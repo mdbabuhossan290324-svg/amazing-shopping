@@ -81,7 +81,7 @@
   <body class="bg-[#fdfdfd] text-zinc-800 font-sans min-h-screen flex flex-col antialiased selection:bg-orange-100 selection:text-orange-900">
 
     <!-- LOGIN SCREEN -->
-    <div id="login-screen" class="fixed inset-0 bg-[#0c0c0e] z-50 flex items-center justify-center p-4">
+    <div id="login-screen" class="hidden fixed inset-0 bg-[#0c0c0e] z-50 flex items-center justify-center p-4">
       <div class="w-full max-w-md bg-white rounded-[2rem] shadow-2xl border border-zinc-100 overflow-hidden relative">
         <div class="p-8 text-center bg-gradient-to-b from-zinc-900 to-zinc-950 text-white relative">
           <!-- Background accent glow -->
@@ -158,8 +158,8 @@
       </div>
     </div>
 
-    <!-- MAIN DASHBOARD CONTENT (Hidden until logged in or bypassed) -->
-    <div id="dashboard-content" class="hidden flex-1 flex flex-col">
+    <!-- MAIN DASHBOARD CONTENT (Direct Access) -->
+    <div id="dashboard-content" class="flex-1 flex flex-col">
       
       <!-- DASHBOARD HEADER -->
       <header class="bg-zinc-950 text-white shadow-md">
@@ -463,4 +463,4 @@
     <!-- MAIN MODULE SCRIPT (Firebase Auth & CRUD Operations integrated directly) -->
     <script type="module" src="/admin.html?html-proxy&index=0.js"></script>
   </body>
-                </html>
+  </html>
