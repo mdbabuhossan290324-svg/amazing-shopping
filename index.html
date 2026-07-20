@@ -8,6 +8,9 @@
     <meta property="og:title" content="Amazing Shopping | Immersive Luxury Experience" />
     <meta property="og:description" content="Shop the finest selection of products with up to 80% discount, free delivery, and secure purchase." />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Amazing Shopping | Immersive Luxury Experience" />
+    <meta name="twitter:description" content="Shop the finest selection of products with up to 80% discount." />
     <link rel="icon" type="image/png" href="https://picsum.photos/seed/luxury/32/32" />
     
     <!-- Tailwind CSS Play CDN -->
@@ -40,8 +43,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Embedded Styles -->
     <style>
-      /* Webkit Scrollbar */
+      /* Scrollbar customizations */
       ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
@@ -57,14 +61,19 @@
         background: #ea580c;
       }
 
+      /* Smooth Scrolling */
       html {
         scroll-behavior: smooth;
       }
 
-      /* Marquee Animation */
+      /* Marquee Bar */
       @keyframes marquee {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-50%); }
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
       }
 
       .animate-marquee {
@@ -73,58 +82,121 @@
         animation: marquee 35s linear infinite;
       }
 
-      /* Pulse Glowing Effects */
+      /* Immersive Pulse Animations for Interactive Components */
       @keyframes pulse-orange {
-        0%, 100% { box-shadow: 0 0 10px rgba(249, 115, 22, 0.4), 0 0 20px rgba(249, 115, 22, 0.2); }
-        50% { box-shadow: 0 0 25px rgba(249, 115, 22, 0.7), 0 0 40px rgba(249, 115, 22, 0.4); transform: translateY(-2px); }
-      }
-      @keyframes pulse-red {
-        0%, 100% { box-shadow: 0 0 10px rgba(239, 68, 68, 0.4), 0 0 20px rgba(239, 68, 68, 0.2); }
-        50% { box-shadow: 0 0 25px rgba(239, 68, 68, 0.7), 0 0 40px rgba(239, 68, 68, 0.4); transform: translateY(-2px); }
-      }
-      @keyframes pulse-blue {
-        0%, 100% { box-shadow: 0 0 10px rgba(0, 122, 255, 0.3), 0 0 20px rgba(0, 122, 255, 0.15); }
-        50% { box-shadow: 0 0 25px rgba(0, 122, 255, 0.6), 0 0 40px rgba(0, 122, 255, 0.3); transform: translateY(-2px); }
-      }
-      @keyframes pulse-green {
-        0%, 100% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.4), 0 0 20px rgba(34, 197, 94, 0.2); }
-        50% { box-shadow: 0 0 25px rgba(34, 197, 94, 0.7), 0 0 40px rgba(34, 197, 94, 0.4); transform: translateY(-2px); }
+        0%, 100% {
+          box-shadow: 0 0 10px rgba(249, 115, 22, 0.4), 0 0 20px rgba(249, 115, 22, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 25px rgba(249, 115, 22, 0.7), 0 0 40px rgba(249, 115, 22, 0.4);
+          transform: translateY(-2px);
+        }
       }
 
+      @keyframes pulse-red {
+        0%, 100% {
+          box-shadow: 0 0 10px rgba(239, 68, 68, 0.4), 0 0 20px rgba(239, 68, 68, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 25px rgba(239, 68, 68, 0.7), 0 0 40px rgba(239, 68, 68, 0.4);
+          transform: translateY(-2px);
+        }
+      }
+
+      @keyframes pulse-blue {
+        0%, 100% {
+          box-shadow: 0 0 10px rgba(0, 122, 255, 0.3), 0 0 20px rgba(0, 122, 255, 0.15);
+        }
+        50% {
+          box-shadow: 0 0 25px rgba(0, 122, 255, 0.6), 0 0 40px rgba(0, 122, 255, 0.3);
+          transform: translateY(-2px);
+        }
+      }
+
+      @keyframes pulse-green {
+        0%, 100% {
+          box-shadow: 0 0 10px rgba(34, 197, 94, 0.4), 0 0 20px rgba(34, 197, 94, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 25px rgba(34, 197, 94, 0.7), 0 0 40px rgba(34, 197, 94, 0.4);
+          transform: translateY(-2px);
+        }
+      }
+
+      /* Splash Zoom Animation */
       @keyframes splash-zoom {
-        0% { opacity: 0; transform: scale(0.96); }
-        15% { opacity: 1; transform: scale(1); }
-        85% { opacity: 1; transform: scale(1.015); }
-        100% { opacity: 0; transform: scale(1.03); }
+        0% {
+          opacity: 0;
+          transform: scale(0.96);
+        }
+        15% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        85% {
+          opacity: 1;
+          transform: scale(1.015);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(1.03);
+        }
       }
 
       .animate-splash-zoom {
         animation: splash-zoom 2.5s ease-in-out infinite alternate;
       }
 
-      .glow-btn { animation: pulse-orange 3s infinite ease-in-out; }
-      .glow-btn-red { animation: pulse-red 3s infinite ease-in-out; }
-      .glow-btn-blue { animation: pulse-blue 3s infinite ease-in-out; }
-      .glow-btn-green { animation: pulse-green 3s infinite ease-in-out; }
+      /* Glow Bindings */
+      .glow-btn {
+        animation: pulse-orange 3s infinite ease-in-out;
+      }
 
-      /* Chatbot animations */
+      .glow-btn-red {
+        animation: pulse-red 3s infinite ease-in-out;
+      }
+
+      .glow-btn-blue {
+        animation: pulse-blue 3s infinite ease-in-out;
+      }
+
+      .glow-btn-green {
+        animation: pulse-green 3s infinite ease-in-out;
+      }
+
+      /* Chatbot slide in animations */
       .chatbot-slide-in {
         display: flex !important;
         animation: chatSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
+
       .chatbot-slide-out {
         animation: chatSlideOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
       @keyframes chatSlideIn {
-        from { opacity: 0; transform: scale(0.85) translateY(40px); }
-        to { opacity: 1; transform: scale(1) translateY(0); }
-      }
-      @keyframes chatSlideOut {
-        from { opacity: 1; transform: scale(1) translateY(0); }
-        to { opacity: 0; transform: scale(0.85) translateY(40px); }
+        from {
+          opacity: 0;
+          transform: scale(0.85) translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
       }
 
+      @keyframes chatSlideOut {
+        from {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: scale(0.85) translateY(40px);
+        }
+      }
+
+      /* Touch targets and grids */
       @media (max-width: 639px) {
         #products-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -135,12 +207,17 @@
   </head>
   <body class="bg-[#fdfdfd] text-[#1a1a1a] font-sans min-h-screen flex flex-col antialiased selection:bg-orange-100 selection:text-orange-900 overflow-x-hidden">
 
-    <!-- SPLASH SCREEN -->
+    <!-- LOADING / SPLASH SCREEN -->
     <div id="splash-screen" class="fixed inset-0 bg-[#09090b] z-50 flex flex-col items-center justify-center transition-all duration-700 ease-out">
-      <div class="relative w-full max-w-4xl px-4 aspect-video overflow-hidden rounded-[2rem] shadow-2xl border border-neutral-800/40 animate-splash-zoom">
-        <img src="https://picsum.photos/seed/luxuryboutique/800/450" alt="Loading..." class="w-full h-full object-cover rounded-[2rem]" />
+      <div class="relative max-w-[420px] w-[90%] h-[80vh] overflow-hidden rounded-[2.5rem] shadow-2xl border border-neutral-800/40 animate-splash-zoom">
+        <img 
+          src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIi2aX2-zVxcBDP6qAlhlLGR30jCA2pVxWnT-AjG-QUfLfDuuM9tyVkHGAZbNv1n0NBXoOu4_yZ5u-yU1BtlzxvjqDrJQ5VowLa1hFyr3LerTl_yya8Fv9rh3b3ZAJVXCftFMeI2Nb_e1C6t7gxcaheh0YR3e52gPyLe2FpbWsCF8_47hzBJfYw-D6I3Y/s2232/CollageMaker_20260720_130848257.jpg" 
+          alt="Amazing Shopping Loading..." 
+          referrerpolicy="no-referrer"
+          class="w-full h-full object-cover rounded-[2.5rem] scale-100 transition-transform duration-[2000ms] ease-out"
+        />
         <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-8 text-center md:text-left">
-          <h1 class="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase italic mb-2">
+          <h1 class="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase italic mb-2 drop-shadow-lg">
             Amazing <span class="text-orange-500">Shopping</span>
           </h1>
           <p class="text-orange-500 font-extrabold text-sm md:text-lg tracking-wider uppercase font-space">
@@ -148,30 +225,36 @@
           </p>
         </div>
       </div>
+      <!-- Immersive Orange Spinner -->
       <div class="mt-8 flex flex-col items-center gap-3">
         <div class="w-10 h-10 border-2 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div>
         <p class="text-neutral-400 text-xs tracking-widest uppercase animate-pulse font-space font-bold">Initializing Boutique...</p>
       </div>
     </div>
 
-    <!-- MAIN APP CONTENT -->
+    <!-- MAIN APP CONTENT (Hidden initially for 2s) -->
     <div id="app-content" class="hidden opacity-0 flex-1 flex flex-col transition-opacity duration-500">
       
       <!-- HEADER -->
-      <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-zinc-200 shadow-sm">
+      <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-zinc-200 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center shadow-md">
-              <div class="w-4 h-4 border-2 border-white rounded-sm rotate-45"></div>
-            </div>
+          
+          <div class="flex items-center gap-3">
+            <img 
+              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDc9tiofwEyS5LMNMDE9x-IfpRrfvY1I4kTU3X9DSxgpYHY5bB9knUIDhxnl5fIPToS0fRPkpQMq3blyDifKqn4z2mvPBsmDmrJ5NpKWknLOxwK7hnJ5G9fISph_dPISvs9LyNgvJl1tIExtF7WnI0q9LnKO7Ke5tVSF8oco1TiUSJOY5tUGaQkoJnRT0/s112/CompressJPEG.Online_img%28112x112%29.jpg" 
+              alt="Amazing Shopping Logo" 
+              referrerpolicy="no-referrer"
+              class="w-10 h-10 object-cover rounded-full shadow-md border border-orange-100"
+            />
             <a href="/" class="text-2xl font-black tracking-tighter uppercase italic text-zinc-900">
               Amazing <span class="text-orange-600">Shopping</span>
             </a>
           </div>
 
           <div class="hidden lg:flex-1 lg:max-w-md mx-8">
-            <div class="bg-zinc-100 rounded-full h-11 px-5 flex items-center border border-zinc-200">
-              <span class="text-zinc-400 text-xs font-bold uppercase tracking-wider font-space">Luxury Essentials Live Catalog</span>
+            <div class="bg-zinc-100 rounded-full h-11 px-5 flex items-center border border-zinc-200 group focus-within:border-orange-400 transition-colors">
+              <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              <span class="ml-3 text-zinc-400 text-xs font-bold uppercase tracking-wider font-space">Luxury Essentials Live Catalog</span>
             </div>
           </div>
           
@@ -179,249 +262,414 @@
             <a href="#" class="text-orange-600 border-b-2 border-orange-500 pb-1">Boutique</a>
             <a href="#video-section" class="text-zinc-600 hover:text-orange-600 transition-colors">Showcase</a>
             <a href="#products-section" class="text-zinc-600 hover:text-orange-600 transition-colors">Deals</a>
-            <a href="./admin.html" class="flex items-center gap-2 bg-zinc-900 text-white px-5 py-3 rounded-2xl hover:bg-orange-600 transition-colors shadow-lg">
+            <a href="./admin.html" class="flex items-center gap-2 bg-zinc-900 text-white px-5 py-3 rounded-2xl hover:bg-orange-600 transition-all duration-300 shadow-lg shadow-zinc-200">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-cog"><circle cx="18" cy="15" r="3"></circle><circle cx="9" cy="7" r="4"></circle><path d="M10 15H6a4 4 0 0 0-4 4v2"></path><path d="m21.7 16.4-.9-.3"></path><path d="m15.2 13.9-.9-.3"></path><path d="m16.6 18.7.3-.9"></path><path d="m19.1 12.2.3-.9"></path><path d="m15.3 16.6-.3-.9"></path><path d="m21.8 14.3-.3-.9"></path><path d="m20.1 18.2.9-.3"></path><path d="m16.8 12.7.9-.3"></path></svg>
               Admin Dashboard
             </a>
           </nav>
           
+          <!-- Mobile Admin Access -->
           <div class="md:hidden flex items-center gap-3">
-            <a href="./admin.html" class="p-2.5 bg-zinc-100 rounded-full text-zinc-800" title="Admin Panel">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="15" r="3"/><circle cx="9" cy="7" r="4"/><path d="M10 15H6a4 4 0 0 0-4 4v2"/></svg>
+            <a href="./admin.html" class="p-2.5 bg-zinc-100 rounded-full text-zinc-800 hover:text-orange-600 transition-colors" title="Admin Panel">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-cog"><circle cx="18" cy="15" r="3"></circle><circle cx="9" cy="7" r="4"></circle><path d="M10 15H6a4 4 0 0 0-4 4v2"></path></svg>
             </a>
           </div>
         </div>
       </header>
 
-      <!-- PROMO BANNER -->
+      <!-- IMMERSIVE RADIAL GRADIENT PROMO BANNER -->
       <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-6">
-        <a href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" target="_blank" rel="noopener noreferrer" class="block group bg-black h-48 sm:h-56 relative overflow-hidden rounded-[2rem] shadow-xl">
-          <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-900/60 to-transparent z-10"></div>
-          <img src="https://picsum.photos/seed/promo/1000/400" alt="Promo" class="absolute inset-0 w-full h-full object-cover opacity-60" />
-          <div class="absolute inset-0 z-20 flex flex-col justify-between p-6 sm:p-8">
-            <div>
-              <span class="bg-orange-500 text-white px-3 py-1 text-[10px] font-black rounded uppercase mb-2 inline-block">New Arrivals 2026</span>
-              <h2 class="text-3xl sm:text-5xl font-black text-white leading-none">PREMIUM <br/><span class="text-orange-500">LIFESTYLE</span></h2>
-            </div>
-            <div class="flex items-center justify-between mt-2">
-              <p class="text-zinc-400 text-xs sm:text-sm font-medium max-w-md hidden sm:block">Elevate your daily routine with our exclusive luxury curations.</p>
-              <span class="bg-white text-zinc-950 font-black px-6 py-3 rounded-2xl text-xs uppercase inline-flex items-center gap-2">
-                Shop Deals
-              </span>
-            </div>
-          </div>
+        <a 
+          href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="block group bg-zinc-100 relative overflow-hidden rounded-[2rem] shadow-xl border border-zinc-200 cursor-pointer aspect-[1983/793] w-full"
+        >
+          <img 
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9G1wT935zOwgBk3i2nfyasytbF1FK4m41yrRtBno9ZObFiYvKHwSHhmkoAdr5MjOcbvsCL3j_8Vi-apskZxceECNhyphenhyphen_-xE3F3K8IdfvND10lwQmvqfa0OO01_PU9tyZ_j2N_JouWrtpNEKUWu6WjhqK0a3cK4dtiKEWMH1ghPAYsWRTwEc8vJ5IlkU_Q/s1983/386f67d5-91a9-43e6-8761-20e161192624.png" 
+            alt="Promo Banner" 
+            referrerpolicy="no-referrer"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+          />
         </a>
       </section>
 
       <!-- MARQUEE BAR -->
-      <section class="bg-[#1a1a1a] h-10 flex items-center overflow-hidden border-y border-white/5 mt-6">
+      <section class="bg-[#1a1a1a] h-10 flex items-center overflow-hidden shrink-0 border-y border-white/5 mt-6">
         <div class="flex whitespace-nowrap animate-marquee">
-          <div class="flex gap-16 text-orange-500 font-bold text-[11px] uppercase items-center pl-8 whitespace-nowrap">
-            <span>🔥 UP TO 80% OFF</span>
-            <span>🚚 FREE DELIVERY ON SELECTED PRODUCTS</span>
-            <span>💥 MEGA SALE</span>
-            <span>⭐ BEST QUALITY</span>
-            <span>🎁 DAILY NEW DEALS</span>
+          <div class="flex gap-16 text-orange-500 font-bold text-[11px] uppercase items-center tracking-widest pl-8 whitespace-nowrap">
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>🔥 UP TO 80% OFF</span>
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>🚚 FREE DELIVERY SELECTED PRODUCTS</span>
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>💥 MEGA SALE</span>
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>⭐ BEST QUALITY</span>
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>🎁 DAILY NEW DEALS</span>
           </div>
-          <div class="flex gap-16 text-orange-500 font-bold text-[11px] uppercase items-center pl-16 whitespace-nowrap">
-            <span>🔥 UP TO 80% OFF</span>
-            <span>🚚 FREE DELIVERY ON SELECTED PRODUCTS</span>
-            <span>💥 MEGA SALE</span>
-            <span>⭐ BEST QUALITY</span>
-            <span>🎁 DAILY NEW DEALS</span>
+          <div class="flex gap-16 text-orange-500 font-bold text-[11px] uppercase items-center tracking-widest pl-16 whitespace-nowrap">
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>🔥 UP TO 80% OFF</span>
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>🚚 FREE DELIVERY SELECTED PRODUCTS</span>
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>💥 MEGA SALE</span>
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>⭐ BEST QUALITY</span>
+            <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span>🎁 DAILY NEW DEALS</span>
           </div>
         </div>
       </section>
 
-      <!-- AD BUTTONS -->
+      <!-- DYNAMIC ADVERTISING ACTION BANNER (IMMERSIVE 3D BUTTONS) -->
       <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <a href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" target="_blank" class="glow-btn flex flex-col items-center justify-center p-5 bg-orange-500 text-white rounded-2xl font-black text-center">
-            <span class="text-[10px] uppercase text-orange-100 mb-1">Flash Promotion</span>
-            <span class="text-lg font-black">70% DISCOUNT 🎉</span>
+          
+          <a 
+            href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="glow-btn flex flex-col items-center justify-center p-5 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl font-black shadow-[0_4px_12px_rgba(249,115,22,0.5)] border-b-4 border-orange-700 active:translate-y-1 active:border-b-0 transition-all duration-300 relative overflow-hidden group text-center"
+          >
+            <span class="text-[10px] uppercase font-black tracking-widest text-orange-100 mb-1 font-space">Flash Promotion</span>
+            <span class="text-lg font-black tracking-tight">70% DISCOUNT 🎉</span>
           </a>
-          <a href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" target="_blank" class="glow-btn-red flex flex-col items-center justify-center p-5 bg-zinc-900 text-white rounded-2xl font-black text-center">
-            <span class="text-[10px] uppercase text-zinc-400 mb-1">Limited Slots</span>
-            <span class="text-lg font-black">80% DISCOUNT 💥</span>
+
+          <a 
+            href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="glow-btn-red flex flex-col items-center justify-center p-5 bg-zinc-900 hover:bg-black text-white rounded-2xl font-black shadow-[0_4px_12px_rgba(0,0,0,0.3)] border-b-4 border-black active:translate-y-1 active:border-b-0 transition-all duration-300 relative overflow-hidden group text-center"
+          >
+            <span class="text-[10px] uppercase font-black tracking-widest text-zinc-400 mb-1 font-space">Limited Slots</span>
+            <span class="text-lg font-black tracking-tight">80% DISCOUNT 💥</span>
           </a>
-          <a href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" target="_blank" class="glow-btn-blue flex flex-col items-center justify-center p-5 bg-white text-zinc-950 rounded-2xl font-black border border-zinc-200 text-center">
-            <span class="text-[10px] uppercase text-zinc-500 mb-1">Golden Ticket</span>
-            <span class="text-lg font-black">MEGA OFFER ⭐</span>
+
+          <a 
+            href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="glow-btn-blue flex flex-col items-center justify-center p-5 bg-white text-zinc-900 rounded-2xl font-black shadow-lg border border-zinc-200 border-b-4 border-zinc-300 active:translate-y-1 active:border-b-0 transition-all duration-300 relative overflow-hidden group text-center"
+          >
+            <span class="text-[10px] uppercase font-black tracking-widest text-zinc-500 mb-1 font-space">Golden Ticket</span>
+            <span class="text-lg font-black tracking-tight text-zinc-900">MEGA OFFER ⭐</span>
           </a>
-          <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" class="glow-btn-green flex flex-col items-center justify-center p-5 bg-[#007aff] text-white rounded-2xl font-black text-center">
-            <span class="text-[9px] uppercase text-blue-100 mb-1">Android Native App</span>
-            <span class="text-sm font-black flex items-center gap-1.5 justify-center">DOWNLOAD APP FREE</span>
+
+          <a 
+            href="https://www.appcreator24.com/app4124991-s83n4c" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="glow-btn-green flex flex-col items-center justify-center p-5 bg-[#007aff] hover:bg-blue-600 text-white rounded-2xl font-black shadow-[0_4px_12px_rgba(0,122,255,0.4)] border-b-4 border-blue-800 active:translate-y-1 active:border-b-0 transition-all duration-300 relative overflow-hidden group text-center"
+          >
+            <span class="text-[9px] uppercase font-black tracking-widest text-blue-100 mb-1 font-space">Android Native App</span>
+            <span class="text-sm font-black tracking-tight flex items-center gap-1.5 justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+              DOWNLOAD APP FREE
+            </span>
           </a>
+
         </div>
       </section>
 
-      <!-- AD SLOT 1 -->
+      <!-- ADVERTISEMENT PLACEHOLDER 1 -->
       <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-8">
-        <div class="bg-zinc-50 border border-dashed border-zinc-200 rounded-[2rem] p-5 text-center">
-          <p class="text-[9px] uppercase text-zinc-400 mb-2">Advertisement Space</p>
-          <div class="w-full min-h-[90px] flex items-center justify-center bg-zinc-100 rounded-2xl border border-dashed border-zinc-200">
-            <span class="text-[10px] text-zinc-400 font-bold uppercase">Responsive Ad Banner Slot #1</span>
+        <div class="bg-zinc-50 border-2 border-dashed border-zinc-200 rounded-[2rem] p-5 text-center flex flex-col items-center justify-center overflow-hidden">
+          <p class="text-[9px] font-black uppercase tracking-widest text-zinc-400 mb-2">Advertisement Space</p>
+          <!-- Paste Banner Ad Code Here -->
+          <div class="w-full min-h-[90px] flex items-center justify-center bg-zinc-100 rounded-2xl border border-dashed border-zinc-200 overflow-hidden">
+            <script>
+              atOptions = {
+                'key' : 'b1ea071a36d532c5c71d427f548a748f',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+              };
+            </script>
+            <script src="https://www.highperformanceformat.com/b1ea071a36d532c5c71d427f548a748f/invoke.js"></script>
           </div>
         </div>
       </section>
 
-      <!-- PRODUCTS SECTION -->
+      <!-- PRODUCT SHOWCASE / DEALS SECTION -->
       <section id="products-section" class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-12 flex-1">
+        
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 border-b border-zinc-200 pb-5 gap-4">
           <div>
-            <span class="text-xs uppercase font-black tracking-widest text-orange-600 block mb-1">Curated Masterpieces</span>
-            <h2 class="text-3xl font-black tracking-tight text-zinc-900 uppercase italic">Hot Selling <span class="text-orange-600">Products</span></h2>
+            <span class="text-xs uppercase font-black tracking-widest text-orange-600 font-space block mb-1">
+              Curated Masterpieces
+            </span>
+            <h2 class="text-3xl font-black font-sans tracking-tight text-zinc-900 uppercase italic">
+              Hot Selling <span class="text-orange-600">Products</span>
+            </h2>
           </div>
+          
           <div class="flex items-center gap-3">
-            <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[10px] font-black bg-green-50 text-green-700 border border-green-200">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[10px] font-black font-space bg-green-50 text-green-700 border border-green-200 shadow-sm uppercase tracking-wide">
               <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              Live Synced
+              Live Synced Firestore
             </span>
           </div>
         </div>
 
+        <!-- FIREBASE REALTIME LOAD INDICATOR -->
         <div id="loading-products" class="flex flex-col items-center justify-center py-20 gap-3">
           <div class="w-8 h-8 border-2 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div>
-          <span class="text-zinc-500 text-xs uppercase font-bold animate-pulse">Refreshing catalog...</span>
+          <span class="text-zinc-500 text-xs tracking-wider uppercase font-space font-bold animate-pulse">Refreshing catalog...</span>
         </div>
 
-        <div id="products-grid" class="hidden grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"></div>
+        <!-- PRODUCTS GRID -->
+        <div id="products-grid" class="hidden grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          <!-- Dynamic products injected here -->
+        </div>
 
+        <!-- EMPTY STATE -->
         <div id="empty-products" class="hidden py-16 text-center border-2 border-dashed border-zinc-200 rounded-[2rem] bg-zinc-50">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-zinc-300 mb-4"><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg>
           <p class="text-lg font-black text-zinc-700 uppercase">No products available yet.</p>
-          <a href="./admin.html" class="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-zinc-900 text-white rounded-xl text-xs font-black">Go to Admin Dashboard</a>
+          <p class="text-xs text-zinc-400 font-bold uppercase mt-1">Visit the admin panel to publish your first luxury deal!</p>
+          <a href="./admin.html" class="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-zinc-900 text-white rounded-xl text-xs font-black uppercase tracking-wider hover:bg-orange-600 transition-colors">
+            Go to Admin Dashboard
+          </a>
         </div>
+
       </section>
 
-      <!-- AD SLOT 2 -->
+      <!-- ADVERTISEMENT PLACEHOLDER 2 -->
       <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-12">
-        <div class="bg-zinc-50 border border-dashed border-zinc-200 rounded-[2rem] p-5 text-center">
-          <p class="text-[9px] uppercase text-zinc-400 mb-2">Sponsored Content</p>
-          <div class="w-full min-h-[90px] flex items-center justify-center bg-zinc-100 rounded-2xl border border-dashed border-zinc-200">
-            <span class="text-[10px] text-zinc-400 font-bold uppercase">Responsive Ad Banner Slot #2</span>
+        <div class="bg-zinc-50 border-2 border-dashed border-zinc-200 rounded-[2rem] p-5 text-center flex flex-col items-center justify-center overflow-hidden">
+          <p class="text-[9px] font-black uppercase tracking-widest text-zinc-400 mb-2">Sponsored Content</p>
+          <!-- Paste Banner Ad Code Here -->
+          <div class="w-full min-h-[90px] flex items-center justify-center bg-zinc-100 rounded-2xl border border-dashed border-zinc-200 overflow-hidden">
+            <script>
+              atOptions = {
+                'key' : 'b1ea071a36d532c5c71d427f548a748f',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+              };
+            </script>
+            <script src="https://www.highperformanceformat.com/b1ea071a36d532c5c71d427f548a748f/invoke.js"></script>
           </div>
         </div>
       </section>
 
       <!-- VIDEO SECTION -->
       <section id="video-section" class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-16 mb-16">
-        <div class="bg-white border border-zinc-200 rounded-[2rem] p-6 md:p-8 shadow-xl">
+        <div class="bg-white border border-zinc-200 rounded-[2rem] p-6 md:p-8 shadow-xl shadow-zinc-200/50">
           <div class="max-w-3xl mx-auto text-center mb-8">
-            <span class="text-xs uppercase font-black text-orange-600 block mb-1">Live Showcase</span>
+            <span class="text-xs uppercase font-black tracking-widest text-orange-600 font-space block mb-1">Live Showcase</span>
             <h3 class="text-2xl md:text-3xl font-black text-zinc-900 uppercase italic">Featured Video & <span class="text-orange-600">Review</span></h3>
+            <p class="text-zinc-500 text-xs sm:text-sm mt-2 font-bold">Unboxing and real-world demonstration of our luxury curations.</p>
           </div>
-          <div class="aspect-video w-full max-w-4xl mx-auto rounded-[2rem] overflow-hidden bg-black relative">
+          
+          <div class="aspect-video w-full max-w-4xl mx-auto rounded-[2rem] overflow-hidden shadow-2xl bg-black border border-white/5 relative">
             <div id="video-placeholder" class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-              <p class="text-xs font-black text-zinc-500 uppercase">No Featured Video Configured</p>
+              <div class="w-12 h-12 rounded-full bg-orange-500/10 flex items-center justify-center mb-3 text-orange-600 animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-video-off"><path d="M10.66 6H17a2 2 0 0 1 2 2v3.34"></path><path d="M22.17 8.01 17 12l5 4V8.01z"></path><path d="m2 2 20 20"></path><path d="M3 21a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.34"></path><path d="M14 14V8"></path></svg>
+              </div>
+              <p class="text-xs font-black text-zinc-500 uppercase tracking-widest">No Featured Video Configured</p>
             </div>
-            <iframe id="youtube-player" class="w-full h-full border-0 hidden" src="" allowfullscreen></iframe>
+            <iframe 
+              id="youtube-player" 
+              class="w-full h-full border-0 hidden" 
+              src="" 
+              title="Amazing Shopping Showcase"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
       </section>
 
-      <!-- SOCIAL CONNECTION BUTTONS -->
+      <!-- SOCIAL CONNECTIONS FLOATING ACTIONS (Bottom Left) -->
       <div class="fixed bottom-8 left-8 flex gap-3 z-[60]">
-        <a href="https://www.facebook.com/share/17iurH6h42/" target="_blank" class="w-10 h-10 bg-[#1877F2] rounded-full flex items-center justify-center text-white font-black">f</a>
-        <a href="https://www.youtube.com/@bahadurlivenews24" target="_blank" class="w-10 h-10 bg-[#FF0000] rounded-full flex items-center justify-center text-white font-black">Y</a>
-        <a href="https://vm.tiktok.com/ZSXC8LmMG/" target="_blank" class="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-black">T</a>
+        <a 
+          href="https://www.facebook.com/share/17iurH6h42/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="w-10 h-10 bg-[#1877F2] rounded-full flex items-center justify-center text-white font-black shadow-lg shadow-[#1877F2]/40 hover:-translate-y-1 transition-transform"
+          title="Facebook Connection"
+        >
+          f
+        </a>
+        <a 
+          href="https://www.youtube.com/@bahadurlivenews24" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="w-10 h-10 bg-[#FF0000] rounded-full flex items-center justify-center text-white font-black shadow-lg shadow-[#FF0000]/40 hover:-translate-y-1 transition-transform"
+          title="YouTube Connection"
+        >
+          Y
+        </a>
+        <a 
+          href="https://vm.tiktok.com/ZSXC8LmMG/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-black shadow-lg shadow-black/40 hover:-translate-y-1 transition-transform"
+          title="TikTok Connection"
+        >
+          T
+        </a>
       </div>
 
       <!-- FOOTER -->
-      <footer class="bg-zinc-900 text-zinc-400 py-12 mt-auto">
+      <footer class="bg-zinc-900 text-zinc-400 border-t border-zinc-800 py-12 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
+          
           <div class="text-center md:text-left">
-            <h4 class="text-white text-lg font-black uppercase italic">Amazing <span class="text-orange-500">Shopping</span></h4>
-            <p class="text-[10px] font-bold text-zinc-500 uppercase mt-1">Uncompromising Quality & Instant Gratification.</p>
+            <h4 class="text-white text-lg font-black uppercase tracking-tight italic font-sans">Amazing <span class="text-orange-500">Shopping</span></h4>
+            <p class="text-[10px] font-bold text-zinc-500 uppercase mt-1 tracking-wider">Uncompromising Quality & Instant Gratification.</p>
           </div>
+          
           <div class="text-center md:text-right">
-            <p class="text-[11px] text-zinc-600 font-bold uppercase">&copy; 2026 Amazing Shopping. All rights reserved.</p>
+            <p class="text-[11px] text-zinc-600 font-bold uppercase font-space">© 2026 Amazing Shopping. All rights reserved.</p>
+            <p class="text-[10px] text-zinc-700 font-bold uppercase mt-1">Immersive UI Experience Theme</p>
           </div>
+          
         </div>
       </footer>
 
-      <!-- CHATBOT -->
+      <!-- CHATBOT FLOATING UI -->
       <div id="chatbot-container" class="fixed bottom-8 right-8 z-[70] flex flex-col items-end">
+        
+        <!-- Chatbot window -->
         <div id="chatbot-window" class="hidden w-[340px] sm:w-[380px] h-[480px] bg-white border border-zinc-200 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden mb-4 transition-all duration-300 scale-95 origin-bottom-right opacity-0">
-          <div class="bg-zinc-900 text-white p-4 flex items-center justify-between">
+          <!-- Chat header -->
+          <div class="bg-zinc-900 text-white p-4 flex items-center justify-between border-b border-zinc-800">
             <div class="flex items-center gap-3">
               <div class="relative">
                 <span class="w-3 h-3 bg-green-500 border border-white rounded-full absolute -top-0.5 -right-0.5 animate-pulse"></span>
-                <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold">💬</div>
+                <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold shadow-inner">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+                </div>
               </div>
               <div>
-                <h5 class="font-black text-xs leading-none uppercase">Amazing Assistant</h5>
-                <span class="text-[9px] text-green-300 uppercase font-bold">Online • Live Support</span>
+                <h5 class="font-black text-xs leading-none uppercase tracking-wider">Amazing Assistant</h5>
+                <span class="text-[9px] text-green-300 font-space tracking-widest uppercase font-bold">Online • Live Support</span>
               </div>
             </div>
-            <button id="close-chat" class="text-zinc-400 hover:text-white">✕</button>
+            <button id="close-chat" class="text-zinc-400 hover:text-white transition-colors" title="Close Chat">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+            </button>
           </div>
 
-          <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-zinc-50"></div>
+          <!-- Chat body (scrollable messages) -->
+          <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-zinc-50">
+            <!-- Welcome message -->
+            <div class="flex gap-2.5 max-w-[85%]">
+              <div class="w-7 h-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 shrink-0 self-end">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+              </div>
+              <div class="bg-white border border-zinc-150 p-3 rounded-2xl rounded-bl-xs text-xs shadow-sm text-zinc-800 leading-relaxed font-medium">
+                Welcome to <strong class="font-bold text-orange-600">Amazing Shopping</strong>! I am your Shopping Assistant. How can I help you today? ✨
+              </div>
+            </div>
+          </div>
 
+          <!-- Suggestions / Quick Questions -->
           <div class="px-4 py-2 bg-zinc-100/50 border-t border-zinc-200 flex flex-wrap gap-1.5 max-h-24 overflow-y-auto">
-            <button class="chat-faq-btn text-[9px] bg-white border border-zinc-200 px-2.5 py-1 rounded-full uppercase font-bold">Offers & Discounts</button>
-            <button class="chat-faq-btn text-[9px] bg-white border border-zinc-200 px-2.5 py-1 rounded-full uppercase font-bold">Delivery Information</button>
-            <button class="chat-faq-btn text-[9px] bg-white border border-zinc-200 px-2.5 py-1 rounded-full uppercase font-bold">Payment Methods</button>
-            <button class="chat-faq-btn text-[9px] bg-white border border-zinc-200 px-2.5 py-1 rounded-full uppercase font-bold">Returns & Refund</button>
-            <button class="chat-faq-btn text-[9px] bg-white border border-zinc-200 px-2.5 py-1 rounded-full uppercase font-bold">Product Inquiries</button>
+            <button class="chat-faq-btn text-[9px] bg-white hover:bg-orange-50 border border-zinc-200 text-zinc-700 px-2.5 py-1 rounded-full transition-colors font-bold uppercase tracking-wide">Offers & Discounts</button>
+            <button class="chat-faq-btn text-[9px] bg-white hover:bg-orange-50 border border-zinc-200 text-zinc-700 px-2.5 py-1 rounded-full transition-colors font-bold uppercase tracking-wide">Delivery Information</button>
+            <button class="chat-faq-btn text-[9px] bg-white hover:bg-orange-50 border border-zinc-200 text-zinc-700 px-2.5 py-1 rounded-full transition-colors font-bold uppercase tracking-wide">Payment Methods</button>
+            <button class="chat-faq-btn text-[9px] bg-white hover:bg-orange-50 border border-zinc-200 text-zinc-700 px-2.5 py-1 rounded-full transition-colors font-bold uppercase tracking-wide font-space">Returns & Refund</button>
+            <button class="chat-faq-btn text-[9px] bg-white hover:bg-orange-50 border border-zinc-200 text-zinc-700 px-2.5 py-1 rounded-full transition-colors font-bold uppercase tracking-wide font-space">Product Inquiries</button>
+            <button class="chat-faq-btn text-[9px] bg-white hover:bg-orange-50 border border-zinc-200 text-zinc-700 px-2.5 py-1 rounded-full transition-colors font-bold uppercase tracking-wide font-space">Customer Support</button>
           </div>
 
+          <!-- Chat input -->
           <form id="chat-form" class="p-3 border-t border-zinc-200 bg-white flex items-center gap-2">
-            <input type="text" id="chat-input" placeholder="Ask anything..." required class="flex-1 bg-zinc-50 border border-zinc-200 px-4 py-2.5 rounded-full text-xs outline-none" />
-            <button type="submit" class="p-2.5 bg-zinc-950 text-white rounded-full">Send</button>
+            <input 
+              type="text" 
+              id="chat-input" 
+              placeholder="Ask anything about our service..." 
+              required
+              class="flex-1 bg-zinc-50 border border-zinc-200 px-4 py-2.5 rounded-full text-xs outline-none focus:border-orange-500 focus:bg-white transition-all"
+            />
+            <button 
+              type="submit" 
+              class="p-2.5 bg-zinc-950 text-white rounded-full hover:bg-orange-600 transition-colors shrink-0 shadow-md"
+              title="Send Message"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+            </button>
           </form>
         </div>
 
-        <button id="chat-toggle" class="w-16 h-16 bg-orange-500 rounded-full shadow-2xl flex items-center justify-center text-white text-3xl border-4 border-white/20 z-20">
-          <span id="chat-icon-open">💬</span>
-          <span id="chat-icon-close" class="hidden text-xl font-bold">✕</span>
-        </button>
+        <!-- Float toggle button -->
+        <div class="relative flex items-center justify-center">
+          <div class="absolute inset-0 bg-orange-500 rounded-full blur-xl opacity-40 animate-pulse"></div>
+          <button 
+            id="chat-toggle" 
+            class="w-16 h-16 bg-orange-500 rounded-full shadow-2xl flex items-center justify-center text-white text-3xl border-4 border-white/20 cursor-pointer hover:scale-105 active:scale-95 transition-all z-20"
+            title="Open Shopping Chat"
+          >
+            <span id="chat-icon-open">💬</span>
+            <span id="chat-icon-close" class="hidden text-xl font-bold">✕</span>
+          </button>
+        </div>
+
       </div>
 
     </div>
 
-    <!-- FIREBASE AND JS LOGIC -->
+    <!-- MAIN MODULE SCRIPT (Firebase SDK & Logic integrated directly) -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
       import { getFirestore, collection, onSnapshot, query } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
+      // Firebase Configuration
       const firebaseConfig = {
-        apiKey: "AIzaSyACgKVsEx6ec0I3OJ6fH7KemGgNmk3V2nY",
-        authDomain: "daraz-bangladesh-6a0f8.firebaseapp.com",
-        projectId: "daraz-bangladesh-6a0f8",
-        storageBucket: "daraz-bangladesh-6a0f8.firebasestorage.app",
-        messagingSenderId: "133315105065",
-        appId: "1:133315105065:web:094a55ea313b04a6f3e738"
+        apiKey: "AIzaSyCEwO6gl1sWEx4_tra-3KpBp6hcHGQE_3I",
+        authDomain: "amazing-shopping-2d3bc.firebaseapp.com",
+        projectId: "amazing-shopping-2d3bc",
+        storageBucket: "amazing-shopping-2d3bc.firebasestorage.app",
+        messagingSenderId: "163413077176",
+        appId: "1:163413077176:web:b82c2976b0193fe740984d",
+        measurementId: "G-95RRX24X8M"
       };
 
+      // Initialize Firebase & Services
       const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
       const db = getFirestore(app);
 
-      // Splash Screen Transition
+      // ==========================================
+      // 1. LOADING / SPLASH SCREEN CONTROLLER
+      // ==========================================
       window.addEventListener("DOMContentLoaded", () => {
         const splashScreen = document.getElementById("splash-screen");
         const appContent = document.getElementById("app-content");
+
         setTimeout(() => {
           splashScreen.classList.add("opacity-0", "pointer-events-none");
           appContent.classList.remove("hidden");
-          setTimeout(() => { appContent.classList.add("opacity-100"); }, 50);
-          setTimeout(() => { splashScreen.style.display = "none"; }, 700);
+          setTimeout(() => {
+            appContent.classList.add("opacity-100");
+          }, 50);
+
+          setTimeout(() => {
+            splashScreen.style.display = "none";
+          }, 700);
         }, 2000);
       });
 
-      // Products Catalog Grid Sync
+      // ==========================================
+      // 2. REALTIME FIREBASE PRODUCTS GRID
+      // ==========================================
       const productsGrid = document.getElementById("products-grid");
       const loadingProducts = document.getElementById("loading-products");
       const emptyProducts = document.getElementById("empty-products");
-      const productsCollectionRef = collection(db, "products");
 
-      onSnapshot(query(productsCollectionRef), (snapshot) => {
+      const productsCollectionRef = collection(db, "products");
+      const productsQuery = query(productsCollectionRef);
+
+      // Setup Realtime Sync Listener
+      onSnapshot(productsQuery, (snapshot) => {
         try {
           loadingProducts.classList.add("hidden");
+
           if (snapshot.empty) {
             productsGrid.classList.add("hidden");
             emptyProducts.classList.remove("hidden");
             return;
           }
+
           emptyProducts.classList.add("hidden");
           productsGrid.classList.remove("hidden");
           productsGrid.innerHTML = "";
@@ -429,6 +677,7 @@
           snapshot.forEach((doc) => {
             const product = doc.data();
             const productId = doc.id;
+
             const name = product.name || "Premium Product";
             const originalPrice = parseFloat(product.originalPrice) || 0;
             const offerPrice = parseFloat(product.offerPrice) || 0;
@@ -444,36 +693,64 @@
             const starsString = "★".repeat(fullStars) + halfStar + "☆".repeat(emptyStarsCount);
 
             const card = document.createElement("div");
-            card.className = "bg-white rounded-[2rem] p-4 shadow-xl border border-zinc-100 flex flex-col relative overflow-hidden group";
-            
+            card.className = "bg-white rounded-[2rem] p-4 shadow-xl shadow-zinc-200/50 border border-zinc-100 flex flex-col relative overflow-hidden group";
+            card.id = `product-${productId}`;
+
             const deliveryBadgeHtml = freeDelivery
-              ? `<div class="absolute top-3 left-3 bg-green-500 text-white text-[9px] font-black px-3 py-1 rounded-full z-10 uppercase">FREE DELIVERY</div>`
-              : `<div class="absolute top-3 left-3 bg-zinc-400/60 text-white text-[9px] font-black px-3 py-1 rounded-full z-10 uppercase">PAID DELIVERY</div>`;
+              ? `<div class="absolute top-3 left-3 bg-green-500 text-white text-[9px] font-black px-3 py-1 rounded-full shadow-lg z-10 tracking-wider uppercase">FREE DELIVERY</div>`
+              : `<div class="absolute top-3 left-3 bg-zinc-400/60 text-white text-[9px] font-black px-3 py-1 rounded-full z-10 tracking-wider uppercase">PAID DELIVERY</div>`;
 
             card.innerHTML = `
-              <div class="h-40 sm:h-48 bg-zinc-100 rounded-3xl mb-4 flex items-center justify-center overflow-hidden relative">
+              <div class="h-40 sm:h-48 bg-zinc-100 rounded-3xl mb-4 flex items-center justify-center text-zinc-400 overflow-hidden relative">
                 ${deliveryBadgeHtml}
-                <img src="${imageUrl}" alt="${name}" referrerpolicy="no-referrer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <img 
+                  src="${imageUrl}" 
+                  alt="${name}" 
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
-              <h3 class="font-black text-sm text-zinc-900 leading-tight mb-1 truncate" title="${name}">${name}</h3>
+              
+              <h3 class="font-black text-sm text-zinc-900 leading-tight mb-1 truncate" title="${name}">
+                ${name}
+              </h3>
+              
               <div class="flex items-center gap-1.5 mb-3">
-                <span class="text-orange-500 text-xs">${starsString}</span>
-                <span class="text-[10px] text-zinc-400 font-bold uppercase">${rating.toFixed(1)} (${soldCount})</span>
+                <span class="text-orange-500 text-xs tracking-wider">${starsString}</span>
+                <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-tighter">
+                  ${rating.toFixed(1)} (${soldCount})
+                </span>
               </div>
+
               <div class="mt-auto flex items-end justify-between">
                 <div>
-                  <span class="text-zinc-400 line-through text-[11px] block">$${originalPrice.toFixed(2)}</span>
-                  <span class="text-2xl font-black text-zinc-900">$${offerPrice.toFixed(2)}</span>
+                  <span class="text-zinc-400 line-through text-[11px] block">$${originalPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+                  <span class="text-2xl font-black text-zinc-900 tracking-tighter">$${offerPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
                 </div>
-                <a href="${affiliateUrl}" target="_blank" class="bg-zinc-900 text-white text-[11px] px-5 py-2.5 rounded-xl font-black hover:bg-orange-600 uppercase">BUY NOW</a>
+                <a 
+                  href="${affiliateUrl}" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="bg-zinc-900 text-white text-[11px] px-5 py-2.5 rounded-xl font-black hover:bg-orange-600 transition-colors uppercase tracking-wider font-space active:scale-95"
+                >
+                  BUY NOW
+                </a>
               </div>
             `;
             productsGrid.appendChild(card);
           });
-        } catch (err) { console.error(err); }
+
+        } catch (err) {
+          console.error("Firestore read error:", err);
+        }
+      }, (err) => {
+        console.error("Snapshot error:", err);
       });
 
-      // Video Section Sync
+      // ==========================================
+      // 3. REALTIME YOUTUBE VIDEO SECTION
+      // ==========================================
       const videoCollectionRef = collection(db, "video");
       const youtubePlayer = document.getElementById("youtube-player");
       const videoPlaceholder = document.getElementById("video-placeholder");
@@ -482,24 +759,40 @@
         if (!url) return null;
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         const match = url.match(regExp);
-        return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}?autoplay=0&rel=0` : null;
+        if (match && match[2].length === 11) {
+          return `https://www.youtube.com/embed/${match[2]}?autoplay=0&rel=0`;
+        }
+        return null;
       }
 
       onSnapshot(videoCollectionRef, (snapshot) => {
-        let videoUrl = "";
-        snapshot.forEach((doc) => { if (doc.data()?.url) videoUrl = doc.data().url; });
-        const embedUrl = getYouTubeEmbedUrl(videoUrl);
-        if (embedUrl) {
-          youtubePlayer.src = embedUrl;
-          youtubePlayer.classList.remove("hidden");
-          videoPlaceholder.classList.add("hidden");
-        } else {
-          youtubePlayer.classList.add("hidden");
-          videoPlaceholder.classList.remove("hidden");
+        try {
+          let videoUrl = "";
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data && data.url) {
+              videoUrl = data.url;
+            }
+          });
+
+          const embedUrl = getYouTubeEmbedUrl(videoUrl);
+          if (embedUrl) {
+            youtubePlayer.src = embedUrl;
+            youtubePlayer.classList.remove("hidden");
+            videoPlaceholder.classList.add("hidden");
+          } else {
+            youtubePlayer.classList.add("hidden");
+            youtubePlayer.src = "";
+            videoPlaceholder.classList.remove("hidden");
+          }
+        } catch (err) {
+          console.error("Video snap error:", err);
         }
       });
 
-      // FAQ Chatbot Logic
+      // ==========================================
+      // 4. FLOATING AI FAQ CHATBOT
+      // ==========================================
       const chatToggle = document.getElementById("chat-toggle");
       const chatWindow = document.getElementById("chatbot-window");
       const closeChat = document.getElementById("close-chat");
@@ -510,60 +803,143 @@
       const chatIconClose = document.getElementById("chat-icon-close");
 
       const FAQ_RESPONSES = {
-        offers: "We have active discounts! Check the promo buttons at the top of the page for 70% to 80% off on premium items.",
-        delivery: "We offer FREE delivery on selected products with the [FREE DELIVERY] badge. Standard delivery options also available.",
-        payment: "We support major digital payments. Tap 'Buy Now' on any product card to securely complete your payment.",
-        returns: "We provide a 14-day hassle-free return and refund policy on all premium catalog items.",
-        products: "Our catalog is synced in real-time with Firestore. Each product is certified for executive unboxing experiences."
+        offers: "We have amazing active discounts! Tap on the glowing top promo buttons to access 70% to 80% off on our limited-edition products. Don't forget to check our daily deals in the product grid below!",
+        delivery: "We offer FREE delivery on selected products with the green [FREE DELIVERY] badge! For other products, a standard shipping fee applies. All premium items are carefully packaged and dispatched within 24 hours.",
+        payment: "We support all major payment providers, credit/debit cards, and digital mobile banking wallets. Simply select 'Buy Now' on any product card to view the secure checkout page for your selected item!",
+        returns: "We stand by our uncompromising quality! We provide a hassle-free 14-day return and full refund policy if you are not 100% satisfied with your premium purchase.",
+        products: "Our catalog features highly-rated luxury goods synced directly from our premium master database. Check each card for ratings, sale counts, and direct buy links!",
+        support: "For direct personal assistance, contact our executive helpline at support@amazingshopping.com, or join our social media channels on Facebook, YouTube, and TikTok linked at the footer!"
       };
 
+      function findFAQResponse(userQuery) {
+        const queryLower = userQuery.toLowerCase();
+        
+        if (queryLower.includes("offer") || queryLower.includes("discount") || queryLower.includes("sale") || queryLower.includes("promo") || queryLower.includes("deal")) {
+          return FAQ_RESPONSES.offers;
+        }
+        if (queryLower.includes("delivery") || queryLower.includes("ship") || queryLower.includes("free") || queryLower.includes("charge") || queryLower.includes("postage")) {
+          return FAQ_RESPONSES.delivery;
+        }
+        if (queryLower.includes("payment") || queryLower.includes("pay") || queryLower.includes("card") || queryLower.includes("checkout") || queryLower.includes("buy")) {
+          return FAQ_RESPONSES.payment;
+        }
+        if (queryLower.includes("return") || queryLower.includes("refund") || queryLower.includes("change") || queryLower.includes("replace")) {
+          return FAQ_RESPONSES.returns;
+        }
+        if (queryLower.includes("product") || queryLower.includes("item") || queryLower.includes("catalog") || queryLower.includes("good") || queryLower.includes("stock")) {
+          return FAQ_RESPONSES.products;
+        }
+        if (queryLower.includes("support") || queryLower.includes("contact") || queryLower.includes("phone") || queryLower.includes("email") || queryLower.includes("help") || queryLower.includes("social")) {
+          return FAQ_RESPONSES.support;
+        }
+        
+        return "I'm happy to assist you! For quick answers, please select one of the popular topics above, or ask me about: 'Offers', 'Delivery', 'Payment options', 'Returns', 'Products', or 'Contacting support'.";
+      }
+
       function toggleChat() {
-        if (!chatWindow.classList.contains("hidden")) {
+        const isOpen = !chatWindow.classList.contains("hidden");
+        
+        if (isOpen) {
+          chatWindow.classList.remove("chatbot-slide-in");
           chatWindow.classList.add("chatbot-slide-out");
-          setTimeout(() => { chatWindow.classList.add("hidden"); chatWindow.classList.remove("chatbot-slide-out"); }, 300);
-          chatIconOpen.classList.remove("hidden"); chatIconClose.classList.add("hidden");
+          setTimeout(() => {
+            chatWindow.classList.add("hidden");
+            chatWindow.classList.remove("chatbot-slide-out");
+          }, 300);
+          chatIconOpen.classList.remove("hidden");
+          chatIconClose.classList.add("hidden");
         } else {
-          chatWindow.classList.remove("hidden"); chatWindow.classList.add("chatbot-slide-in");
-          chatIconOpen.classList.add("hidden"); chatIconClose.classList.remove("hidden");
+          chatWindow.classList.remove("hidden");
+          chatWindow.classList.add("chatbot-slide-in");
+          chatIconOpen.classList.add("hidden");
+          chatIconClose.classList.remove("hidden");
           chatInput.focus();
         }
       }
 
-      chatToggle.onclick = toggleChat;
-      closeChat.onclick = toggleChat;
+      chatToggle.addEventListener("click", toggleChat);
+      closeChat.addEventListener("click", toggleChat);
 
       function appendMessage(sender, text) {
         const msgDiv = document.createElement("div");
-        msgDiv.className = sender === "user" ? "flex justify-end max-w-[85%] ml-auto" : "flex gap-2.5 max-w-[85%]";
-        msgDiv.innerHTML = sender === "user" 
-          ? `<div class="bg-zinc-950 text-white p-3 rounded-2xl rounded-br-xs text-xs text-right">${text}</div>`
-          : `<div class="w-7 h-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 shrink-0 self-end">💬</div>
-             <div class="bg-white border p-3 rounded-2xl rounded-bl-xs text-xs text-zinc-800">${text}</div>`;
+        const isUser = sender === "user";
+        
+        msgDiv.className = isUser 
+          ? "flex justify-end max-w-[85%] ml-auto" 
+          : "flex gap-2.5 max-w-[85%]";
+
+        if (isUser) {
+          msgDiv.innerHTML = `
+            <div class="bg-zinc-950 text-white p-3 rounded-2xl rounded-br-xs text-xs shadow-xs text-right leading-relaxed font-medium">
+              ${text}
+            </div>
+          `;
+        } else {
+          msgDiv.innerHTML = `
+            <div class="w-7 h-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 shrink-0 self-end">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+            </div>
+            <div class="bg-white border border-zinc-150 p-3 rounded-2xl rounded-bl-xs text-xs shadow-xs text-zinc-800 leading-relaxed font-medium">
+              ${text}
+            </div>
+          `;
+        }
+
         chatMessages.appendChild(msgDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
-      chatForm.onsubmit = (e) => {
-        e.preventDefault();
-        const msg = chatInput.value.trim();
-        if (!msg) return;
-        appendMessage("user", msg);
-        chatInput.value = "";
-        setTimeout(() => {
-          const lower = msg.toLowerCase();
-          let rep = "I am happy to assist! Please ask about: 'Offers', 'Delivery', 'Payment options', 'Returns' or 'Products'.";
-          if (lower.includes("offer") || lower.includes("discount") || lower.includes("promo")) rep = FAQ_RESPONSES.offers;
-          else if (lower.includes("delivery") || lower.includes("ship") || lower.includes("free")) rep = FAQ_RESPONSES.delivery;
-          else if (lower.includes("payment") || lower.includes("pay") || lower.includes("card")) rep = FAQ_RESPONSES.payment;
-          else if (lower.includes("return") || lower.includes("refund")) rep = FAQ_RESPONSES.returns;
-          else if (lower.includes("product") || lower.includes("item")) rep = FAQ_RESPONSES.products;
-          appendMessage("bot", rep);
-        }, 800);
-      };
+      function appendTypingIndicator() {
+        const typingDiv = document.createElement("div");
+        typingDiv.id = "typing-indicator";
+        typingDiv.className = "flex gap-2.5 max-w-[85%]";
+        typingDiv.innerHTML = `
+          <div class="w-7 h-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 shrink-0 self-end">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+          </div>
+          <div class="bg-zinc-100 p-3 rounded-2xl rounded-bl-xs text-xs shadow-xs text-zinc-400 flex items-center gap-1 font-medium">
+            <span class="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce"></span>
+            <span class="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+            <span class="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+          </div>
+        `;
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
 
-      document.querySelectorAll(".chat-faq-btn").forEach(btn => {
-        btn.onclick = () => { appendMessage("user", btn.textContent); chatForm.dispatchEvent(new Event('submit')); };
+      function removeTypingIndicator() {
+        const indicator = document.getElementById("typing-indicator");
+        if (indicator) {
+          indicator.remove();
+        }
+      }
+
+      function handleUserMessage(messageText) {
+        appendMessage("user", messageText);
+        appendTypingIndicator();
+
+        setTimeout(() => {
+          removeTypingIndicator();
+          const botResponse = findFAQResponse(messageText);
+          appendMessage("bot", botResponse);
+        }, 1000);
+      }
+
+      chatForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        handleUserMessage(message);
+        chatInput.value = "";
+      });
+
+      document.querySelectorAll(".chat-faq-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const questionText = btn.textContent;
+          handleUserMessage(questionText);
+        });
       });
     </script>
   </body>
-</html>
+      </html>
