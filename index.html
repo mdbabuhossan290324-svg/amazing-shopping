@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script type="module" src="/@vite/client"></script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Amazing Shopping | Immersive Luxury Experience</title>
@@ -204,7 +206,7 @@
         }
       }
     </style>
-  </head>
+  <script src="/_aistudio-iframe.js?v=1ee22f18"></script></head>
   <body class="bg-[#fdfdfd] text-[#1a1a1a] font-sans min-h-screen flex flex-col antialiased selection:bg-orange-100 selection:text-orange-900 overflow-x-hidden">
 
     <!-- LOADING / SPLASH SCREEN -->
@@ -262,6 +264,7 @@
             <a href="#" class="text-orange-600 border-b-2 border-orange-500 pb-1">Boutique</a>
             <a href="#video-section" class="text-zinc-600 hover:text-orange-600 transition-colors">Showcase</a>
             <a href="#products-section" class="text-zinc-600 hover:text-orange-600 transition-colors">Deals</a>
+            <a href="./copy.html" class="text-zinc-600 hover:text-orange-600 transition-colors">Copy Code 📋</a>
             <a href="./admin.html" class="flex items-center gap-2 bg-zinc-900 text-white px-5 py-3 rounded-2xl hover:bg-orange-600 transition-all duration-300 shadow-lg shadow-zinc-200">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-cog"><circle cx="18" cy="15" r="3"/><circle cx="9" cy="7" r="4"/><path d="M10 15H6a4 4 0 0 0-4 4v2"/><path d="m21.7 16.4-.9-.3"/><path d="m15.2 13.9-.9-.3"/><path d="m16.6 18.7.3-.9"/><path d="m19.1 12.2.3-.9"/><path d="m15.3 16.6-.3-.9"/><path d="m21.8 14.3-.3-.9"/><path d="m20.1 18.2.9-.3"/><path d="m16.8 12.7.9-.3"/></svg>
               Admin Dashboard
@@ -270,6 +273,9 @@
           
           <!-- Mobile Admin Access -->
           <div class="md:hidden flex items-center gap-3">
+            <a href="./copy.html" class="p-2.5 bg-orange-100 rounded-full text-orange-600 hover:bg-orange-200 transition-colors" title="Copy Code">
+              📋
+            </a>
             <a href="./admin.html" class="p-2.5 bg-zinc-100 rounded-full text-zinc-800 hover:text-orange-600 transition-colors" title="Admin Panel">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-cog"><circle cx="18" cy="15" r="3"/><circle cx="9" cy="7" r="4"/><path d="M10 15H6a4 4 0 0 0-4 4v2"/></svg>
             </a>
@@ -608,338 +614,6 @@
     </div>
 
     <!-- MAIN MODULE SCRIPT (Firebase SDK & Logic integrated directly) -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
-      import { getFirestore, collection, onSnapshot, query } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-
-      // Firebase Configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyCEwO6gl1sWEx4_tra-3KpBp6hcHGQE_3I",
-        authDomain: "amazing-shopping-2d3bc.firebaseapp.com",
-        projectId: "amazing-shopping-2d3bc",
-        storageBucket: "amazing-shopping-2d3bc.firebasestorage.app",
-        messagingSenderId: "163413077176",
-        appId: "1:163413077176:web:b82c2976b0193fe740984d",
-        measurementId: "G-95RRX24X8M"
-      };
-
-      // Initialize Firebase & Services
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-      const db = getFirestore(app);
-
-      // ==========================================
-      // 1. LOADING / SPLASH SCREEN CONTROLLER
-      // ==========================================
-      window.addEventListener("DOMContentLoaded", () => {
-        const splashScreen = document.getElementById("splash-screen");
-        const appContent = document.getElementById("app-content");
-
-        setTimeout(() => {
-          splashScreen.classList.add("opacity-0", "pointer-events-none");
-          appContent.classList.remove("hidden");
-          setTimeout(() => {
-            appContent.classList.add("opacity-100");
-          }, 50);
-
-          setTimeout(() => {
-            splashScreen.style.display = "none";
-          }, 700);
-        }, 2000);
-      });
-
-      // ==========================================
-      // 2. REALTIME FIREBASE PRODUCTS GRID
-      // ==========================================
-      const productsGrid = document.getElementById("products-grid");
-      const loadingProducts = document.getElementById("loading-products");
-      const emptyProducts = document.getElementById("empty-products");
-
-      const productsCollectionRef = collection(db, "products");
-      const productsQuery = query(productsCollectionRef);
-
-      // Setup Realtime Sync Listener
-      onSnapshot(productsQuery, (snapshot) => {
-        try {
-          loadingProducts.classList.add("hidden");
-
-          if (snapshot.empty) {
-            productsGrid.classList.add("hidden");
-            emptyProducts.classList.remove("hidden");
-            return;
-          }
-
-          emptyProducts.classList.add("hidden");
-          productsGrid.classList.remove("hidden");
-          productsGrid.innerHTML = "";
-
-          snapshot.forEach((doc) => {
-            const product = doc.data();
-            const productId = doc.id;
-
-            const name = product.name || "Premium Product";
-            const originalPrice = parseFloat(product.originalPrice) || 0;
-            const offerPrice = parseFloat(product.offerPrice) || 0;
-            const rating = parseFloat(product.rating) || 5.0;
-            const soldCount = product.soldCount || "0 Sold";
-            const freeDelivery = !!product.freeDelivery;
-            const imageUrl = product.imageUrl || "https://picsum.photos/seed/shop/400/300";
-            const affiliateUrl = product.affiliateUrl || "#";
-
-            const fullStars = Math.floor(rating);
-            const halfStar = rating % 1 >= 0.5 ? "★" : "";
-            const emptyStarsCount = 5 - fullStars - (halfStar ? 1 : 0);
-            const starsString = "★".repeat(fullStars) + halfStar + "☆".repeat(emptyStarsCount);
-
-            const card = document.createElement("div");
-            card.className = "bg-white rounded-[2rem] p-4 shadow-xl shadow-zinc-200/50 border border-zinc-100 flex flex-col relative overflow-hidden group";
-            card.id = `product-${productId}`;
-
-            const deliveryBadgeHtml = freeDelivery
-              ? `<div class="absolute top-3 left-3 bg-green-500 text-white text-[9px] font-black px-3 py-1 rounded-full shadow-lg z-10 tracking-wider uppercase">FREE DELIVERY</div>`
-              : `<div class="absolute top-3 left-3 bg-zinc-400/60 text-white text-[9px] font-black px-3 py-1 rounded-full z-10 tracking-wider uppercase">PAID DELIVERY</div>`;
-
-            card.innerHTML = `
-              <div class="h-40 sm:h-48 bg-zinc-100 rounded-3xl mb-4 flex items-center justify-center text-zinc-400 overflow-hidden relative">
-                ${deliveryBadgeHtml}
-                <img 
-                  src="${imageUrl}" 
-                  alt="${name}" 
-                  loading="lazy"
-                  referrerpolicy="no-referrer"
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              
-              <h3 class="font-black text-sm text-zinc-900 leading-tight mb-1 truncate" title="${name}">
-                ${name}
-              </h3>
-              
-              <div class="flex items-center gap-1.5 mb-3">
-                <span class="text-orange-500 text-xs tracking-wider">${starsString}</span>
-                <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-tighter">
-                  ${rating.toFixed(1)} (${soldCount})
-                </span>
-              </div>
-
-              <div class="mt-auto flex items-end justify-between">
-                <div>
-                  <span class="text-zinc-400 line-through text-[11px] block">$${originalPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
-                  <span class="text-2xl font-black text-zinc-900 tracking-tighter">$${offerPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
-                </div>
-                <a 
-                  href="${affiliateUrl}" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="bg-zinc-900 text-white text-[11px] px-5 py-2.5 rounded-xl font-black hover:bg-orange-600 transition-colors uppercase tracking-wider font-space active:scale-95"
-                >
-                  BUY NOW
-                </a>
-              </div>
-            `;
-            productsGrid.appendChild(card);
-          });
-
-        } catch (err) {
-          console.error("Firestore read error:", err);
-        }
-      }, (err) => {
-        console.error("Snapshot error:", err);
-      });
-
-      // ==========================================
-      // 3. REALTIME YOUTUBE VIDEO SECTION
-      // ==========================================
-      const videoCollectionRef = collection(db, "video");
-      const youtubePlayer = document.getElementById("youtube-player");
-      const videoPlaceholder = document.getElementById("video-placeholder");
-
-      function getYouTubeEmbedUrl(url) {
-        if (!url) return null;
-        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        const match = url.match(regExp);
-        if (match && match[2].length === 11) {
-          return `https://www.youtube.com/embed/${match[2]}?autoplay=0&rel=0`;
-        }
-        return null;
-      }
-
-      onSnapshot(videoCollectionRef, (snapshot) => {
-        try {
-          let videoUrl = "";
-          snapshot.forEach((doc) => {
-            const data = doc.data();
-            if (data && data.url) {
-              videoUrl = data.url;
-            }
-          });
-
-          const embedUrl = getYouTubeEmbedUrl(videoUrl);
-          if (embedUrl) {
-            youtubePlayer.src = embedUrl;
-            youtubePlayer.classList.remove("hidden");
-            videoPlaceholder.classList.add("hidden");
-          } else {
-            youtubePlayer.classList.add("hidden");
-            youtubePlayer.src = "";
-            videoPlaceholder.classList.remove("hidden");
-          }
-        } catch (err) {
-          console.error("Video snap error:", err);
-        }
-      });
-
-      // ==========================================
-      // 4. FLOATING AI FAQ CHATBOT
-      // ==========================================
-      const chatToggle = document.getElementById("chat-toggle");
-      const chatWindow = document.getElementById("chatbot-window");
-      const closeChat = document.getElementById("close-chat");
-      const chatForm = document.getElementById("chat-form");
-      const chatInput = document.getElementById("chat-input");
-      const chatMessages = document.getElementById("chat-messages");
-      const chatIconOpen = document.getElementById("chat-icon-open");
-      const chatIconClose = document.getElementById("chat-icon-close");
-
-      const FAQ_RESPONSES = {
-        offers: "We have amazing active discounts! Tap on the glowing top promo buttons to access 70% to 80% off on our limited-edition products. Don't forget to check our daily deals in the product grid below!",
-        delivery: "We offer FREE delivery on selected products with the green [FREE DELIVERY] badge! For other products, a standard shipping fee applies. All premium items are carefully packaged and dispatched within 24 hours.",
-        payment: "We support all major payment providers, credit/debit cards, and digital mobile banking wallets. Simply select 'Buy Now' on any product card to view the secure checkout page for your selected item!",
-        returns: "We stand by our uncompromising quality! We provide a hassle-free 14-day return and full refund policy if you are not 100% satisfied with your premium purchase.",
-        products: "Our catalog features highly-rated luxury goods synced directly from our premium master database. Check each card for ratings, sale counts, and direct buy links!",
-        support: "For direct personal assistance, contact our executive helpline at support@amazingshopping.com, or join our social media channels on Facebook, YouTube, and TikTok linked at the footer!"
-      };
-
-      function findFAQResponse(userQuery) {
-        const queryLower = userQuery.toLowerCase();
-        
-        if (queryLower.includes("offer") || queryLower.includes("discount") || queryLower.includes("sale") || queryLower.includes("promo") || queryLower.includes("deal")) {
-          return FAQ_RESPONSES.offers;
-        }
-        if (queryLower.includes("delivery") || queryLower.includes("ship") || queryLower.includes("free") || queryLower.includes("charge") || queryLower.includes("postage")) {
-          return FAQ_RESPONSES.delivery;
-        }
-        if (queryLower.includes("payment") || queryLower.includes("pay") || queryLower.includes("card") || queryLower.includes("checkout") || queryLower.includes("buy")) {
-          return FAQ_RESPONSES.payment;
-        }
-        if (queryLower.includes("return") || queryLower.includes("refund") || queryLower.includes("change") || queryLower.includes("replace")) {
-          return FAQ_RESPONSES.returns;
-        }
-        if (queryLower.includes("product") || queryLower.includes("item") || queryLower.includes("catalog") || queryLower.includes("good") || queryLower.includes("stock")) {
-          return FAQ_RESPONSES.products;
-        }
-        if (queryLower.includes("support") || queryLower.includes("contact") || queryLower.includes("phone") || queryLower.includes("email") || queryLower.includes("help") || queryLower.includes("social")) {
-          return FAQ_RESPONSES.support;
-        }
-        
-        return "I'm happy to assist you! For quick answers, please select one of the popular topics above, or ask me about: 'Offers', 'Delivery', 'Payment options', 'Returns', 'Products', or 'Contacting support'.";
-      }
-
-      function toggleChat() {
-        const isOpen = !chatWindow.classList.contains("hidden");
-        
-        if (isOpen) {
-          chatWindow.classList.remove("chatbot-slide-in");
-          chatWindow.classList.add("chatbot-slide-out");
-          setTimeout(() => {
-            chatWindow.classList.add("hidden");
-            chatWindow.classList.remove("chatbot-slide-out");
-          }, 300);
-          chatIconOpen.classList.remove("hidden");
-          chatIconClose.classList.add("hidden");
-        } else {
-          chatWindow.classList.remove("hidden");
-          chatWindow.classList.add("chatbot-slide-in");
-          chatIconOpen.classList.add("hidden");
-          chatIconClose.classList.remove("hidden");
-          chatInput.focus();
-        }
-      }
-
-      chatToggle.addEventListener("click", toggleChat);
-      closeChat.addEventListener("click", toggleChat);
-
-      function appendMessage(sender, text) {
-        const msgDiv = document.createElement("div");
-        const isUser = sender === "user";
-        
-        msgDiv.className = isUser 
-          ? "flex justify-end max-w-[85%] ml-auto" 
-          : "flex gap-2.5 max-w-[85%]";
-
-        if (isUser) {
-          msgDiv.innerHTML = `
-            <div class="bg-zinc-950 text-white p-3 rounded-2xl rounded-br-xs text-xs shadow-xs text-right leading-relaxed font-medium">
-              ${text}
-            </div>
-          `;
-        } else {
-          msgDiv.innerHTML = `
-            <div class="w-7 h-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 shrink-0 self-end">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-            </div>
-            <div class="bg-white border border-zinc-150 p-3 rounded-2xl rounded-bl-xs text-xs shadow-xs text-zinc-800 leading-relaxed font-medium">
-              ${text}
-            </div>
-          `;
-        }
-
-        chatMessages.appendChild(msgDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }
-
-      function appendTypingIndicator() {
-        const typingDiv = document.createElement("div");
-        typingDiv.id = "typing-indicator";
-        typingDiv.className = "flex gap-2.5 max-w-[85%]";
-        typingDiv.innerHTML = `
-          <div class="w-7 h-7 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-600 shrink-0 self-end">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-          </div>
-          <div class="bg-zinc-100 p-3 rounded-2xl rounded-bl-xs text-xs shadow-xs text-zinc-400 flex items-center gap-1 font-medium">
-            <span class="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce"></span>
-            <span class="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-            <span class="w-1.5 h-1.5 bg-zinc-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
-          </div>
-        `;
-        chatMessages.appendChild(typingDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-      }
-
-      function removeTypingIndicator() {
-        const indicator = document.getElementById("typing-indicator");
-        if (indicator) {
-          indicator.remove();
-        }
-      }
-
-      function handleUserMessage(messageText) {
-        appendMessage("user", messageText);
-        appendTypingIndicator();
-
-        setTimeout(() => {
-          removeTypingIndicator();
-          const botResponse = findFAQResponse(messageText);
-          appendMessage("bot", botResponse);
-        }, 1000);
-      }
-
-      chatForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const message = chatInput.value.trim();
-        if (!message) return;
-
-        handleUserMessage(message);
-        chatInput.value = "";
-      });
-
-      document.querySelectorAll(".chat-faq-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const questionText = btn.textContent;
-          handleUserMessage(questionText);
-        });
-      });
-    </script>
+    <script type="module" src="/index.html?html-proxy&index=0.js"></script>
   </body>
 </html>
