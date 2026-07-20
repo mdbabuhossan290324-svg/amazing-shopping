@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazing Shopping | Executive Admin Panel</title>
+    <link rel="icon" type="image/png" href="https://picsum.photos/seed/luxury/32/32" />
+    
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+              display: ["Playfair Display", "Georgia", "serif"],
+              space: ["Space Grotesk", "sans-serif"],
+            },
+            colors: {
+              orange: {
+                50: '#fff7ed',
+                100: '#ffedd5',
+                500: '#f97316',
+                600: '#ea580c',
+                700: '#c2410c',
+              }
+            }
+          }
+        }
+      }
+    </script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      @keyframes toast-slide-in {
+        from { opacity: 0; transform: translateY(20px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      .animate-toast {
+        animation: toast-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #fdfdfd;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #e4e4e7;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #ea580c;
+      }
+      input:focus {
+        box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
+      }
+    </style>
+  </head>
+  <body class="bg-[#fdfdfd] text-zinc-800 font-sans min-h-screen flex flex-col antialiased selection:bg-orange-100 selection:text-orange-900">
+
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="fixed inset-0 bg-[#0c0c0e] z-50 flex items-center justify-center p-4">
+      <div class="w-full max-w-md bg-white rounded-[2rem] shadow-2xl border border-zinc-100 overflow-hidden relative">
+        <div class="p-8 text-center bg-gradient-to-b from-zinc-900 to-zinc-950 text-white relative">
+          <div class="absolute -top-12 -left-12 w-24 h-24 bg-orange-500/10 blur-xl rounded-full"></div>
+          <div class="w-14 h-14 bg-orange-500 text-white rounded-2xl mx-auto flex items-center justify-center font-bold text-xl mb-4">🔐</div>
+          <h1 class="text-2xl font-black uppercase italic">Amazing <span class="text-orange-500">Boutique</span></h1>
+          <p class="text-zinc-400 text-xs mt-1 uppercase font-space font-bold">Executive Control Access</p>
+        </div>
+
+        <div class="p-8 space-y-6">
+          <form id="login-form" class="space-y-4">
+            <div class="space-y-1.5">
+              <label for="login-email" class="text-[10px] font-black text-zinc-600 uppercase font-space">Executive Email</label>
+              <input type="email" id="login-email" placeholder="admin@amazingshopping.com" required class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-3 rounded-xl text-sm outline-none transition-all" />
+            </div>
+            <div class="space-y-1.5">
+              <label for="login-password" class="text-[10px] font-black text-zinc-600 uppercase font-space">Password / Pin</label>
+              <input type="password" id="login-password" placeholder="••••••••" required class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-3 rounded-xl text-sm outline-none transition-all" />
+            </div>
+            <div class="pt-2">
+              <button type="submit" class="w-full bg-zinc-950 text-white hover:bg-orange-600 transition-all duration-300 font-bold py-3 px-4 rounded-xl text-xs uppercase shadow-md flex items-center justify-center gap-2">
+                Sign In
+              </button>
+            </div>
+          </form>
+
+          <div class="relative flex py-2 items-center">
+            <div class="flex-grow border-t border-zinc-200"></div>
+            <span class="flex-shrink mx-4 text-zinc-400 text-[10px] uppercase font-bold">Or Sandbox Bypass</span>
+            <div class="flex-grow border-t border-zinc-200"></div>
+          </div>
+
+          <div class="bg-orange-50 border border-orange-200 rounded-2xl p-4 space-y-3">
+            <button id="bypass-login-btn" type="button" class="w-full bg-orange-500 text-white hover:bg-orange-600 font-bold py-2.5 rounded-xl text-xs uppercase transition-all">
+              Enter via Demo Gate
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT -->
+    <div id="dashboard-content" class="hidden flex-1 flex flex-col">
+      <header class="bg-zinc-950 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-orange-500 text-white rounded-xl flex items-center justify-center font-black text-lg">A</div>
+            <div>
+              <h1 class="text-xl font-black uppercase italic">Amazing <span class="text-orange-500">Shopping</span></h1>
+              <span class="text-[10px] text-orange-400 uppercase font-bold">Executive Admin Panel</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <a href="./index.html" class="bg-zinc-900 border border-zinc-800 text-zinc-300 px-4 py-2 rounded-full text-xs uppercase font-bold">View Website</a>
+            <button id="logout-btn" class="bg-orange-500 text-white font-bold px-4 py-2 rounded-full text-xs uppercase">Sign Out</button>
+          </div>
+        </div>
+      </header>
+
+      <div id="notification-container" class="fixed top-24 right-6 z-50 flex flex-col gap-3 max-w-sm"></div>
+
+      <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- LEFT: FORM -->
+        <section class="lg:col-span-5 space-y-6">
+          <div class="bg-white border border-zinc-200 rounded-[2rem] p-6 shadow-xl relative overflow-hidden">
+            <div class="flex items-center justify-between border-b pb-4 mb-5">
+              <div>
+                <h2 id="form-title" class="text-lg font-black text-zinc-900 uppercase italic">Create New Product</h2>
+                <p id="form-subtitle" class="text-[11px] text-zinc-400">Publish a hot luxury deal to the shop</p>
+              </div>
+              <span id="edit-indicator" class="hidden text-[10px] bg-orange-100 text-orange-800 font-bold px-2.5 py-1 rounded-full uppercase animate-pulse">Edit Mode</span>
+            </div>
+
+            <form id="product-form" class="space-y-4">
+              <input type="hidden" id="edit-product-id" />
+              <div class="space-y-1">
+                <label for="product-name" class="text-[10px] font-black text-zinc-600 uppercase">Product Name</label>
+                <input type="text" id="product-name" placeholder="e.g. Elegant Chronometer" required class="w-full bg-zinc-50 border px-4 py-2.5 rounded-xl text-xs outline-none" />
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1">
+                  <label for="original-price" class="text-[10px] font-black text-zinc-600 uppercase">Original Price ($)</label>
+                  <input type="number" id="original-price" placeholder="999.00" step="0.01" min="0" required class="w-full bg-zinc-50 border px-4 py-2.5 rounded-xl text-xs outline-none" />
+                </div>
+                <div class="space-y-1">
+                  <label for="offer-price" class="text-[10px] font-black text-zinc-600 uppercase">Offer Price ($)</label>
+                  <input type="number" id="offer-price" placeholder="199.00" step="0.01" min="0" required class="w-full bg-zinc-50 border px-4 py-2.5 rounded-xl text-xs outline-none" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-1">
+                  <label for="product-rating" class="text-[10px] font-black text-zinc-600 uppercase">Rating (1.0 - 5.0)</label>
+                  <input type="number" id="product-rating" placeholder="4.5" step="0.1" min="1" max="5" required class="w-full bg-zinc-50 border px-4 py-2.5 rounded-xl text-xs outline-none" />
+                </div>
+                <div class="space-y-1">
+                  <label for="sold-count" class="text-[10px] font-black text-zinc-600 uppercase">Sold Count Text</label>
+                  <input type="text" id="sold-count" placeholder="e.g. 17K Sold" required class="w-full bg-zinc-50 border px-4 py-2.5 rounded-xl text-xs outline-none" />
+                </div>
+              </div>
+
+              <div class="space-y-1">
+                <label for="image-url" class="text-[10px] font-black text-zinc-600 uppercase">Image URL</label>
+                <input type="url" id="image-url" placeholder="https://images.unsplash.com/..." required class="w-full bg-zinc-50 border px-4 py-2.5 rounded-xl text-xs outline-none" />
+              </div>
+
+              <div class="space-y-1">
+                <label for="affiliate-url" class="text-[10px] font-black text-zinc-600 uppercase">Affiliate Buy URL</label>
+                <input type="url" id="affiliate-url" placeholder="https://click.affiliate.com/..." required class="w-full bg-zinc-50 border px-4 py-2.5 rounded-xl text-xs outline-none" />
+              </div>
+
+              <div class="flex items-center justify-between bg-zinc-50 p-3 rounded-2xl border">
+                <span class="text-xs font-black text-zinc-700 uppercase">Free Delivery Eligibility</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="free-delivery" class="sr-only peer">
+                  <div class="w-11 h-6 bg-zinc-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
+                </label>
+              </div>
+
+              <div class="flex gap-3 pt-3 border-t">
+                <button type="button" id="reset-btn" class="flex-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-black py-3 rounded-xl text-xs uppercase">Reset</button>
+                <button type="submit" id="submit-btn" class="flex-1 bg-zinc-950 text-white hover:bg-orange-600 font-black py-3 rounded-xl text-xs uppercase shadow-md">Publish</button>
+                <button type="button" id="update-btn" class="hidden flex-1 bg-orange-500 text-white hover:bg-orange-600 font-black py-3 rounded-xl text-xs uppercase shadow-md">Update</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- YOUTUBE VIDEO MANAGER -->
+          <div class="bg-white border border-zinc-200 rounded-[2rem] p-6 shadow-xl">
+            <div class="flex items-center gap-3 border-b pb-4 mb-5">
+              <div class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-red-600">📹</div>
+              <div>
+                <h3 class="text-base font-black text-zinc-900 uppercase italic">Featured Video Manager</h3>
+                <p class="text-[11px] text-zinc-400">Control the video showcase on landing page</p>
+              </div>
+            </div>
+            <form id="video-form" class="space-y-4">
+              <div class="space-y-1">
+                <label for="video-url" class="text-[10px] font-black text-zinc-600 uppercase">YouTube Video URL</label>
+                <input type="url" id="video-url" placeholder="https://www.youtube.com/watch?v=..." required class="w-full bg-zinc-50 border px-4 py-2.5 rounded-xl text-xs outline-none" />
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-zinc-400 bg-zinc-50 p-2.5 rounded-lg border">
+                <span class="uppercase text-[9px]">Live Video URL:</span>
+                <span id="current-video-text" class="font-semibold text-zinc-600 truncate max-w-[150px]">None</span>
+              </div>
+              <button type="submit" class="w-full bg-zinc-900 text-white hover:bg-orange-600 font-black py-2.5 rounded-xl text-xs uppercase">Save Video Link</button>
+            </form>
+          </div>
+        </section>
+
+        <!-- RIGHT: TABLE -->
+        <section class="lg:col-span-7 space-y-6">
+          <div class="bg-white border border-zinc-200 rounded-[2rem] p-6 shadow-xl flex flex-col min-h-[500px]">
+            <div class="flex items-center justify-between border-b pb-5 mb-5">
+              <div>
+                <h2 class="text-lg font-black text-zinc-900 uppercase italic">Manage Catalog</h2>
+                <p class="text-[11px] text-zinc-400">Edit or delete items in realtime</p>
+              </div>
+              <span id="products-count" class="bg-zinc-100 text-zinc-700 text-[10px] font-black px-3 py-1.5 rounded-full">0 Items Total</span>
+            </div>
+
+            <div id="table-loading" class="flex-1 flex flex-col items-center justify-center py-20 gap-3">
+              <div class="w-8 h-8 border-2 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div>
+              <span class="text-zinc-500 text-xs uppercase font-bold animate-pulse">Syncing table...</span>
+            </div>
+
+            <div id="table-container" class="hidden flex-1 overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[600px]">
+                <thead>
+                  <tr class="border-b text-zinc-500 text-[10px] uppercase font-bold">
+                    <th class="pb-3 font-bold">Preview</th>
+                    <th class="pb-3 font-bold">Product Detail</th>
+                    <th class="pb-3 font-bold">Pricing</th>
+                    <th class="pb-3 font-bold">Shipping</th>
+                    <th class="pb-3 font-bold text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="catalog-table-body" class="divide-y text-xs text-zinc-700"></tbody>
+              </table>
+            </div>
+
+            <div id="table-empty" class="hidden flex-1 flex flex-col items-center justify-center py-16 text-center">
+              <p class="text-sm font-black text-zinc-600 uppercase">The showroom catalog is empty.</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ADMIN PANEL SCRIPTS -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+      import { getFirestore, doc, collection, addDoc, updateDoc, deleteDoc, onSnapshot, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyACgKVsEx6ec0I3OJ6fH7KemGgNmk3V2nY",
+        authDomain: "daraz-bangladesh-6a0f8.firebaseapp.com",
+        projectId: "daraz-bangladesh-6a0f8",
+        storageBucket: "daraz-bangladesh-6a0f8.firebasestorage.app",
+        messagingSenderId: "133315105065",
+        appId: "1:133315105065:web:094a55ea313b04a6f3e738"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const auth = getAuth(app);
+
+      let isDemoBypass = false;
+      let isEditMode = false;
+      let currentEditingId = null;
+      let localCatalog = [];
+
+      // DOM ELEMENTS
+      const loginScreen = document.getElementById("login-screen");
+      const dashboardContent = document.getElementById("dashboard-content");
+      const loginForm = document.getElementById("login-form");
+      const loginEmailInput = document.getElementById("login-email");
+      const loginPasswordInput = document.getElementById("login-password");
+      const bypassBtn = document.getElementById("bypass-login-btn");
+      const logoutBtn = document.getElementById("logout-btn");
+
+      const productForm = document.getElementById("product-form");
+      const editProductIdInput = document.getElementById("edit-product-id");
+      const productNameInput = document.getElementById("product-name");
+      const originalPriceInput = document.getElementById("original-price");
+      const offerPriceInput = document.getElementById("offer-price");
+      const productRatingInput = document.getElementById("product-rating");
+      const soldCountInput = document.getElementById("sold-count");
+      const imageUrlInput = document.getElementById("image-url");
+      const affiliateUrlInput = document.getElementById("affiliate-url");
+      const freeDeliveryInput = document.getElementById("free-delivery");
+
+      const submitBtn = document.getElementById("submit-btn");
+      const updateBtn = document.getElementById("update-btn");
+      const resetBtn = document.getElementById("reset-btn");
+      const formTitle = document.getElementById("form-title");
+      const formSubtitle = document.getElementById("form-subtitle");
+      const editIndicator = document.getElementById("edit-indicator");
+
+      const videoForm = document.getElementById("video-form");
+      const videoUrlInput = document.getElementById("video-url");
+      const currentVideoText = document.getElementById("current-video-text");
+
+      const catalogTableBody = document.getElementById("catalog-table-body");
+      const tableLoading = document.getElementById("table-loading");
+      const tableContainer = document.getElementById("table-container");
+      const tableEmpty = document.getElementById("table-empty");
+      const productsCountBadge = document.getElementById("products-count");
+      const notificationContainer = document.getElementById("notification-container");
+
+      function showNotification(title, message, type = "success") {
+        const toast = document.createElement("div");
+        toast.className = `animate-toast p-4 rounded-2xl shadow-lg border flex gap-3 items-start ${
+          type === "success" ? "bg-emerald-50 text-emerald-800 border-emerald-200" : type === "error" ? "bg-red-50 text-red-800 border-red-200" : "bg-orange-50 text-orange-800 border-orange-200"
+        }`;
+        toast.innerHTML = `<div><h6 class="font-bold text-xs uppercase">${title}</h6><p class="text-xs leading-tight">${message}</p></div>`;
+        notificationContainer.appendChild(toast);
+        setTimeout(() => { toast.remove(); }, 4000);
+      }
+
+      onAuthStateChanged(auth, (user) => {
+        if (user && user.email === "mdbabuhossan290324@gmail.com") {
+          isDemoBypass = false;
+          loginScreen.classList.add("hidden");
+          dashboardContent.classList.remove("hidden");
+          showNotification("Access Granted", `Welcome ${user.email}`);
+        } else if (!isDemoBypass) {
+          loginScreen.classList.remove("hidden");
+          dashboardContent.classList.add("hidden");
+        }
+      });
+
+      loginForm.onsubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const cred = await signInWithEmailAndPassword(auth, loginEmailInput.value, loginPasswordInput.value);
+          if (cred.user.email !== "mdbabuhossan290324@gmail.com") {
+            await signOut(auth);
+            showNotification("Denied", "Mismatch email", "error");
+          }
+        } catch (err) { showNotification("Error", err.message, "error"); }
+      };
+
+      bypassBtn.onclick = () => {
+        isDemoBypass = true;
+        loginScreen.classList.add("hidden");
+        dashboardContent.classList.remove("hidden");
+        showNotification("Bypass On", "Demo bypass active", "alert");
+      };
+
+      logoutBtn.onclick = async () => {
+        if (isDemoBypass) {
+          isDemoBypass = false;
+          loginScreen.classList.remove("hidden");
+          dashboardContent.classList.add("hidden");
+        } else {
+          await signOut(auth);
+        }
+      };
+
+      const productsCollectionRef = collection(db, "products");
+      onSnapshot(productsCollectionRef, (snap) => {
+        tableLoading.classList.add("hidden");
+        localCatalog = [];
+        snap.forEach(doc => { localCatalog.push({ id: doc.id, ...doc.data() }); });
+        renderTable();
+      }, (err) => { tableLoading.classList.add("hidden"); renderTable(); });
+
+      function renderTable() {
+        if (localCatalog.length === 0) {
+          tableContainer.classList.add("hidden"); tableEmpty.classList.remove("hidden");
+          productsCountBadge.textContent = "0 Items Total";
+          return;
+        }
+        tableEmpty.classList.add("hidden"); tableContainer.classList.remove("hidden");
+        catalogTableBody.innerHTML = "";
+        productsCountBadge.textContent = `${localCatalog.length} Items Total`;
+
+        localCatalog.forEach(product => {
+          const tr = document.createElement("tr");
+          tr.className = "border-b hover:bg-neutral-50/50 align-middle";
+          const delivery = product.freeDelivery ? `<span class="bg-emerald-50 text-emerald-700 font-bold px-2.5 py-0.5 border rounded-full text-[9px]">Free</span>` : `<span class="bg-neutral-100 text-zinc-400 px-2 py-0.5 border rounded-full text-[9px]">Paid</span>`;
+          tr.innerHTML = `
+            <td class="py-3"><div class="w-12 h-12 rounded-xl overflow-hidden border"><img src="${product.imageUrl || ''}" class="w-full h-full object-cover" /></div></td>
+            <td class="py-3 font-bold truncate max-w-[200px]">${product.name}</td>
+            <td class="py-3 font-bold">$${parseFloat(product.offerPrice || 0).toFixed(2)}</td>
+            <td class="py-3">${delivery}</td>
+            <td class="py-3 text-right">
+              <button data-edit-id="${product.id}" class="edit-row-btn p-2 text-zinc-500 hover:text-orange-600">✎</button>
+              <button data-delete-id="${product.id}" class="delete-row-btn p-2 text-zinc-400 hover:text-red-600">🗑</button>
+            </td>
+          `;
+          catalogTableBody.appendChild(tr);
+        });
+
+        document.querySelectorAll(".edit-row-btn").forEach(btn => {
+          btn.onclick = () => loadProductToForm(btn.getAttribute("data-edit-id"));
+        });
+        document.querySelectorAll(".delete-row-btn").forEach(btn => {
+          btn.onclick = () => deleteProduct(btn.getAttribute("data-delete-id"));
+        });
+      }
+
+      function loadProductToForm(id) {
+        const prod = localCatalog.find(item => item.id === id);
+        if (!prod) return;
+        currentEditingId = id; isEditMode = true;
+        editProductIdInput.value = prod.id;
+        productNameInput.value = prod.name;
+        originalPriceInput.value = prod.originalPrice;
+        offerPriceInput.value = prod.offerPrice;
+        productRatingInput.value = prod.rating;
+        soldCountInput.value = prod.soldCount;
+        imageUrlInput.value = prod.imageUrl;
+        affiliateUrlInput.value = prod.affiliateUrl;
+        freeDeliveryInput.checked = !!prod.freeDelivery;
+
+        formTitle.textContent = "Edit Product Details";
+        editIndicator.classList.remove("hidden");
+        submitBtn.classList.add("hidden");
+        updateBtn.classList.remove("hidden");
+        productForm.scrollIntoView({ behavior: "smooth" });
+      }
+
+      productForm.onsubmit = async (e) => {
+        e.preventDefault();
+        if (isEditMode) return;
+        const payload = getFormPayload();
+        try {
+          await addDoc(productsCollectionRef, payload);
+          showNotification("Success", "Published product");
+          exitEditMode();
+        } catch (err) {
+          if (isDemoBypass) {
+            localCatalog.push({ id: "demo-" + Math.floor(Math.random()*1000), ...payload });
+            renderTable(); exitEditMode();
+          } else showNotification("Error", err.message, "error");
+        }
+      };
+
+      updateBtn.onclick = async () => {
+        if (!isEditMode || !currentEditingId) return;
+        const payload = getFormPayload();
+        try {
+          await updateDoc(doc(db, "products", currentEditingId), payload);
+          showNotification("Success", "Updated successfully");
+          exitEditMode();
+        } catch (err) {
+          if (isDemoBypass) {
+            const idx = localCatalog.findIndex(item => item.id === currentEditingId);
+            if (idx !== -1) localCatalog[idx] = { ...localCatalog[idx], ...payload };
+            renderTable(); exitEditMode();
+          } else showNotification("Error", err.message, "error");
+        }
+      };
+
+      async function deleteProduct(id) {
+        if (!confirm("Are you sure?")) return;
+        try {
+          await deleteDoc(doc(db, "products", id));
+          showNotification("Deleted", "Product removed");
+        } catch (err) {
+          if (isDemoBypass) {
+            localCatalog = localCatalog.filter(item => item.id !== id);
+            renderTable();
+          } else showNotification("Error", err.message, "error");
+        }
+      }
+
+      function exitEditMode() {
+        isEditMode = false; currentEditingId = null;
+        productForm.reset(); freeDeliveryInput.checked = false;
+        formTitle.textContent = "Create New Product";
+        editIndicator.classList.add("hidden");
+        submitBtn.classList.remove("hidden");
+        updateBtn.classList.add("hidden");
+      }
+
+      resetBtn.onclick = exitEditMode;
+
+      const videoDocRef = doc(db, "video", "featured_video");
+      onSnapshot(videoDocRef, (snap) => {
+        if (snap.exists() && snap.data()?.url) {
+          videoUrlInput.value = snap.data().url;
+          currentVideoText.textContent = snap.data().url;
+        }
+      });
+
+      videoForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const url = videoUrlInput.value.trim();
+        try {
+          await setDoc(videoDocRef, { url: url, updatedAt: serverTimestamp() });
+          showNotification("Success", "Video saved");
+        } catch (err) {
+          if (isDemoBypass) currentVideoText.textContent = url;
+          else showNotification("Error", err.message, "error");
+        }
+      };
+    </script>
+  </body>
+                </html>
