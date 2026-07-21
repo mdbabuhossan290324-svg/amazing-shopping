@@ -313,6 +313,67 @@
       const [activeFilter, setActiveFilter] = useState("all");
       const [freeDeliveryTicked, setFreeDeliveryTicked] = useState(true);
       
+      // Copy HTML states
+      const [isCopying, setIsCopying] = useState(false);
+      const [copyStatus, setCopyStatus] = useState(""); // "" | "success" | "error"
+
+      const handleCopyHTML = async () => {
+        setIsCopying(true);
+        setCopyStatus("");
+        try {
+          let codeText = "";
+          // Attempt 1: Fetch from custom API
+          try {
+            const response = await fetch("/api/raw-html");
+            if (response.ok) {
+              const data = await response.json();
+              codeText = data.code;
+            }
+          } catch (e) {
+            console.warn("API raw-html fetch failed, trying direct file fetch", e);
+          }
+
+          // Attempt 2: Fallback to direct file fetch
+          if (!codeText) {
+            try {
+              const response = await fetch("/single-file-index.html");
+              if (response.ok) {
+                codeText = await response.text();
+              }
+            } catch (e) {
+              console.warn("Direct file fetch failed", e);
+            }
+          }
+
+          // Attempt 3: Fallback to window.location.href fetch
+          if (!codeText) {
+            try {
+              const response = await fetch(window.location.href);
+              if (response.ok) {
+                codeText = await response.text();
+              }
+            } catch (e) {
+              console.warn("window.location fetch failed", e);
+            }
+          }
+
+          if (codeText) {
+            await navigator.clipboard.writeText(codeText);
+            setCopyStatus("success");
+            setTimeout(() => setCopyStatus(""), 4000);
+          } else {
+            throw new Error("Could not retrieve HTML code");
+          }
+        } catch (err) {
+          console.error("Copy failed:", err);
+          setCopyStatus("error");
+          setTimeout(() => setCopyStatus(""), 4000);
+          alert("কোড কপি করা যায়নি। অনুগ্রহ করে ম্যানুয়ালি কোডটি কপি করুন।");
+        } finally {
+          setIsCopying(false);
+        }
+      };
+      
       // Admin Authentication States
       const [isAdmin, setIsAdmin] = useState(false);
       const [adminPassword, setAdminPassword] = useState("");
@@ -323,7 +384,7 @@
       const [newProdName, setNewProdName] = useState("");
       const [newProdPrice, setNewProdPrice] = useState("");
       const [newProdOfferPrice, setNewProdOfferPrice] = useState("");
-      const [newProdRating, setNewProdRating] =("4.5");
+      const [newProdRating, setNewProdRating] = useState("4.5");
       const [newProdFreeDelivery, setNewProdFreeDelivery] = useState(true);
       const [newProdImage, setNewProdImage] = useState("");
       const [newProdAffiliate, setNewProdAffiliate] = useState("");
@@ -488,20 +549,23 @@
         if (activeFilter === "all") return products;
         
         if (activeFilter === "promo-70") {
+          // Products where saving is significant (roughly 70% off or high discount)
           return products.filter(p => {
             const ratio = p.offerPrice / p.price;
-            return ratio <= 0.35;
+            return ratio <= 0.35; // 65% off or higher
           });
         }
         
         if (activeFilter === "promo-80") {
+          // High percent discount
           return products.filter(p => {
             const ratio = p.offerPrice / p.price;
-            return ratio <= 0.25;
+            return ratio <= 0.25; // 75% off or higher
           });
         }
         
         if (activeFilter === "mega") {
+          // Highly rated products with free delivery
           return products.filter(p => p.rating >= 4.6 || p.isFreeDelivery);
         }
 
@@ -551,6 +615,72 @@
           {!showSplash && (
             <div className="flex-1 flex flex-col">
               
+              {/* ONE-CLICK FULL CODE COPY BAR */}
+              <div className="bg-[#FFF1C5] border-b-4 border-black p-3.5 px-4 sticky top-[76px] sm:top-0 z-40 shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 text-slate-900">
+                  <div className="flex items-center gap-3 text-center md:text-left">
+                    <div className="hidden sm:flex p-2 bg-[#FFD166] rounded-xl border-2 border-black shadow-[2px_2px_0px_#000]">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-black">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-sans font-black text-sm uppercase leading-tight tracking-tight flex items-center justify-center md:justify-start gap-1.5 text-black">
+                        <span>📋 সম্পূর্ণ HTML কোড কপি করুন</span>
+                        <span className="text-[10px] font-mono font-bold bg-black text-yellow-300 px-1.5 py-0.5 rounded ml-1 uppercase">Single File</span>
+                      </h4>
+                      <p className="text-xs text-slate-700 font-bold mt-0.5 leading-tight">
+                        বাটনে ক্লিক করলেই এই পেজের সম্পূর্ণ সোর্স কোডটি কপি হয়ে যাবে। আপনি কপি করে সরাসরি আপনার ব্লগারে (Blogger) বা HTML ফাইলে ব্যবহার করতে পারবেন।
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2.5 shrink-0 w-full md:w-auto justify-center">
+                    <button
+                      onClick={handleCopyHTML}
+                      disabled={isCopying}
+                      className={`w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border-2 border-black font-black uppercase text-xs tracking-wider transition-all duration-150 shadow-[3px_3px_0px_#000] active:translate-y-0.5 active:shadow-[1px_1px_0px_#000] disabled:opacity-75 ${
+                        copyStatus === "success"
+                        ? "bg-[#00C853] text-white"
+                        : copyStatus === "error"
+                        ? "bg-rose-500 text-white"
+                        : "bg-[#00E676] hover:bg-[#00C853] text-black"
+                      }`}
+                    >
+                      {isCopying ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          ⌛ কপি করা হচ্ছে...
+                        </>
+                      ) : copyStatus === "success" ? (
+                        <>
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          🎉 সফলভাবে কপি হয়েছে!
+                        </>
+                      ) : copyStatus === "error" ? (
+                        <>
+                          <span>❌ কপি ব্যর্থ হয়েছে!</span>
+                        </>
+                      ) : (
+                        <>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mr-0.5">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                          </svg>
+                          কপি কোড (Copy Code) 📋
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               {/* HEADER CONTAINER */}
               <header className="bg-[#FF4D00] text-white border-b-4 border-black sticky top-0 z-30 shadow-md">
                 <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -884,6 +1014,7 @@
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {getFilteredProducts().map((prod) => {
+                      // Calculate discount saving percent
                       const discountPct = Math.round(((prod.price - prod.offerPrice) / prod.price) * 100);
                       
                       return (
@@ -907,7 +1038,7 @@
                               SAVE {discountPct}%
                             </div>
 
-                            {/* Free Delivery Badge */}
+                            {/* Free Delivery Badge (Blurs if ticked is false) */}
                             {prod.isFreeDelivery && (
                               <div className={`absolute top-3 right-3 bg-[#00C853] text-white font-black text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md border-2 border-black shadow-[2px_2px_0px_#000] ${
                                 !freeDeliveryTicked ? "blur-badge" : ""
@@ -969,7 +1100,7 @@
                                 Buy Now
                               </a>
 
-                              {/* Review Video */}
+                              {/* Review Video (Only visible if set) */}
                               {prod.videoLink && (
                                 <a 
                                   href={prod.videoLink}
@@ -1221,4 +1352,4 @@
     root.render(<App />);
   </script>
 </body>
-</html>
+  </html>
