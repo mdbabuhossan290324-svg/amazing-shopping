@@ -526,7 +526,7 @@
             const ytId = getYouTubeId(videoDoc.data().videoLink);
             if (ytId) {
               videoContainer.innerHTML = `
-                <iframe src="https://www.youtube.com/embed/${ytId}" class="w-full h-full border-0" allowfullscreen></iframe>
+                <iframe src="https://youtube.com/shorts/Li0XbrC0vuk?si=xcGiLV7XG5r9ejrG/${ytId}" class="w-full h-full border-0" allowfullscreen></iframe>
               `;
             } else {
               videoContainer.innerHTML = `<p class="text-slate-400 text-xs italic">No featured video has been set, or the link is invalid.</p>`;
