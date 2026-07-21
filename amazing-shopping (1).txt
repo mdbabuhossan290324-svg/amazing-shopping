@@ -1,0 +1,365 @@
+PK♥♦
+     ÆUõ\▲Ý¶•`☺  `☺  
+  metadata.json{
+  "name": "Amazing Shopping",
+  "description": "A high-fidelity, interactive, and beautifully designed shopping website featuring premium products, promotional deals, a smart AI support chatbot, and an admin panel for product management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
+PK♥♦
+     ÆUõ\Ý♣]½☺  ½☺  ♀   .env.example# GEMINI_API_KEY: Required for Gemini AI API calls.
+# AI Studio automatically injects this at runtime from user secrets.
+# Users configure this via the Secrets panel in the AI Studio UI.
+GEMINI_API_KEY="MY_GEMINI_API_KEY"
+
+# APP_URL: The URL where this applet is hosted.
+# AI Studio automatically injects this at runtime with the Cloud Run service URL.
+# Used for self-referential links, OAuth callbacks, and API endpoints.
+APP_URL="MY_APP_URL"
+PK♥♦
+     ÆUõ\È½.ÙI   I   
+   .gitignorenode_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+PK♥♦
+     ÆUõ\            •   assets/PK♥♦
+     ÆUõ\            ◄   assets/.aistudio/PK♥♦
+     ÆUõ\É7gÎ☻   ☻   ←   assets/.aistudio/.gitignore*
+PK♥♦
+     ÆUõ\ðû6Ò7☺  7☺  
+   index.html<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
+PK♥♦
+     ÆUõ\ÕàÑœÕ♥  Õ♥  ♀   package.json{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx server.ts",
+    "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "start": "node dist/server.cjs",
+    "preview": "vite preview",
+    "clean": "rm -rf dist server.js",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "lucide-react": "^0.546.0",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "vite": "^6.2.3",
+    "express": "^4.21.2",
+    "dotenv": "^17.2.3",
+    "motion": "^12.23.24"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "autoprefixer": "^10.4.21",
+    "esbuild": "^0.25.0",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3",
+    "@types/express": "^4.17.21"
+  }
+}
+PK♥♦
+     ÆUõ\            ♦   src/PK♥♦
+     ÆUõ\¨y#G♀â  ♀â  ♂   src/App.tsximport React, { useState, useEffect, useRef, FormEvent } from "react";
+import { 
+  Star, 
+  Facebook, 
+  Youtube, 
+  MessageSquare, 
+  Plus, 
+  Check, 
+  Lock, 
+  Unlock, 
+  Smartphone, 
+  Send, 
+  ShoppingBag, 
+  X, 
+  Loader2, 
+  Filter, 
+  AlertCircle, 
+  Share2, 
+  Play, 
+  ThumbsUp, 
+  Flame, 
+  Truck, 
+  Sparkles,
+  ArrowRight
+} from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { Product, ChatMessage } from "./types";
+
+export default function App() {
+  // Application States
+  const [showSplash, setShowSplash] = useState(true);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [errorProducts, setErrorProducts] = useState("");
+  
+  // Free Delivery Badge blurring state (User can tick/untick option to toggle blur/show)
+  const [freeDeliveryTicked, setFreeDeliveryTicked] = useState(true);
+  
+  // Admin Access State
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const [showAdminForm, setShowAdminForm] = useState(false);
+  const [adminError, setAdminError] = useState("");
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  
+  // Admin Product Form State
+  const [newProdName, setNewProdName] = useState("");
+  const [newProdPrice, setNewProdPrice] = useState("");
+  const [newProdOfferPrice, setNewProdOfferPrice] = useState("");
+  const [newProdRating, setNewProdRating] = useState("4.5");
+  const [newProdFreeDelivery, setNewProdFreeDelivery] = useState(true);
+  const [newProdImage, setNewProdImage] = useState("");
+  const [newProdAffiliate, setNewProdAffiliate] = useState("");
+  const [newProdVideo, setNewProdVideo] = useState("");
+  const [submittingProduct, setSubmittingProduct] = useState(false);
+
+  // Chatbot State
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      id: "welcome",
+      sender: "bot",
+      text: "Hello there! Welcome to Amazing Shopping support. If you have any questions about products, promos, or delivery, feel free to ask me!",
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    }
+  ]);
+  const [chatInput, setChatInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  // Constants
+  const AFFILIATE_PROMO_URL = "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607";
+  const APP_DOWNLOAD_URL = "https://www.appcreator24.com/app4124991-s83n4c";
+  
+  const FB_URL = "https://www.facebook.com/share/17iurH6h42/";
+  const YT_URL = "https://www.youtube.com/@bahadurlivenews24";
+  const TIKTOK_URL = "https://vm.tiktok.com/ZSXC8LmMG/";
+
+  // Image for Splash Screen
+  const SPLASH_IMAGE = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIi2aX2-zVxcBDP6qAlhlLGR30jCA2pVxWnT-AjG-QUfLfDuuM9tyVkHGAZbNv1n0NBXoOu4_yZ5u-yU1BtlzxvjqDrJQ5VowLa1hFyr3LerTl_yya8Fv9rh3b3ZAJVXCftFMeI2Nb_e1C6t7gxcaheh0YR3e52gPyLe2FpbWsCF8_47hzBJfYw-D6I3Y/s1600/klagamaker_t2607to_130848257.jpg";
+
+  // Banner Image
+  const BANNER_IMAGE = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9G1wT935zOwgBk3i2nfyasytbF1FK4m41yrRtBno9ZObFiYvKHwSHhmkoAdr5MjOcbvsCL3j_8Vi-apskZxceECNhyphen_-xE3F3K8IdfvND10lwQmvqfa0OO01_PU9tyZ_j2N_JouWrtpNEKUWu6WjhqK0a3cK4dtiKEWMH1ghPAYsWRTwEc8vJ5IlkU_Q/s1983/386f67d5-91a9-43e6-8761-20e161192624.png";
+
+  // Trigger 2 seconds Splash Screen
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Fetch products from backend
+  const fetchProducts = async () => {
+    try {
+      setLoadingProducts(true);
+      const response = await fetch("/api/products");
+      if (!response.ok) throw new Error("Failed to load catalog products.");
+      const data = await response.json();
+      setProducts(data);
+      setErrorProducts("");
+    } catch (err: any) {
+      console.error(err);
+      setErrorProducts(err.message || "Something went wrong while fetching products.");
+    } finally {
+      setLoadingProducts(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  // Scroll to bottom on new chatbot message
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages, isTyping]);
+
+  // Admin login trigger
+  const handleAdminLogin = (e: FormEvent) => {
+    e.preventDefault();
+    if (adminPassword === "bahadur@2025#") {
+      setIsAdmin(true);
+      setAdminError("");
+      setAdminPassword("");
+    } else {
+      setAdminError("Incorrect password! Please try again.");
+    }
+  };
+
+  // Submit Product Upload Handler
+  const handleProductUpload = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!newProdName || !newProdPrice || !newProdOfferPrice || !newProdImage || !newProdAffiliate) {
+      alert("Please fill in all required product details!");
+      return;
+    }
+
+    setSubmittingProduct(true);
+    try {
+      const response = await fetch("/api/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: newProdName,
+          price: Number(newProdPrice),
+          offerPrice: Number(newProdOfferPrice),
+          rating: Number(newProdRating),
+          isFreeDelivery: newProdFreeDelivery,
+          image: newProdImage,
+          affiliateLink: newProdAffiliate,
+          videoLink: newProdVideo || undefined,
+          password: "admin123" // Server verified password
+        })
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.error || "Failed to upload product.");
+      }
+
+      await fetchProducts(); // Reload catalog
+      setUploadSuccess(true);
+      
+      // Clear Form Fields
+      setNewProdName("");
+      setNewProdPrice("");
+      setNewProdOfferPrice("");
+      setNewProdRating("4.5");
+      setNewProdFreeDelivery(true);
+      setNewProdImage("");
+      setNewProdAffiliate("");
+      setNewProdVideo("");
+      
+      setTimeout(() => setUploadSuccess(false), 3000);
+    } catch (err: any) {
+      alert(err.message || "Failed to upload product to catalog");
+    } finally {
+      setSubmittingProduct(false);
+    }
+  };
+
+  // Chatbot message sender
+  const handleSendMessage = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!chatInput.trim()) return;
+
+    const userMsg: ChatMessage = {
+      id: "msg-" + Date.now(),
+      sender: "user",
+      text: chatInput,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+
+    setChatMessages(prev => [...prev, userMsg]);
+    const inputToSend = chatInput;
+    setChatInput("");
+    setIsTyping(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: inputToSend })
+      });
+
+      if (!response.ok) throw new Error("Connection lost");
+      const data = await response.json();
+
+      setChatMessages(prev => [...prev, {
+        id: "bot-" + Date.now(),
+        sender: "bot",
+        text: data.text,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }]);
+    } catch (error) {
+      console.error(error);
+      setChatMessages(prev => [...prev, {
+        id: "err-" + Date.now(),
+        sender: "bot",
+        text: "My apologies, I had trouble connecting. For immediate delivery info, please send a message to our WhatsApp Support: 01764335343.",
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
+  // Helper to render stars
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalf = rating % 1 >= 0.5;
+    return (
+      <div className="flex items-center text-amber-400 gap-0.5">
+        {[...Array(5)].map((_, i) => (
+          <Star 
+            key={i} 
+            size={14} 
+            className={i < fullStars ? "fill-amber-400 text-amber-400" : "text-gray-300"} 
+          />
+        ))}
+        <span className="text-xs font-semibold ml-1 text-gray-600 font-mono">({rating})</span>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900 bg-[#FFF9E6] relative">
+      
+      {/* 1. Splash Screen: "zoom skin app open photo" - lasts 2 seconds */}
+      <AnimatePresence>
+        {showSplash && (
+          <motion.div 
+            id="splash-screen"
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 bg-black z-50 flex items-center justify-center overflow-hidden"
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0 }}
+              animate={{ scale: 1.05, opacity: 1 }}
+              transition={{ duration: 1.8, ease: "easeOut" }}
+              className="relative w-full h-full max-w-lg aspect-[9/16] flex items-center justify-center p-4"
+            >
+              <img 
+                src={SPLASH_IMAGE} 
+                alt="Splash Welcome" 
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover rounded-2xl shadow-2xl border-4 border-amber-400/50"
+                onError={(e) => {
+                  // Fallback if Blogger URL fails in sandbox
+                  e.currentTarget.src = "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1200";
+                }}
+              />
+              <div className="absolute inset-x-0 bottom-12 flex flex-col items-center justify-center px-6 text-center">
+                <div className="bg-black/70 backdrop-blu©â©
