@@ -104,7 +104,6 @@
       );
     }
 
-    // Owner Authenticated Lock Icon
     function LockIcon({ size = 16, className = "" }) {
       return (
         <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -192,11 +191,11 @@
       );
     }
 
-    // Default seed products
+    // Default seed products to use if localStorage is empty
     const DEFAULT_PRODUCTS = [
       {
         id: "prod-1784624891250",
-        name: "L'Oreal Paris Age Perfect Anti-Aging Midnight Cream",
+        name: "Product Name: L'Oreal Paris Age Perfect Anti-Aging Midnight Cream",
         price: 27,
         offerPrice: 25,
         rating: 4.5,
@@ -257,7 +256,6 @@
       }
     ];
 
-    // Isolated Banner Ad Component via iframe srcDoc
     function AdsterraBanner({ adKey, width, height }) {
       const iframeSrcDoc = `
         <!DOCTYPE html>
@@ -357,8 +355,9 @@
       const SPLASH_IMAGE = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiIi2aX2-zVxcBDP6qAlhlLGR30jCA2pVxWnT-AjG-QUfLfDuuM9tyVkHGAZbNv1n0NBXoOu4_yZ5u-yU1BtlzxvjqDrJQ5VowLa1hFyr3LerTl_yya8Fv9rh3b3ZAJVXCftFMeI2Nb_e1C6t7gxcaheh0YR3e52gPyLe2FpbWsCF8_47hzBJfYw-D6I3Y/s1600/klagamaker_t2607to_130848257.jpg";
       const BANNER_IMAGE = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh9G1wT935zOwgBk3i2nfyasytbF1FK4m41yrRtBno9ZObFiYvKHwSHhmkoAdr5MjOcbvsCL3j_8Vi-apskZxceECNhyphen_-xE3F3K8IdfvND10lwQmvqfa0OO01_PU9tyZ_j2N_JouWrtpNEKUWu6WjhqK0a3cK4dtiKEWMH1ghPAYsWRTwEc8vJ5IlkU_Q/s1983/386f67d5-91a9-43e6-8761-20e161192624.png";
 
-      // Initial Catalog Data Fetch and Splash Handler
+      // 1. Initial Load (Splash timer and Local Storage Products Fetch)
       useEffect(() => {
+        // Fetch or Seed products
         const localProds = localStorage.getItem("amazing_products");
         if (localProds) {
           setProducts(JSON.parse(localProds));
@@ -373,14 +372,14 @@
         return () => clearTimeout(timer);
       }, []);
 
-      // Auto scroll inside support bot
+      // 2. Chatbot Auto-Scroll
       useEffect(() => {
         if (chatEndRef.current) {
           chatEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
       }, [chatMessages, isChatOpen]);
 
-      // Handle Authentication Process
+      // Handle Admin Login Form Submission
       const handleAdminLogin = (e) => {
         e.preventDefault();
         if (adminPassword === "bahadur@2025#") {
@@ -392,7 +391,7 @@
         }
       };
 
-      // Create & Post New Item
+      // Handle Adding New Product
       const handleAddProduct = (e) => {
         e.preventDefault();
         if (!newProdName || !newProdPrice || !newProdOfferPrice || !newProdImage || !newProdAffiliate) {
@@ -405,7 +404,7 @@
           name: newProdName,
           price: Number(newProdPrice),
           offerPrice: Number(newProdOfferPrice),
-          rating: 4.5,
+          rating: Number(newProdRating) || 4.5,
           reviewsCount: Math.floor(Math.random() * 450) + 15,
           soldCount: `${(Math.random() * 14 + 1).toFixed(1)}k sold`,
           isFreeDelivery: newProdFreeDelivery,
@@ -418,10 +417,11 @@
         setProducts(updated);
         localStorage.setItem("amazing_products", JSON.stringify(updated));
 
-        // Reset fields
+        // Reset Inputs
         setNewProdName("");
         setNewProdPrice("");
         setNewProdOfferPrice("");
+        setNewProdRating("4.5");
         setNewProdFreeDelivery(true);
         setNewProdImage("");
         setNewProdAffiliate("");
@@ -431,6 +431,7 @@
         setTimeout(() => setUploadSuccess(false), 4000);
       };
 
+      // Handle Deleting a Product
       const handleDeleteProduct = (id) => {
         if (confirm("Are you sure you want to delete this product from the catalog?")) {
           const updated = products.filter(p => p.id !== id);
@@ -439,6 +440,7 @@
         }
       };
 
+      // Local chatbot responder
       const handleSendMessage = (e) => {
         e.preventDefault();
         if (!chatInput.trim()) return;
@@ -481,20 +483,32 @@
         }, 1000);
       };
 
+      // Filtered Products Logic
       const getFilteredProducts = () => {
         if (activeFilter === "all") return products;
+        
         if (activeFilter === "promo-70") {
-          return products.filter(p => (p.offerPrice / p.price) <= 0.35);
+          return products.filter(p => {
+            const ratio = p.offerPrice / p.price;
+            return ratio <= 0.35;
+          });
         }
+        
         if (activeFilter === "promo-80") {
-          return products.filter(p => (p.offerPrice / p.price) <= 0.25);
+          return products.filter(p => {
+            const ratio = p.offerPrice / p.price;
+            return ratio <= 0.25;
+          });
         }
+        
         if (activeFilter === "mega") {
           return products.filter(p => p.rating >= 4.6 || p.isFreeDelivery);
         }
+
         return products;
       };
 
+      // Star renderer
       const renderStars = (rating) => {
         const fullStars = Math.floor(rating);
         return (
@@ -540,6 +554,8 @@
               {/* HEADER CONTAINER */}
               <header className="bg-[#FF4D00] text-white border-b-4 border-black sticky top-0 z-30 shadow-md">
                 <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  
+                  {/* Brand logo & Text */}
                   <div className="flex items-center gap-3">
                     <div className="bg-white text-[#FF4D00] p-2 rounded-xl shadow-lg border-2 border-black">
                       <ShoppingBagIcon size={24} className="animate-pulse" />
@@ -549,9 +565,14 @@
                     </h1>
                   </div>
 
+                  {/* Right Header Navigation & Actions */}
                   <div className="flex items-center gap-4">
                     <div className="bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest text-white border border-white/10 font-mono">
                       App: 4124991
+                    </div>
+                    <div className="hidden md:flex items-center gap-1.5 text-xs font-bold uppercase">
+                      <span className="opacity-80">Support WhatsApp:</span>
+                      <span className="font-mono text-yellow-300">01764335343</span>
                     </div>
                     <button
                       id="admin-form-toggle"
@@ -587,11 +608,11 @@
                         
                         <div className="flex gap-2">
                           <input
-                             type="password"
-                             placeholder="Enter owner secret password..."
-                             value={adminPassword}
-                             onChange={(e) => setAdminPassword(e.target.value)}
-                             className="flex-1 px-4 py-2.5 text-sm rounded-xl border-2 border-black focus:outline-none focus:ring-0"
+                            type="password"
+                            placeholder="Enter owner secret password..."
+                            value={adminPassword}
+                            onChange={(e) => setAdminPassword(e.target.value)}
+                            className="flex-1 px-4 py-2.5 text-sm rounded-xl border-2 border-black focus:outline-none focus:ring-0 focus:border-[#FF4D00]"
                           />
                           <button
                             type="submit"
@@ -638,7 +659,7 @@
                               placeholder="e.g. L'Oreal Midnight Cream"
                               value={newProdName}
                               onChange={(e) => setNewProdName(e.target.value)}
-                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none"
+                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none focus:ring-0"
                             />
                           </div>
 
@@ -651,7 +672,7 @@
                               placeholder="e.g. 150"
                               value={newProdPrice}
                               onChange={(e) => setNewProdPrice(e.target.value)}
-                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none"
+                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none focus:ring-0"
                             />
                           </div>
 
@@ -664,8 +685,23 @@
                               placeholder="e.g. 45"
                               value={newProdOfferPrice}
                               onChange={(e) => setNewProdOfferPrice(e.target.value)}
-                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none"
+                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none focus:ring-0"
                             />
+                          </div>
+
+                          <div className="flex flex-col gap-1">
+                            <label className="font-bold text-slate-800 text-xs uppercase">Rating (1 to 5) *</label>
+                            <select
+                              value={newProdRating}
+                              onChange={(e) => setNewProdRating(e.target.value)}
+                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none focus:ring-0 bg-white"
+                            >
+                              <option value="5.0">5.0 ⭐⭐⭐⭐⭐</option>
+                              <option value="4.8">4.8 ⭐⭐⭐⭐⭐</option>
+                              <option value="4.5">4.5 ⭐⭐⭐⭐</option>
+                              <option value="4.0">4.0 ⭐⭐⭐⭐</option>
+                              <option value="3.5">3.5 ⭐⭐⭐</option>
+                            </select>
                           </div>
 
                           <div className="flex flex-col gap-1">
@@ -676,7 +712,7 @@
                               placeholder="https://images.unsplash.com/... or postimg link"
                               value={newProdImage}
                               onChange={(e) => setNewProdImage(e.target.value)}
-                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none"
+                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none focus:ring-0"
                             />
                           </div>
 
@@ -688,7 +724,7 @@
                               placeholder="https://amzn.to/... or link"
                               value={newProdAffiliate}
                               onChange={(e) => setNewProdAffiliate(e.target.value)}
-                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none"
+                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none focus:ring-0"
                             />
                           </div>
 
@@ -699,7 +735,7 @@
                               placeholder="https://youtube.com/shorts/..."
                               value={newProdVideo}
                               onChange={(e) => setNewProdVideo(e.target.value)}
-                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none"
+                              className="px-3 py-2 rounded-lg border-2 border-slate-300 focus:border-black focus:outline-none focus:ring-0"
                             />
                           </div>
 
@@ -750,6 +786,7 @@
                       alt="Mega Promotion Banner" 
                       className="w-full h-auto object-cover transform hover:scale-[1.01] transition-transform duration-500"
                     />
+                    {/* Pulsating offer tag */}
                     <div className="absolute top-4 right-4 bg-[#FF4D00] border-2 border-black text-white text-xs md:text-sm font-black px-4 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 animate-pulse">
                       <FlameIcon size={14} />
                       HOT PROMO - CLICK TO CLAIM
@@ -757,7 +794,7 @@
                   </a>
                 </div>
 
-                {/* SCROLLING MARQUEE */}
+                {/* SCROLLING MARQUEE OF ANNOUNCEMENTS */}
                 <div className="bg-[#FFB300] text-slate-950 rounded-2xl py-3 px-4 overflow-hidden border-4 border-black shadow-[4px_4px_0px_#000]">
                   <div className="relative flex items-center overflow-hidden">
                     <div className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-[#FFB300] to-transparent w-12 z-10 pointer-events-none" />
@@ -818,6 +855,7 @@
                     </p>
                   </div>
 
+                  {/* Free Delivery Blur / Show Checkbox */}
                   <div className="flex items-center gap-2.5 bg-[#FFF9E6] p-2.5 rounded-xl border-2 border-black">
                     <input 
                       type="checkbox" 
@@ -853,6 +891,7 @@
                           key={prod.id} 
                           className="bg-white rounded-3xl border-4 border-black neo-shadow hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden relative group"
                         >
+                          {/* Image Box */}
                           <div className="aspect-square w-full bg-slate-100 relative overflow-hidden border-b-4 border-black">
                             <img 
                               src={prod.image} 
@@ -863,10 +902,12 @@
                               }}
                             />
                             
+                            {/* Saving Badge */}
                             <div className="absolute top-3 left-3 bg-[#E04300] text-white font-black text-xs px-3 py-1 rounded-full border-2 border-black shadow-[2px_2px_0px_#000]">
                               SAVE {discountPct}%
                             </div>
 
+                            {/* Free Delivery Badge */}
                             {prod.isFreeDelivery && (
                               <div className={`absolute top-3 right-3 bg-[#00C853] text-white font-black text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md border-2 border-black shadow-[2px_2px_0px_#000] ${
                                 !freeDeliveryTicked ? "blur-badge" : ""
@@ -875,6 +916,7 @@
                               </div>
                             )}
 
+                            {/* Admin Delete Action Button */}
                             {isAdmin && (
                               <button
                                 onClick={() => handleDeleteProduct(prod.id)}
@@ -886,11 +928,14 @@
                             )}
                           </div>
 
+                          {/* Details Content Box */}
                           <div className="p-4 flex-1 flex flex-col gap-3">
+                            {/* Product Name */}
                             <h3 className="font-bold text-slate-900 text-sm leading-snug tracking-tight uppercase line-clamp-2 h-10 select-none">
                               {prod.name}
                             </h3>
 
+                            {/* Rating stars & metrics */}
                             <div className="flex flex-col gap-1">
                               {renderStars(prod.rating)}
                               <div className="flex justify-between text-[10px] font-bold text-slate-500 uppercase font-mono">
@@ -899,6 +944,7 @@
                               </div>
                             </div>
 
+                            {/* Price Elements */}
                             <div className="flex items-baseline gap-2.5 mt-1">
                               <span className="text-2xl font-black text-rose-600 font-mono">
                                 ${prod.offerPrice}
@@ -911,7 +957,9 @@
                               </span>
                             </div>
 
+                            {/* CTA Actions Block */}
                             <div className="flex flex-col gap-2 mt-auto pt-2">
+                              {/* Buy Button */}
                               <a 
                                 href={prod.affiliateLink || AFFILIATE_PROMO_URL}
                                 target="_blank"
@@ -921,6 +969,7 @@
                                 Buy Now
                               </a>
 
+                              {/* Review Video */}
                               {prod.videoLink && (
                                 <a 
                                   href={prod.videoLink}
@@ -945,18 +994,23 @@
                 <div className="bg-white border-4 border-black p-4 rounded-3xl flex flex-col items-center gap-3 text-center shadow-[4px_4px_0px_#000]">
                   <span className="text-xs font-black text-slate-800 tracking-wider uppercase">Promotions & Network Ads</span>
                   
+                  {/* Dynamic script placeholders */}
                   <div className="flex flex-col md:flex-row gap-6 w-full items-center justify-center">
+                    
+                    {/* Banner ad container 1 */}
                     <div className="bg-[#FFF9E6] p-2.5 border-2 border-black rounded-2xl max-w-full overflow-auto flex items-center justify-center shadow-[3px_3px_0px_#000]">
                       <AdsterraBanner adKey="b1ea071a36d532c5c71d427f548a748f" width={728} height={90} />
                     </div>
 
+                    {/* Banner ad container 2 */}
                     <div className="bg-[#FFF9E6] p-2.5 border-2 border-black rounded-2xl max-w-full overflow-auto flex items-center justify-center shadow-[3px_3px_0px_#000]">
                       <AdsterraBanner adKey="0954ebc33c055a57db1b0016759fbd35" width={320} height={50} />
                     </div>
+
                   </div>
                 </div>
 
-                {/* YOUTUBE VIDEO SECTION */}
+                {/* SPACE FOR VIDEOS (Embedded YouTube Short) */}
                 <div className="bg-white rounded-3xl border-4 border-black p-6 md:p-8 flex flex-col gap-4 shadow-[6px_6px_0px_#000]">
                   <div className="flex items-center gap-3 text-left">
                     <div className="p-2 bg-[#FFF9E6] text-[#FF4D00] rounded-xl border border-black/15">
@@ -964,10 +1018,11 @@
                     </div>
                     <div>
                       <h3 className="font-sans font-black text-slate-900 text-lg uppercase leading-none">Amazing Product Short Preview</h3>
-                      <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1 font-mono">Watch our live gadget review and performance overview</p>
+                      <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mt-1">Watch our live gadget review and performance overview</p>
                     </div>
                   </div>
 
+                  {/* YouTube Short Player */}
                   <div className="relative w-full max-w-md mx-auto aspect-[9/16] rounded-2xl overflow-hidden shadow-lg border-2 border-black bg-slate-950">
                     <iframe
                       src="https://www.youtube-nocookie.com/embed/Li0XbrC0vuk"
@@ -978,6 +1033,7 @@
                     ></iframe>
                   </div>
 
+                  {/* Backup watch button for restricted embedding environments */}
                   <div className="flex justify-center mt-2">
                     <a 
                       href="https://youtube.com/shorts/Li0XbrC0vuk" 
@@ -999,6 +1055,7 @@
               <footer className="bg-slate-900 text-white border-t-4 border-black mt-12 py-10">
                 <div className="max-w-7xl mx-auto px-4 flex flex-col items-center gap-8">
                   
+                  {/* BRAND & APP DESCRIPTION */}
                   <div className="text-center max-w-md">
                     <h2 className="text-2xl font-black italic tracking-tighter text-amber-400 uppercase">AMAZING SHOPPING</h2>
                     <p className="text-xs text-slate-400 mt-2 uppercase tracking-wide leading-relaxed font-semibold">
@@ -1006,6 +1063,7 @@
                     </p>
                   </div>
 
+                  {/* PROMINENT MOBILE APP DOWNLOAD */}
                   <div className="w-full max-w-lg">
                     <a 
                       href={APP_DOWNLOAD_URL}
@@ -1020,6 +1078,7 @@
                     </a>
                   </div>
 
+                  {/* SOCIAL MEDIA CONNECTIONS */}
                   <div className="flex flex-wrap justify-center gap-4">
                     <a 
                       href={FB_URL} 
@@ -1047,17 +1106,22 @@
                     </a>
                   </div>
 
+                  {/* SYSTEM AND CONTACT COPYRIGHT info */}
                   <div className="flex flex-col items-center gap-1.5 text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono text-center pt-4 border-t border-slate-800 w-full">
                     <span>© {new Date().getFullYear()} Amazing Shopping Catalog. Curated securely.</span>
                     <span>Direct Delivery Support WhatsApp: 01764335343</span>
                   </div>
+
                 </div>
               </footer>
 
-              {/* SUPPORT CHATBOT WIDGET */}
+              {/* FLOATING COLLAPSIBLE CHATBOT WIDGET */}
               <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end">
+                {/* Chat window panel */}
                 {isChatOpen && (
-                  <div className="w-[320px] md:w-[360px] h-[450px] bg-white rounded-3xl border-4 border-black neo-shadow-orange flex flex-col overflow-hidden mb-3">
+                  <div className="w-[320px] md:w-[360px] h-[450px] bg-white rounded-3xl border-4 border-black neo-shadow-orange flex flex-col overflow-hidden mb-3 animate-fade-in">
+                    
+                    {/* Header bar */}
                     <div className="bg-[#FF4D00] text-white p-4 border-b-4 border-black flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <div className="bg-white text-[#FF4D00] p-1.5 rounded-lg border border-black">
@@ -1076,6 +1140,7 @@
                       </button>
                     </div>
 
+                    {/* Chat messages body container */}
                     <div className="flex-1 p-4 overflow-y-auto bg-slate-50 flex flex-col gap-3.5 no-scrollbar">
                       {chatMessages.map((msg) => (
                         <div 
@@ -1095,6 +1160,7 @@
                         </div>
                       ))}
 
+                      {/* Typing bubble */}
                       {isTyping && (
                         <div className="mr-auto max-w-[85%] flex flex-col items-start">
                           <div className="px-3.5 py-2.5 rounded-2xl rounded-tl-none border-2 border-black bg-white text-xs text-slate-400 flex items-center gap-1.5 font-mono shadow-[1px_1px_0px_#000]">
@@ -1104,9 +1170,11 @@
                           </div>
                         </div>
                       )}
+
                       <div ref={chatEndRef} />
                     </div>
 
+                    {/* Chat input form panel */}
                     <form onSubmit={handleSendMessage} className="p-3 border-t-2 border-slate-200 bg-white flex gap-2">
                       <input 
                         type="text" 
@@ -1122,9 +1190,11 @@
                         <SendIcon size={14} />
                       </button>
                     </form>
+
                   </div>
                 )}
 
+                {/* Main floating action toggle button */}
                 <button 
                   onClick={() => setIsChatOpen(!isChatOpen)}
                   className="w-14 h-14 bg-[#FF4D00] text-white rounded-full border-4 border-black neo-shadow hover:scale-105 active:translate-y-0.5 transition flex items-center justify-center relative group"
@@ -1146,8 +1216,9 @@
       );
     }
 
+    // Render App Component to Virtual DOM
     const root = ReactDOM.createRoot(document.getElementById("root"));
     root.render(<App />);
   </script>
 </body>
-  </html>
+</html>
