@@ -1,466 +1,258 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script type="module" src="/@vite/client"></script>
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amazing Shopping | Executive Admin Panel</title>
-    <link rel="icon" type="image/png" href="https://picsum.photos/seed/luxury/32/32" />
-    
-    <!-- Tailwind CSS Play CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-              display: ["Playfair Display", "Georgia", "serif"],
-              space: ["Space Grotesk", "sans-serif"],
-            },
-            colors: {
-              orange: {
-                50: '#fff7ed',
-                100: '#ffedd5',
-                500: '#f97316',
-                600: '#ea580c',
-                700: '#c2410c',
-              }
-            }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amazing Shopping - Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
           }
         }
       }
-    </script>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Embedded Styles -->
-    <style>
-      /* Custom toast slide animations */
-      @keyframes toast-slide-in {
-        from {
-          opacity: 0;
-          transform: translateY(20px) scale(0.95);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 min-h-screen p-4 md:p-8">
 
-      .animate-toast {
-        animation: toast-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
+  <div class="max-w-3xl mx-auto space-y-8">
+    <div class="text-center space-y-2">
+      <h1 class="text-3xl font-bold font-display tracking-tight text-slate-900">⚙️ অ্যামেজিং অ্যাডমিন প্যানেল</h1>
+      <p class="text-slate-500 text-xs font-semibold">আপনার অনলাইন স্টোর এবং পণ্য তালিকা নিয়ন্ত্রণ করার নিয়ন্ত্রণ কক্ষ</p>
+      <a href="index.html" class="inline-block text-xs font-bold text-rose-500 hover:underline">← স্টোরে ফিরে যান (Back to Store)</a>
+    </div>
 
-      /* Scrollbar customizations */
-      ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #fdfdfd;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #e4e4e7;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #ea580c;
-      }
-
-      /* Inputs styling focus */
-      input:focus {
-        box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.2);
-      }
-    </style>
-  <script src="/_aistudio-iframe.js?v=1ee22f18"></script></head>
-  <body class="bg-[#fdfdfd] text-zinc-800 font-sans min-h-screen flex flex-col antialiased selection:bg-orange-100 selection:text-orange-900">
-
-    <!-- LOGIN SCREEN -->
-    <div id="login-screen" class="hidden fixed inset-0 bg-[#0c0c0e] z-50 flex items-center justify-center p-4">
-      <div class="w-full max-w-md bg-white rounded-[2rem] shadow-2xl border border-zinc-100 overflow-hidden relative">
-        <div class="p-8 text-center bg-gradient-to-b from-zinc-900 to-zinc-950 text-white relative">
-          <!-- Background accent glow -->
-          <div class="absolute -top-12 -left-12 w-24 h-24 bg-orange-500/10 blur-xl rounded-full"></div>
-          
-          <div class="w-14 h-14 bg-orange-500 text-white rounded-2xl mx-auto flex items-center justify-center font-bold text-xl mb-4 shadow-md shadow-orange-500/20">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 9.7a1 1 0 0 1-.68 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 .76-.97l8-2a1 1 0 0 1 .48 0l8 2c.57.14.76.64.76 1.18V13z"/><path d="m9 12 2 2 4-4"/></svg>
-          </div>
-          <h1 class="text-2xl font-black tracking-tight font-sans uppercase italic">Amazing <span class="text-orange-500">Boutique</span></h1>
-          <p class="text-zinc-400 text-xs mt-1 tracking-wider uppercase font-space font-bold">Executive Control Access</p>
+    <!-- Password Verification Block -->
+    <div id="login-card" class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm max-w-md mx-auto space-y-4">
+      <h3 class="text-xs font-bold uppercase text-slate-400 tracking-wider font-mono">অ্যাডমিন প্রবেশাধিকার (Verification Required)</h3>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">অ্যাডমিন পাসওয়ার্ড (Password)</label>
+          <input id="password-input" type="password" placeholder="পাসওয়ার্ড লিখুন (যেমন: admin123)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" />
+          <p class="text-[10px] text-slate-400 mt-1">সুরক্ষার জন্য ডিফল্ট পাসওয়ার্ড **admin123** ব্যবহার করুন</p>
         </div>
-
-        <div class="p-8 space-y-6">
-          <form id="login-form" class="space-y-4">
-            <div class="space-y-1.5">
-              <label for="login-email" class="text-[10px] font-black text-zinc-600 tracking-wide uppercase font-space">Executive Email</label>
-              <input 
-                type="email" 
-                id="login-email" 
-                placeholder="admin@amazingshopping.com" 
-                required
-                class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-3 rounded-xl text-sm outline-none transition-all"
-              />
-            </div>
-            <div class="space-y-1.5">
-              <label for="login-password" class="text-[10px] font-black text-zinc-600 tracking-wide uppercase font-space">Security Pin / Password</label>
-              <input 
-                type="password" 
-                id="login-password" 
-                placeholder="••••••••" 
-                required
-                class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-3 rounded-xl text-sm outline-none transition-all"
-              />
-            </div>
-            
-            <div class="pt-2">
-              <button 
-                type="submit" 
-                class="w-full bg-zinc-950 text-white hover:bg-orange-600 transition-all duration-300 font-bold py-3 px-4 rounded-xl text-xs tracking-wider uppercase shadow-md active:scale-[0.98] flex items-center justify-center gap-2 font-space"
-              >
-                Sign In
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
-              </button>
-            </div>
-          </form>
-
-          <div class="relative flex py-2 items-center">
-            <div class="flex-grow border-t border-zinc-200"></div>
-            <span class="flex-shrink mx-4 text-zinc-400 text-[10px] uppercase tracking-widest font-space font-bold">Or sandbox bypass</span>
-            <div class="flex-grow border-t border-zinc-200"></div>
-          </div>
-
-          <!-- Sandbox/Preview Fast Access Bypass -->
-          <div class="bg-orange-50 border border-orange-200 rounded-2xl p-4 space-y-3">
-            <p class="text-[11px] text-orange-800 leading-relaxed font-bold text-center uppercase font-space">
-              Testing without Firebase Authentication?
-            </p>
-            <button 
-              id="bypass-login-btn"
-              type="button"
-              class="w-full bg-orange-500 text-white hover:bg-orange-600 font-bold py-2.5 rounded-xl text-xs tracking-wider uppercase shadow-sm transition-all flex items-center justify-center gap-2 font-space active:scale-95"
-            >
-              Enter via Demo Gate
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-unlocked"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
-            </button>
-            <a 
-              href="./copy.html" 
-              class="block text-center text-[10px] font-black uppercase text-zinc-500 hover:text-orange-600 tracking-wider font-space border-t border-zinc-200/50 pt-2.5 mt-1"
-            >
-              📋 Mobile Developer: Copy App Code
-            </a>
-          </div>
-        </div>
+        <button onclick="verifyPassword()" class="w-full bg-rose-500 text-white font-bold py-2 rounded-xl text-xs hover:bg-rose-600 shadow-md">প্রবেশ করুন</button>
       </div>
     </div>
 
-    <!-- MAIN DASHBOARD CONTENT (Direct Access) -->
-    <div id="dashboard-content" class="flex-1 flex flex-col">
+    <!-- Admin Content Panel (Hidden by default) -->
+    <div id="admin-panel" class="hidden space-y-8">
       
-      <!-- DASHBOARD HEADER -->
-      <header class="bg-zinc-950 text-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-orange-500 text-white rounded-xl flex items-center justify-center font-black text-lg shadow-inner">
-              A
-            </div>
-            <div>
-              <h1 class="text-xl font-black tracking-tight font-sans uppercase italic">Amazing <span class="text-orange-500">Shopping</span></h1>
-              <span class="text-[10px] text-orange-400 tracking-widest uppercase font-space font-bold">Executive Admin Panel</span>
-            </div>
+      <!-- Product Form -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm space-y-6">
+        <h3 class="font-extrabold text-slate-800 text-base md:text-lg border-b border-slate-100 pb-3 flex items-center space-x-2">
+          <span>নতুন পণ্য আপলোড ফরম</span>
+        </h3>
+
+        <form id="product-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">পণ্যের নাম (Product Name) *</label>
+            <input id="prod-name" type="text" placeholder="যেমন: Wireless Earbuds Pro" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" required />
           </div>
-          
-          <div class="flex items-center gap-4">
-            <a href="./copy.html" class="inline-flex items-center gap-1.5 text-xs text-zinc-300 hover:text-white bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-full transition-colors font-bold uppercase tracking-wider font-space">
-              Copy Code 📋
-            </a>
-            <a href="./index.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs text-zinc-300 hover:text-white bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-full transition-colors font-bold uppercase tracking-wider font-space">
-              View Website
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-            </a>
-            
-            <button 
-              id="logout-btn" 
-              class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded-full text-xs tracking-wider uppercase transition-all shadow-md active:scale-95 flex items-center gap-1.5 font-space"
-            >
-              Sign Out
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">দাম (Price ৳) *</label>
+            <input id="prod-price" type="number" placeholder="যেমন: 2500" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">অফার মূল্য (Offer Price ৳) *</label>
+            <input id="prod-offer" type="number" placeholder="যেমন: 1299" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">রেটিং (Rating: e.g. 4.8) *</label>
+            <input id="prod-rating" type="text" value="4.8" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">রেটিং সংখ্যা (Rating Count) *</label>
+            <input id="prod-rating-count" type="text" value="128" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">বিক্রিত সংখ্যা (Sold Count) *</label>
+            <input id="prod-sold" type="text" value="1.2k sold" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 mb-1">ফটো লিংক (Photo URL Link) *</label>
+            <input id="prod-photo" type="url" placeholder="https://example.com/photo.jpg" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 mb-1">অ্যাফিলিয়েট লিংক (Affiliate Link) *</label>
+            <input id="prod-affiliate" type="url" placeholder="https://www.effectivecpmnetwork.com/jjgii2iixj?key=..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+          </div>
+          <div class="flex items-center space-x-2 py-2">
+            <input type="checkbox" id="prod-free-delivery" class="w-4 h-4 rounded text-rose-500 focus:ring-rose-500 border-slate-300" checked />
+            <label for="prod-free-delivery" class="text-xs font-bold text-slate-700">ফ্রি ডেলিভারি প্রযোজ্য? (Free Delivery Toggle)</label>
+          </div>
+          <div class="md:col-span-2 pt-2">
+            <button type="submit" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 rounded-xl text-xs md:text-sm uppercase tracking-wider shadow-md transition-all">
+              পণ্য পোস্ট করুন (Post Product)
             </button>
           </div>
+        </form>
+      </div>
+
+      <!-- Video Update Form -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm space-y-4">
+        <h3 class="font-extrabold text-slate-800 text-base md:text-lg border-b border-slate-100 pb-3">ইউটিউব ভিডিও পরিবর্তন</h3>
+        <form id="video-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">ইউটিউব ভিডিও লিংক (YouTube URL)</label>
+            <input id="video-url" type="url" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none" required />
+          </div>
+          <button type="submit" class="bg-slate-900 text-white px-6 py-2.5 rounded-xl text-xs font-bold uppercase hover:bg-slate-950 shadow-md">ভিডিও আপডেট করুন</button>
+        </form>
+      </div>
+
+      <!-- Action status messages -->
+      <div id="status-box" class="hidden p-4 rounded-xl text-xs border"></div>
+
+      <!-- Active Products list -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm space-y-4">
+        <h3 class="font-extrabold text-slate-800 text-base border-b border-slate-100 pb-2">বর্তমান সক্রিয় পণ্যসমূহ (<span id="products-count">0</span>)</h3>
+        <div id="active-products" class="divide-y divide-slate-100">
+          <!-- Active products injected here -->
         </div>
-      </header>
-
-      <!-- NOTIFICATION MESSAGES CONTAINER -->
-      <div id="notification-container" class="fixed top-24 right-6 z-50 flex flex-col gap-3 max-w-sm"></div>
-
-      <!-- MAIN LAYOUT -->
-      <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        <!-- LEFT COLUMN: ADD / EDIT PRODUCT FORM -->
-        <section class="lg:col-span-5 space-y-6">
-          
-          <!-- PRODUCT SUBMISSION FORM CARD -->
-          <div class="bg-white border border-zinc-200/60 rounded-[2rem] p-6 shadow-xl shadow-zinc-200/40 relative overflow-hidden">
-            <div class="flex items-center justify-between border-b border-zinc-100 pb-4 mb-5">
-              <div>
-                <h2 id="form-title" class="text-lg font-black text-zinc-900 uppercase italic">Create New Product</h2>
-                <p id="form-subtitle" class="text-[11px] text-zinc-400 mt-0.5 uppercase tracking-wider font-space font-bold">Publish a hot luxury deal to the shop</p>
-              </div>
-              <span id="edit-indicator" class="hidden text-[10px] bg-orange-100 text-orange-800 font-bold px-2.5 py-1 rounded-full uppercase tracking-wider font-space animate-pulse">
-                Edit Mode
-              </span>
-            </div>
-
-            <form id="product-form" class="space-y-4">
-              <input type="hidden" id="edit-product-id" />
-
-              <!-- Product Name -->
-              <div class="space-y-1">
-                <label for="product-name" class="text-[10px] font-black text-zinc-600 uppercase tracking-wider font-space">Product Name</label>
-                <input 
-                  type="text" 
-                  id="product-name" 
-                  placeholder="e.g. Elegant Stainless Chronometer" 
-                  required
-                  maxlength="100"
-                  class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-2.5 rounded-xl text-xs outline-none transition-all"
-                />
-              </div>
-
-              <!-- Prices Grid -->
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-1">
-                  <label for="original-price" class="text-[10px] font-black text-zinc-600 uppercase tracking-wider font-space">Original Price ($)</label>
-                  <input 
-                    type="number" 
-                    id="original-price" 
-                    placeholder="999.00" 
-                    step="0.01"
-                    min="0"
-                    required
-                    class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-2.5 rounded-xl text-xs outline-none transition-all"
-                  />
-                </div>
-                <div class="space-y-1">
-                  <label for="offer-price" class="text-[10px] font-black text-zinc-600 uppercase tracking-wider font-space">Offer Price ($)</label>
-                  <input 
-                    type="number" 
-                    id="offer-price" 
-                    placeholder="199.00" 
-                    step="0.01"
-                    min="0"
-                    required
-                    class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-2.5 rounded-xl text-xs outline-none transition-all"
-                  />
-                </div>
-              </div>
-
-              <!-- Rating and Sold Count -->
-              <div class="grid grid-cols-2 gap-4">
-                <div class="space-y-1">
-                  <label for="product-rating" class="text-[10px] font-black text-zinc-600 uppercase tracking-wider font-space">Rating (1.0 to 5.0)</label>
-                  <input 
-                    type="number" 
-                    id="product-rating" 
-                    placeholder="4.5" 
-                    step="0.1"
-                    min="1"
-                    max="5"
-                    required
-                    class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-2.5 rounded-xl text-xs outline-none transition-all"
-                  />
-                </div>
-                <div class="space-y-1">
-                  <label for="sold-count" class="text-[10px] font-black text-zinc-600 uppercase tracking-wider font-space">Sold Count Text</label>
-                  <input 
-                    type="text" 
-                    id="sold-count" 
-                    placeholder="e.g. 17K Sold" 
-                    maxlength="30"
-                    required
-                    class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-2.5 rounded-xl text-xs outline-none transition-all"
-                  />
-                </div>
-              </div>
-
-              <!-- Image URL -->
-              <div class="space-y-1">
-                <label for="image-url" class="text-[10px] font-black text-zinc-600 uppercase tracking-wider font-space">Image URL</label>
-                <input 
-                  type="url" 
-                  id="image-url" 
-                  placeholder="https://images.unsplash.com/photo-..." 
-                  required
-                  class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-2.5 rounded-xl text-xs outline-none transition-all"
-                />
-              </div>
-
-              <!-- Affiliate URL -->
-              <div class="space-y-1">
-                <label for="affiliate-url" class="text-[10px] font-black text-zinc-600 uppercase tracking-wider font-space">Affiliate Buy URL</label>
-                <input 
-                  type="url" 
-                  id="affiliate-url" 
-                  placeholder="https://click.affiliate.com/..." 
-                  required
-                  class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-2.5 rounded-xl text-xs outline-none transition-all"
-                />
-              </div>
-
-              <!-- Free Delivery (ON/OFF switch) -->
-              <div class="flex items-center justify-between bg-zinc-50 p-3 rounded-2xl border border-zinc-200/50">
-                <div class="flex flex-col">
-                  <span class="text-xs font-black text-zinc-700 font-space uppercase">Free Delivery Eligibility</span>
-                  <span class="text-[10px] text-zinc-400 mt-0.5 font-bold uppercase tracking-wider">Toggle to show Free Delivery Badge</span>
-                </div>
-                
-                <!-- Elegant Custom Switch -->
-                <label class="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" id="free-delivery" class="sr-only peer">
-                  <div class="w-11 h-6 bg-zinc-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
-                </label>
-              </div>
-
-              <!-- Form Buttons -->
-              <div class="flex gap-3 pt-3 border-t border-zinc-100">
-                <button 
-                  type="button" 
-                  id="reset-btn"
-                  class="flex-1 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-black py-3 px-4 rounded-xl text-xs tracking-wider uppercase transition-colors font-space"
-                >
-                  Reset
-                </button>
-                
-                <!-- Submit (Create) Button -->
-                <button 
-                  type="submit" 
-                  id="submit-btn"
-                  class="flex-1 bg-zinc-950 text-white hover:bg-orange-600 font-black py-3 px-4 rounded-xl text-xs tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-1 font-space active:scale-95"
-                >
-                  Publish
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-                </button>
-
-                <!-- Update Button (Hidden unless editing) -->
-                <button 
-                  type="button" 
-                  id="update-btn"
-                  class="hidden flex-1 bg-orange-500 text-white hover:bg-orange-600 font-black py-3 px-4 rounded-xl text-xs tracking-wider uppercase shadow-md transition-all flex items-center justify-center gap-1 animate-pulse font-space"
-                >
-                  Update
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <!-- YOUTUBE VIDEO MANAGER CARD -->
-          <div class="bg-white border border-zinc-200/60 rounded-[2rem] p-6 shadow-xl shadow-zinc-200/40">
-            <div class="flex items-center gap-3 border-b border-zinc-100 pb-4 mb-5">
-              <div class="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center text-red-600">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-video"><path d="M4 18V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><polygon points="22 8 17 12 22 16 22 8"/></svg>
-              </div>
-              <div>
-                <h3 class="text-base font-black text-zinc-900 uppercase italic">Featured Video Manager</h3>
-                <p class="text-[11px] text-zinc-400 mt-0.5 uppercase font-space font-bold">Control the video showcase on the landing page</p>
-              </div>
-            </div>
-
-            <form id="video-form" class="space-y-4">
-              <div class="space-y-1">
-                <label for="video-url" class="text-[10px] font-black text-zinc-600 uppercase tracking-wider font-space">YouTube Video URL</label>
-                <input 
-                  type="url" 
-                  id="video-url" 
-                  placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" 
-                  required
-                  class="w-full bg-zinc-50 border border-zinc-200 focus:border-orange-500 focus:bg-white px-4 py-2.5 rounded-xl text-xs outline-none transition-all"
-                />
-              </div>
-
-              <div class="flex items-center justify-between text-[11px] text-zinc-400 font-mono bg-zinc-50 p-2.5 rounded-lg border border-zinc-100">
-                <span class="uppercase font-space font-bold text-[9px] text-zinc-400">Current Live Video:</span>
-                <span id="current-video-text" class="font-semibold text-zinc-600 truncate max-w-[150px]">None</span>
-              </div>
-
-              <button 
-                type="submit" 
-                class="w-full bg-zinc-900 text-white hover:bg-orange-600 font-black py-2.5 px-4 rounded-xl text-xs tracking-wider uppercase transition-all shadow-md flex items-center justify-center gap-1.5 font-space active:scale-95"
-              >
-                Save Video Link
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-              </button>
-            </form>
-          </div>
-
-        </section>
-
-        <!-- RIGHT COLUMN: PRODUCTS LIST TABLE -->
-        <section class="lg:col-span-7 space-y-6">
-          <div class="bg-white border border-zinc-200/60 rounded-[2rem] p-6 shadow-xl shadow-zinc-200/40 flex flex-col min-h-[500px]">
-            
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-100 pb-5 mb-5">
-              <div>
-                <h2 class="text-lg font-black text-zinc-900 uppercase italic">Manage Catalog</h2>
-                <p class="text-[11px] text-zinc-400 mt-0.5 uppercase tracking-wider font-space font-bold">Edit or delete published store items in realtime</p>
-              </div>
-              
-              <!-- count indicator -->
-              <div class="flex items-center gap-2">
-                <span id="products-count" class="bg-zinc-100 text-zinc-700 text-[10px] font-black px-3 py-1.5 rounded-full font-space border border-zinc-200/50 uppercase tracking-wide">
-                  0 Items Total
-                </span>
-              </div>
-            </div>
-
-            <!-- TABLE LOADING STATE -->
-            <div id="table-loading" class="flex-1 flex flex-col items-center justify-center py-20 gap-3">
-              <div class="w-8 h-8 border-2 border-orange-500/20 border-t-orange-500 rounded-full animate-spin"></div>
-              <span class="text-zinc-500 text-xs tracking-wider uppercase font-space font-bold animate-pulse">Syncing table with Firestore...</span>
-            </div>
-
-            <!-- TABLE VIEW -->
-            <div id="table-container" class="hidden flex-1 overflow-x-auto">
-              <table class="w-full text-left border-collapse min-w-[600px]">
-                <thead>
-                  <tr class="border-b border-zinc-200 text-zinc-500 text-[10px] uppercase tracking-wider font-space font-bold">
-                    <th class="pb-3 font-bold">Preview</th>
-                    <th class="pb-3 font-bold">Product Detail</th>
-                    <th class="pb-3 font-bold">Pricing</th>
-                    <th class="pb-3 font-bold">Shipping</th>
-                    <th class="pb-3 font-bold text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="catalog-table-body" class="divide-y divide-zinc-100 text-xs text-zinc-700">
-                  <!-- Realtime content injected here -->
-                </tbody>
-              </table>
-            </div>
-
-            <!-- TABLE EMPTY STATE -->
-            <div id="table-empty" class="hidden flex-1 flex flex-col items-center justify-center py-16 text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-300 mb-3"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
-              <p class="text-sm font-black text-zinc-600 uppercase">The showroom catalog is empty.</p>
-              <p class="text-xs text-zinc-400 font-bold uppercase mt-1">Submit the form on the left to add items.</p>
-            </div>
-
-          </div>
-        </section>
-
-      </main>
-
-      <!-- EXECUTIVE FOOTER -->
-      <footer class="bg-zinc-950 border-t border-zinc-800 py-6 text-center text-xs text-zinc-500 font-bold uppercase tracking-wider mt-auto">
-        <p>&copy; 2026 Amazing Shopping Admin Dashboard • Connected to Firestore • Verified Auth Ready</p>
-      </footer>
+      </div>
 
     </div>
+  </div>
 
-    <!-- MAIN MODULE SCRIPT (Firebase Auth & CRUD Operations integrated directly) -->
-    <script type="module" src="/admin.html?html-proxy&index=0.js"></script>
-  </body>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEwO6gl1sWEx4_tra-3KpBp6hcHGQE_3I",
+      authDomain: "amazing-shopping-2d3bc.firebaseapp.com",
+      projectId: "amazing-shopping-2d3bc",
+      storageBucket: "amazing-shopping-2d3bc.firebasestorage.app",
+      messagingSenderId: "163413077176",
+      appId: "1:163413077176:web:b82c2976b0193fe740984d"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    function showStatus(text, type = "success") {
+      const box = document.getElementById("status-box");
+      box.className = `p-4 rounded-xl text-xs border ${
+        type === "success" 
+          ? "bg-emerald-50 border-emerald-200 text-emerald-800" 
+          : "bg-rose-50 border-rose-200 text-rose-800"
+      }`;
+      box.innerText = text;
+      box.classList.remove("hidden");
+      setTimeout(() => box.classList.add("hidden"), 4000);
+    }
+
+    function verifyPassword() {
+      const p = document.getElementById("password-input").value;
+      if (p === "admin123" || p === "admin") {
+        document.getElementById("login-card").classList.add("hidden");
+        document.getElementById("admin-panel").classList.remove("hidden");
+        loadAdminData();
+      } else {
+        alert("ভুল পাসওয়ার্ড!");
+      }
+    }
+
+    async function loadAdminData() {
+      try {
+        const snapshot = await db.collection("products").orderBy("createdAt", "desc").get();
+        const container = document.getElementById("active-products");
+        const countSpan = document.getElementById("products-count");
+        
+        countSpan.innerText = snapshot.size;
+        container.innerHTML = "";
+
+        if (snapshot.empty) {
+          container.innerHTML = `<p class="text-slate-400 text-xs py-4 text-center">কোনো পণ্য পাওয়া যায়নি।</p>`;
+        } else {
+          snapshot.forEach((doc) => {
+            const p = doc.data();
+            container.innerHTML += `
+              <div class="py-3 flex items-center justify-between">
+                <div class="flex items-center space-x-3 overflow-hidden">
+                  <img src="${p.photoLink}" class="w-10 h-10 object-cover rounded-lg" />
+                  <div>
+                    <p class="text-xs font-bold text-slate-800 truncate">${p.name}</p>
+                    <p class="text-[10px] text-rose-500 font-bold">৳${p.offerPrice} <span class="text-slate-400 line-through">৳${p.price}</span></p>
+                  </div>
+                </div>
+                <button onclick="deleteProduct('${doc.id}')" class="text-rose-500 hover:bg-rose-50 hover:text-rose-700 px-3 py-1 rounded text-xs font-bold">মুছে ফেলুন</button>
+              </div>
+            `;
+          });
+        }
+
+        // load video link
+        const videoDoc = await db.collection("config").doc("video").get();
+        if (videoDoc.exists) {
+          document.getElementById("video-url").value = videoDoc.data().videoLink || "";
+        }
+      } catch (err) {
+        console.error("Error loading products:", err);
+      }
+    }
+
+    // Submit Product Handler
+    document.getElementById("product-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("prod-name").value;
+      const price = document.getElementById("prod-price").value;
+      const offerPrice = document.getElementById("prod-offer").value;
+      const rating = document.getElementById("prod-rating").value;
+      const ratingCount = document.getElementById("prod-rating-count").value;
+      const soldCount = document.getElementById("prod-sold").value;
+      const photoLink = document.getElementById("prod-photo").value;
+      const affiliateLink = document.getElementById("prod-affiliate").value;
+      const freeDelivery = document.getElementById("prod-free-delivery").checked;
+
+      try {
+        await db.collection("products").add({
+          name, price, offerPrice, rating, ratingCount, soldCount, photoLink, affiliateLink, freeDelivery,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        showStatus("পণ্য সফলভাবে পোস্ট করা হয়েছে!");
+        document.getElementById("product-form").reset();
+        loadAdminData();
+      } catch (err) {
+        showStatus("ত্রুটি: " + err.message, "error");
+      }
+    });
+
+    // Update Video Handler
+    document.getElementById("video-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const videoLink = document.getElementById("video-url").value;
+
+      try {
+        await db.collection("config").doc("video").set({ videoLink }, { merge: true });
+        showStatus("ভিডিও লিংক সফলভাবে পরিবর্তন করা হয়েছে!");
+        loadAdminData();
+      } catch (err) {
+        showStatus("ত্রুটি: " + err.message, "error");
+      }
+    });
+
+    // Delete Product
+    async function deleteProduct(id) {
+      if (!confirm("আপনি কি নিশ্চিতভাবে পণ্যটি মুছে ফেলতে চান?")) return;
+      try {
+        await db.collection("products").doc(id).delete();
+        showStatus("পণ্য সফলভাবে মুছে ফেলা হয়েছে!");
+        loadAdminData();
+      } catch (err) {
+        showStatus("ত্রুটি: " + err.message, "error");
+      }
+    }
+  </script>
+</body>
 </html>
