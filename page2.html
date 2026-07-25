@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="en" class="dark"><head>
+  <script type="module" src="/@vite/client"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Amazing Shopping - Premium Digital PWA</title>
+  <meta name="description" content="Amazing Shopping - Premium Futuristic Digital Shopping Platform with Exclusive Deals &amp; 70% Offers">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            rgbGreen: '#10B981',
+            rgbBlue: '#3B82F6',
+            rgbRed: '#EF4444',
+            rgbOrange: '#F97316',
+            rgbYellow: '#EAB308',
+            rgbPurple: '#8B5CF6',
+          },
+          animation: {
+            'gradient-x': 'gradient-x 6s ease infinite',
+            'pulse-glow': 'pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 12s linear infinite',
+            'float': 'float 4s ease-in-out infinite',
+            'border-rgb': 'rgbBorder 8s linear infinite',
+          },
+          keyframes: {
+            'gradient-x': {
+              '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+              '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 0 15px rgba(16,185,129,0.7))' },
+              '50%': { opacity: '0.7', filter: 'drop-shadow(0 0 25px rgba(139,92,246,0.9))' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            rgbBorder: {
+              '0%': { borderColor: '#10B981', boxShadow: '0 0 15px rgba(16,185,129,0.4)' },
+              16: { borderColor: '#3B82F6', boxShadow: '0 0 15px rgba(59,130,246,0.4)' },
+              33: { borderColor: '#EF4444', boxShadow: '0 0 15px rgba(239,68,68,0.4)' },
+              50: { borderColor: '#F97316', boxShadow: '0 0 15px rgba(249,115,22,0.4)' },
+              66: { borderColor: '#EAB308', boxShadow: '0 0 15px rgba(234,179,8,0.4)' },
+              83: { borderColor: '#8B5CF6', boxShadow: '0 0 15px rgba(139,92,246,0.4)' },
+              '100%': { borderColor: '#10B981', boxShadow: '0 0 15px rgba(16,185,129,0.4)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Futuristic Glass & 6-Color RGB Styling */
+    body {
+      background-color: #0b0f19;
+      color: #f8fafc;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* 6-Color RGB Gradient Background Animation */
+    .bg-rgb-gradient {
+      background: linear-gradient(135deg, #10B981, #3B82F6, #EF4444, #F97316, #EAB308, #8B5CF6);
+      background-size: 400% 400%;
+      animation: rgbBgAnimation 10s ease infinite;
+    }
+
+    .text-rgb-gradient {
+      background: linear-gradient(90deg, #10B981, #3B82F6, #EF4444, #F97316, #EAB308, #8B5CF6);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rgbBgAnimation 6s ease infinite;
+    }
+
+    @keyframes rgbBgAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Glassmorphism Card */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .glass-card-interactive {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card-interactive:hover {
+      border-color: rgba(59, 130, 246, 0.6);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(59, 130, 246, 0.3), 0 0 20px rgba(139, 92, 246, 0.2);
+    }
+
+    /* Neon RGB Glowing Border */
+    .rgb-border-glow {
+      border: 2px solid #10B981;
+      animation: rgbBorderAnimation 8s linear infinite;
+    }
+
+    @keyframes rgbBorderAnimation {
+      0% { border-color: #10B981; box-shadow: 0 0 15px rgba(16,185,129,0.5); }
+      16% { border-color: #3B82F6; box-shadow: 0 0 15px rgba(59,130,246,0.5); }
+      33% { border-color: #EF4444; box-shadow: 0 0 15px rgba(239,68,68,0.5); }
+      50% { border-color: #F97316; box-shadow: 0 0 15px rgba(249,115,22,0.5); }
+      66% { border-color: #EAB308; box-shadow: 0 0 15px rgba(234,179,8,0.5); }
+      83% { border-color: #8B5CF6; box-shadow: 0 0 15px rgba(139,92,246,0.5); }
+      100% { border-color: #10B981; box-shadow: 0 0 15px rgba(16,185,129,0.5); }
+    }
+
+    /* Ripple Effect */
+    .btn-ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-ripple::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+      background-repeat: no-repeat;
+      background-position: 50%;
+      transform: scale(10, 10);
+      opacity: 0;
+      transition: transform .5s, opacity 1s;
+    }
+    .btn-ripple:active::after {
+      transform: scale(0, 0);
+      opacity: .3;
+      transition: 0s;
+    }
+
+    /* Hide Scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Floating Particles Background */
+    #particles-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+  </style>
+<script src="/_aistudio-iframe.js?v=1ee22f18"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@2.0.4"></script><style>.aistudio-hover-highlight { box-shadow: inset 0 0 0 0.5px white, inset 0 0 0 1.5px rgba(128,128,128,0.6) !important; }.aistudio-active-highlight { outline: 2px solid #87a9ff !important; outline-offset: -2px !important; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.3), inset 0 0 0 0.5px rgba(0,0,0,0.3) !important; }.aistudio-generating-blur { filter: blur(5px) grayscale(100%) brightness(28%) !important; transition: filter 0.3s ease; }#aistudio-focus-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: #87a9ff; border-radius: 12px; z-index: 10000; padding: 8px; color: #32302c; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }#aistudio-hover-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: rgba(128,128,128,0.6); border-radius: 12px; z-index: 10000; padding: 8px; color: white; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }.aistudio-img-icon { display: none; vertical-align: middle; pointer-events: auto; cursor: pointer; }.aistudio-img-icon.visible { display: inline-flex; }#aistudio-focus-mode-tag .aistudio-img-icon { position: relative; width: 26px; height: 26px; background: #32302c; border-radius: 6px; margin: -4px -4px -4px 0; }#aistudio-focus-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-hover-mode-tag .aistudio-img-icon { position: relative; width: 18px; height: 18px; margin-left: 4px; }#aistudio-hover-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-focus-mode-tag .aistudio-img-icon:hover, #aistudio-hover-mode-tag .aistudio-img-icon:hover { background: #424242 !important; }#aistudio-focus-mode-tag .aistudio-img-icon:active, #aistudio-hover-mode-tag .aistudio-img-icon:active { background: #393f51 !important; }</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.left-3\.5{left:0.875rem}.top-0{top:0px}.top-1\/2{top:50%}.bottom-5{bottom:1.25rem}.right-5{right:1.25rem}.top-5{top:1.25rem}.left-2{left:0.5rem}.right-2{right:0.5rem}.top-2{top:0.5rem}.z-10{z-index:10}.z-40{z-index:40}.z-\[100\]{z-index:100}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mr-1\.5{margin-right:0.375rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-8{margin-top:2rem}.mb-1{margin-bottom:0.25rem}.mb-3{margin-bottom:0.75rem}.mt-1{margin-top:0.25rem}.mt-1\.5{margin-top:0.375rem}.mt-auto{margin-top:auto}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.aspect-\[9\/16\]{aspect-ratio:9/16}.aspect-square{aspect-ratio:1 / 1}.h-1{height:0.25rem}.h-1\.5{height:0.375rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-32{height:8rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-full{height:100%}.h-12{height:3rem}.h-3\.5{height:0.875rem}.h-4{height:1rem}.h-64{height:16rem}.h-8{height:2rem}.h-10{height:2.5rem}.max-h-60{max-height:15rem}.max-h-\[85vh\]{max-height:85vh}.max-h-\[90vh\]{max-height:90vh}.min-h-screen{min-height:100vh}.w-14{width:3.5rem}.w-16{width:4rem}.w-2{width:0.5rem}.w-32{width:8rem}.w-48{width:12rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-full{width:100%}.w-12{width:3rem}.w-3\.5{width:0.875rem}.w-4{width:1rem}.w-8{width:2rem}.w-80{width:20rem}.w-10{width:2.5rem}.max-w-7xl{max-width:80rem}.max-w-sm{max-width:24rem}.max-w-2xl{max-width:42rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-x-full{--tw-translate-x:-100%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-1\/2{--tw-translate-y:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes gradient-x{0%, 100%{background-size:200% 200%;background-position:left center}50%{background-size:200% 200%;background-position:right center}}.animate-gradient-x{animation:gradient-x 6s ease infinite}@keyframes ping{75%, 100%{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0, 0, 0.2, 1) infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}@keyframes pulseGlow{0%, 100%{opacity:1;filter:drop-shadow(0 0 15px rgba(16,185,129,0.7))}50%{opacity:0.7;filter:drop-shadow(0 0 25px rgba(139,92,246,0.9))}}.animate-pulse-glow{animation:pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}@keyframes spin{to{transform:rotate(360deg)}}.animate-spin-slow{animation:spin 12s linear infinite}.cursor-pointer{cursor:pointer}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.space-x-1 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.25rem * var(--tw-space-x-reverse));margin-left:calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.375rem * var(--tw-space-x-reverse));margin-left:calc(0.375rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.whitespace-nowrap{white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.rounded-3xl{border-radius:1.5rem}.rounded-lg{border-radius:0.5rem}.rounded-tl-none{border-top-left-radius:0px}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-amber-500\/30{border-color:rgb(245 158 11 / 0.3)}.border-emerald-400{--tw-border-opacity:1;border-color:rgb(52 211 153 / var(--tw-border-opacity, 1))}.border-emerald-500\/40{border-color:rgb(16 185 129 / 0.4)}.border-slate-700\/80{border-color:rgb(51 65 85 / 0.8)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-slate-800\/80{border-color:rgb(30 41 59 / 0.8)}.border-amber-500\/40{border-color:rgb(245 158 11 / 0.4)}.border-emerald-500\/30{border-color:rgb(16 185 129 / 0.3)}.border-purple-500\/30{border-color:rgb(168 85 247 / 0.3)}.border-red-500\/40{border-color:rgb(239 68 68 / 0.4)}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-emerald-300{--tw-border-opacity:1;border-color:rgb(110 231 183 / var(--tw-border-opacity, 1))}.bg-amber-500\/10{background-color:rgb(245 158 11 / 0.1)}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-emerald-500\/20{background-color:rgb(16 185 129 / 0.2)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-800\/80{background-color:rgb(30 41 59 / 0.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/60{background-color:rgb(15 23 42 / 0.6)}.bg-slate-900\/90{background-color:rgb(15 23 42 / 0.9)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(2 6 23 / var(--tw-bg-opacity, 1))}.bg-amber-500\/20{background-color:rgb(245 158 11 / 0.2)}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-emerald-500\/10{background-color:rgb(16 185 129 / 0.1)}.bg-purple-500\/20{background-color:rgb(168 85 247 / 0.2)}.bg-purple-600{--tw-bg-opacity:1;background-color:rgb(147 51 234 / var(--tw-bg-opacity, 1))}.bg-red-500\/20{background-color:rgb(239 68 68 / 0.2)}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.bg-slate-950\/80{background-color:rgb(2 6 23 / 0.8)}.bg-blue-500\/20{background-color:rgb(59 130 246 / 0.2)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-transparent{--tw-gradient-from:transparent var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-amber-500{--tw-gradient-from:#f59e0b var(--tw-gradient-from-position);--tw-gradient-to:rgb(245 158 11 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-blue-600{--tw-gradient-from:#2563eb var(--tw-gradient-from-position);--tw-gradient-to:rgb(37 99 235 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-emerald-500{--tw-gradient-from:#10b981 var(--tw-gradient-from-position);--tw-gradient-to:rgb(16 185 129 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-purple-500{--tw-gradient-from:#a855f7 var(--tw-gradient-from-position);--tw-gradient-to:rgb(168 85 247 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-red-600{--tw-gradient-from:#dc2626 var(--tw-gradient-from-position);--tw-gradient-to:rgb(220 38 38 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-slate-700{--tw-gradient-from:#334155 var(--tw-gradient-from-position);--tw-gradient-to:rgb(51 65 85 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-white\/30{--tw-gradient-to:rgb(255 255 255 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(255 255 255 / 0.3) var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.to-blue-400{--tw-gradient-to:#60a5fa var(--tw-gradient-to-position)}.to-blue-500{--tw-gradient-to:#3b82f6 var(--tw-gradient-to-position)}.to-orange-500{--tw-gradient-to:#f97316 var(--tw-gradient-to-position)}.to-pink-500{--tw-gradient-to:#ec4899 var(--tw-gradient-to-position)}.to-red-400{--tw-gradient-to:#f87171 var(--tw-gradient-to-position)}.to-slate-400{--tw-gradient-to:#94a3b8 var(--tw-gradient-to-position)}.to-blue-600{--tw-gradient-to:#2563eb var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-1{padding:0.25rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-0\.5{padding:0.125rem}.p-3{padding:0.75rem}.p-3\.5{padding:0.875rem}.p-1\.5{padding:0.375rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.pb-2{padding-bottom:0.5rem}.pl-11{padding-left:2.75rem}.pr-4{padding-right:1rem}.pb-12{padding-bottom:3rem}.pb-4{padding-bottom:1rem}.pr-1{padding-right:0.25rem}.pt-2{padding-top:0.5rem}.pt-8{padding-top:2rem}.pt-0{padding-top:0px}.text-center{text-align:center}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-base{font-size:1rem;line-height:1.5rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-orange-400{--tw-text-opacity:1;color:rgb(251 146 60 / var(--tw-text-opacity, 1))}.text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.text-red-400{--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.line-through{-webkit-text-decoration-line:line-through;text-decoration-line:line-through}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.placeholder-slate-400::placeholder{--tw-placeholder-opacity:1;color:rgb(148 163 184 / var(--tw-placeholder-opacity, 1))}.opacity-75{opacity:0.75}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-emerald-500\/20{--tw-shadow-color:rgb(16 185 129 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-1000{transition-duration:1000ms}.duration-300{transition-duration:300ms}.duration-700{transition-duration:700ms}.duration-500{transition-duration:500ms}.selection\:bg-purple-500 *::selection{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.selection\:bg-purple-500::selection{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-\[1\.01\]:hover{--tw-scale-x:1.01;--tw-scale-y:1.01;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-purple-500:hover{--tw-border-opacity:1;border-color:rgb(168 85 247 / var(--tw-border-opacity, 1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:bg-amber-500\/30:hover{background-color:rgb(245 158 11 / 0.3)}.hover\:bg-blue-500:hover{--tw-bg-opacity:1;background-color:rgb(59 130 246 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-400:hover{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.hover\:bg-purple-500:hover{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.hover\:bg-red-500\/30:hover{background-color:rgb(239 68 68 / 0.3)}.hover\:bg-white\/20:hover{background-color:rgb(255 255 255 / 0.2)}.hover\:bg-blue-500\/30:hover{background-color:rgb(59 130 246 / 0.3)}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-slate-400:hover{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.hover\:shadow-emerald-500\/40:hover{--tw-shadow-color:rgb(16 185 129 / 0.4);--tw-shadow:var(--tw-shadow-colored)}.hover\:shadow-emerald-500\/30:hover{--tw-shadow-color:rgb(16 185 129 / 0.3);--tw-shadow:var(--tw-shadow-colored)}.hover\:brightness-110:hover{--tw-brightness:brightness(1.1);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.focus\:border-emerald-500:focus{--tw-border-opacity:1;border-color:rgb(16 185 129 / var(--tw-border-opacity, 1))}.focus\:border-purple-500:focus{--tw-border-opacity:1;border-color:rgb(168 85 247 / var(--tw-border-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.group:hover .group-hover\:translate-x-full{--tw-translate-x:100%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.group:hover .group-hover\:text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-orange-400{--tw-text-opacity:1;color:rgb(251 146 60 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-red-400{--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-emerald-300{--tw-text-opacity:1;color:rgb(110 231 183 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-pink-400{--tw-text-opacity:1;color:rgb(244 114 182 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:shadow-blue-500\/50{--tw-shadow-color:rgb(59 130 246 / 0.5);--tw-shadow:var(--tw-shadow-colored)}.group:hover .group-hover\:shadow-emerald-500\/50{--tw-shadow-color:rgb(16 185 129 / 0.5);--tw-shadow:var(--tw-shadow-colored)}.group:hover .group-hover\:shadow-orange-500\/50{--tw-shadow-color:rgb(249 115 22 / 0.5);--tw-shadow:var(--tw-shadow-colored)}.group:hover .group-hover\:shadow-purple-500\/50{--tw-shadow-color:rgb(168 85 247 / 0.5);--tw-shadow:var(--tw-shadow-colored)}.group:hover .group-hover\:shadow-red-500\/50{--tw-shadow-color:rgb(239 68 68 / 0.5);--tw-shadow:var(--tw-shadow-colored)}.group:hover .group-hover\:shadow-amber-500\/50{--tw-shadow-color:rgb(245 158 11 / 0.5);--tw-shadow:var(--tw-shadow-colored)}.group:hover .group-hover\:shadow-slate-400\/50{--tw-shadow-color:rgb(148 163 184 / 0.5);--tw-shadow:var(--tw-shadow-colored)}@media (min-width: 640px){.sm\:w-96{width:24rem}.sm\:justify-center{justify-content:center}}@media (min-width: 768px){.md\:h-20{height:5rem}.md\:h-8{height:2rem}.md\:h-14{height:3.5rem}.md\:w-20{width:5rem}.md\:w-8{width:2rem}.md\:w-96{width:24rem}.md\:w-auto{width:auto}.md\:w-14{width:3.5rem}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:justify-center{justify-content:center}.md\:gap-8{gap:2rem}.md\:gap-5{gap:1.25rem}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-sm{font-size:0.875rem;line-height:1.25rem}.md\:text-xl{font-size:1.25rem;line-height:1.75rem}.md\:text-base{font-size:1rem;line-height:1.5rem}}@media (min-width: 1024px){.lg\:grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}}</style></head>
+<body class="min-h-screen relative flex flex-col justify-between antialiased selection:bg-purple-500 selection:text-white">
+
+  <!-- Floating Canvas Background -->
+  <canvas id="particles-canvas" width="552" height="1614"></canvas>
+
+  <!-- SPLASH SCREEN (Exactly 2 Seconds) -->
+  <div id="splash-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-950 transition-opacity duration-700" style="opacity: 0; display: none;">
+    <div class="relative flex flex-col items-center">
+      <!-- Outer Glowing 6-Color Ring -->
+      <div class="relative w-32 h-32 rounded-full p-1 bg-rgb-gradient animate-spin-slow flex items-center justify-center shadow-2xl mb-6">
+        <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag w-14 h-14 text-emerald-400 animate-pulse"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>
+        </div>
+      </div>
+
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-wider text-rgb-gradient mb-2 text-center">
+        Amazing Shopping
+      </h1>
+      <span class="text-lg font-semibold text-amber-400 tracking-widest uppercase bg-amber-500/10 px-4 py-1 rounded-full border border-amber-500/30 animate-bounce">
+        Amazing Deal
+      </span>
+
+      <!-- Loader Indicator -->
+      <div class="w-48 h-1.5 bg-slate-800 rounded-full mt-8 overflow-hidden relative">
+        <div class="h-full bg-rgb-gradient w-full animate-gradient-x"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APP CONTAINER -->
+  <div id="main-app" class="relative z-10 flex-1 flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 glass-card border-b border-slate-800/80 shadow-2xl">
+      <!-- 6-Color Top Glow Strip -->
+      <div class="h-1 bg-rgb-gradient"></div>
+
+      <div class="max-w-7xl mx-auto px-4 py-3">
+        <!-- Logo & Title Row -->
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center space-x-3">
+            <div class="p-2 rounded-xl bg-rgb-gradient flex items-center justify-center shadow-lg shadow-emerald-500/20">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles w-6 h-6 text-white"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
+            </div>
+            <div>
+              <div class="flex items-center space-x-2">
+                <h1 class="text-xl md:text-2xl font-black text-rgb-gradient tracking-tight">
+                  Amazing Shopping
+                </h1>
+                <!-- Blinking Green LIVE Indicator -->
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                  <span class="relative flex h-2 w-2 mr-1.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  LIVE
+                </span>
+              </div>
+              <p class="text-xs font-bold text-amber-400 tracking-wider uppercase">Amazing Deal</p>
+            </div>
+          </div>
+
+          <!-- Header Right Actions -->
+          <div class="flex items-center space-x-2">
+            <!-- Search Toggle / Admin Trigger -->
+            <button onclick="openAdminModal()" title="Admin Login" class="p-2.5 rounded-xl glass-card-interactive text-slate-300 hover:text-white hover:border-purple-500 transition-all btn-ripple">
+              <i data-lucide="shield-lock" class="w-5 h-5 text-purple-400"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STATS BAR (Exact Requirements) -->
+        <div class="mt-3 py-2 px-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between text-xs overflow-x-auto no-scrollbar gap-3 text-slate-300 font-medium">
+          <div class="flex items-center space-x-1 shrink-0 text-amber-400 font-bold">
+            <span>⭐ 4.3★</span>
+          </div>
+          <span class="text-slate-700">|</span>
+          <div class="shrink-0 font-bold text-purple-400">12+</div>
+          <span class="text-slate-700">|</span>
+          <div class="shrink-0 font-bold text-blue-400">10B+</div>
+          <span class="text-slate-700">|</span>
+          <div class="shrink-0 font-semibold text-emerald-400">177 Million Reviews</div>
+          <span class="text-slate-700">|</span>
+          <div class="shrink-0 font-medium text-slate-400">Rated for Downloads</div>
+          <span class="text-slate-700">|</span>
+          <div class="shrink-0 font-bold text-orange-400">12+</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- TOP NAVIGATION (5 Animated Circular Buttons in One Row) -->
+    <section class="max-w-7xl mx-auto w-full px-4 py-6">
+      <div class="flex items-center justify-between sm:justify-center gap-3 md:gap-8 overflow-x-auto pb-2 no-scrollbar">
+        
+        <!-- 1. par day benefit -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page18.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-105">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full p-1 bg-rgb-gradient animate-pulse-glow flex items-center justify-center shadow-lg group-hover:shadow-emerald-500/50">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center transition-all group-hover:bg-slate-900">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="gift" aria-hidden="true" class="lucide lucide-gift w-7 h-7 md:w-8 md:h-8 text-emerald-400 group-hover:scale-110 transition-transform"><path d="M12 7v14"></path><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"></path><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"></path><rect x="3" y="7" width="18" height="4" rx="1"></rect></svg>
+            </div>
+          </div>
+          <span class="mt-2 text-xs md:text-sm font-bold text-slate-200 group-hover:text-emerald-400 text-center whitespace-nowrap">par day benefit</span>
+        </a>
+
+        <!-- 2. big Benefits -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page17.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-105">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full p-1 bg-rgb-gradient animate-pulse-glow flex items-center justify-center shadow-lg group-hover:shadow-blue-500/50">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center transition-all group-hover:bg-slate-900">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="zap" aria-hidden="true" class="lucide lucide-zap w-7 h-7 md:w-8 md:h-8 text-blue-400 group-hover:scale-110 transition-transform"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
+            </div>
+          </div>
+          <span class="mt-2 text-xs md:text-sm font-bold text-slate-200 group-hover:text-blue-400 text-center whitespace-nowrap">big Benefits</span>
+        </a>
+
+        <!-- 3. office Deal offer -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page15.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-105">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full p-1 bg-rgb-gradient animate-pulse-glow flex items-center justify-center shadow-lg group-hover:shadow-red-500/50">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center transition-all group-hover:bg-slate-900">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="briefcase" aria-hidden="true" class="lucide lucide-briefcase w-7 h-7 md:w-8 md:h-8 text-red-400 group-hover:scale-110 transition-transform"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect width="20" height="14" x="2" y="6" rx="2"></rect></svg>
+            </div>
+          </div>
+          <span class="mt-2 text-xs md:text-sm font-bold text-slate-200 group-hover:text-red-400 text-center whitespace-nowrap">office Deal offer</span>
+        </a>
+
+        <!-- 4. office delivery offer -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page16.html" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-105">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full p-1 bg-rgb-gradient animate-pulse-glow flex items-center justify-center shadow-lg group-hover:shadow-orange-500/50">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center transition-all group-hover:bg-slate-900">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="truck" aria-hidden="true" class="lucide lucide-truck w-7 h-7 md:w-8 md:h-8 text-orange-400 group-hover:scale-110 transition-transform"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg>
+            </div>
+          </div>
+          <span class="mt-2 text-xs md:text-sm font-bold text-slate-200 group-hover:text-orange-400 text-center whitespace-nowrap">office delivery offer</span>
+        </a>
+
+        <!-- 5. 70% Offer -->
+        <a href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-105">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full p-1 bg-rgb-gradient animate-pulse-glow flex items-center justify-center shadow-lg group-hover:shadow-purple-500/50">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center transition-all group-hover:bg-slate-900">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="percent" aria-hidden="true" class="lucide lucide-percent w-7 h-7 md:w-8 md:h-8 text-purple-400 group-hover:scale-110 transition-transform"><line x1="19" x2="5" y1="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
+            </div>
+          </div>
+          <span class="mt-2 text-xs md:text-sm font-bold text-slate-200 group-hover:text-purple-400 text-center whitespace-nowrap">70% Offer</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- DOWNLOAD BUTTON SECTION -->
+    <section class="max-w-7xl mx-auto w-full px-4 mb-8">
+      <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener noreferrer" class="relative group block w-full py-4 px-6 rounded-2xl bg-rgb-gradient text-white font-extrabold text-lg md:text-xl text-center shadow-2xl overflow-hidden transition-all duration-300 hover:scale-[1.01] hover:shadow-emerald-500/40 btn-ripple">
+        <div class="relative z-10 flex items-center justify-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download-cloud" aria-hidden="true" class="lucide lucide-download-cloud w-7 h-7 animate-bounce"><path d="M12 13v8l-4-4"></path><path d="m12 21 4-4"></path><path d="M4.393 15.269A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.436 8.284"></path></svg>
+          <span class="tracking-wide">Download Official App (APK)</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="sparkles" aria-hidden="true" class="lucide lucide-sparkles w-6 h-6 text-amber-300"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg>
+        </div>
+        <!-- Sliding Light Effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+      </a>
+    </section>
+
+    <!-- SEARCH & FILTER BAR -->
+    <section class="max-w-7xl mx-auto w-full px-4 mb-6">
+      <div class="glass-card p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 border border-slate-800">
+        <div class="relative w-full md:w-96">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" aria-hidden="true" class="lucide lucide-search absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+          <input type="text" id="search-input" oninput="renderProducts()" placeholder="Search deals &amp; products..." class="w-full pl-11 pr-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-emerald-500 transition-colors">
+        </div>
+        <div class="flex items-center space-x-2 w-full md:w-auto overflow-x-auto no-scrollbar">
+          <button onclick="filterCategory('all')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500 text-slate-950 border border-emerald-400 shadow-md transition-all">All</button>
+          <button onclick="filterCategory('electronics')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 text-slate-300 hover:bg-slate-700 transition-all">Electronics</button>
+          <button onclick="filterCategory('fashion')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 text-slate-300 hover:bg-slate-700 transition-all">Fashion</button>
+          <button onclick="filterCategory('gadgets')" class="cat-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-800/80 text-slate-300 hover:bg-slate-700 transition-all">Gadgets</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- AFFILIATE PRODUCT MARKETPLACE (Grid: Desktop 5 | Tablet 3 | Mobile 2) -->
+    <main class="max-w-7xl mx-auto w-full px-4 mb-12 flex-1">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg md:text-2xl font-black text-white flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-cart" aria-hidden="true" class="lucide lucide-shopping-cart w-6 h-6 text-amber-400"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+          <span>Featured Affiliate Deals</span>
+        </h2>
+        <span id="product-count" class="text-xs font-bold text-slate-400 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">6 Items Available</span>
+      </div>
+
+      <!-- Product Grid -->
+      <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-5">
+        <div class="glass-card-interactive rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <!-- Image & Delivery Badge Container -->
+            <div class="relative w-full aspect-square bg-slate-950 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Ultra Wireless Noise Canceling Headphones" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+              
+              <!-- Free Delivery Badge -->
+              
+                <span class="absolute top-2 left-2 bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-lg border border-emerald-300">
+                  FREE DELIVERY
+                </span>
+              
+
+              <!-- Rating Badge -->
+              <span class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-slate-700">
+                ★ 4.9
+              </span>
+            </div>
+
+            <!-- Product Details -->
+            <div class="p-3">
+              <h3 class="text-xs md:text-sm font-bold text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Ultra Wireless Noise Canceling Headphones
+              </h3>
+              
+              <div class="flex items-baseline space-x-2">
+                <span class="text-sm md:text-base font-black text-amber-400">$79.99</span>
+                <span class="text-[11px] text-slate-500 line-through">$199.99</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BUY NOW BUTTON -->
+          <div class="p-3 pt-0">
+            <a href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-600 text-slate-950 font-black text-xs text-center shadow-md transition-all duration-300 hover:brightness-110 hover:shadow-emerald-500/30 btn-ripple">
+              BUY NOW
+            </a>
+          </div>
+        </div>
+      
+        <div class="glass-card-interactive rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <!-- Image & Delivery Badge Container -->
+            <div class="relative w-full aspect-square bg-slate-950 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Futuristic Smartwatch Series 9 Pro" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+              
+              <!-- Free Delivery Badge -->
+              
+                <span class="absolute top-2 left-2 bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-lg border border-emerald-300">
+                  FREE DELIVERY
+                </span>
+              
+
+              <!-- Rating Badge -->
+              <span class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-slate-700">
+                ★ 4.8
+              </span>
+            </div>
+
+            <!-- Product Details -->
+            <div class="p-3">
+              <h3 class="text-xs md:text-sm font-bold text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Futuristic Smartwatch Series 9 Pro
+              </h3>
+              
+              <div class="flex items-baseline space-x-2">
+                <span class="text-sm md:text-base font-black text-amber-400">$99.00</span>
+                <span class="text-[11px] text-slate-500 line-through">$249.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BUY NOW BUTTON -->
+          <div class="p-3 pt-0">
+            <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page18.html" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-600 text-slate-950 font-black text-xs text-center shadow-md transition-all duration-300 hover:brightness-110 hover:shadow-emerald-500/30 btn-ripple">
+              BUY NOW
+            </a>
+          </div>
+        </div>
+      
+        <div class="glass-card-interactive rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <!-- Image & Delivery Badge Container -->
+            <div class="relative w-full aspect-square bg-slate-950 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="4K Ultra HD Gaming Action Camera" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+              
+              <!-- Free Delivery Badge -->
+              
+
+              <!-- Rating Badge -->
+              <span class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-slate-700">
+                ★ 4.7
+              </span>
+            </div>
+
+            <!-- Product Details -->
+            <div class="p-3">
+              <h3 class="text-xs md:text-sm font-bold text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                4K Ultra HD Gaming Action Camera
+              </h3>
+              
+              <div class="flex items-baseline space-x-2">
+                <span class="text-sm md:text-base font-black text-amber-400">$59.99</span>
+                <span class="text-[11px] text-slate-500 line-through">$149.99</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BUY NOW BUTTON -->
+          <div class="p-3 pt-0">
+            <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page17.html" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-600 text-slate-950 font-black text-xs text-center shadow-md transition-all duration-300 hover:brightness-110 hover:shadow-emerald-500/30 btn-ripple">
+              BUY NOW
+            </a>
+          </div>
+        </div>
+      
+        <div class="glass-card-interactive rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <!-- Image & Delivery Badge Container -->
+            <div class="relative w-full aspect-square bg-slate-950 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Luxury RGB Mechanical Gaming Keyboard" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+              
+              <!-- Free Delivery Badge -->
+              
+                <span class="absolute top-2 left-2 bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-lg border border-emerald-300">
+                  FREE DELIVERY
+                </span>
+              
+
+              <!-- Rating Badge -->
+              <span class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-slate-700">
+                ★ 4.9
+              </span>
+            </div>
+
+            <!-- Product Details -->
+            <div class="p-3">
+              <h3 class="text-xs md:text-sm font-bold text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Luxury RGB Mechanical Gaming Keyboard
+              </h3>
+              
+              <div class="flex items-baseline space-x-2">
+                <span class="text-sm md:text-base font-black text-amber-400">$49.99</span>
+                <span class="text-[11px] text-slate-500 line-through">$129.99</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BUY NOW BUTTON -->
+          <div class="p-3 pt-0">
+            <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page15.html" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-600 text-slate-950 font-black text-xs text-center shadow-md transition-all duration-300 hover:brightness-110 hover:shadow-emerald-500/30 btn-ripple">
+              BUY NOW
+            </a>
+          </div>
+        </div>
+      
+        <div class="glass-card-interactive rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <!-- Image & Delivery Badge Container -->
+            <div class="relative w-full aspect-square bg-slate-950 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Premium Cyberpunk Fashion Sneakers" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+              
+              <!-- Free Delivery Badge -->
+              
+                <span class="absolute top-2 left-2 bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-lg border border-emerald-300">
+                  FREE DELIVERY
+                </span>
+              
+
+              <!-- Rating Badge -->
+              <span class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-slate-700">
+                ★ 4.6
+              </span>
+            </div>
+
+            <!-- Product Details -->
+            <div class="p-3">
+              <h3 class="text-xs md:text-sm font-bold text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Premium Cyberpunk Fashion Sneakers
+              </h3>
+              
+              <div class="flex items-baseline space-x-2">
+                <span class="text-sm md:text-base font-black text-amber-400">$69.99</span>
+                <span class="text-[11px] text-slate-500 line-through">$180.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BUY NOW BUTTON -->
+          <div class="p-3 pt-0">
+            <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page16.html" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-600 text-slate-950 font-black text-xs text-center shadow-md transition-all duration-300 hover:brightness-110 hover:shadow-emerald-500/30 btn-ripple">
+              BUY NOW
+            </a>
+          </div>
+        </div>
+      
+        <div class="glass-card-interactive rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <!-- Image & Delivery Badge Container -->
+            <div class="relative w-full aspect-square bg-slate-950 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&amp;fit=crop&amp;w=600&amp;q=80" alt="Portable High-Bass RGB Bluetooth Speaker" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+              
+              <!-- Free Delivery Badge -->
+              
+                <span class="absolute top-2 left-2 bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-lg border border-emerald-300">
+                  FREE DELIVERY
+                </span>
+              
+
+              <!-- Rating Badge -->
+              <span class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-slate-700">
+                ★ 4.8
+              </span>
+            </div>
+
+            <!-- Product Details -->
+            <div class="p-3">
+              <h3 class="text-xs md:text-sm font-bold text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Portable High-Bass RGB Bluetooth Speaker
+              </h3>
+              
+              <div class="flex items-baseline space-x-2">
+                <span class="text-sm md:text-base font-black text-amber-400">$34.99</span>
+                <span class="text-[11px] text-slate-500 line-through">$89.99</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BUY NOW BUTTON -->
+          <div class="p-3 pt-0">
+            <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-600 text-slate-950 font-black text-xs text-center shadow-md transition-all duration-300 hover:brightness-110 hover:shadow-emerald-500/30 btn-ripple">
+              BUY NOW
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FIXED YOUTUBE SHORTS VIDEO (9:16 Vertical Player) -->
+    <section class="max-w-7xl mx-auto w-full px-4 mb-12">
+      <div class="glass-card p-6 rounded-3xl rgb-border-glow max-w-sm mx-auto flex flex-col items-center">
+        <div class="flex items-center space-x-2 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play-circle" aria-hidden="true" class="lucide lucide-play-circle w-6 h-6 text-red-500 animate-pulse"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></svg>
+          <h3 class="text-base font-bold text-white tracking-wide">Featured Trending Deal Video</h3>
+        </div>
+
+        <!-- 9:16 Responsive Container -->
+        <div class="w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-2xl relative">
+          <iframe src="https://www.youtube.com/embed/Li0XbrC0vuk?autoplay=0&amp;mute=0&amp;controls=1&amp;loop=1" title="Amazing Deal Shorts Video" class="w-full h-full object-cover rounded-2xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM QUICK BUTTONS (6 Small Circular Icon Buttons in 1 Row) -->
+    <section class="max-w-7xl mx-auto w-full px-4 mb-12">
+      <div class="glass-card p-4 rounded-2xl border border-slate-800">
+        <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 text-center mb-4">Quick Official Download &amp; Social Links</h4>
+        <div class="flex items-center justify-around md:justify-center gap-2 md:gap-8 overflow-x-auto no-scrollbar">
+          
+          <!-- 1. Apple App Store -->
+          <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener noreferrer" title="Apple App Store" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-110">
+            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full p-0.5 bg-gradient-to-tr from-slate-700 to-slate-400 flex items-center justify-center shadow-lg group-hover:shadow-slate-400/50">
+              <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="apple" aria-hidden="true" class="lucide lucide-apple w-6 h-6 text-slate-200 group-hover:text-white"><path d="M12 6.528V3a1 1 0 0 1 1-1h0"></path><path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21"></path></svg>
+              </div>
+            </div>
+            <span class="mt-1.5 text-[10px] font-semibold text-slate-400 group-hover:text-slate-200">App Store</span>
+          </a>
+
+          <!-- 2. Google Play -->
+          <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener noreferrer" title="Google Play" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-110">
+            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full p-0.5 bg-gradient-to-tr from-emerald-500 to-blue-500 flex items-center justify-center shadow-lg group-hover:shadow-emerald-500/50">
+              <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play" aria-hidden="true" class="lucide lucide-play w-5 h-5 text-emerald-400 group-hover:text-emerald-300"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></svg>
+              </div>
+            </div>
+            <span class="mt-1.5 text-[10px] font-semibold text-slate-400 group-hover:text-emerald-400">Google Play</span>
+          </a>
+
+          <!-- 3. Amazon Appstore -->
+          <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener noreferrer" title="Amazon Appstore" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-110">
+            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full p-0.5 bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center shadow-lg group-hover:shadow-amber-500/50">
+              <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" aria-hidden="true" class="lucide lucide-shopping-bag w-5 h-5 text-amber-400 group-hover:text-amber-300"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg>
+              </div>
+            </div>
+            <span class="mt-1.5 text-[10px] font-semibold text-slate-400 group-hover:text-amber-400">Amazon</span>
+          </a>
+
+          <!-- 4. YouTube -->
+          <a href="https://www.youtube.com/@bahadurlivenews24" target="_blank" rel="noopener noreferrer" title="YouTube" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-110">
+            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full p-0.5 bg-gradient-to-tr from-red-600 to-red-400 flex items-center justify-center shadow-lg group-hover:shadow-red-500/50">
+              <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+                <i data-lucide="youtube" class="w-6 h-6 text-red-500 group-hover:text-red-400"></i>
+              </div>
+            </div>
+            <span class="mt-1.5 text-[10px] font-semibold text-slate-400 group-hover:text-red-400">YouTube</span>
+          </a>
+
+          <!-- 5. Facebook -->
+          <a href="https://www.facebook.com/share/1TZCYbzrA4/" target="_blank" rel="noopener noreferrer" title="Facebook" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-110">
+            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full p-0.5 bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center shadow-lg group-hover:shadow-blue-500/50">
+              <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+                <i data-lucide="facebook" class="w-6 h-6 text-blue-500 group-hover:text-blue-400"></i>
+              </div>
+            </div>
+            <span class="mt-1.5 text-[10px] font-semibold text-slate-400 group-hover:text-blue-400">Facebook</span>
+          </a>
+
+          <!-- 6. TikTok -->
+          <a href="https://vm.tiktok.com/ZS9rbC6pq6nf5-UUmgd/" target="_blank" rel="noopener noreferrer" title="TikTok" class="group flex flex-col items-center shrink-0 transition-transform duration-300 hover:scale-110">
+            <div class="w-12 h-12 md:w-14 md:h-14 rounded-full p-0.5 bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center shadow-lg group-hover:shadow-purple-500/50">
+              <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="video" aria-hidden="true" class="lucide lucide-video w-5 h-5 text-purple-400 group-hover:text-pink-400"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"></path><rect x="2" y="6" width="14" height="12" rx="2"></rect></svg>
+              </div>
+            </div>
+            <span class="mt-1.5 text-[10px] font-semibold text-slate-400 group-hover:text-purple-400">TikTok</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="mt-auto glass-card border-t border-slate-800 pt-8 pb-12">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <!-- Verified Badge -->
+        <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold mb-6">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-circle-2" aria-hidden="true" class="lucide lucide-check-circle-2 w-4 h-4 text-emerald-400"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          <span>Verified Official Digital Store • 100% Encrypted &amp; Safe</span>
+        </div>
+
+        <!-- Policy Links Grid -->
+        <div class="flex flex-wrap items-center justify-center gap-3 text-xs font-medium text-slate-400 mb-6">
+          <button onclick="openPolicyModal('privacy')" class="hover:text-white transition-colors">Privacy Policy</button>
+          <span>•</span>
+          <button onclick="openPolicyModal('copyright')" class="hover:text-white transition-colors">Copyright</button>
+          <span>•</span>
+          <button onclick="openPolicyModal('content')" class="hover:text-white transition-colors">Content Policy</button>
+          <span>•</span>
+          <button onclick="openPolicyModal('cookie')" class="hover:text-white transition-colors">Cookie Policy</button>
+          <span>•</span>
+          <button onclick="openPolicyModal('theme')" class="hover:text-white transition-colors">Theme Policy</button>
+          <span>•</span>
+          <button onclick="openPolicyModal('terms')" class="hover:text-white transition-colors">Terms &amp; Conditions</button>
+          <span>•</span>
+          <button onclick="openPolicyModal('children')" class="hover:text-white transition-colors">Children's Policy</button>
+        </div>
+
+        <p class="text-xs text-slate-500 mb-2">© 2026 Amazing Shopping. All rights reserved.</p>
+        <button onclick="openAdminModal()" class="text-[11px] text-slate-600 hover:text-slate-400 underline">Admin Panel Access</button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- FLOATING AI CHATBOT -->
+  <div class="fixed bottom-5 right-5 z-50">
+    <!-- Chatbot Window -->
+    <div id="chatbot-window" class="hidden glass-card w-80 sm:w-96 rounded-2xl shadow-2xl border border-slate-700/80 mb-3 overflow-hidden transition-all duration-300">
+      <!-- Header -->
+      <div class="bg-rgb-gradient p-3.5 flex items-center justify-between text-white">
+        <div class="flex items-center space-x-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bot" aria-hidden="true" class="lucide lucide-bot w-5 h-5"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+          <span class="font-bold text-sm">Amazing AI Support Bot</span>
+        </div>
+        <button onclick="toggleChatbot()" class="p-1 hover:bg-white/20 rounded-lg transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-4 h-4"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Messages Body -->
+      <div id="chat-messages" class="h-64 p-3 overflow-y-auto space-y-3 text-xs bg-slate-950/80">
+        <div class="flex items-start space-x-2">
+          <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="bot" aria-hidden="true" class="lucide lucide-bot w-3.5 h-3.5"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+          </div>
+          <div class="bg-slate-800 p-2.5 rounded-2xl rounded-tl-none text-slate-200 border border-slate-700">
+            Hello! Welcome to Amazing Shopping. How can I help you today?
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Form -->
+      <form onsubmit="handleChatSubmit(event)" class="p-2.5 bg-slate-900 border-t border-slate-800 flex items-center gap-2">
+        <input type="text" id="chat-input" placeholder="Ask a question..." class="flex-1 px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-emerald-500">
+        <button type="submit" class="p-2 rounded-xl bg-emerald-500 text-slate-950 hover:bg-emerald-400 font-bold">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="send" aria-hidden="true" class="lucide lucide-send w-4 h-4"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path><path d="m21.854 2.147-10.94 10.939"></path></svg>
+        </button>
+      </form>
+    </div>
+
+    <!-- Toggle Button -->
+    <button onclick="toggleChatbot()" class="w-14 h-14 rounded-full p-1 bg-rgb-gradient shadow-2xl flex items-center justify-center hover:scale-110 transition-transform btn-ripple">
+      <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="message-square-heart" aria-hidden="true" class="lucide lucide-message-square-heart w-6 h-6 text-amber-400"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"></path><path d="M7.5 9.5c0 .687.265 1.383.697 1.844l3.009 3.264a1.14 1.14 0 0 0 .407.314 1 1 0 0 0 .783-.004 1.14 1.14 0 0 0 .398-.31l3.008-3.264A2.77 2.77 0 0 0 16.5 9.5 2.5 2.5 0 0 0 12 8a2.5 2.5 0 0 0-4.5 1.5"></path></svg>
+      </div>
+    </button>
+  </div>
+
+  <!-- ADMIN LOGIN & DASHBOARD MODAL -->
+  <div id="admin-modal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-2xl rounded-3xl p-6 border border-slate-700 shadow-2xl relative max-h-[90vh] overflow-y-auto no-scrollbar">
+      
+      <button onclick="closeAdminModal()" class="absolute top-5 right-5 p-2 rounded-xl bg-slate-800/80 text-slate-400 hover:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-5 h-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+
+      <!-- LOGIN FORM VIEW -->
+      <div id="admin-login-view" class="py-6 flex flex-col items-center hidden">
+        <div class="w-16 h-16 rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="lock" aria-hidden="true" class="lucide lucide-lock w-8 h-8"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </div>
+        <h3 class="text-2xl font-black text-white mb-1">Protected Admin Portal</h3>
+        <p class="text-xs text-slate-400 mb-6">Enter secure administrator password to continue</p>
+
+        <div class="w-full max-w-sm space-y-4">
+          <div>
+            <input type="password" id="admin-password-input" placeholder="Enter password..." class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:outline-none focus:border-purple-500">
+            <p id="admin-error-msg" class="text-xs text-red-400 mt-1 hidden">Invalid admin password!</p>
+          </div>
+          <button onclick="verifyAdminPassword()" class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold text-white transition-colors btn-ripple">
+            Login to Admin Dashboard
+          </button>
+        </div>
+      </div>
+
+      <!-- ADMIN DASHBOARD PANEL VIEW (Protected) -->
+      <div id="admin-dashboard-view" class="space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+          <div>
+            <h3 class="text-xl font-black text-white flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="layout-dashboard" aria-hidden="true" class="lucide lucide-layout-dashboard w-6 h-6 text-emerald-400"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg>
+              <span>Admin Marketplace Management</span>
+            </h3>
+            <p class="text-xs text-slate-400">Add, edit, delete, and backup product listings</p>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <!-- COPY SOURCE CODE BUTTON (ONLY VISIBLE AFTER SUCCESSFUL LOGIN) -->
+            <button onclick="copySourceCode()" class="px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold hover:bg-amber-500/30 transition-all flex items-center space-x-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="copy" aria-hidden="true" class="lucide lucide-copy w-4 h-4"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+              <span>Copy Source Code</span>
+            </button>
+            <button onclick="adminLogout()" class="px-3 py-1.5 rounded-xl bg-red-500/20 text-red-400 border border-red-500/40 text-xs font-bold hover:bg-red-500/30">
+              Logout
+            </button>
+          </div>
+        </div>
+
+        <!-- PRODUCT FORM -->
+        <div class="bg-slate-900/80 p-4 rounded-2xl border border-slate-800 space-y-3">
+          <h4 id="form-title" class="text-sm font-bold text-slate-200">Add New Product</h4>
+          <input type="hidden" id="edit-prod-id">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div>
+              <label class="text-[11px] text-slate-400">Product Name</label>
+              <input type="text" id="prod-name" placeholder="e.g. Wireless Noise Canceling Headphones" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white">
+            </div>
+            <div>
+              <label class="text-[11px] text-slate-400">Category</label>
+              <select id="prod-category" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white">
+                <option value="electronics">Electronics</option>
+                <option value="gadgets">Gadgets</option>
+                <option value="fashion">Fashion</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-[11px] text-slate-400">Old Price</label>
+              <input type="text" id="prod-old-price" placeholder="e.g. $199.99" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white">
+            </div>
+            <div>
+              <label class="text-[11px] text-slate-400">Discount Price</label>
+              <input type="text" id="prod-discount-price" placeholder="e.g. $89.99" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white">
+            </div>
+            <div>
+              <label class="text-[11px] text-slate-400">Rating (e.g. 4.9)</label>
+              <input type="text" id="prod-rating" placeholder="4.8" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white">
+            </div>
+            <div>
+              <label class="text-[11px] text-slate-400">Free Delivery</label>
+              <select id="prod-free-delivery" class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white">
+                <option value="ON">ON (Active)</option>
+                <option value="OFF">OFF (Disabled)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="text-[11px] text-slate-400">Product Image Direct URL</label>
+            <input type="url" id="prod-image-url" placeholder="https://images.unsplash.com/..." class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white">
+          </div>
+
+          <div>
+            <label class="text-[11px] text-slate-400">Affiliate Link</label>
+            <input type="url" id="prod-affiliate-link" placeholder="https://..." class="w-full p-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white">
+          </div>
+
+          <div class="flex items-center space-x-2 pt-2">
+            <button onclick="saveProductForm()" class="px-5 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition-colors">
+              Save Product
+            </button>
+            <button onclick="resetProductForm()" class="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-medium text-xs hover:bg-slate-700">
+              Cancel / Reset
+            </button>
+          </div>
+        </div>
+
+        <!-- BACKUP & RESTORE CONTROLS -->
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+          <span class="font-bold text-slate-300">Data Backup &amp; Restore</span>
+          <div class="flex items-center space-x-2">
+            <button onclick="backupProductData()" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-500">
+              Backup JSON
+            </button>
+            <label class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 font-bold hover:bg-slate-700 cursor-pointer">
+              Restore JSON
+              <input type="file" id="restore-file-input" onchange="restoreProductData(event)" accept=".json" class="hidden">
+            </label>
+          </div>
+        </div>
+
+        <!-- ADMIN PRODUCT LIST -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Current Products Inventory</h4>
+          <div id="admin-product-list" class="space-y-2 max-h-60 overflow-y-auto pr-1 no-scrollbar">
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=600&amp;q=80" class="w-10 h-10 object-cover rounded-lg shrink-0">
+            <div class="truncate">
+              <p class="font-bold text-white truncate">Ultra Wireless Noise Canceling Headphones</p>
+              <p class="text-[10px] text-emerald-400">$79.99 <span class="text-slate-500 line-through">$199.99</span></p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="editProduct('1')" class="p-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-2" aria-hidden="true" class="lucide lucide-edit-2 w-3.5 h-3.5"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+            </button>
+            <button onclick="deleteProduct('1')" class="p-1.5 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-3.5 h-3.5"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&amp;fit=crop&amp;w=600&amp;q=80" class="w-10 h-10 object-cover rounded-lg shrink-0">
+            <div class="truncate">
+              <p class="font-bold text-white truncate">Futuristic Smartwatch Series 9 Pro</p>
+              <p class="text-[10px] text-emerald-400">$99.00 <span class="text-slate-500 line-through">$249.00</span></p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="editProduct('2')" class="p-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-2" aria-hidden="true" class="lucide lucide-edit-2 w-3.5 h-3.5"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+            </button>
+            <button onclick="deleteProduct('2')" class="p-1.5 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-3.5 h-3.5"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=600&amp;q=80" class="w-10 h-10 object-cover rounded-lg shrink-0">
+            <div class="truncate">
+              <p class="font-bold text-white truncate">4K Ultra HD Gaming Action Camera</p>
+              <p class="text-[10px] text-emerald-400">$59.99 <span class="text-slate-500 line-through">$149.99</span></p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="editProduct('3')" class="p-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-2" aria-hidden="true" class="lucide lucide-edit-2 w-3.5 h-3.5"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+            </button>
+            <button onclick="deleteProduct('3')" class="p-1.5 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-3.5 h-3.5"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&amp;fit=crop&amp;w=600&amp;q=80" class="w-10 h-10 object-cover rounded-lg shrink-0">
+            <div class="truncate">
+              <p class="font-bold text-white truncate">Luxury RGB Mechanical Gaming Keyboard</p>
+              <p class="text-[10px] text-emerald-400">$49.99 <span class="text-slate-500 line-through">$129.99</span></p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="editProduct('4')" class="p-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-2" aria-hidden="true" class="lucide lucide-edit-2 w-3.5 h-3.5"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+            </button>
+            <button onclick="deleteProduct('4')" class="p-1.5 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-3.5 h-3.5"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&amp;fit=crop&amp;w=600&amp;q=80" class="w-10 h-10 object-cover rounded-lg shrink-0">
+            <div class="truncate">
+              <p class="font-bold text-white truncate">Premium Cyberpunk Fashion Sneakers</p>
+              <p class="text-[10px] text-emerald-400">$69.99 <span class="text-slate-500 line-through">$180.00</span></p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="editProduct('5')" class="p-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-2" aria-hidden="true" class="lucide lucide-edit-2 w-3.5 h-3.5"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+            </button>
+            <button onclick="deleteProduct('5')" class="p-1.5 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-3.5 h-3.5"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&amp;fit=crop&amp;w=600&amp;q=80" class="w-10 h-10 object-cover rounded-lg shrink-0">
+            <div class="truncate">
+              <p class="font-bold text-white truncate">Portable High-Bass RGB Bluetooth Speaker</p>
+              <p class="text-[10px] text-emerald-400">$34.99 <span class="text-slate-500 line-through">$89.99</span></p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="editProduct('6')" class="p-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="edit-2" aria-hidden="true" class="lucide lucide-edit-2 w-3.5 h-3.5"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path></svg>
+            </button>
+            <button onclick="deleteProduct('6')" class="p-1.5 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trash-2" aria-hidden="true" class="lucide lucide-trash-2 w-3.5 h-3.5"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POLICY MODAL -->
+  <div id="policy-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-card w-full max-w-2xl rounded-3xl p-6 border border-slate-700 shadow-2xl relative max-h-[85vh] overflow-y-auto no-scrollbar">
+      <button onclick="closePolicyModal()" class="absolute top-5 right-5 p-2 rounded-xl bg-slate-800/80 text-slate-400 hover:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x w-5 h-5"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+      <h3 id="policy-title" class="text-xl font-black text-white mb-4">Policy Document</h3>
+      <div id="policy-body" class="text-xs text-slate-300 space-y-3 leading-relaxed">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // --- 1. DEFAULT INITIAL PRODUCTS DATASET ---
+    const defaultProducts = [
+      {
+        id: '1',
+        name: 'Ultra Wireless Noise Canceling Headphones',
+        category: 'electronics',
+        oldPrice: '$199.99',
+        discountPrice: '$79.99',
+        rating: '4.9',
+        imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80',
+        affiliateUrl: 'https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607',
+        freeDelivery: 'ON'
+      },
+      {
+        id: '2',
+        name: 'Futuristic Smartwatch Series 9 Pro',
+        category: 'gadgets',
+        oldPrice: '$249.00',
+        discountPrice: '$99.00',
+        rating: '4.8',
+        imageUrl: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80',
+        affiliateUrl: 'https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page18.html',
+        freeDelivery: 'ON'
+      },
+      {
+        id: '3',
+        name: '4K Ultra HD Gaming Action Camera',
+        category: 'electronics',
+        oldPrice: '$149.99',
+        discountPrice: '$59.99',
+        rating: '4.7',
+        imageUrl: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80',
+        affiliateUrl: 'https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page17.html',
+        freeDelivery: 'OFF'
+      },
+      {
+        id: '4',
+        name: 'Luxury RGB Mechanical Gaming Keyboard',
+        category: 'gadgets',
+        oldPrice: '$129.99',
+        discountPrice: '$49.99',
+        rating: '4.9',
+        imageUrl: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80',
+        affiliateUrl: 'https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page15.html',
+        freeDelivery: 'ON'
+      },
+      {
+        id: '5',
+        name: 'Premium Cyberpunk Fashion Sneakers',
+        category: 'fashion',
+        oldPrice: '$180.00',
+        discountPrice: '$69.99',
+        rating: '4.6',
+        imageUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80',
+        affiliateUrl: 'https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page16.html',
+        freeDelivery: 'ON'
+      },
+      {
+        id: '6',
+        name: 'Portable High-Bass RGB Bluetooth Speaker',
+        category: 'electronics',
+        oldPrice: '$89.99',
+        discountPrice: '$34.99',
+        rating: '4.8',
+        imageUrl: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=600&q=80',
+        affiliateUrl: 'https://www.appcreator24.com/app4124991-s83n4c',
+        freeDelivery: 'ON'
+      }
+    ];
+
+    let currentProducts = [];
+    let currentCategoryFilter = 'all';
+
+    // Initialize Products from LocalStorage
+    function initProducts() {
+      const stored = localStorage.getItem('amazing_products');
+      if (stored) {
+        try {
+          currentProducts = JSON.parse(stored);
+        } catch(e) {
+          currentProducts = defaultProducts;
+        }
+      } else {
+        currentProducts = defaultProducts;
+        localStorage.setItem('amazing_products', JSON.stringify(currentProducts));
+      }
+    }
+
+    // Render Product Marketplace
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      const countEl = document.getElementById('product-count');
+      const searchVal = (document.getElementById('search-input')?.value || '').toLowerCase();
+
+      if (!grid) return;
+
+      const filtered = currentProducts.filter(p => {
+        const matchesCategory = currentCategoryFilter === 'all' || p.category === currentCategoryFilter;
+        const matchesSearch = p.name.toLowerCase().includes(searchVal);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (countEl) countEl.textContent = `${filtered.length} Items Available`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center text-slate-400">
+            <i data-lucide="package-x" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+            <p class="text-sm font-semibold">No products found matching your search.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => `
+        <div class="glass-card-interactive rounded-2xl overflow-hidden flex flex-col justify-between group">
+          <div>
+            <!-- Image & Delivery Badge Container -->
+            <div class="relative w-full aspect-square bg-slate-950 overflow-hidden">
+              <img src="${p.imageUrl}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+              
+              <!-- Free Delivery Badge -->
+              ${p.freeDelivery === 'ON' ? `
+                <span class="absolute top-2 left-2 bg-emerald-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full shadow-lg border border-emerald-300">
+                  FREE DELIVERY
+                </span>
+              ` : ''}
+
+              <!-- Rating Badge -->
+              <span class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-slate-700">
+                ★ ${p.rating}
+              </span>
+            </div>
+
+            <!-- Product Details -->
+            <div class="p-3">
+              <h3 class="text-xs md:text-sm font-bold text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                ${p.name}
+              </h3>
+              
+              <div class="flex items-baseline space-x-2">
+                <span class="text-sm md:text-base font-black text-amber-400">${p.discountPrice}</span>
+                <span class="text-[11px] text-slate-500 line-through">${p.oldPrice}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BUY NOW BUTTON -->
+          <div class="p-3 pt-0">
+            <a href="${p.affiliateUrl}" target="_blank" rel="noopener noreferrer" 
+               class="block w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-blue-600 text-slate-950 font-black text-xs text-center shadow-md transition-all duration-300 hover:brightness-110 hover:shadow-emerald-500/30 btn-ripple">
+              BUY NOW
+            </a>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function filterCategory(cat) {
+      currentCategoryFilter = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-500', 'text-slate-950', 'border-emerald-400');
+        btn.classList.add('bg-slate-800/80', 'text-slate-300');
+      });
+      event.target.classList.add('bg-emerald-500', 'text-slate-950', 'border-emerald-400');
+      renderProducts();
+    }
+
+    // --- 2. ADMIN PANEL LOGIC & SECURITY ---
+    const ADMIN_PASSWORD = 'bahadur@2025#';
+    let isAdminLoggedIn = false;
+
+    function openAdminModal() {
+      document.getElementById('admin-modal').classList.remove('hidden');
+      if (isAdminLoggedIn) {
+        showAdminDashboard();
+      } else {
+        showAdminLogin();
+      }
+    }
+
+    function closeAdminModal() {
+      document.getElementById('admin-modal').classList.add('hidden');
+    }
+
+    function showAdminLogin() {
+      document.getElementById('admin-login-view').classList.remove('hidden');
+      document.getElementById('admin-dashboard-view').classList.add('hidden');
+      document.getElementById('admin-password-input').value = '';
+      document.getElementById('admin-error-msg').classList.add('hidden');
+    }
+
+    function verifyAdminPassword() {
+      const input = document.getElementById('admin-password-input').value;
+      if (input === ADMIN_PASSWORD) {
+        isAdminLoggedIn = true;
+        showAdminDashboard();
+      } else {
+        document.getElementById('admin-error-msg').classList.remove('hidden');
+      }
+    }
+
+    function showAdminDashboard() {
+      document.getElementById('admin-login-view').classList.add('hidden');
+      document.getElementById('admin-dashboard-view').classList.remove('hidden');
+      renderAdminProductList();
+    }
+
+    function adminLogout() {
+      isAdminLoggedIn = false;
+      showAdminLogin();
+    }
+
+    // Render Admin Product Inventory List
+    function renderAdminProductList() {
+      const list = document.getElementById('admin-product-list');
+      if (!list) return;
+
+      list.innerHTML = currentProducts.map(p => `
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+          <div class="flex items-center space-x-3 overflow-hidden">
+            <img src="${p.imageUrl}" class="w-10 h-10 object-cover rounded-lg shrink-0" />
+            <div class="truncate">
+              <p class="font-bold text-white truncate">${p.name}</p>
+              <p class="text-[10px] text-emerald-400">${p.discountPrice} <span class="text-slate-500 line-through">${p.oldPrice}</span></p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 shrink-0">
+            <button onclick="editProduct('${p.id}')" class="p-1.5 rounded-lg bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">
+              <i data-lucide="edit-2" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="deleteProduct('${p.id}')" class="p-1.5 rounded-lg bg-red-500/20 text-red-400 hover:bg-red-500/30">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function saveProductForm() {
+      const id = document.getElementById('edit-prod-id').value;
+      const name = document.getElementById('prod-name').value;
+      const category = document.getElementById('prod-category').value;
+      const oldPrice = document.getElementById('prod-old-price').value;
+      const discountPrice = document.getElementById('prod-discount-price').value;
+      const rating = document.getElementById('prod-rating').value;
+      const freeDelivery = document.getElementById('prod-free-delivery').value;
+      const imageUrl = document.getElementById('prod-image-url').value;
+      const affiliateUrl = document.getElementById('prod-affiliate-link').value;
+
+      if (!name || !discountPrice || !imageUrl || !affiliateUrl) {
+        alert('Please fill in all required product fields.');
+        return;
+      }
+
+      if (id) {
+        // Edit existing
+        const idx = currentProducts.findIndex(p => p.id === id);
+        if (idx !== -1) {
+          currentProducts[idx] = { id, name, category, oldPrice, discountPrice, rating, freeDelivery, imageUrl, affiliateUrl };
+        }
+      } else {
+        // Add new
+        const newProd = {
+          id: Date.now().toString(),
+          name, category, oldPrice, discountPrice, rating, freeDelivery, imageUrl, affiliateUrl
+        };
+        currentProducts.unshift(newProd);
+      }
+
+      localStorage.setItem('amazing_products', JSON.stringify(currentProducts));
+      resetProductForm();
+      renderProducts();
+      renderAdminProductList();
+      alert('Product saved successfully!');
+    }
+
+    function editProduct(id) {
+      const p = currentProducts.find(item => item.id === id);
+      if (!p) return;
+
+      document.getElementById('edit-prod-id').value = p.id;
+      document.getElementById('prod-name').value = p.name;
+      document.getElementById('prod-category').value = p.category;
+      document.getElementById('prod-old-price').value = p.oldPrice;
+      document.getElementById('prod-discount-price').value = p.discountPrice;
+      document.getElementById('prod-rating').value = p.rating;
+      document.getElementById('prod-free-delivery').value = p.freeDelivery;
+      document.getElementById('prod-image-url').value = p.imageUrl;
+      document.getElementById('prod-affiliate-link').value = p.affiliateUrl;
+
+      document.getElementById('form-title').textContent = 'Edit Product Details';
+    }
+
+    function deleteProduct(id) {
+      if (confirm('Are you sure you want to delete this product?')) {
+        currentProducts = currentProducts.filter(p => p.id !== id);
+        localStorage.setItem('amazing_products', JSON.stringify(currentProducts));
+        renderProducts();
+        renderAdminProductList();
+      }
+    }
+
+    function resetProductForm() {
+      document.getElementById('edit-prod-id').value = '';
+      document.getElementById('prod-name').value = '';
+      document.getElementById('prod-old-price').value = '';
+      document.getElementById('prod-discount-price').value = '';
+      document.getElementById('prod-rating').value = '4.8';
+      document.getElementById('prod-image-url').value = '';
+      document.getElementById('prod-affiliate-link').value = '';
+      document.getElementById('form-title').textContent = 'Add New Product';
+    }
+
+    function backupProductData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentProducts, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "amazing_shopping_products_backup.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function restoreProductData(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const restored = JSON.parse(evt.target.result);
+          if (Array.isArray(restored)) {
+            currentProducts = restored;
+            localStorage.setItem('amazing_products', JSON.stringify(currentProducts));
+            renderProducts();
+            renderAdminProductList();
+            alert('Product data restored successfully!');
+          }
+        } catch (err) {
+          alert('Invalid JSON backup file.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // COPY COMPLETE INDEX.HTML SOURCE CODE (ONLY IN ADMIN DASHBOARD)
+    function copySourceCode() {
+      if (!isAdminLoggedIn) return;
+      const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      navigator.clipboard.writeText(htmlContent).then(() => {
+        alert("Full source code copied to clipboard successfully!");
+      }).catch(err => {
+        alert("Failed to copy source code: " + err);
+      });
+    }
+
+    // --- 3. FLOATING CHATBOT LOGIC ---
+    function toggleChatbot() {
+      const win = document.getElementById('chatbot-window');
+      win.classList.toggle('hidden');
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const msgBox = document.getElementById('chat-messages');
+      
+      // Add User Message
+      msgBox.innerHTML += `
+        <div class="flex items-start justify-end space-x-2">
+          <div class="bg-emerald-500 text-slate-950 font-medium p-2.5 rounded-2xl rounded-tr-none">
+            ${text}
+          </div>
+        </div>
+      `;
+
+      input.value = '';
+      msgBox.scrollTop = msgBox.scrollHeight;
+
+      // Auto Reply Logic
+      setTimeout(() => {
+        const lower = text.toLowerCase();
+        let reply = "Thank you for reaching out! Explore our exclusive 70% off deals and daily benefit offers directly on the homepage.";
+
+        if (lower.includes('support') || lower.includes('contact') || lower.includes('help') || lower.includes('issue') || lower.includes('problem')) {
+          reply = "For support please contact:\n\ndaraz.bangladesh.shop.com";
+        } else if (lower.includes('download') || lower.includes('app') || lower.includes('apk')) {
+          reply = "You can download our official mobile application by clicking the 'Download App' button at the top of the page.";
+        }
+
+        msgBox.innerHTML += `
+          <div class="flex items-start space-x-2">
+            <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+            </div>
+            <div class="bg-slate-800 p-2.5 rounded-2xl rounded-tl-none text-slate-200 border border-slate-700 whitespace-pre-line">
+              ${reply}
+            </div>
+          </div>
+        `;
+        msgBox.scrollTop = msgBox.scrollHeight;
+        lucide.createIcons();
+      }, 600);
+    }
+
+    // --- 4. POLICY MODAL CONTROLS ---
+    const policyData = {
+      privacy: { title: "Privacy Policy", body: "At Amazing Shopping, we value user privacy and security. We do not track or collect personal user identification info without consent. All stored local data remains strictly inside your local browser storage." },
+      copyright: { title: "Copyright Notice", body: "All product titles, trademarks, and logos displayed belong to their respective owners. Amazing Shopping operates as a digital affiliate aggregation showcase platform." },
+      content: { title: "Content Policy", body: "All featured promotions, discounts, and offer banners undergo automated verification to ensure long-term stability and non-misleading promotional guidelines." },
+      cookie: { title: "Cookie Policy", body: "We use essential client-side LocalStorage variables strictly to persist user preference selections, cart caches, and administrator state updates." },
+      theme: { title: "Theme & Design Policy", body: "Our 6-color futuristic digital theme utilizes client-side GPU accelerated CSS keyframe animations designed for high performance across mobile and desktop displays." },
+      terms: { title: "Terms & Conditions", body: "By using Amazing Shopping, you agree to access affiliate promotional links in accordance with public standard web navigation guidelines." },
+      children: { title: "Children's Privacy Policy", body: "Amazing Shopping is rated 12+ and does not knowingly collect personal information from children under the age of 13." }
+    };
+
+    function openPolicyModal(key) {
+      const data = policyData[key];
+      if (!data) return;
+      document.getElementById('policy-title').textContent = data.title;
+      document.getElementById('policy-body').textContent = data.body;
+      document.getElementById('policy-modal').classList.remove('hidden');
+    }
+
+    function closePolicyModal() {
+      document.getElementById('policy-modal').classList.add('hidden');
+    }
+
+    // --- 5. CLIENT-SIDE PROTECTION (Discourage Casual Copying) ---
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      // Disable F12, Ctrl+U, Ctrl+Shift+I, Ctrl+S
+      if (
+        e.keyCode === 123 || 
+        (e.ctrlKey && e.keyCode === 85) || 
+        (e.ctrlKey && e.shiftKey && e.keyCode === 73) ||
+        (e.ctrlKey && e.shiftKey && e.keyCode === 74) ||
+        (e.ctrlKey && e.keyCode === 83)
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
+    document.addEventListener('dragstart', function(e) {
+      e.preventDefault();
+    });
+
+    // --- 6. PARTICLES BACKGROUND CANVAS ---
+    function initParticles() {
+      const canvas = document.getElementById('particles-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      const colors = ['#10B981', '#3B82F6', '#EF4444', '#F97316', '#EAB308', '#8B5CF6'];
+      const particles = [];
+
+      for (let i = 0; i < 35; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 2 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          alpha: Math.random() * 0.5 + 0.2
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.alpha;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = p.color;
+          ctx.fill();
+        });
+        requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      animate();
+    }
+
+    // --- 7. SPLASH SCREEN AUTO TRANSITION (EXACTLY 2 SECONDS) ---
+    window.addEventListener('DOMContentLoaded', () => {
+      initProducts();
+      renderProducts();
+      initParticles();
+
+      // Exactly 2 seconds splash timer
+      setTimeout(() => {
+        const splash = document.getElementById('splash-screen');
+        const app = document.getElementById('main-app');
+
+        if (splash) {
+          splash.style.opacity = '0';
+          setTimeout(() => {
+            splash.style.display = 'none';
+            if (app) app.classList.remove('hidden');
+          }, 700);
+        }
+      }, 2000);
+    });
+  </script>
+
+
+
+
+</body></html>
