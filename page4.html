@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en" class="dark"><head>
+  <script type="module" src="/@vite/client"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Amazing Shopping - Mega offer</title>
+
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="Amazing Shopping - Premium Futuristic Digital PWA with Mega Offers, Live Deals, and Top Discounts">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Amazing Shopping">
+
+  <!-- Embedded Web Application Manifest -->
+  <link rel="manifest" href="data:application/manifest+json,{&quot;name&quot;:&quot;Amazing Shopping&quot;,&quot;short_name&quot;:&quot;AmazingShopping&quot;,&quot;description&quot;:&quot;Mega offer Digital Shopping PWA&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#0f172a&quot;,&quot;theme_color&quot;:&quot;#00ff88&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=192&amp;auto=format&amp;fit=crop&amp;q=80&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/png&quot;}]}">
+
+  <!-- Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            orbitron: ['"Orbitron"', 'sans-serif'],
+          },
+          colors: {
+            rgb: {
+              green: '#00ff88',
+              blue: '#00d2ff',
+              red: '#ff0055',
+              orange: '#ff6b00',
+              yellow: '#ffd700',
+              purple: '#9d00ff',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* 6-COLOR RGB FUTURISTIC THEME ANIMATIONS */
+    :root {
+      --c-green: #00ff88;
+      --c-blue: #00d2ff;
+      --c-red: #ff0055;
+      --c-orange: #ff6b00;
+      --c-yellow: #ffd700;
+      --c-purple: #9d00ff;
+    }
+
+    body {
+      background-color: #0b0f19;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Selection enabled for input/textarea */
+    input, textarea {
+      user-select: text !important;
+      -webkit-user-select: text !important;
+    }
+
+    /* Animated RGB Border & Glow */
+    @keyframes rgbBorderAnim {
+      0% { border-color: var(--c-green); box-shadow: 0 0 15px rgba(0,255,136,0.4); }
+      16% { border-color: var(--c-blue); box-shadow: 0 0 15px rgba(0,210,255,0.4); }
+      33% { border-color: var(--c-red); box-shadow: 0 0 15px rgba(255,0,85,0.4); }
+      50% { border-color: var(--c-orange); box-shadow: 0 0 15px rgba(255,107,0,0.4); }
+      66% { border-color: var(--c-yellow); box-shadow: 0 0 15px rgba(255,215,0,0.4); }
+      83% { border-color: var(--c-purple); box-shadow: 0 0 15px rgba(157,0,255,0.4); }
+      100% { border-color: var(--c-green); box-shadow: 0 0 15px rgba(0,255,136,0.4); }
+    }
+
+    .rgb-border-glow {
+      animation: rgbBorderAnim 8s infinite linear;
+    }
+
+    /* Animated RGB Text Gradient */
+    @keyframes rgbTextAnim {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .rgb-gradient-text {
+      background: linear-gradient(90deg, #00ff88, #00d2ff, #ff0055, #ff6b00, #ffd700, #9d00ff, #00ff88);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rgbTextAnim 6s linear infinite;
+    }
+
+    .rgb-gradient-bg {
+      background: linear-gradient(135deg, #00ff88, #00d2ff, #ff0055, #ff6b00, #ffd700, #9d00ff);
+      background-size: 400% 400%;
+      animation: rgbTextAnim 8s ease infinite;
+    }
+
+    /* Glassmorphism styling */
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-card {
+      background: rgba(30, 41, 59, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: rgba(0, 255, 136, 0.5);
+      box-shadow: 0 12px 30px -10px rgba(0, 255, 136, 0.3);
+    }
+
+    /* Sliding Light Sweep */
+    .light-slide {
+      position: relative;
+      overflow: hidden;
+    }
+    .light-slide::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(60deg, transparent 30%, rgba(255, 255, 255, 0.25) 50%, transparent 70%);
+      transform: rotate(30deg) translateY(-100%);
+      animation: lightSweep 4s infinite ease-in-out;
+    }
+    @keyframes lightSweep {
+      0% { transform: rotate(30deg) translateY(-100%); }
+      20% { transform: rotate(30deg) translateY(100%); }
+      100% { transform: rotate(30deg) translateY(100%); }
+    }
+
+    /* Ripple Effect */
+    .ripple-effect {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple-span {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: rippleAnim 0.6s linear;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ff88;
+    }
+  </style>
+<script src="/_aistudio-iframe.js?v=1ee22f18"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@2.0.4"></script><style>.aistudio-hover-highlight { box-shadow: inset 0 0 0 0.5px white, inset 0 0 0 1.5px rgba(128,128,128,0.6) !important; }.aistudio-active-highlight { outline: 2px solid #87a9ff !important; outline-offset: -2px !important; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.3), inset 0 0 0 0.5px rgba(0,0,0,0.3) !important; }.aistudio-generating-blur { filter: blur(5px) grayscale(100%) brightness(28%) !important; transition: filter 0.3s ease; }#aistudio-focus-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: #87a9ff; border-radius: 12px; z-index: 10000; padding: 8px; color: #32302c; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }#aistudio-hover-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: rgba(128,128,128,0.6); border-radius: 12px; z-index: 10000; padding: 8px; color: white; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }.aistudio-img-icon { display: none; vertical-align: middle; pointer-events: auto; cursor: pointer; }.aistudio-img-icon.visible { display: inline-flex; }#aistudio-focus-mode-tag .aistudio-img-icon { position: relative; width: 26px; height: 26px; background: #32302c; border-radius: 6px; margin: -4px -4px -4px 0; }#aistudio-focus-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-hover-mode-tag .aistudio-img-icon { position: relative; width: 18px; height: 18px; margin-left: 4px; }#aistudio-hover-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-focus-mode-tag .aistudio-img-icon:hover, #aistudio-hover-mode-tag .aistudio-img-icon:hover { background: #424242 !important; }#aistudio-focus-mode-tag .aistudio-img-icon:active, #aistudio-hover-mode-tag .aistudio-img-icon:active { background: #393f51 !important; }</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:"Plus Jakarta Sans", sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.pointer-events-auto{pointer-events:auto}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0px}.bottom-16{bottom:4rem}.bottom-5{bottom:1.25rem}.right-0{right:0px}.right-5{right:1.25rem}.top-0{top:0px}.top-5{top:1.25rem}.left-2{left:0.5rem}.right-2{right:0.5rem}.top-2{top:0.5rem}.z-0{z-index:0}.z-10{z-index:10}.z-50{z-index:50}.z-40{z-index:40}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-2{margin-left:0.5rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-8{margin-top:2rem}.mt-16{margin-top:4rem}.mb-3{margin-bottom:0.75rem}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.aspect-\[9\/16\]{aspect-ratio:9/16}.aspect-square{aspect-ratio:1 / 1}.h-1\.5{height:0.375rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-2\.5{height:0.625rem}.h-28{height:7rem}.h-5{height:1.25rem}.h-7{height:1.75rem}.h-8{height:2rem}.h-full{height:100%}.h-11{height:2.75rem}.h-6{height:1.5rem}.h-\[450px\]{height:450px}.h-4{height:1rem}.max-h-\[90vh\]{max-height:90vh}.max-h-60{max-height:15rem}.max-h-\[85vh\]{max-height:85vh}.min-h-screen{min-height:100vh}.w-14{width:3.5rem}.w-16{width:4rem}.w-2\.5{width:0.625rem}.w-28{width:7rem}.w-3{width:0.75rem}.w-48{width:12rem}.w-5{width:1.25rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-full{width:100%}.w-1\.5{width:0.375rem}.w-11{width:2.75rem}.w-6{width:1.5rem}.w-\[320px\]{width:320px}.w-4{width:1rem}.min-w-\[620px\]{min-width:620px}.max-w-7xl{max-width:80rem}.max-w-\[310px\]{max-width:310px}.max-w-2xl{max-width:42rem}.max-w-\[85\%\]{max-width:85%}.max-w-lg{max-width:32rem}.flex-1{flex:1 1 0%}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes ping{75%, 100%{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0, 0, 0.2, 1) infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-x-4{column-gap:1rem}.gap-y-2{row-gap:0.5rem}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-x-1 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.25rem * var(--tw-space-x-reverse));margin-left:calc(0.25rem * calc(1 - var(--tw-space-x-reverse)))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-slate-800 > :not([hidden]) ~ :not([hidden]){--tw-divide-opacity:1;border-color:rgb(30 41 59 / var(--tw-divide-opacity, 1))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.whitespace-nowrap{white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-\[14px\]{border-radius:14px}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.rounded{border-radius:0.25rem}.rounded-tl-none{border-top-left-radius:0px}.border{border-width:1px}.border-0{border-width:0px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-amber-500\/30{border-color:rgb(245 158 11 / 0.3)}.border-emerald-500\/40{border-color:rgb(16 185 129 / 0.4)}.border-emerald-500\/50{border-color:rgb(16 185 129 / 0.5)}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-emerald-500\/30{border-color:rgb(16 185 129 / 0.3)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-slate-800\/80{border-color:rgb(30 41 59 / 0.8)}.border-amber-500\/40{border-color:rgb(245 158 11 / 0.4)}.border-emerald-500\/60{border-color:rgb(16 185 129 / 0.6)}.bg-amber-500\/20{background-color:rgb(245 158 11 / 0.2)}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-emerald-950\/80{background-color:rgb(2 44 34 / 0.8)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/90{background-color:rgb(15 23 42 / 0.9)}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(2 6 23 / var(--tw-bg-opacity, 1))}.bg-emerald-500\/20{background-color:rgb(16 185 129 / 0.2)}.bg-emerald-950\/60{background-color:rgb(2 44 34 / 0.6)}.bg-slate-800\/80{background-color:rgb(30 41 59 / 0.8)}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.bg-slate-950\/80{background-color:rgb(2 6 23 / 0.8)}.bg-cyan-500{--tw-bg-opacity:1;background-color:rgb(6 182 212 / var(--tw-bg-opacity, 1))}.bg-emerald-950\/90{background-color:rgb(2 44 34 / 0.9)}.bg-cyan-500\/20{background-color:rgb(6 182 212 / 0.2)}.bg-rose-500\/20{background-color:rgb(244 63 94 / 0.2)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-emerald-400{--tw-gradient-from:#34d399 var(--tw-gradient-from-position);--tw-gradient-to:rgb(52 211 153 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-cyan-400{--tw-gradient-to:rgb(34 211 238 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #22d3ee var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-purple-500{--tw-gradient-to:#a855f7 var(--tw-gradient-to-position)}.fill-current{fill:currentColor}.object-cover{object-fit:cover}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-\[2px\]{padding:2px}.p-\[3px\]{padding:3px}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.pb-12{padding-bottom:3rem}.pb-2{padding-bottom:0.5rem}.pt-4{padding-top:1rem}.pb-4{padding-bottom:1rem}.pt-8{padding-top:2rem}.pb-3{padding-bottom:0.75rem}.pt-2{padding-top:0.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-orbitron{font-family:"Orbitron", sans-serif}.font-sans{font-family:"Plus Jakarta Sans", sans-serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-base{font-size:1rem;line-height:1.5rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-\[10px\]{font-size:10px}.text-lg{font-size:1.125rem;line-height:1.75rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.font-medium{font-weight:500}.uppercase{text-transform:uppercase}.capitalize{text-transform:capitalize}.leading-relaxed{line-height:1.625}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-cyan-300{--tw-text-opacity:1;color:rgb(103 232 249 / var(--tw-text-opacity, 1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-emerald-300{--tw-text-opacity:1;color:rgb(110 231 183 / var(--tw-text-opacity, 1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-orange-400{--tw-text-opacity:1;color:rgb(251 146 60 / var(--tw-text-opacity, 1))}.text-pink-300{--tw-text-opacity:1;color:rgb(249 168 212 / var(--tw-text-opacity, 1))}.text-purple-300{--tw-text-opacity:1;color:rgb(216 180 254 / var(--tw-text-opacity, 1))}.text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-rose-300{--tw-text-opacity:1;color:rgb(253 164 175 / var(--tw-text-opacity, 1))}.line-through{-webkit-text-decoration-line:line-through;text-decoration-line:line-through}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-emerald-500{accent-color:#10b981}.opacity-40{opacity:0.4}.opacity-75{opacity:0.75}.shadow-\[0_0_12px_\#00ff88\]{--tw-shadow:0 0 12px #00ff88;--tw-shadow-colored:0 0 12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(0\2c 255\2c 136\2c 0\.3\)\]{--tw-shadow:0 0 15px rgba(0,255,136,0.3);--tw-shadow-colored:0 0 15px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_20px_rgba\(0\2c 210\2c 255\2c 0\.3\)\]{--tw-shadow:0 0 20px rgba(0,210,255,0.3);--tw-shadow-colored:0 0 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_20px_rgba\(0\2c 255\2c 136\2c 0\.3\)\]{--tw-shadow:0 0 20px rgba(0,255,136,0.3);--tw-shadow-colored:0 0 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_20px_rgba\(157\2c 0\2c 255\2c 0\.3\)\]{--tw-shadow:0 0 20px rgba(157,0,255,0.3);--tw-shadow-colored:0 0 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_20px_rgba\(255\2c 0\2c 85\2c 0\.3\)\]{--tw-shadow:0 0 20px rgba(255,0,85,0.3);--tw-shadow-colored:0 0 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_20px_rgba\(255\2c 107\2c 0\2c 0\.3\)\]{--tw-shadow:0 0 20px rgba(255,107,0,0.3);--tw-shadow-colored:0 0 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_25px_rgba\(0\2c 255\2c 136\2c 0\.5\)\]{--tw-shadow:0 0 25px rgba(0,255,136,0.5);--tw-shadow-colored:0 0 25px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_35px_rgba\(0\2c 255\2c 136\2c 0\.3\)\]{--tw-shadow:0 0 35px rgba(0,255,136,0.3);--tw-shadow-colored:0 0 35px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_50px_rgba\(0\2c 255\2c 136\2c 0\.5\)\]{--tw-shadow:0 0 50px rgba(0,255,136,0.5);--tw-shadow-colored:0 0 50px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(0\2c 210\2c 255\2c 0\.2\)\]{--tw-shadow:0 0 15px rgba(0,210,255,0.2);--tw-shadow-colored:0 0 15px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(0\2c 255\2c 136\2c 0\.2\)\]{--tw-shadow:0 0 15px rgba(0,255,136,0.2);--tw-shadow-colored:0 0 15px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(0\2c 255\2c 136\2c 0\.5\)\]{--tw-shadow:0 0 15px rgba(0,255,136,0.5);--tw-shadow-colored:0 0 15px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(236\2c 72\2c 153\2c 0\.2\)\]{--tw-shadow:0 0 15px rgba(236,72,153,0.2);--tw-shadow-colored:0 0 15px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(255\2c 0\2c 85\2c 0\.2\)\]{--tw-shadow:0 0 15px rgba(255,0,85,0.2);--tw-shadow-colored:0 0 15px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(255\2c 215\2c 0\2c 0\.2\)\]{--tw-shadow:0 0 15px rgba(255,215,0,0.2);--tw-shadow-colored:0 0 15px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_15px_rgba\(59\2c 130\2c 246\2c 0\.2\)\]{--tw-shadow:0 0 15px rgba(59,130,246,0.2);--tw-shadow-colored:0 0 15px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_20px_rgba\(0\2c 255\2c 136\2c 0\.4\)\]{--tw-shadow:0 0 20px rgba(0,255,136,0.4);--tw-shadow-colored:0 0 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_25px_rgba\(0\2c 255\2c 136\2c 0\.6\)\]{--tw-shadow:0 0 25px rgba(0,255,136,0.6);--tw-shadow-colored:0 0 25px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_40px_rgba\(0\2c 0\2c 0\2c 0\.8\)\]{--tw-shadow:0 0 40px rgba(0,0,0,0.8);--tw-shadow-colored:0 0 40px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_50px_rgba\(0\2c 0\2c 0\2c 0\.9\)\]{--tw-shadow:0 0 50px rgba(0,0,0,0.9);--tw-shadow-colored:0 0 50px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-500{transition-duration:500ms}.duration-300{transition-duration:300ms}.selection\:bg-emerald-500 *::selection{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.selection\:text-black *::selection{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.selection\:bg-emerald-500::selection{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.selection\:text-black::selection{--tw-text-opacity:1;color:rgb(0 0 0 / var(--tw-text-opacity, 1))}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-amber-400:hover{--tw-border-opacity:1;border-color:rgb(251 191 36 / var(--tw-border-opacity, 1))}.hover\:border-blue-500:hover{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity, 1))}.hover\:border-cyan-400:hover{--tw-border-opacity:1;border-color:rgb(34 211 238 / var(--tw-border-opacity, 1))}.hover\:border-emerald-400:hover{--tw-border-opacity:1;border-color:rgb(52 211 153 / var(--tw-border-opacity, 1))}.hover\:border-pink-400:hover{--tw-border-opacity:1;border-color:rgb(244 114 182 / var(--tw-border-opacity, 1))}.hover\:border-rose-500:hover{--tw-border-opacity:1;border-color:rgb(244 63 94 / var(--tw-border-opacity, 1))}.hover\:bg-emerald-400:hover{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.hover\:bg-cyan-400:hover{--tw-bg-opacity:1;background-color:rgb(34 211 238 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:bg-cyan-500\/40:hover{background-color:rgb(6 182 212 / 0.4)}.hover\:bg-rose-500\/40:hover{background-color:rgb(244 63 94 / 0.4)}.hover\:bg-slate-800\/50:hover{background-color:rgb(30 41 59 / 0.5)}.hover\:text-amber-400:hover{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.hover\:text-blue-500:hover{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.hover\:text-cyan-400:hover{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.hover\:text-emerald-400:hover{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.hover\:text-pink-400:hover{--tw-text-opacity:1;color:rgb(244 114 182 / var(--tw-text-opacity, 1))}.hover\:text-purple-400:hover{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.hover\:text-rose-400:hover{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.hover\:text-rose-500:hover{--tw-text-opacity:1;color:rgb(244 63 94 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.focus\:border-emerald-400:focus{--tw-border-opacity:1;border-color:rgb(52 211 153 / var(--tw-border-opacity, 1))}.focus\:border-cyan-400:focus{--tw-border-opacity:1;border-color:rgb(34 211 238 / var(--tw-border-opacity, 1))}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.group:hover .group-hover\:text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-orange-400{--tw-text-opacity:1;color:rgb(251 146 60 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:shadow-\[0_0_30px_rgba\(0\2c 210\2c 255\2c 0\.7\)\]{--tw-shadow:0 0 30px rgba(0,210,255,0.7);--tw-shadow-colored:0 0 30px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.group:hover .group-hover\:shadow-\[0_0_30px_rgba\(0\2c 255\2c 136\2c 0\.7\)\]{--tw-shadow:0 0 30px rgba(0,255,136,0.7);--tw-shadow-colored:0 0 30px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.group:hover .group-hover\:shadow-\[0_0_30px_rgba\(157\2c 0\2c 255\2c 0\.7\)\]{--tw-shadow:0 0 30px rgba(157,0,255,0.7);--tw-shadow-colored:0 0 30px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.group:hover .group-hover\:shadow-\[0_0_30px_rgba\(255\2c 0\2c 85\2c 0\.7\)\]{--tw-shadow:0 0 30px rgba(255,0,85,0.7);--tw-shadow-colored:0 0 30px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.group:hover .group-hover\:shadow-\[0_0_30px_rgba\(255\2c 107\2c 0\2c 0\.7\)\]{--tw-shadow:0 0 30px rgba(255,107,0,0.7);--tw-shadow-colored:0 0 30px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}@media (min-width: 640px){.sm\:h-20{height:5rem}.sm\:h-12{height:3rem}.sm\:w-20{width:5rem}.sm\:w-auto{width:auto}.sm\:w-12{width:3rem}.sm\:w-\[380px\]{width:380px}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:gap-5{gap:1.25rem}.sm\:gap-4{gap:1rem}.sm\:p-6{padding:1.5rem}.sm\:p-4{padding:1rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}}@media (min-width: 768px){.md\:w-auto{width:auto}.md\:min-w-0{min-width:0px}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-start{align-items:flex-start}.md\:justify-start{justify-content:flex-start}.md\:text-left{text-align:left}}@media (min-width: 1024px){.lg\:grid-cols-5{grid-template-columns:repeat(5, minmax(0, 1fr))}}</style></head>
+
+<body class="relative min-h-screen pb-12 antialiased selection:bg-emerald-500 selection:text-black">
+
+  <!-- Floating Particles Background Canvas -->
+  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40" width="552" height="1614"></canvas>
+
+  <!-- ================= SPLASH SCREEN (2 SECONDS) ================= -->
+  
+
+  <!-- ================= MAIN CONTAINER ================= -->
+  <div id="main-content" class="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 pt-4">
+
+    <!-- ================= HEADER SECTION ================= -->
+    <header id="app-header" class="glass-panel rounded-2xl p-4 sm:p-6 mb-6 rgb-border-glow relative overflow-hidden">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <!-- Logo & Live Indicator -->
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+          <div class="flex items-center gap-3 mb-1">
+            <div class="p-2.5 rounded-xl bg-slate-900 border border-emerald-500/40 shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+              <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z"></path>
+              </svg>
+            </div>
+            <div>
+              <h1 class="font-orbitron text-2xl sm:text-3xl font-black tracking-wider rgb-gradient-text">
+                Amazing Shopping
+              </h1>
+              <span class="text-xs sm:text-sm font-bold text-amber-400 tracking-wider block">
+                Mega offer
+              </span>
+            </div>
+
+            <!-- Blinking GREEN LIVE Indicator -->
+            <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/50 ml-2">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span class="text-xs font-black text-emerald-400 tracking-widest uppercase">LIVE</span>
+            </div>
+          </div>
+
+          <!-- EXACT HEADER STATS DISPLAY BELOW LOGO -->
+          <div class="mt-3 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs sm:text-sm font-semibold text-slate-200">
+            <span class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1">
+              ⭐ 4.3★
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-cyan-300">
+              12+
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-emerald-300">
+              10B+
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-purple-300">
+              177 Million Reviews
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-pink-300">
+              Rated for Downloads
+            </span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 border border-slate-700 text-cyan-300">
+              12+
+            </span>
+          </div>
+        </div>
+
+        <!-- Download App Button & Admin Button -->
+        <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+          <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener font-bold" class="ripple-effect light-slide w-full sm:w-auto px-6 py-3.5 rounded-xl font-orbitron font-extrabold text-sm sm:text-base text-slate-950 rgb-gradient-bg shadow-[0_0_25px_rgba(0,255,136,0.5)] hover:scale-105 active:scale-95 transition-all text-center flex items-center justify-center gap-2">
+            <svg class="w-5 h-5 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            DOWNLOAD APP
+          </a>
+
+          <button onclick="openAdminModal()" title="Admin Login" class="p-3 rounded-xl bg-slate-900/90 border border-slate-700 hover:border-amber-400 text-slate-400 hover:text-amber-400 transition-all flex items-center justify-center">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ================= TOP NAVIGATION (5 ANIMATED CIRCULAR BUTTONS) ================= -->
+    <section class="mb-8 overflow-x-auto pb-2 scrollbar-none">
+      <div class="flex items-center justify-between min-w-[620px] md:min-w-0 gap-4 px-2">
+        
+        <!-- Button 1 -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page18.html" target="_blank" rel="noopener" class="ripple-effect group flex flex-col items-center text-center transition-transform hover:scale-105">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-[2px] rgb-gradient-bg shadow-[0_0_20px_rgba(0,255,136,0.3)] group-hover:shadow-[0_0_30px_rgba(0,255,136,0.7)] transition-all">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-emerald-400 group-hover:bg-slate-900 transition-colors">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <span class="mt-2 text-xs sm:text-sm font-bold text-slate-200 group-hover:text-emerald-400 capitalize transition-colors">
+            par day benefit
+          </span>
+        </a>
+
+        <!-- Button 2 -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page17.html" target="_blank" rel="noopener" class="ripple-effect group flex flex-col items-center text-center transition-transform hover:scale-105">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-[2px] rgb-gradient-bg shadow-[0_0_20px_rgba(0,210,255,0.3)] group-hover:shadow-[0_0_30px_rgba(0,210,255,0.7)] transition-all">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-cyan-400 group-hover:bg-slate-900 transition-colors">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+          </div>
+          <span class="mt-2 text-xs sm:text-sm font-bold text-slate-200 group-hover:text-cyan-400 capitalize transition-colors">
+            big Benefits
+          </span>
+        </a>
+
+        <!-- Button 3 -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page15.html" target="_blank" rel="noopener" class="ripple-effect group flex flex-col items-center text-center transition-transform hover:scale-105">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-[2px] rgb-gradient-bg shadow-[0_0_20px_rgba(255,0,85,0.3)] group-hover:shadow-[0_0_30px_rgba(255,0,85,0.7)] transition-all">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-rose-400 group-hover:bg-slate-900 transition-colors">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+          </div>
+          <span class="mt-2 text-xs sm:text-sm font-bold text-slate-200 group-hover:text-rose-400 capitalize transition-colors">
+            office Deal offer
+          </span>
+        </a>
+
+        <!-- Button 4 -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page16.html" target="_blank" rel="noopener" class="ripple-effect group flex flex-col items-center text-center transition-transform hover:scale-105">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-[2px] rgb-gradient-bg shadow-[0_0_20px_rgba(255,107,0,0.3)] group-hover:shadow-[0_0_30px_rgba(255,107,0,0.7)] transition-all">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-orange-400 group-hover:bg-slate-900 transition-colors">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path>
+              </svg>
+            </div>
+          </div>
+          <span class="mt-2 text-xs sm:text-sm font-bold text-slate-200 group-hover:text-orange-400 capitalize transition-colors">
+            office delivery offer
+          </span>
+        </a>
+
+        <!-- Button 5 -->
+        <a href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" target="_blank" rel="noopener" class="ripple-effect group flex flex-col items-center text-center transition-transform hover:scale-105">
+          <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-[2px] rgb-gradient-bg shadow-[0_0_20px_rgba(157,0,255,0.3)] group-hover:shadow-[0_0_30px_rgba(157,0,255,0.7)] transition-all">
+            <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-purple-400 group-hover:bg-slate-900 transition-colors font-black text-base sm:text-lg">
+              70%
+            </div>
+          </div>
+          <span class="mt-2 text-xs sm:text-sm font-bold text-slate-200 group-hover:text-purple-400 capitalize transition-colors">
+            70% Offer
+          </span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ================= AFFILIATE PRODUCT MARKETPLACE ================= -->
+    <section class="mb-12">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-8 rounded-full bg-emerald-400 shadow-[0_0_12px_#00ff88]"></span>
+          <h2 class="font-orbitron text-xl sm:text-2xl font-black text-slate-100 tracking-wide">
+            AFFILIATE PRODUCTS
+          </h2>
+        </div>
+        <span class="text-xs font-bold px-3 py-1.5 rounded-full bg-slate-800 text-emerald-400 border border-slate-700">
+          🔥 Mega Flash Deals
+        </span>
+      </div>
+
+      <!-- Responsive Grid: Desktop 5 / Tablet 3 / Mobile 2 -->
+      <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="Ultra Smart Watch Pro 8" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 text-[10px] font-black tracking-wide shadow-lg flex items-center gap-1">
+                  ⚡ FREE DELIVERY
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.9
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Ultra Smart Watch Pro 8
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $39.99
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $120.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="Wireless ANC Earbuds Gaming" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 text-[10px] font-black tracking-wide shadow-lg flex items-center gap-1">
+                  ⚡ FREE DELIVERY
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.8
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Wireless ANC Earbuds Gaming
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $24.50
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $85.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="Futuristic RGB Gaming Headset" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-400 text-[10px] font-bold">
+                  STANDARD
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.9
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Futuristic RGB Gaming Headset
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $49.00
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $150.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="4K Ultra HD Drone Camera" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 text-[10px] font-black tracking-wide shadow-lg flex items-center gap-1">
+                  ⚡ FREE DELIVERY
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.7
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                4K Ultra HD Drone Camera
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $89.00
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $299.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="RGB Mechanical Keyboard" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 text-[10px] font-black tracking-wide shadow-lg flex items-center gap-1">
+                  ⚡ FREE DELIVERY
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.8
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                RGB Mechanical Keyboard
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $34.00
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $95.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="Smart Fitness Tracker Band" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 text-[10px] font-black tracking-wide shadow-lg flex items-center gap-1">
+                  ⚡ FREE DELIVERY
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.6
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Smart Fitness Tracker Band
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $18.99
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $65.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="Power Bank 30000mAh Fast" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 text-[10px] font-black tracking-wide shadow-lg flex items-center gap-1">
+                  ⚡ FREE DELIVERY
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.9
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Power Bank 30000mAh Fast
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $22.00
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $70.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="Portable RGB Bluetooth Speaker" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-400 text-[10px] font-bold">
+                  STANDARD
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.7
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                Portable RGB Bluetooth Speaker
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $27.50
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $80.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="MagSafe Fast Charger Stand" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 text-[10px] font-black tracking-wide shadow-lg flex items-center gap-1">
+                  ⚡ FREE DELIVERY
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.8
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                MagSafe Fast Charger Stand
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $14.99
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $45.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&amp;auto=format&amp;fit=crop&amp;q=80" alt="HD Mini Smart Projector 1080P" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&amp;auto=format&amp;fit=crop&amp;q=80'">
+            
+            <div class="absolute top-2 left-2">
+              
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 text-[10px] font-black tracking-wide shadow-lg flex items-center gap-1">
+                  ⚡ FREE DELIVERY
+                </span>
+              
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ 4.9
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                HD Mini Smart Projector 1080P
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $75.00
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $210.00
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FIXED YOUTUBE SHORTS VIDEO SECTION ================= -->
+    <section class="mb-12 flex flex-col items-center">
+      <div class="text-center mb-4">
+        <h3 class="font-orbitron text-xl sm:text-2xl font-extrabold rgb-gradient-text">
+          🎬 FEATURED SHOWCASE
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-400 mt-1">Watch live demo deals &amp; product reviews</p>
+      </div>
+
+      <!-- Fixed 9:16 Vertical Player Frame -->
+      <div class="relative w-full max-w-[310px] aspect-[9/16] rounded-2xl p-[3px] rgb-gradient-bg shadow-[0_0_35px_rgba(0,255,136,0.3)]">
+        <div class="w-full h-full bg-slate-950 rounded-[14px] overflow-hidden">
+          <iframe src="https://www.youtube.com/embed/Li0XbrC0vuk?autoplay=0&amp;rel=0" title="Featured YouTube Short" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- ================= BOTTOM QUICK BUTTONS (6 SMALL CIRCULAR ICON BUTTONS) ================= -->
+      <div class="mt-8 flex items-center justify-center flex-wrap gap-3 sm:gap-4 max-w-lg mx-auto">
+        
+        <!-- 1. Apple App Store -->
+        <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" title="Apple App Store" class="ripple-effect w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-slate-200 hover:text-cyan-400 border border-slate-700 hover:border-cyan-400 shadow-[0_0_15px_rgba(0,210,255,0.2)] hover:scale-110 transition-all">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.85c.67-.82 1.13-1.96.99-3.1-.98.04-2.19.66-2.88 1.47-.62.72-1.16 1.88-.99 3.01 1.1.09 2.21-.56 2.88-1.38z"></path>
+          </svg>
+        </a>
+
+        <!-- 2. Google Play -->
+        <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" title="Google Play Store" class="ripple-effect w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-slate-200 hover:text-emerald-400 border border-slate-700 hover:border-emerald-400 shadow-[0_0_15px_rgba(0,255,136,0.2)] hover:scale-110 transition-all">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M3.609 1.814L13.792 12 3.61 22.186a1.99 1.99 0 0 1-.61-1.42V3.234c0-.543.218-1.036.609-1.42zM15.207 13.414l2.58 2.58-10.99 6.34 8.41-8.92zm2.58-5.408l-2.58 2.58-8.41-8.92 10.99 6.34zm2.13 1.23a1.99 1.99 0 0 1 0 3.528l-1.42.82-2.828-2.828 2.828-2.828 1.42.82z"></path>
+          </svg>
+        </a>
+
+        <!-- 3. Amazon Appstore -->
+        <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" rel="noopener" title="Amazon Appstore" class="ripple-effect w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-slate-200 hover:text-amber-400 border border-slate-700 hover:border-amber-400 shadow-[0_0_15px_rgba(255,215,0,0.2)] hover:scale-110 transition-all">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M15.93 17.09c-2.86 2.11-7.01 3.23-10.6 3.23-5.04 0-9.59-1.87-13.01-4.99-.25-.23-.03-.54.27-.37 3.65 2.12 8.1 3.39 12.63 3.39 3.19 0 6.64-.78 9.71-2.4.45-.24.83.3.4.64zm.99-1.63c-.36-.46-2.39-.22-3.32-.11-.28.03-.33-.21-.08-.39.1.84 2.85 1.18 3.58.28.25-.3.04-.54-.18-.78zM12.92 11.2c0 1.22-.16 2.12-.91 3.03-.68.82-1.63 1.3-2.61 1.3-1.39 0-2.2-.95-2.2-2.39 0-2.82 2.5-3.34 5.72-3.34v-.27c0-.62-.05-1.36-.44-1.88-.35-.46-1.01-.73-1.63-.73-1.12 0-2.12.57-2.4 1.74-.06.27-.27.35-.48.33l-2.02-.22c-.22-.05-.33-.27-.24-.49C6.27 6.4 8.24 5.3 10.8 5.3c1.72 0 3.32.49 4.3 1.83.84 1.11.82 2.61.82 4.07v3.97c0 .87.35 1.25.68 1.72.12.16.14.35-.02.46l-1.9 1.42c-.17.13-.35.1-.49-.08-.35-.47-.85-1.15-.85-1.89h-.02zm-3.02 2.22c.73 0 1.55-.38 2.07-1.01.52-.63.95-1.42.95-2.34v-.82c-1.8 0-3.62.27-3.62 1.96 0 .84.52 1.48 1.4 1.48z"></path>
+          </svg>
+        </a>
+
+        <!-- 4. YouTube -->
+        <a href="https://www.youtube.com/@bahadurlivenews24" target="_blank" rel="noopener" title="YouTube Channel" class="ripple-effect w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-slate-200 hover:text-rose-500 border border-slate-700 hover:border-rose-500 shadow-[0_0_15px_rgba(255,0,85,0.2)] hover:scale-110 transition-all">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path>
+          </svg>
+        </a>
+
+        <!-- 5. Facebook -->
+        <a href="https://www.facebook.com/share/1TZCYbzrA4/" target="_blank" rel="noopener" title="Facebook Page" class="ripple-effect w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-slate-200 hover:text-blue-500 border border-slate-700 hover:border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:scale-110 transition-all">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+          </svg>
+        </a>
+
+        <!-- 6. TikTok -->
+        <a href="https://vm.tiktok.com/ZS9rbC6pq6nf5-UUmgd/" target="_blank" rel="noopener" title="TikTok Profile" class="ripple-effect w-11 h-11 sm:w-12 sm:h-12 rounded-full glass-panel flex items-center justify-center text-slate-200 hover:text-pink-400 border border-slate-700 hover:border-pink-400 shadow-[0_0_15px_rgba(236,72,153,0.2)] hover:scale-110 transition-all">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.82.57-1.31 1.56-1.25 2.57.02.94.55 1.83 1.36 2.3 1.07.61 2.45.51 3.42-.23.77-.58 1.22-1.52 1.23-2.49.03-4.32.01-8.64.02-12.96z"></path>
+          </svg>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ================= VERIFIED BADGE & FOOTER POLICIES ================= -->
+    <footer class="mt-16 pt-8 border-t border-slate-800/80 text-center text-slate-400 text-xs sm:text-sm">
+      
+      <!-- Verified Store Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-emerald-500/40 text-emerald-400 font-bold mb-6 shadow-[0_0_15px_rgba(0,255,136,0.2)]">
+        <svg class="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        </svg>
+        ✔ Verified Official Store — 100% Secure Mega Shopping
+      </div>
+
+      <!-- Legal Policy Links -->
+      <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mb-6 font-medium text-slate-300">
+        <button onclick="openPolicyModal('privacy')" class="hover:text-emerald-400 transition-colors">Privacy Policy</button>
+        <span>•</span>
+        <button onclick="openPolicyModal('copyright')" class="hover:text-cyan-400 transition-colors">Copyright</button>
+        <span>•</span>
+        <button onclick="openPolicyModal('content')" class="hover:text-rose-400 transition-colors">Content Policy</button>
+        <span>•</span>
+        <button onclick="openPolicyModal('cookie')" class="hover:text-amber-400 transition-colors">Cookie Policy</button>
+        <span>•</span>
+        <button onclick="openPolicyModal('theme')" class="hover:text-purple-400 transition-colors">Theme Policy</button>
+        <span>•</span>
+        <button onclick="openPolicyModal('terms')" class="hover:text-emerald-400 transition-colors">Terms &amp; Conditions</button>
+        <span>•</span>
+        <button onclick="openPolicyModal('children')" class="hover:text-pink-400 transition-colors">Children's Policy</button>
+      </div>
+
+      <p class="text-slate-500 font-sans">
+        © 2026 <strong class="text-slate-300">Amazing Shopping</strong>. All Rights Reserved. Mega Offer PWA Platform.
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- ================= FLOATING AI CHATBOT ================= -->
+  <div id="chatbot-container" class="fixed bottom-5 right-5 z-40">
+    <!-- Chat Trigger Button -->
+    <button id="chatbot-toggle" onclick="toggleChatbot()" class="ripple-effect w-14 h-14 rounded-full rgb-gradient-bg p-[2px] shadow-[0_0_25px_rgba(0,255,136,0.6)] hover:scale-110 active:scale-95 transition-all flex items-center justify-center">
+      <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center text-emerald-400">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+        </svg>
+      </div>
+    </button>
+
+    <!-- Chat Modal Window -->
+    <div id="chatbot-window" class="hidden absolute bottom-16 right-0 w-[320px] sm:w-[380px] h-[450px] glass-panel rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.8)] border border-emerald-500/30 flex flex-col overflow-hidden">
+      <!-- Chat Header -->
+      <div class="p-4 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/40">
+            🤖
+          </div>
+          <div>
+            <h4 class="font-orbitron font-bold text-sm text-slate-100">AI Support Assistant</h4>
+            <span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span> Online
+            </span>
+          </div>
+        </div>
+        <button onclick="toggleChatbot()" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+
+      <!-- Chat Messages Container -->
+      <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 text-xs sm:text-sm">
+        <div class="bg-slate-800/80 text-slate-200 p-3 rounded-xl rounded-tl-none border border-slate-700 max-w-[85%]">
+          👋 Hello! Welcome to <strong>Amazing Shopping</strong>. How can I help you today?
+        </div>
+      </div>
+
+      <!-- Chat Input -->
+      <form id="chat-form" onsubmit="handleChatSubmit(event)" class="p-3 bg-slate-900/90 border-t border-slate-800 flex gap-2">
+        <input type="text" id="chat-input" placeholder="Ask a question..." class="flex-1 bg-slate-800 border border-slate-700 focus:border-emerald-400 rounded-xl px-3 py-2 text-xs sm:text-sm text-white outline-none">
+        <button type="submit" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs sm:text-sm transition-colors">
+          Send
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= HIDDEN ADMIN DASHBOARD MODAL ================= -->
+  <div id="admin-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
+    <div class="w-full max-w-2xl max-h-[90vh] glass-panel rounded-2xl p-6 overflow-y-auto border border-emerald-500/40 shadow-[0_0_50px_rgba(0,0,0,0.9)]">
+      
+      <!-- Admin Header -->
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🔐</span>
+          <h3 class="font-orbitron text-xl font-bold rgb-gradient-text">Admin Control Dashboard</h3>
+        </div>
+        <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white font-bold text-xl">✕</button>
+      </div>
+
+      <!-- Login Screen -->
+      <div id="admin-login-view" class="hidden">
+        <p class="text-sm text-slate-300 mb-4">Please enter the security password to access the product manager.</p>
+        <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-400 mb-1">Security Password</label>
+            <input type="password" id="admin-password-input" placeholder="Enter password" required="" class="w-full bg-slate-900 border border-slate-700 focus:border-emerald-400 rounded-xl px-4 py-3 text-sm text-white outline-none">
+          </div>
+          <button type="submit" class="w-full py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-sm transition-colors shadow-[0_0_20px_rgba(0,255,136,0.4)]">
+            Login to Admin Panel
+          </button>
+        </form>
+      </div>
+
+      <!-- Admin Authenticated Panel View -->
+      <div id="admin-panel-view" class="space-y-6">
+        
+        <!-- Copy Source Code Banner (ONLY VISIBLE HERE) -->
+        <div class="p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div>
+            <h4 class="font-bold text-emerald-400 text-sm">Copy Full index.html Source</h4>
+            <p class="text-xs text-slate-300">Copy complete application code ready for instant GitHub Pages deployment.</p>
+          </div>
+          <button onclick="copySourceCode()" class="w-full sm:w-auto px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-xs sm:text-sm transition-all shadow-[0_0_15px_rgba(0,255,136,0.5)] whitespace-nowrap">
+            📋 Copy Source Code
+          </button>
+        </div>
+
+        <!-- Product Form -->
+        <form id="product-form" onsubmit="handleSaveProduct(event)" class="p-4 bg-slate-900/80 rounded-xl border border-slate-800 space-y-4">
+          <h4 id="form-title" class="font-bold text-sm text-cyan-400 uppercase tracking-wider">Add New Product</h4>
+          <input type="hidden" id="edit-product-id" value="">
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Product Name</label>
+              <input type="text" id="prod-name" placeholder="e.g. Smart Watch Pro" required="" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Product Image Direct URL</label>
+              <input type="url" id="prod-image" placeholder="https://example.com/image.jpg" required="" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Old Price ($)</label>
+              <input type="text" id="prod-old-price" placeholder="99.99" required="" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Discount Price ($)</label>
+              <input type="text" id="prod-discount-price" placeholder="29.99" required="" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Rating (e.g. 4.8)</label>
+              <input type="text" id="prod-rating" placeholder="4.8" required="" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Affiliate Link</label>
+              <input type="url" id="prod-link" placeholder="https://..." required="" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white outline-none focus:border-cyan-400">
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 pt-2">
+            <label class="flex items-center gap-2 text-xs font-semibold text-slate-300 cursor-pointer">
+              <input type="checkbox" id="prod-free-delivery" class="w-4 h-4 accent-emerald-500 rounded">
+              Free Delivery ON
+            </label>
+          </div>
+
+          <div class="flex gap-2 pt-2">
+            <button type="submit" class="flex-1 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-lg text-xs transition-colors">
+              Save Product
+            </button>
+            <button type="button" onclick="resetProductForm()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs">
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        <!-- Product Table & Search -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-3">
+            <h4 class="font-bold text-sm text-slate-200">Existing Products</h4>
+            <input type="text" id="admin-search" oninput="renderAdminProductList()" placeholder="Search products..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white outline-none w-48">
+          </div>
+
+          <div class="max-h-60 overflow-y-auto border border-slate-800 rounded-xl">
+            <table class="w-full text-left text-xs text-slate-300">
+              <thead class="bg-slate-900 text-slate-400 uppercase text-[10px] sticky top-0">
+                <tr>
+                  <th class="p-2.5">Image</th>
+                  <th class="p-2.5">Name</th>
+                  <th class="p-2.5">Price</th>
+                  <th class="p-2.5">Delivery</th>
+                  <th class="p-2.5 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-product-tbody" class="divide-y divide-slate-800">
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">Ultra Smart Watch Pro 8</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$39.99</td>
+          <td class="p-2.5">⚡ Free</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_1')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_1')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">Wireless ANC Earbuds Gaming</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$24.50</td>
+          <td class="p-2.5">⚡ Free</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_2')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_2')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">Futuristic RGB Gaming Headset</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$49.00</td>
+          <td class="p-2.5">Standard</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_3')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_3')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">4K Ultra HD Drone Camera</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$89.00</td>
+          <td class="p-2.5">⚡ Free</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_4')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_4')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">RGB Mechanical Keyboard</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$34.00</td>
+          <td class="p-2.5">⚡ Free</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_5')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_5')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">Smart Fitness Tracker Band</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$18.99</td>
+          <td class="p-2.5">⚡ Free</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_6')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_6')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1609592424009-4210de9b922a?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">Power Bank 30000mAh Fast</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$22.00</td>
+          <td class="p-2.5">⚡ Free</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_7')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_7')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">Portable RGB Bluetooth Speaker</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$27.50</td>
+          <td class="p-2.5">Standard</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_8')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_8')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1622445268465-843d168a015c?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">MagSafe Fast Charger Stand</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$14.99</td>
+          <td class="p-2.5">⚡ Free</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_9')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_9')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&amp;auto=format&amp;fit=crop&amp;q=80" class="w-8 h-8 rounded object-cover">
+          </td>
+          <td class="p-2.5 font-bold text-white">HD Mini Smart Projector 1080P</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$75.00</td>
+          <td class="p-2.5">⚡ Free</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('prod_10')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('prod_10')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Backup & Restore Buttons -->
+        <div class="flex flex-wrap gap-2 pt-2 border-t border-slate-800">
+          <button onclick="backupProductData()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-700">
+            📥 Backup Product Data (JSON)
+          </button>
+          <button onclick="restoreProductData()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 rounded-lg border border-slate-700">
+            📤 Restore Product Data
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= POLICY MODAL ================= -->
+  <div id="policy-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md p-4">
+    <div class="w-full max-w-2xl max-h-[85vh] glass-panel rounded-2xl p-6 overflow-y-auto border border-slate-700 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+        <h3 id="policy-title" class="font-orbitron font-bold text-lg text-emerald-400">Policy Document</h3>
+        <button onclick="closePolicyModal()" class="text-slate-400 hover:text-white font-bold text-xl">✕</button>
+      </div>
+      <div id="policy-body" class="text-xs sm:text-sm text-slate-300 space-y-3 leading-relaxed">
+        <!-- Content inserted dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2 pointer-events-none"></div>
+
+  <!-- ================= JAVASCRIPT APPLICATION CODE ================= -->
+  <script>
+    // INITIAL DEFAULT AFFILIATE PRODUCTS
+    const DEFAULT_PRODUCTS = [
+      {
+        id: "prod_1",
+        name: "Ultra Smart Watch Pro 8",
+        image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "120.00",
+        discountPrice: "39.99",
+        rating: "4.9",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: true
+      },
+      {
+        id: "prod_2",
+        name: "Wireless ANC Earbuds Gaming",
+        image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "85.00",
+        discountPrice: "24.50",
+        rating: "4.8",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: true
+      },
+      {
+        id: "prod_3",
+        name: "Futuristic RGB Gaming Headset",
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "150.00",
+        discountPrice: "49.00",
+        rating: "4.9",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: false
+      },
+      {
+        id: "prod_4",
+        name: "4K Ultra HD Drone Camera",
+        image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "299.00",
+        discountPrice: "89.00",
+        rating: "4.7",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: true
+      },
+      {
+        id: "prod_5",
+        name: "RGB Mechanical Keyboard",
+        image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "95.00",
+        discountPrice: "34.00",
+        rating: "4.8",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: true
+      },
+      {
+        id: "prod_6",
+        name: "Smart Fitness Tracker Band",
+        image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "65.00",
+        discountPrice: "18.99",
+        rating: "4.6",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: true
+      },
+      {
+        id: "prod_7",
+        name: "Power Bank 30000mAh Fast",
+        image: "https://images.unsplash.com/photo-1609592424009-4210de9b922a?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "70.00",
+        discountPrice: "22.00",
+        rating: "4.9",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: true
+      },
+      {
+        id: "prod_8",
+        name: "Portable RGB Bluetooth Speaker",
+        image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "80.00",
+        discountPrice: "27.50",
+        rating: "4.7",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: false
+      },
+      {
+        id: "prod_9",
+        name: "MagSafe Fast Charger Stand",
+        image: "https://images.unsplash.com/photo-1622445268465-843d168a015c?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "45.00",
+        discountPrice: "14.99",
+        rating: "4.8",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: true
+      },
+      {
+        id: "prod_10",
+        name: "HD Mini Smart Projector 1080P",
+        image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&auto=format&fit=crop&q=80",
+        oldPrice: "210.00",
+        discountPrice: "75.00",
+        rating: "4.9",
+        affiliateLink: "https://www.appcreator24.com/app4124991-s83n4c",
+        freeDelivery: true
+      }
+    ];
+
+    // LOCAL STORAGE MANAGER
+    function getProducts() {
+      const stored = localStorage.getItem('amazing_shopping_products');
+      if (!stored) {
+        localStorage.setItem('amazing_shopping_products', JSON.stringify(DEFAULT_PRODUCTS));
+        return DEFAULT_PRODUCTS;
+      }
+      try {
+        return JSON.parse(stored);
+      } catch (e) {
+        return DEFAULT_PRODUCTS;
+      }
+    }
+
+    function saveProducts(products) {
+      localStorage.setItem('amazing_shopping_products', JSON.stringify(products));
+      renderProducts();
+      renderAdminProductList();
+    }
+
+    // RENDER PRODUCTS MARKETPLACE
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      const products = getProducts();
+      if (!grid) return;
+
+      grid.innerHTML = products.map(prod => `
+        <div class="glass-card rounded-2xl p-3 sm:p-4 flex flex-col justify-between relative group overflow-hidden">
+          
+          <!-- Image Box with Delivery Badge -->
+          <div class="relative w-full aspect-square rounded-xl bg-slate-900 overflow-hidden mb-3">
+            <img src="${prod.image}" alt="${prod.name}" 
+                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                 onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80'" />
+            
+            <div class="absolute top-2 left-2">
+              ${prod.freeDelivery ? `
+                <span class="px-2 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500/60 text-emerald-400 text-[10px] font-black tracking-wide shadow-lg flex items-center gap-1">
+                  ⚡ FREE DELIVERY
+                </span>
+              ` : `
+                <span class="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-400 text-[10px] font-bold">
+                  STANDARD
+                </span>
+              `}
+            </div>
+
+            <div class="absolute top-2 right-2 px-2 py-0.5 rounded-lg bg-slate-950/80 border border-amber-500/40 text-amber-300 text-[10px] font-bold">
+              ⭐ ${prod.rating}
+            </div>
+          </div>
+
+          <!-- Title & Price Info -->
+          <div class="flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 line-clamp-2 mb-2 group-hover:text-emerald-400 transition-colors">
+                ${prod.name}
+              </h3>
+            </div>
+
+            <div>
+              <div class="flex items-baseline gap-2 mb-3">
+                <span class="text-sm sm:text-base font-extrabold text-emerald-400">
+                  $${prod.discountPrice}
+                </span>
+                <span class="text-xs font-semibold text-slate-500 line-through">
+                  $${prod.oldPrice}
+                </span>
+              </div>
+
+              <!-- BUY NOW BUTTON -->
+              <a href="${prod.affiliateLink}" target="_blank" rel="noopener" 
+                 class="ripple-effect light-slide w-full py-2 sm:py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(0,255,136,0.3)]">
+                BUY NOW
+              </a>
+            </div>
+          </div>
+
+        </div>
+      `).join('');
+    }
+
+    // FLOATING CHATBOT ENGINE
+    let isChatOpen = false;
+    function toggleChatbot() {
+      isChatOpen = !isChatOpen;
+      const win = document.getElementById('chatbot-window');
+      if (win) {
+        if (isChatOpen) win.classList.remove('hidden');
+        else win.classList.add('hidden');
+      }
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const messages = document.getElementById('chat-messages');
+      if (!input || !messages) return;
+
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      // Append user msg
+      messages.innerHTML += `
+        <div class="flex justify-end">
+          <div class="bg-emerald-600 text-slate-950 font-medium p-2.5 rounded-xl rounded-tr-none max-w-[85%] text-xs sm:text-sm">
+            ${escapeHtml(userText)}
+          </div>
+        </div>
+      `;
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+
+      // Automated Bot Response
+      setTimeout(() => {
+        let reply = "Thank you for reaching out to Amazing Shopping! Check out our top discounts above.";
+        const lower = userText.toLowerCase();
+
+        if (lower.includes('support') || lower.includes('contact') || lower.includes('help') || lower.includes('email') || lower.includes('issue')) {
+          reply = "For support please contact:\ndaraz.bangladesh.shop.com";
+        } else if (lower.includes('offer') || lower.includes('deal') || lower.includes('discount')) {
+          reply = "🔥 We have 70% mega offers available today! Click the 70% Offer button in top navigation.";
+        } else if (lower.includes('download') || lower.includes('app')) {
+          reply = "📱 You can download our official mobile app using the DOWNLOAD APP button at top!";
+        } else if (lower.includes('delivery') || lower.includes('shipping')) {
+          reply = "🚚 Free delivery is available on most products with the green ⚡ FREE DELIVERY badge.";
+        }
+
+        messages.innerHTML += `
+          <div class="bg-slate-800/90 text-slate-200 p-3 rounded-xl rounded-tl-none border border-slate-700 max-w-[85%] whitespace-pre-line">
+            ${reply}
+          </div>
+        `;
+        messages.scrollTop = messages.scrollHeight;
+      }, 500);
+    }
+
+    // ADMIN DASHBOARD & AUTH
+    let isAdminAuthenticated = false;
+    function openAdminModal() {
+      document.getElementById('admin-modal').classList.remove('hidden');
+    }
+    function closeAdminModal() {
+      document.getElementById('admin-modal').classList.add('hidden');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const pass = document.getElementById('admin-password-input').value;
+      if (pass === "bahadur@2025#") {
+        isAdminAuthenticated = true;
+        document.getElementById('admin-login-view').classList.add('hidden');
+        document.getElementById('admin-panel-view').classList.remove('hidden');
+        renderAdminProductList();
+        showToast("Logged in as Admin!", "success");
+      } else {
+        showToast("Incorrect password!", "error");
+      }
+    }
+
+    function renderAdminProductList() {
+      const tbody = document.getElementById('admin-product-tbody');
+      const search = (document.getElementById('admin-search')?.value || '').toLowerCase();
+      if (!tbody) return;
+
+      const products = getProducts().filter(p => p.name.toLowerCase().includes(search));
+      
+      tbody.innerHTML = products.map(prod => `
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-2.5">
+            <img src="${prod.image}" class="w-8 h-8 rounded object-cover" />
+          </td>
+          <td class="p-2.5 font-bold text-white">${prod.name}</td>
+          <td class="p-2.5 text-emerald-400 font-semibold">$${prod.discountPrice}</td>
+          <td class="p-2.5">${prod.freeDelivery ? '⚡ Free' : 'Standard'}</td>
+          <td class="p-2.5 text-right space-x-1">
+            <button onclick="editProduct('${prod.id}')" class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded hover:bg-cyan-500/40">Edit</button>
+            <button onclick="deleteProduct('${prod.id}')" class="px-2 py-1 bg-rose-500/20 text-rose-300 rounded hover:bg-rose-500/40">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function handleSaveProduct(e) {
+      e.preventDefault();
+      const editId = document.getElementById('edit-product-id').value;
+      const products = getProducts();
+
+      const newProd = {
+        id: editId || ("prod_" + Date.now()),
+        name: document.getElementById('prod-name').value,
+        image: document.getElementById('prod-image').value,
+        oldPrice: document.getElementById('prod-old-price').value,
+        discountPrice: document.getElementById('prod-discount-price').value,
+        rating: document.getElementById('prod-rating').value,
+        affiliateLink: document.getElementById('prod-link').value,
+        freeDelivery: document.getElementById('prod-free-delivery').checked
+      };
+
+      if (editId) {
+        const index = products.findIndex(p => p.id === editId);
+        if (index !== -1) products[index] = newProd;
+      } else {
+        products.unshift(newProd);
+      }
+
+      saveProducts(products);
+      resetProductForm();
+      showToast(editId ? "Product updated!" : "Product added!", "success");
+    }
+
+    function editProduct(id) {
+      const prod = getProducts().find(p => p.id === id);
+      if (!prod) return;
+
+      document.getElementById('edit-product-id').value = prod.id;
+      document.getElementById('prod-name').value = prod.name;
+      document.getElementById('prod-image').value = prod.image;
+      document.getElementById('prod-old-price').value = prod.oldPrice;
+      document.getElementById('prod-discount-price').value = prod.discountPrice;
+      document.getElementById('prod-rating').value = prod.rating;
+      document.getElementById('prod-link').value = prod.affiliateLink;
+      document.getElementById('prod-free-delivery').checked = prod.freeDelivery;
+      document.getElementById('form-title').innerText = "Edit Product";
+    }
+
+    function resetProductForm() {
+      document.getElementById('product-form').reset();
+      document.getElementById('edit-product-id').value = '';
+      document.getElementById('form-title').innerText = "Add New Product";
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Are you sure you want to delete this product?")) {
+        const products = getProducts().filter(p => p.id !== id);
+        saveProducts(products);
+        showToast("Product deleted!", "info");
+      }
+    }
+
+    function backupProductData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(getProducts(), null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "amazing_shopping_products.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast("Backup JSON downloaded!", "success");
+    }
+
+    function restoreProductData() {
+      const jsonInput = prompt("Paste your backup JSON array here:");
+      if (!jsonInput) return;
+      try {
+        const parsed = JSON.parse(jsonInput);
+        if (Array.isArray(parsed)) {
+          saveProducts(parsed);
+          showToast("Products restored successfully!", "success");
+        } else {
+          showToast("Invalid JSON array structure!", "error");
+        }
+      } catch (err) {
+        showToast("Failed to parse JSON!", "error");
+      }
+    }
+
+    // COPY SOURCE CODE FUNCTION (ONLY AVAILABLE TO AUTHENTICATED ADMIN)
+    function copySourceCode() {
+      if (!isAdminAuthenticated) return;
+      const fullHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      navigator.clipboard.writeText(fullHtml).then(() => {
+        showToast("Full index.html source code copied to clipboard!", "success");
+      }).catch(() => {
+        showToast("Copy failed! Please try manually.", "error");
+      });
+    }
+
+    // LEGAL POLICY MODALS
+    const POLICIES = {
+      privacy: {
+        title: "Privacy Policy",
+        text: "At Amazing Shopping, your privacy is paramount. We collect minimal personal usage information strictly to provide affiliate product recommendations, improve navigation performance, and optimize discount notifications. We never sell or share user data with unauthorized third parties. All affiliate purchases take place externally on encrypted partner portals."
+      },
+      copyright: {
+        title: "Copyright Notice",
+        text: "© 2026 Amazing Shopping. All rights reserved. Logos, trademarks, design themes, and digital product assets belong to their respective brand owners. Unattributed copying or commercial redistribution of this application framework without express permission is strictly prohibited."
+      },
+      content: {
+        title: "Content Policy",
+        text: "All deal links, product information, prices, and videos showcased on Amazing Shopping are verified periodically. We enforce strict guidelines ensuring all affiliate promotions are genuine, respectful, accurate, and free from misleading claims or malicious redirection."
+      },
+      cookie: {
+        title: "Cookie Policy",
+        text: "Amazing Shopping utilizes local browser storage (LocalStorage) and standard session tokens to remember your application preferences, preserve product additions, and manage offline access. No invasive tracking cookies are used."
+      },
+      theme: {
+        title: "Theme & UI Policy",
+        text: "The 6-color RGB futuristic layout, glassmorphism, floating particle animations, and neon styling are engineered for high readability and visual contrast. Users are advised to enjoy our eye-safe dark theme interface."
+      },
+      terms: {
+        title: "Terms & Conditions",
+        text: "By accessing Amazing Shopping, you agree to our standard terms. Products purchased via our affiliate links are subject to the terms, warranties, return policies, and shipping timelines of the external seller platforms."
+      },
+      children: {
+        title: "Children's Privacy Policy",
+        text: "Amazing Shopping does not knowingly collect personal identifiable information from children under the age of 13. Our platform is intended for general audiences looking for mega deals and digital affiliate products."
+      }
+    };
+
+    function openPolicyModal(key) {
+      const pol = POLICIES[key];
+      if (!pol) return;
+      document.getElementById('policy-title').innerText = pol.title;
+      document.getElementById('policy-body').innerText = pol.text;
+      document.getElementById('policy-modal').classList.remove('hidden');
+    }
+
+    function closePolicyModal() {
+      document.getElementById('policy-modal').classList.add('hidden');
+    }
+
+    // TOAST NOTIFICATIONS
+    function showToast(msg, type = "info") {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto px-4 py-2.5 rounded-xl font-bold text-xs shadow-xl transition-all duration-300 flex items-center gap-2 border text-white ${
+        type === 'success' ? 'bg-emerald-950/90 border-emerald-500/60 text-emerald-300' :
+        type === 'error' ? 'bg-rose-950/90 border-rose-500/60 text-rose-300' :
+        'bg-slate-900/90 border-cyan-500/60 text-cyan-300'
+      }`;
+      toast.innerHTML = `<span>${msg}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    // CLIENT-SIDE PROTECTIONS
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('selectstart', e => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') e.preventDefault();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'F12' || (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'i' || e.key === 'I' || e.key === 'j' || e.key === 'J' || e.key === 'c' || e.key === 'C'))) {
+        e.preventDefault();
+      }
+    });
+    document.addEventListener('dragstart', e => {
+      if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+
+    // RIPPLE EFFECT HANDLER
+    document.addEventListener('click', function(e) {
+      const target = e.target.closest('.ripple-effect');
+      if (!target) return;
+      const rect = target.getBoundingClientRect();
+      const circle = document.createElement('span');
+      const diameter = Math.max(rect.width, rect.height);
+      const radius = diameter / 2;
+
+      circle.style.width = circle.style.height = `${diameter}px`;
+      circle.style.left = `${e.clientX - rect.left - radius}px`;
+      circle.style.top = `${e.clientY - rect.top - radius}px`;
+      circle.classList.add('ripple-span');
+
+      const ripple = target.getElementsByClassName('ripple-span')[0];
+      if (ripple) ripple.remove();
+      target.appendChild(circle);
+    });
+
+    // FLOATING CANVAS PARTICLES ANIMATION
+    (function initParticles() {
+      const canvas = document.getElementById('bg-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width, height;
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const colors = ['#00ff88', '#00d2ff', '#ff0055', '#ff6b00', '#ffd700', '#9d00ff'];
+      const particles = Array.from({ length: 45 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 2.5 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+      }));
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = p.color;
+          ctx.fill();
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // ON LOAD INITIALIZATION
+    window.addEventListener('DOMContentLoaded', () => {
+      // Render Products
+      renderProducts();
+
+      // Splash Screen Timer (Exactly 2 seconds)
+      setTimeout(() => {
+        const splash = document.getElementById('splash-screen');
+        if (splash) {
+          splash.style.opacity = '0';
+          setTimeout(() => splash.remove(), 500);
+        }
+      }, 2000);
+    });
+  </script>
+
+
+</body></html>
