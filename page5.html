@@ -1,0 +1,2396 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <script type="module" src="/@vite/client"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Amazing Shopping - Mega offer</title>
+  <meta name="description" content="Amazing Shopping PWA - Premium futuristic digital shopping platform with exclusive mega offer deals and high-discount products.">
+  <meta name="theme-color" content="#0d0a1a">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Amazing Shopping - Mega offer">
+  <meta property="og:description" content="Discover top digital deals, discounts, and exclusive affiliate offers on Amazing Shopping PWA.">
+  
+  <!-- PWA Web Manifest Data URI -->
+  <link rel="manifest" href="data:application/manifest+json,{&quot;name&quot;:&quot;Amazing Shopping&quot;,&quot;short_name&quot;:&quot;AmazingShopping&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#0d0a1a&quot;,&quot;theme_color&quot;:&quot;#00ff88&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;https://cdn-icons-png.flaticon.com/512/3081/3081559.png&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/png&quot;}]}">
+
+  <style>
+    /* =========================================================
+       6-COLOR FUTURISTIC DIGITAL THEME & RESET
+       🟢 Green: #00ff88
+       🔵 Blue: #00d2ff
+       🔴 Red: #ff0055
+       🟠 Orange: #ff8c00
+       🟡 Yellow: #ffee00
+       🟣 Purple: #a855f7
+       ========================================================= */
+    :root {
+      --c-green: #00ff88;
+      --c-blue: #00d2ff;
+      --c-red: #ff0055;
+      --c-orange: #ff8c00;
+      --c-yellow: #ffee00;
+      --c-purple: #a855f7;
+      
+      --bg-dark: #0b0818;
+      --bg-card: rgba(20, 15, 38, 0.75);
+      --bg-glass: rgba(255, 255, 255, 0.05);
+      --border-glass: rgba(255, 255, 255, 0.12);
+      
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Client Protection: Text selection disabled on protected areas */
+    body {
+      background-color: var(--bg-dark);
+      color: #ffffff;
+      font-family: var(--font-family);
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.5;
+      user-select: none;
+      -webkit-user-select: none;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 210, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.08) 0%, transparent 60%);
+      background-attachment: fixed;
+    }
+
+    /* Canvas Particles Background */
+    #particleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* Layout Wrapper */
+    .app-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px;
+    }
+
+    /* =========================================================
+       ANIMATED RGB GRADIENTS & EFFECTS
+       ========================================================= */
+    @keyframes rgbGlow {
+      0% { border-color: var(--c-green); box-shadow: 0 0 15px rgba(0,255,136,0.5); }
+      16% { border-color: var(--c-blue); box-shadow: 0 0 15px rgba(0,210,255,0.5); }
+      33% { border-color: var(--c-purple); box-shadow: 0 0 15px rgba(168,85,247,0.5); }
+      50% { border-color: var(--c-red); box-shadow: 0 0 15px rgba(255,0,85,0.5); }
+      66% { border-color: var(--c-orange); box-shadow: 0 0 15px rgba(255,140,0,0.5); }
+      83% { border-color: var(--c-yellow); box-shadow: 0 0 15px rgba(255,238,0,0.5); }
+      100% { border-color: var(--c-green); box-shadow: 0 0 15px rgba(0,255,136,0.5); }
+    }
+
+    @keyframes rgbText {
+      0% { color: var(--c-green); text-shadow: 0 0 10px rgba(0,255,136,0.6); }
+      20% { color: var(--c-blue); text-shadow: 0 0 10px rgba(0,210,255,0.6); }
+      40% { color: var(--c-purple); text-shadow: 0 0 10px rgba(168,85,247,0.6); }
+      60% { color: var(--c-red); text-shadow: 0 0 10px rgba(255,0,85,0.6); }
+      80% { color: var(--c-orange); text-shadow: 0 0 10px rgba(255,140,0,0.6); }
+      100% { color: var(--c-green); text-shadow: 0 0 10px rgba(0,255,136,0.6); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+
+    @keyframes pulseBlink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.85); }
+    }
+
+    .rgb-border {
+      border: 2px solid transparent;
+      animation: rgbGlow 8s infinite linear;
+    }
+
+    .rgb-text {
+      animation: rgbText 6s infinite linear;
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    /* Ripple Animation */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: rippleAnim 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* =========================================================
+       SPLASH SCREEN (2 SECONDS)
+       ========================================================= */
+    #splashScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: radial-gradient(circle at center, #1a0f35 0%, #080410 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease-out, visibility 0.6s;
+    }
+
+    #splashScreen.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .splash-icon-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .splash-icon-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--c-green), var(--c-blue), var(--c-purple), var(--c-red), var(--c-orange), var(--c-yellow));
+      background-size: 300% 300%;
+      animation: gradientShift 3s ease infinite;
+      padding: 4px;
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+    }
+
+    .splash-icon-inner {
+      width: 100%;
+      height: 100%;
+      background: #0b0818;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+    }
+
+    .splash-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, var(--c-green), var(--c-blue), var(--c-yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .splash-subtitle {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--c-yellow);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 20px;
+      background: rgba(255, 238, 0, 0.1);
+      border: 1px solid rgba(255, 238, 0, 0.3);
+      box-shadow: 0 0 15px rgba(255, 238, 0, 0.3);
+    }
+
+    .splash-loader {
+      width: 180px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      margin-top: 30px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .splash-loader-bar {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--c-green), var(--c-blue), var(--c-purple), var(--c-red));
+      animation: splashLoad 2s ease-in-out forwards;
+    }
+
+    @keyframes splashLoad {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(0%); }
+    }
+
+    /* =========================================================
+       HEADER & APP BANNER
+       ========================================================= */
+    .header-bar {
+      padding: 16px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--c-green), var(--c-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+    }
+
+    .app-title-text {
+      font-size: 24px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 255, 136, 0.15);
+      border: 1px solid var(--c-green);
+      color: var(--c-green);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--c-green);
+      animation: pulseBlink 1.2s infinite ease-in-out;
+    }
+
+    .banner-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--c-yellow);
+      background: rgba(255, 238, 0, 0.12);
+      border: 1px solid rgba(255, 238, 0, 0.3);
+      padding: 4px 16px;
+      border-radius: 12px;
+      display: inline-block;
+      margin-top: 4px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Stats Grid Bar */
+    .stats-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      width: 100%;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .stat-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      white-space: nowrap;
+    }
+
+    .stat-highlight {
+      color: var(--c-yellow);
+      font-weight: 800;
+    }
+
+    /* =========================================================
+       TOP NAVIGATION (5 ANIMATED CIRCULAR BUTTONS)
+       ========================================================= */
+    .top-nav-section {
+      margin-bottom: 20px;
+    }
+
+    .top-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      align-items: start;
+    }
+
+    @media (max-width: 640px) {
+      .top-nav-grid {
+        gap: 8px;
+      }
+    }
+
+    .circle-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #ffffff;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .circle-nav-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .circle-btn-wrapper {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      padding: 3px;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, var(--c-green), var(--c-blue), var(--c-purple), var(--c-red));
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease infinite;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 480px) {
+      .circle-btn-wrapper {
+        width: 52px;
+        height: 52px;
+      }
+    }
+
+    .circle-btn-inner {
+      width: 100%;
+      height: 100%;
+      background: #100b24;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      transition: background 0.3s;
+    }
+
+    .circle-nav-item:hover .circle-btn-inner {
+      background: #1c143d;
+    }
+
+    .circle-nav-label {
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 75px;
+      word-wrap: break-word;
+    }
+
+    /* =========================================================
+       DOWNLOAD APP BUTTON
+       ========================================================= */
+    .download-section {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 480px;
+      padding: 16px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #00ff88, #00d2ff, #a855f7, #ff0055);
+      background-size: 300% 300%;
+      animation: gradientShift 5s ease infinite, rgbGlow 6s infinite linear;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4);
+    }
+
+    .download-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shimmer 2.5s infinite;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.02);
+    }
+
+    .download-subtext {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 6px;
+    }
+
+    /* =========================================================
+       AFFILIATE PRODUCT MARKETPLACE (RESPONSIVE GRID)
+       Desktop -> 5 per row
+       Tablet -> 3 per row
+       Mobile -> 2 per row
+       ========================================================= */
+    .marketplace-section {
+      margin-bottom: 30px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 200px;
+      flex-grow: 1;
+      max-width: 320px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 14px 8px 36px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .search-input:focus {
+      border-color: var(--c-blue);
+      box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Product Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 1023px) {
+      .products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 639px) {
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+    }
+
+    /* Product Card */
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(22, 16, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+    }
+
+    .product-card:hover {
+      border-color: var(--c-green);
+      box-shadow: 0 6px 20px rgba(0, 255, 136, 0.25);
+    }
+
+    .product-badge-bar {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 2;
+    }
+
+    .delivery-badge {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .delivery-badge.on {
+      background: rgba(0, 255, 136, 0.2);
+      color: var(--c-green);
+      border: 1px solid var(--c-green);
+    }
+
+    .delivery-badge.off {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .product-image-wrap {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 8px;
+      position: relative;
+      background: #090614;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.08);
+    }
+
+    .product-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 34px;
+    }
+
+    .product-rating {
+      font-size: 11px;
+      color: var(--c-yellow);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .price-container {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .old-price {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: line-through;
+    }
+
+    .discount-price {
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--c-green);
+    }
+
+    .buy-btn {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      background: linear-gradient(90deg, #00ff88, #00d2ff);
+      color: #0b0818;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .buy-btn:hover {
+      background: linear-gradient(90deg, #00d2ff, #a855f7);
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+    }
+
+    /* =========================================================
+       FIXED VIDEO SECTION (9:16 VERTICAL PLAYER)
+       ========================================================= */
+    .video-section {
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .video-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--c-blue);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .video-frame-container {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 9 / 16;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid var(--c-purple);
+      box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+      background: #000;
+    }
+
+    .video-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* =========================================================
+       BOTTOM QUICK BUTTONS (6 SMALL CIRCULAR ICON BUTTONS)
+       ========================================================= */
+    .quick-buttons-section {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .quick-btn-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .quick-circle-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glass);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 20px;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .quick-circle-btn:hover {
+      transform: translateY(-4px) scale(1.1);
+      border-color: var(--c-green);
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+      background: rgba(0, 255, 136, 0.15);
+    }
+
+    /* Tooltip */
+    .quick-circle-btn::after {
+      content: attr(data-title);
+      position: absolute;
+      bottom: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 9px;
+      font-weight: 700;
+      white-space: nowrap;
+      color: rgba(255, 255, 255, 0.8);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    /* =========================================================
+       VERIFIED BADGE & FOOTER
+       ========================================================= */
+    .verified-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      background: rgba(0, 255, 136, 0.08);
+      border: 1px dashed var(--c-green);
+      color: var(--c-green);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-section {
+      padding: 24px 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .policy-links-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .policy-link {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .policy-link:hover {
+      color: var(--c-blue);
+      text-decoration: underline;
+    }
+
+    .admin-trigger-btn {
+      margin-top: 10px;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.4);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .admin-trigger-btn:hover {
+      color: var(--c-yellow);
+      border-color: var(--c-yellow);
+    }
+
+    /* =========================================================
+       FLOATING AI CHATBOT WIDGET
+       ========================================================= */
+    .chatbot-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--c-blue), var(--c-purple));
+      border: 2px solid var(--c-green);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .chatbot-fab:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .chatbot-modal {
+      position: fixed;
+      bottom: 85px;
+      right: 20px;
+      z-index: 1000;
+      width: 320px;
+      max-width: calc(100vw - 40px);
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      display: none; /* toggled by JS */
+    }
+
+    .chatbot-modal.active {
+      display: flex;
+    }
+
+    .chat-header {
+      padding: 12px 16px;
+      background: rgba(16, 11, 36, 0.95);
+      border-bottom: 1px solid var(--border-glass);
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--c-green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .chat-body {
+      flex: 1;
+      padding: 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(11, 8, 24, 0.95);
+    }
+
+    .chat-msg {
+      max-width: 85%;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .chat-msg.bot {
+      background: rgba(0, 210, 255, 0.15);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      color: #ffffff;
+      align-self: flex-start;
+      border-bottom-left-radius: 2px;
+    }
+
+    .chat-msg.user {
+      background: rgba(0, 255, 136, 0.2);
+      border: 1px solid rgba(0, 255, 136, 0.4);
+      color: #ffffff;
+      align-self: flex-end;
+      border-bottom-right-radius: 2px;
+    }
+
+    .chat-input-row {
+      padding: 8px;
+      background: rgba(16, 11, 36, 0.95);
+      border-top: 1px solid var(--border-glass);
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .chat-input {
+      flex: 1;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      color: #fff;
+      font-size: 12px;
+      outline: none;
+    }
+
+    .chat-send-btn {
+      background: var(--c-green);
+      border: none;
+      color: #0b0818;
+      font-weight: 800;
+      padding: 0 14px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       MODALS (ADMIN & POLICY MODALS)
+       ========================================================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      display: none;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      width: 100%;
+      max-width: 650px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--c-blue);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--c-green);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--c-green), var(--c-blue));
+      color: #0b0818;
+      font-weight: 900;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-danger {
+      background: var(--c-red);
+      color: #ffffff;
+      font-weight: 800;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-warning {
+      background: var(--c-orange);
+      color: #ffffff;
+      font-weight: 800;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-copy-code {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, var(--c-purple), var(--c-red), var(--c-orange));
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      border: 1px solid var(--c-yellow);
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .btn-copy-code:hover {
+      transform: scale(1.02);
+    }
+
+    /* Admin Table */
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 12px;
+    }
+
+    .admin-table th, .admin-table td {
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: left;
+    }
+
+    .admin-table th {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--c-green);
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      z-index: 999999;
+      background: rgba(16, 11, 36, 0.95);
+      border: 1px solid var(--c-green);
+      color: #ffffff;
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+<script src="/_aistudio-iframe.js?v=1ee22f18"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@2.0.4"></script><style>.aistudio-hover-highlight { box-shadow: inset 0 0 0 0.5px white, inset 0 0 0 1.5px rgba(128,128,128,0.6) !important; }.aistudio-active-highlight { outline: 2px solid #87a9ff !important; outline-offset: -2px !important; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.3), inset 0 0 0 0.5px rgba(0,0,0,0.3) !important; }.aistudio-generating-blur { filter: blur(5px) grayscale(100%) brightness(28%) !important; transition: filter 0.3s ease; }#aistudio-focus-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: #87a9ff; border-radius: 12px; z-index: 10000; padding: 8px; color: #32302c; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }#aistudio-hover-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: rgba(128,128,128,0.6); border-radius: 12px; z-index: 10000; padding: 8px; color: white; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }.aistudio-img-icon { display: none; vertical-align: middle; pointer-events: auto; cursor: pointer; }.aistudio-img-icon.visible { display: inline-flex; }#aistudio-focus-mode-tag .aistudio-img-icon { position: relative; width: 26px; height: 26px; background: #32302c; border-radius: 6px; margin: -4px -4px -4px 0; }#aistudio-focus-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-hover-mode-tag .aistudio-img-icon { position: relative; width: 18px; height: 18px; margin-left: 4px; }#aistudio-hover-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-focus-mode-tag .aistudio-img-icon:hover, #aistudio-hover-mode-tag .aistudio-img-icon:hover { background: #424242 !important; }#aistudio-focus-mode-tag .aistudio-img-icon:active, #aistudio-hover-mode-tag .aistudio-img-icon:active { background: #393f51 !important; }</style></head>
+
+<body oncontextmenu="return false;" ondragstart="return false;">
+
+  <!-- Canvas Floating Particles -->
+  <canvas id="particleCanvas" width="552" height="1614"></canvas>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="">Logged in successfully!</div>
+
+  <!-- =========================================================
+       1. SPLASH SCREEN (EXACTLY 2 SECONDS)
+       ========================================================= -->
+  <div id="splashScreen" class="fade-out">
+    <div class="splash-icon-wrapper">
+      <div class="splash-icon-ring"></div>
+      <div class="splash-icon-inner">🛍️</div>
+    </div>
+    <div class="splash-title">Amazing Shopping</div>
+    <div class="splash-subtitle">Amazing Deal</div>
+    <div class="splash-loader">
+      <div class="splash-loader-bar"></div>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+
+    <!-- =========================================================
+         2. HEADER & BANNER
+         ========================================================= -->
+    <header class="header-bar glass-card rgb-border">
+      <div class="header-top">
+        <div class="logo-container">
+          <div class="logo-icon">🛍️</div>
+          <h1 class="app-title-text rgb-text">Amazing Shopping</h1>
+        </div>
+        <div class="live-badge">
+          <span class="live-dot"></span> LIVE
+        </div>
+      </div>
+
+      <div class="banner-title">Mega offer • Amazing Deal</div>
+
+      <!-- Required Stats Row -->
+      <div class="stats-row">
+        <div class="stat-item"><span class="stat-highlight">⭐ 4.3★</span></div>
+        <div class="stat-item"><span class="stat-highlight">12+</span></div>
+        <div class="stat-item"><span class="stat-highlight">10B+</span> Downloads</div>
+        <div class="stat-item"><span class="stat-highlight">177 Million</span> Reviews</div>
+        <div class="stat-item">Rated for <span class="stat-highlight">12+</span></div>
+      </div>
+    </header>
+
+    <!-- =========================================================
+         3. TOP NAVIGATION (5 ANIMATED CIRCULAR BUTTONS)
+         ========================================================= -->
+    <section class="top-nav-section">
+      <div class="top-nav-grid">
+        <!-- 1. par day benefit -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page18.html" target="_blank" class="circle-nav-item ripple">
+          <div class="circle-btn-wrapper">
+            <div class="circle-btn-inner">🎁</div>
+          </div>
+          <span class="circle-nav-label">par day benefit</span>
+        </a>
+
+        <!-- 2. big Benefits -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page17.html" target="_blank" class="circle-nav-item ripple">
+          <div class="circle-btn-wrapper">
+            <div class="circle-btn-inner">🚀</div>
+          </div>
+          <span class="circle-nav-label">big Benefits</span>
+        </a>
+
+        <!-- 3. office Deal offer -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page15.html" target="_blank" class="circle-nav-item ripple">
+          <div class="circle-btn-wrapper">
+            <div class="circle-btn-inner">🏢</div>
+          </div>
+          <span class="circle-nav-label">office Deal offer</span>
+        </a>
+
+        <!-- 4. office delivery offer -->
+        <a href="https://mdbabuhossan290324-svg.github.io/Diraz-shipping-/page16.html" target="_blank" class="circle-nav-item ripple">
+          <div class="circle-btn-wrapper">
+            <div class="circle-btn-inner">📦</div>
+          </div>
+          <span class="circle-nav-label">office delivery offer</span>
+        </a>
+
+        <!-- 5. 70% Offer -->
+        <a href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" target="_blank" class="circle-nav-item ripple">
+          <div class="circle-btn-wrapper">
+            <div class="circle-btn-inner">💥</div>
+          </div>
+          <span class="circle-nav-label">70% Offer</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         4. DOWNLOAD APP BUTTON
+         ========================================================= -->
+    <section class="download-section">
+      <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" class="download-btn ripple">
+        <span>📲 Download App</span>
+      </a>
+      <div class="download-subtext">Official Android APK &amp; PWA • Safe &amp; Verified Download</div>
+    </section>
+
+    <!-- =========================================================
+         5. AFFILIATE PRODUCT MARKETPLACE
+         ========================================================= -->
+    <section class="marketplace-section">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <span style="font-size:24px;">🔥</span>
+          <h2 class="section-title">Affiliate Products</h2>
+        </div>
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search mega offer products..." onkeyup="renderMarketplace()">
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div id="productsGrid" class="products-grid">
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge on">
+              ⚡ FREE DELIVERY
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Wireless ANC Cyber Headphones" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">Wireless ANC Cyber Headphones</div>
+          <div class="product-rating">
+            ⭐ 4.9 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$149.99</span>
+            <span class="discount-price">$39.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge on">
+              ⚡ FREE DELIVERY
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Futuristic RGB Smartwatch Pro" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">Futuristic RGB Smartwatch Pro</div>
+          <div class="product-rating">
+            ⭐ 4.8 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$199.99</span>
+            <span class="discount-price">$49.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge on">
+              ⚡ FREE DELIVERY
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Ultra HD Drone 4K Camera" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">Ultra HD Drone 4K Camera</div>
+          <div class="product-rating">
+            ⭐ 4.7 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$299.99</span>
+            <span class="discount-price">$89.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge off">
+              STANDARD
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Gaming Mechanical RGB Keyboard" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">Gaming Mechanical RGB Keyboard</div>
+          <div class="product-rating">
+            ⭐ 4.9 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$99.99</span>
+            <span class="discount-price">$29.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge on">
+              ⚡ FREE DELIVERY
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Smart Cyber Audio Glasses" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">Smart Cyber Audio Glasses</div>
+          <div class="product-rating">
+            ⭐ 4.6 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$179.99</span>
+            <span class="discount-price">$59.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge on">
+              ⚡ FREE DELIVERY
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="High-Speed Portable SSD 2TB" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">High-Speed Portable SSD 2TB</div>
+          <div class="product-rating">
+            ⭐ 4.9 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$229.99</span>
+            <span class="discount-price">$69.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge on">
+              ⚡ FREE DELIVERY
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Foldable Smartphone Gimbal" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">Foldable Smartphone Gimbal</div>
+          <div class="product-rating">
+            ⭐ 4.7 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$119.99</span>
+            <span class="discount-price">$34.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge off">
+              STANDARD
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="LED Digital Desk Clock &amp; Charger" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">LED Digital Desk Clock &amp; Charger</div>
+          <div class="product-rating">
+            ⭐ 4.5 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$69.99</span>
+            <span class="discount-price">$19.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge on">
+              ⚡ FREE DELIVERY
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Noise Cancelling Cyber Earbuds" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">Noise Cancelling Cyber Earbuds</div>
+          <div class="product-rating">
+            ⭐ 4.8 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$89.99</span>
+            <span class="discount-price">$24.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge on">
+              ⚡ FREE DELIVERY
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80" alt="Ultra Slim Power Bank 20000mAh" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&amp;fit=crop&amp;w=500&amp;q=80'">
+          </div>
+          <div class="product-name">Ultra Slim Power Bank 20000mAh</div>
+          <div class="product-rating">
+            ⭐ 4.8 / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">$79.99</span>
+            <span class="discount-price">$22.99</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         6. FIXED VIDEO SECTION (9:16 VERTICAL SHORTS PLAYER)
+         ========================================================= -->
+    <section class="video-section">
+      <div class="video-title">
+        <span>🎬</span> Featured Deals Video
+      </div>
+      <div class="video-frame-container">
+        <iframe class="video-iframe" src="https://www.youtube.com/embed/Li0XbrC0vuk?autoplay=0&amp;rel=0" title="YouTube Shorts" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         7. BOTTOM QUICK BUTTONS (6 CIRCULAR ICON BUTTONS)
+         ========================================================= -->
+    <section class="quick-buttons-section">
+      <div style="font-size:12px; font-weight:700; color:rgba(255,255,255,0.6); margin-bottom:10px; text-transform:uppercase;">Connect &amp; Download</div>
+      <div class="quick-btn-row">
+        <!-- 1. Apple App Store -->
+        <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" class="quick-circle-btn" data-title="App Store">
+          🍎
+        </a>
+
+        <!-- 2. Google Play -->
+        <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" class="quick-circle-btn" data-title="Google Play">
+          ▶️
+        </a>
+
+        <!-- 3. Amazon Appstore -->
+        <a href="https://www.appcreator24.com/app4124991-s83n4c" target="_blank" class="quick-circle-btn" data-title="Amazon">
+          📦
+        </a>
+
+        <!-- 4. YouTube -->
+        <a href="https://www.youtube.com/@bahadurlivenews24" target="_blank" class="quick-circle-btn" data-title="YouTube">
+          📺
+        </a>
+
+        <!-- 5. Facebook -->
+        <a href="https://www.facebook.com/share/1TZCYbzrA4/" target="_blank" class="quick-circle-btn" data-title="Facebook">
+          🌐
+        </a>
+
+        <!-- 6. TikTok -->
+        <a href="https://vm.tiktok.com/ZS9rbC6pq6nf5-UUmgd/" target="_blank" class="quick-circle-btn" data-title="TikTok">
+          🎵
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         8. VERIFIED BADGE & FOOTER
+         ========================================================= -->
+    <div class="verified-banner">
+      <span>✔</span> Verified Official Affiliate Store • 100% Safe Shopping Guarantee
+    </div>
+
+    <footer class="footer-section">
+      <div class="policy-links-grid">
+        <span class="policy-link" onclick="openPolicy('Privacy Policy')">Privacy Policy</span> •
+        <span class="policy-link" onclick="openPolicy('Copyright')">Copyright</span> •
+        <span class="policy-link" onclick="openPolicy('Content Policy')">Content Policy</span> •
+        <span class="policy-link" onclick="openPolicy('Cookie Policy')">Cookie Policy</span> •
+        <span class="policy-link" onclick="openPolicy('Theme Policy')">Theme Policy</span> •
+        <span class="policy-link" onclick="openPolicy('Terms &amp; Conditions')">Terms &amp; Conditions</span> •
+        <span class="policy-link" onclick="openPolicy('Children\'s Policy')">Children's Policy</span>
+      </div>
+      <div>© 2025 Amazing Shopping. All Rights Reserved. Designed for High Performance.</div>
+      <button class="admin-trigger-btn" onclick="openAdminPrompt()">🔒 Admin Login</button>
+    </footer>
+
+  </div>
+
+  <!-- =========================================================
+       9. FLOATING AI CHATBOT
+       ========================================================= -->
+  <div class="chatbot-fab" onclick="toggleChatbot()">🤖</div>
+
+  <div id="chatbotModal" class="chatbot-modal glass-card">
+    <div class="chat-header">
+      <div class="chat-title">🤖 Amazing AI Support</div>
+      <button class="close-btn" onclick="toggleChatbot()">✕</button>
+    </div>
+    <div id="chatBody" class="chat-body">
+      <div class="chat-msg bot">
+        Hello! 👋 Welcome to Amazing Shopping. How can I assist you with today's Mega Deals?
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" class="chat-input" placeholder="Ask for support or deals..." onkeypress="handleChatKeyPress(event)">
+      <button class="chat-send-btn" onclick="sendChatMessage()">Send</button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       10. ADMIN MODAL (PASSWORD: bahadur@2025#)
+       ========================================================= -->
+  <div id="adminModal" class="modal-overlay active">
+    <div class="modal-content glass-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 id="adminModalTitle" style="color:var(--c-green); font-size:18px; font-weight:800;">⚙️ Admin Control Panel</h3>
+        <button class="close-btn" onclick="closeAdminModal()">✕</button>
+      </div>
+
+      <!-- Step 1: Login Form -->
+      <div id="adminLoginForm" style="display: none;">
+        <p style="font-size:12px; color:rgba(255,255,255,0.7); margin-bottom:12px;">Please enter the secure admin password to access the product management panel.</p>
+        <div class="form-group">
+          <label class="form-label">Admin Password</label>
+          <input type="password" id="adminPasswordInput" class="form-input" placeholder="Enter password...">
+        </div>
+        <button class="btn-primary" style="width:100%; margin-top:8px;" onclick="verifyAdminPassword()">Login to Admin Panel</button>
+      </div>
+
+      <!-- Step 2: Admin Control Panel (Hidden until login) -->
+      <div id="adminPanelBody" style="display: block;">
+        
+        <!-- Copy Source Code Button (ONLY visible after successful admin login) -->
+        <button class="btn-copy-code" onclick="copySourceCode()">
+          📋 Copy Complete Source Code (index.html)
+        </button>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h4 style="color:var(--c-yellow); font-size:14px; font-weight:800;">Manage Marketplace Products</h4>
+          <div>
+            <button class="btn-warning" onclick="backupProductData()">Export JSON</button>
+            <input type="file" id="restoreFileInput" accept=".json" style="display:none;" onchange="restoreProductData(event)">
+            <button class="btn-primary" onclick="document.getElementById('restoreFileInput').click()" style="padding:6px 12px; font-size:11px;">Import JSON</button>
+          </div>
+        </div>
+
+        <!-- Add/Edit Form -->
+        <form id="productForm" onsubmit="handleProductSubmit(event)" style="background:rgba(0,0,0,0.3); padding:12px; border-radius:10px; margin-bottom:16px;">
+          <input type="hidden" id="editProductId" value="">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div class="form-group">
+              <label class="form-label">Product Name</label>
+              <input type="text" id="pName" class="form-input" required="" placeholder="e.g. Smart Watch Ultra">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Image Direct URL</label>
+              <input type="url" id="pImg" class="form-input" required="" placeholder="https://...">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Old Price</label>
+              <input type="text" id="pOldPrice" class="form-input" required="" placeholder="e.g. $199.99">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Discount Price</label>
+              <input type="text" id="pDiscPrice" class="form-input" required="" placeholder="e.g. $49.99">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Rating</label>
+              <input type="text" id="pRating" class="form-input" required="" placeholder="e.g. 4.8">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Free Delivery</label>
+              <select id="pFreeDelivery" class="form-select">
+                <option value="ON">ON (Free Delivery)</option>
+                <option value="OFF">OFF (Standard)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Affiliate Link</label>
+            <input type="url" id="pAffLink" class="form-input" required="" placeholder="https://...">
+          </div>
+          <button type="submit" id="formSubmitBtn" class="btn-primary" style="width:100%;">Add New Product</button>
+        </form>
+
+        <h4 style="font-size:13px; color:var(--c-blue); margin-bottom:8px;">Existing Products List</h4>
+        <div style="max-height: 220px; overflow-y:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Delivery</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTable">
+        <tr>
+          <td><strong>Wireless ANC Cyber Headphones</strong></td>
+          <td>$39.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($149.99)</span></td>
+          <td>ON</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(0)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(0)">Delete</button>
+          </td>
+        </tr>
+      
+        <tr>
+          <td><strong>Futuristic RGB Smartwatch Pro</strong></td>
+          <td>$49.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($199.99)</span></td>
+          <td>ON</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(1)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(1)">Delete</button>
+          </td>
+        </tr>
+      
+        <tr>
+          <td><strong>Ultra HD Drone 4K Camera</strong></td>
+          <td>$89.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($299.99)</span></td>
+          <td>ON</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(2)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(2)">Delete</button>
+          </td>
+        </tr>
+      
+        <tr>
+          <td><strong>Gaming Mechanical RGB Keyboard</strong></td>
+          <td>$29.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($99.99)</span></td>
+          <td>OFF</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(3)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(3)">Delete</button>
+          </td>
+        </tr>
+      
+        <tr>
+          <td><strong>Smart Cyber Audio Glasses</strong></td>
+          <td>$59.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($179.99)</span></td>
+          <td>ON</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(4)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(4)">Delete</button>
+          </td>
+        </tr>
+      
+        <tr>
+          <td><strong>High-Speed Portable SSD 2TB</strong></td>
+          <td>$69.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($229.99)</span></td>
+          <td>ON</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(5)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(5)">Delete</button>
+          </td>
+        </tr>
+      
+        <tr>
+          <td><strong>Foldable Smartphone Gimbal</strong></td>
+          <td>$34.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($119.99)</span></td>
+          <td>ON</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(6)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(6)">Delete</button>
+          </td>
+        </tr>
+      
+        <tr>
+          <td><strong>LED Digital Desk Clock &amp; Charger</strong></td>
+          <td>$19.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($69.99)</span></td>
+          <td>OFF</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(7)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(7)">Delete</button>
+          </td>
+        </tr>
+      
+        <tr>
+          <td><strong>Noise Cancelling Cyber Earbuds</strong></td>
+          <td>$24.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($89.99)</span></td>
+          <td>ON</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(8)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(8)">Delete</button>
+          </td>
+        </tr>
+      
+        <tr>
+          <td><strong>Ultra Slim Power Bank 20000mAh</strong></td>
+          <td>$22.99 <span style="font-size:10px; color:rgba(255,255,255,0.4);">($79.99)</span></td>
+          <td>ON</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(9)">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(9)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       11. POLICY MODAL
+       ========================================================= -->
+  <div id="policyModal" class="modal-overlay">
+    <div class="modal-content glass-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 id="policyModalTitle" style="color:var(--c-blue); font-size:18px; font-weight:800;">Policy</h3>
+        <button class="close-btn" onclick="closePolicyModal()">✕</button>
+      </div>
+      <div id="policyModalBody" style="font-size:13px; line-height:1.6; color:rgba(255,255,255,0.85); max-height:60vh; overflow-y:auto; padding-right:8px;">
+        <!-- Policy content populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       JAVASCRIPT LOGIC
+       ========================================================= -->
+  <script>
+    /* =========================================================
+       INITIAL PRODUCTS DATA & LOCALSTORAGE ENGINE
+       ========================================================= */
+    const DEFAULT_PRODUCTS = [
+      {
+        id: "p1",
+        name: "Wireless ANC Cyber Headphones",
+        oldPrice: "$149.99",
+        discPrice: "$39.99",
+        rating: "4.9",
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "ON"
+      },
+      {
+        id: "p2",
+        name: "Futuristic RGB Smartwatch Pro",
+        oldPrice: "$199.99",
+        discPrice: "$49.99",
+        rating: "4.8",
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "ON"
+      },
+      {
+        id: "p3",
+        name: "Ultra HD Drone 4K Camera",
+        oldPrice: "$299.99",
+        discPrice: "$89.99",
+        rating: "4.7",
+        image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "ON"
+      },
+      {
+        id: "p4",
+        name: "Gaming Mechanical RGB Keyboard",
+        oldPrice: "$99.99",
+        discPrice: "$29.99",
+        rating: "4.9",
+        image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "OFF"
+      },
+      {
+        id: "p5",
+        name: "Smart Cyber Audio Glasses",
+        oldPrice: "$179.99",
+        discPrice: "$59.99",
+        rating: "4.6",
+        image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "ON"
+      },
+      {
+        id: "p6",
+        name: "High-Speed Portable SSD 2TB",
+        oldPrice: "$229.99",
+        discPrice: "$69.99",
+        rating: "4.9",
+        image: "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "ON"
+      },
+      {
+        id: "p7",
+        name: "Foldable Smartphone Gimbal",
+        oldPrice: "$119.99",
+        discPrice: "$34.99",
+        rating: "4.7",
+        image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "ON"
+      },
+      {
+        id: "p8",
+        name: "LED Digital Desk Clock & Charger",
+        oldPrice: "$69.99",
+        discPrice: "$19.99",
+        rating: "4.5",
+        image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "OFF"
+      },
+      {
+        id: "p9",
+        name: "Noise Cancelling Cyber Earbuds",
+        oldPrice: "$89.99",
+        discPrice: "$24.99",
+        rating: "4.8",
+        image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "ON"
+      },
+      {
+        id: "p10",
+        name: "Ultra Slim Power Bank 20000mAh",
+        oldPrice: "$79.99",
+        discPrice: "$22.99",
+        rating: "4.8",
+        image: "https://images.unsplash.com/photo-1609592424109-dd9892f1b177?auto=format&fit=crop&w=500&q=80",
+        affiliateLink: "https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607",
+        freeDelivery: "ON"
+      }
+    ];
+
+    function getProducts() {
+      const stored = localStorage.getItem("amazing_shopping_products");
+      if (!stored) {
+        localStorage.setItem("amazing_shopping_products", JSON.stringify(DEFAULT_PRODUCTS));
+        return DEFAULT_PRODUCTS;
+      }
+      try {
+        return JSON.parse(stored);
+      } catch (e) {
+        return DEFAULT_PRODUCTS;
+      }
+    }
+
+    function saveProducts(products) {
+      localStorage.setItem("amazing_shopping_products", JSON.stringify(products));
+      renderMarketplace();
+      if (isAdminLoggedIn) renderAdminTable();
+    }
+
+    /* =========================================================
+       SPLASH SCREEN CONTROLLER (EXACTLY 2 SECONDS)
+       ========================================================= */
+    window.addEventListener("DOMContentLoaded", () => {
+      initParticles();
+      renderMarketplace();
+
+      setTimeout(() => {
+        const splash = document.getElementById("splashScreen");
+        if (splash) {
+          splash.classList.add("fade-out");
+        }
+      }, 2000);
+    });
+
+    /* =========================================================
+       RENDER MARKETPLACE PRODUCTS
+       ========================================================= */
+    function renderMarketplace() {
+      const products = getProducts();
+      const query = (document.getElementById("searchInput")?.value || "").toLowerCase().trim();
+      const grid = document.getElementById("productsGrid");
+      if (!grid) return;
+
+      const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align:center; padding:30px; color:rgba(255,255,255,0.6);">No mega offer products found.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => `
+        <div class="product-card glass-card">
+          <div class="product-badge-bar">
+            <span class="delivery-badge ${p.freeDelivery === 'ON' ? 'on' : 'off'}">
+              ${p.freeDelivery === 'ON' ? '⚡ FREE DELIVERY' : 'STANDARD'}
+            </span>
+            <span style="font-size:10px; font-weight:800; color:var(--c-yellow); background:rgba(255,238,0,0.15); padding:2px 6px; border-radius:4px;">OFFER</span>
+          </div>
+          <div class="product-image-wrap">
+            <img class="product-image" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=500&q=80'" />
+          </div>
+          <div class="product-name">${escapeHtml(p.name)}</div>
+          <div class="product-rating">
+            ⭐ ${p.rating} / 5.0
+          </div>
+          <div class="price-container">
+            <span class="old-price">${escapeHtml(p.oldPrice)}</span>
+            <span class="discount-price">${escapeHtml(p.discPrice)}</span>
+          </div>
+          <button class="buy-btn ripple" onclick="openAffiliateLink('${p.affiliateLink}')">
+            <span>BUY NOW</span> 🚀
+          </button>
+        </div>
+      `).join('');
+
+      initRipples();
+    }
+
+    function openAffiliateLink(url) {
+      window.open(url, "_blank");
+    }
+
+    function escapeHtml(str) {
+      return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    /* =========================================================
+       FLOATING AI CHATBOT ENGINE
+       ========================================================= */
+    function toggleChatbot() {
+      const modal = document.getElementById("chatbotModal");
+      modal.classList.toggle("active");
+    }
+
+    function handleChatKeyPress(e) {
+      if (e.key === "Enter") sendChatMessage();
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById("chatInput");
+      const body = document.getElementById("chatBody");
+      const text = (input.value || "").trim();
+      if (!text) return;
+
+      // Add User Message
+      const userDiv = document.createElement("div");
+      userDiv.className = "chat-msg user";
+      userDiv.textContent = text;
+      body.appendChild(userDiv);
+
+      input.value = "";
+      body.scrollTop = body.scrollHeight;
+
+      // Automated Bot Response (Matches Prompt Directive)
+      setTimeout(() => {
+        const botDiv = document.createElement("div");
+        botDiv.className = "chat-msg bot";
+        
+        // Exact requirement response
+        botDiv.innerText = "For support please contact:\ndaraz.bangladesh.shop.com";
+        
+        body.appendChild(botDiv);
+        body.scrollTop = body.scrollHeight;
+      }, 600);
+    }
+
+    /* =========================================================
+       ADMIN DASHBOARD LOGIC (PASSWORD: bahadur@2025#)
+       ========================================================= */
+    let isAdminLoggedIn = false;
+
+    function openAdminPrompt() {
+      const modal = document.getElementById("adminModal");
+      modal.classList.add("active");
+    }
+
+    function closeAdminModal() {
+      document.getElementById("adminModal").classList.remove("active");
+    }
+
+    function verifyAdminPassword() {
+      const pwd = document.getElementById("adminPasswordInput").value;
+      if (pwd === "bahadur@2025#") {
+        isAdminLoggedIn = true;
+        document.getElementById("adminLoginForm").style.display = "none";
+        document.getElementById("adminPanelBody").style.display = "block";
+        document.getElementById("adminModalTitle").textContent = "⚙️ Admin Control Panel";
+        showToast("Logged in successfully!");
+        renderAdminTable();
+      } else {
+        showToast("❌ Incorrect Password!");
+      }
+    }
+
+    function renderAdminTable() {
+      const products = getProducts();
+      const tbody = document.getElementById("adminProductsTable");
+      if (!tbody) return;
+
+      tbody.innerHTML = products.map((p, idx) => `
+        <tr>
+          <td><strong>${escapeHtml(p.name)}</strong></td>
+          <td>${escapeHtml(p.discPrice)} <span style="font-size:10px; color:rgba(255,255,255,0.4);">(${p.oldPrice})</span></td>
+          <td>${p.freeDelivery}</td>
+          <td style="white-space:nowrap;">
+            <button class="btn-warning" style="font-size:10px; padding:3px 6px;" onclick="populateEditForm(${idx})">Edit</button>
+            <button class="btn-danger" style="font-size:10px; padding:3px 6px;" onclick="deleteProduct(${idx})">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function handleProductSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById("editProductId").value;
+      const products = getProducts();
+
+      const newP = {
+        id: id || "p_" + Date.now(),
+        name: document.getElementById("pName").value,
+        image: document.getElementById("pImg").value,
+        oldPrice: document.getElementById("pOldPrice").value,
+        discPrice: document.getElementById("pDiscPrice").value,
+        rating: document.getElementById("pRating").value,
+        freeDelivery: document.getElementById("pFreeDelivery").value,
+        affiliateLink: document.getElementById("pAffLink").value
+      };
+
+      if (id) {
+        const index = products.findIndex(p => p.id === id);
+        if (index !== -1) products[index] = newP;
+        showToast("Product updated!");
+      } else {
+        products.unshift(newP);
+        showToast("New product added!");
+      }
+
+      saveProducts(products);
+      resetProductForm();
+    }
+
+    function populateEditForm(index) {
+      const products = getProducts();
+      const p = products[index];
+      if (!p) return;
+
+      document.getElementById("editProductId").value = p.id;
+      document.getElementById("pName").value = p.name;
+      document.getElementById("pImg").value = p.image;
+      document.getElementById("pOldPrice").value = p.oldPrice;
+      document.getElementById("pDiscPrice").value = p.discPrice;
+      document.getElementById("pRating").value = p.rating;
+      document.getElementById("pFreeDelivery").value = p.freeDelivery;
+      document.getElementById("pAffLink").value = p.affiliateLink;
+
+      document.getElementById("formSubmitBtn").textContent = "Update Product";
+    }
+
+    function resetProductForm() {
+      document.getElementById("productForm").reset();
+      document.getElementById("editProductId").value = "";
+      document.getElementById("formSubmitBtn").textContent = "Add New Product";
+    }
+
+    function deleteProduct(index) {
+      if (confirm("Are you sure you want to delete this product?")) {
+        const products = getProducts();
+        products.splice(index, 1);
+        saveProducts(products);
+        showToast("Product deleted!");
+      }
+    }
+
+    function backupProductData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(getProducts(), null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "amazing_shopping_products_backup.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast("Data backup downloaded!");
+    }
+
+    function restoreProductData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (Array.isArray(parsed)) {
+            saveProducts(parsed);
+            showToast("Products restored successfully!");
+          } else {
+            alert("Invalid JSON format!");
+          }
+        } catch (err) {
+          alert("Error parsing JSON file!");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    /* =========================================================
+       COPY SOURCE CODE BUTTON (ONLY VISIBLE IN ADMIN PANEL)
+       ========================================================= */
+    function copySourceCode() {
+      if (!isAdminLoggedIn) {
+        showToast("Access Denied!");
+        return;
+      }
+      const sourceCode = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      navigator.clipboard.writeText(sourceCode).then(() => {
+        showToast("✅ Complete index.html copied to clipboard!");
+      }).catch(err => {
+        // Fallback
+        const textarea = document.createElement("textarea");
+        textarea.value = sourceCode;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        showToast("✅ Complete index.html copied to clipboard!");
+      });
+    }
+
+    /* =========================================================
+       POLICY PAGES MODAL SYSTEM
+       ========================================================= */
+    const POLICY_DATA = {
+      "Privacy Policy": "Welcome to Amazing Shopping. We prioritize your personal data privacy. We do not collect personal identify information directly. All product interactions and affiliate links redirect safely to verified third-party vendors. Your browsing history remains local on your device.",
+      "Copyright": "All trademarks, logos, brand titles, images, and content displayed on Amazing Shopping belong to their respective copyright holders. Affiliate products are displayed for promotional & deal sharing purposes under fair use guidelines.",
+      "Content Policy": "Amazing Shopping maintains strict content policies ensuring all featured deals, promotional offers, media, and images are appropriate for general audiences aged 12 and above.",
+      "Cookie Policy": "We use local storage technology (LocalStorage) purely to store your offline product configurations and app settings. No invasive tracking cookies are placed on your machine.",
+      "Theme Policy": "The futuristic 6-color digital theme (Green, Blue, Red, Orange, Yellow, Purple) is custom-designed with CSS animations, glowing gradients, and glassmorphism UI for an immersive digital shopping experience.",
+      "Terms & Conditions": "By accessing Amazing Shopping PWA, you agree to browse mega offer deals responsibly. Prices and discount availability on third-party seller pages may change dynamically.",
+      "Children's Policy": "Our digital platform is rated for downloads 12+. We do not knowingly target or collect any personal information from children under the age of 13."
+    };
+
+    function openPolicy(title) {
+      document.getElementById("policyModalTitle").textContent = title;
+      document.getElementById("policyModalBody").innerHTML = `<p>${POLICY_DATA[title] || 'Information regarding ' + title + ' is maintained in compliance with global standards.'}</p>`;
+      document.getElementById("policyModal").classList.add("active");
+    }
+
+    function closePolicyModal() {
+      document.getElementById("policyModal").classList.remove("active");
+    }
+
+    /* =========================================================
+       TOAST NOTIFICATION ENGINE
+       ========================================================= */
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+
+    /* =========================================================
+       CLIENT-SIDE PROTECTION SYSTEM
+       ========================================================= */
+    // Disable Right Click
+    document.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      showToast("🔒 Action protected on Amazing Shopping PWA");
+    });
+
+    // Disable Ctrl+U, F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J, Ctrl+S
+    document.addEventListener("keydown", (e) => {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.key === "u") ||
+        (e.ctrlKey && e.key === "U") ||
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "C" || e.key === "c" || e.key === "J" || e.key === "j")) ||
+        (e.ctrlKey && (e.key === "s" || e.key === "S"))
+      ) {
+        e.preventDefault();
+        showToast("🔒 Developer Tools shortcut disabled");
+      }
+    });
+
+    /* =========================================================
+       RIPPLE EFFECT INITIALIZER
+       ========================================================= */
+    function initRipples() {
+      document.querySelectorAll(".ripple").forEach(button => {
+        button.addEventListener("click", function(e) {
+          const rect = this.getBoundingClientRect();
+          const circle = document.createElement("span");
+          const diameter = Math.max(rect.width, rect.height);
+          const radius = diameter / 2;
+
+          circle.style.width = circle.style.height = `${diameter}px`;
+          circle.style.left = `${e.clientX - rect.left - radius}px`;
+          circle.style.top = `${e.clientY - rect.top - radius}px`;
+          circle.classList.add("ripple-effect");
+
+          const ripple = this.querySelector(".ripple-effect");
+          if (ripple) ripple.remove();
+
+          this.appendChild(circle);
+        });
+      });
+    }
+
+    /* =========================================================
+       CANVAS PARTICLES BACKGROUND
+       ========================================================= */
+    function initParticles() {
+      const canvas = document.getElementById("particleCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const colors = ["#00ff88", "#00d2ff", "#ff0055", "#ff8c00", "#ffee00", "#a855f7"];
+      const particles = [];
+      const particleCount = 45;
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 2 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = p.color;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+  </script>
+
+
+</body></html>
