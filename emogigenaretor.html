@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <script src="https://apis.google.com/_/scs/abc-static/_/js/k=gapi.lb.en.9vdPKhB0RUg.O/m=gapi_iframes/rt=j/sv=1/d=1/ed=1/rs=AHpOoo97anj7zZ432JcN58tqJJp_A6WeOw/cb=gapi.loaded_0?le=scs" async=""></script><script type="module" src="/@vite/client"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Amazing Emoji generator</title>
+  <meta name="description" content="Free unlimited 🤑 Amazing Emoji generator for TikTok, Instagram, Facebook, WhatsApp, YouTube &amp; Social Messaging powered by AI.">
+  
+  <!-- FIREBASE AUTHENTICATION SDK -->
+  <script type="module" src="/index.html?html-proxy&amp;index=0.js"></script>
+
+  <!-- Push Ad Script -->
+  <script type="text/javascript" src="//cdn-server.live/d75567e0584eade4f670/86089c4622/?placementName=default"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&amp;family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+            digital: ['Orbitron', 'sans-serif']
+          },
+          colors: {
+            neonGreen: '#10b981',
+            neonBlue: '#3b82f6',
+            neonRed: '#ef4444',
+            neonOrange: '#f97316',
+            neonYellow: '#eab308',
+            neonPurple: '#a855f7'
+          },
+          animation: {
+            'rgb-glow': 'rgbGlow 8s ease infinite',
+            'laser-scan': 'laserScan 2s ease-in-out infinite alternate',
+            'float': 'float 4s ease-in-out infinite',
+            'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'shimmer': 'shimmer 2.5s infinite'
+          },
+          keyframes: {
+            rgbGlow: {
+              '0%, 100%': { 'border-color': '#10b981', 'box-shadow': '0 0 15px rgba(16, 185, 129, 0.5)' },
+              '20%': { 'border-color': '#3b82f6', 'box-shadow': '0 0 15px rgba(59, 130, 246, 0.5)' },
+              '40%': { 'border-color': '#a855f7', 'box-shadow': '0 0 15px rgba(168, 85, 247, 0.5)' },
+              '60%': { 'border-color': '#ef4444', 'box-shadow': '0 0 15px rgba(239, 68, 68, 0.5)' },
+              '80%': { 'border-color': '#f97316', 'box-shadow': '0 0 15px rgba(249, 115, 22, 0.5)' }
+            },
+            laserScan: {
+              '0%': { top: '5%' },
+              '100%': { top: '90%' }
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' }
+            },
+            shimmer: {
+              '100%': { transform: 'translateX(100%)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom CSS Styles */
+    body {
+      background-color: #090d16;
+      color: #f3f4f6;
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* 6-Color Animated Border Effect */
+    .rgb-border {
+      position: relative;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15), rgba(168, 85, 247, 0.15));
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .rgb-border::after {
+      content: '';
+      position: absolute;
+      top: -2px; bottom: -2px;
+      left: -2px; right: -2px;
+      background: linear-gradient(45deg, #10b981, #3b82f6, #a855f7, #ef4444, #f97316, #eab308);
+      background-size: 400% 400%;
+      z-index: -1;
+      border-radius: inherit;
+      animation: gradientShift 6s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Glassmorphism Card */
+    .glass-card {
+      background: rgba(18, 25, 41, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .glass-input {
+      background: rgba(10, 15, 28, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .glass-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+      outline: none;
+    }
+
+    /* Canvas Particle Background */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 4px;
+    }
+
+    /* Top Banner Continuous Light Shimmer Animation */
+    @keyframes bannerShimmerPass {
+      0% { transform: translateX(-150%) skewX(-15deg); }
+      35%, 100% { transform: translateX(250%) skewX(-15deg); }
+    }
+    .banner-shimmer-auto {
+      position: absolute;
+      top: 0; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+      animation: bannerShimmerPass 2.8s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    /* Hide element */
+    .hidden-force {
+      display: none !important;
+    }
+
+    /* Bio Card Pill Style */
+    .bio-card-item {
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .bio-card-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.25);
+    }
+    .bio-card-item.selected {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(59, 130, 246, 0.25)) !important;
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+  </style>
+<script src="/_aistudio-iframe.js?v=2f1c016a"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@2.0.4"></script><style>.aistudio-hover-highlight { box-shadow: inset 0 0 0 0.5px white, inset 0 0 0 1.5px rgba(128,128,128,0.6) !important; }.aistudio-active-highlight { outline: 2px solid #87a9ff !important; outline-offset: -2px !important; box-shadow: 0 0 0 0.5px rgba(0,0,0,0.3), inset 0 0 0 0.5px rgba(0,0,0,0.3) !important; }.aistudio-generating-blur { filter: blur(5px) grayscale(100%) brightness(28%) !important; transition: filter 0.3s ease; }#aistudio-focus-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: #87a9ff; border-radius: 12px; z-index: 10000; padding: 8px; color: #32302c; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }#aistudio-hover-mode-tag { position: absolute; display: none; align-items: center; gap: 4px; background: rgba(128,128,128,0.6); border-radius: 12px; z-index: 10000; padding: 8px; color: white; font-family: Inter, sans-serif; font-size: 14px; font-style: normal; font-weight: 500; line-height: 21px; pointer-events: none; }.aistudio-img-icon { display: none; vertical-align: middle; pointer-events: auto; cursor: pointer; }.aistudio-img-icon.visible { display: inline-flex; }#aistudio-focus-mode-tag .aistudio-img-icon { position: relative; width: 26px; height: 26px; background: #32302c; border-radius: 6px; margin: -4px -4px -4px 0; }#aistudio-focus-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-hover-mode-tag .aistudio-img-icon { position: relative; width: 18px; height: 18px; margin-left: 4px; }#aistudio-hover-mode-tag .aistudio-img-icon::before { content: ""; position: absolute; top: 0; left: 0; width: 18px; height: 18px; background-color: white; -webkit-mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; mask-image: url("https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/edit_fix_auto/default/24px.svg"); mask-size: contain; mask-repeat: no-repeat; }#aistudio-focus-mode-tag .aistudio-img-icon:hover, #aistudio-hover-mode-tag .aistudio-img-icon:hover { background: #424242 !important; }#aistudio-focus-mode-tag .aistudio-img-icon:active, #aistudio-hover-mode-tag .aistudio-img-icon:active { background: #393f51 !important; }</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Outfit, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.-bottom-12{bottom:-3rem}.-left-12{left:-3rem}.-right-12{right:-3rem}.-top-12{top:-3rem}.bottom-2{bottom:0.5rem}.left-1\/2{left:50%}.right-3{right:0.75rem}.top-3{top:0.75rem}.-right-1{right:-0.25rem}.-top-1{top:-0.25rem}.bottom-20{bottom:5rem}.bottom-4{bottom:1rem}.left-4{left:1rem}.right-4{right:1rem}.top-5{top:1.25rem}.z-10{z-index:10}.z-20{z-index:20}.z-40{z-index:40}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.my-1{margin-top:0.25rem;margin-bottom:0.25rem}.my-2{margin-top:0.5rem;margin-bottom:0.5rem}.my-6{margin-top:1.5rem;margin-bottom:1.5rem}.mt-1{margin-top:0.25rem}.mt-3{margin-top:0.75rem}.mb-1{margin-bottom:0.25rem}.mb-4{margin-bottom:1rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.ml-1{margin-left:0.25rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.aspect-\[9\/16\]{aspect-ratio:9/16}.h-10{height:2.5rem}.h-14{height:3.5rem}.h-2{height:0.5rem}.h-28{height:7rem}.h-8{height:2rem}.h-auto{height:auto}.h-full{height:100%}.h-12{height:3rem}.h-3\.5{height:0.875rem}.h-9{height:2.25rem}.h-96{height:24rem}.max-h-48{max-height:12rem}.max-h-80{max-height:20rem}.max-h-60{max-height:15rem}.min-h-screen{min-height:100vh}.min-h-\[160px\]{min-height:160px}.min-h-\[90px\]{min-height:90px}.min-h-\[250px\]{min-height:250px}.min-h-\[50px\]{min-height:50px}.w-10{width:2.5rem}.w-14{width:3.5rem}.w-2{width:0.5rem}.w-28{width:7rem}.w-8{width:2rem}.w-full{width:100%}.w-12{width:3rem}.w-3\.5{width:0.875rem}.w-9{width:2.25rem}.w-\[90vw\]{width:90vw}.min-w-\[68px\]{min-width:68px}.max-w-xl{max-width:36rem}.max-w-\[280px\]{max-width:280px}.max-w-80{max-width:20rem}.max-w-\[85\%\]{max-width:85%}.max-w-full{max-width:100%}.max-w-md{max-width:28rem}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-x-full{--tw-translate-x:-100%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-4{--tw-translate-y:-1rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.translate-y-0{--tw-translate-y:0px;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-skew-x-12{--tw-skew-x:-12deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes ping{75%, 100%{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0, 0, 0.2, 1) infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}@keyframes spin{to{transform:rotate(360deg)}}.animate-spin{animation:spin 1s linear infinite}.cursor-pointer{cursor:pointer}.select-all{-webkit-user-select:all;user-select:all}.resize-none{resize:none}.grid-cols-6{grid-template-columns:repeat(6, minmax(0, 1fr))}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-start{justify-content:flex-start}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-x-3{column-gap:0.75rem}.gap-y-1{row-gap:0.25rem}.gap-y-2\.5{row-gap:0.625rem}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.375rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.whitespace-nowrap{white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.rounded-lg{border-radius:0.5rem}.rounded-tl-none{border-top-left-radius:0px}.border{border-width:1px}.border-2{border-width:2px}.border-t{border-top-width:1px}.border-b{border-bottom-width:1px}.border-emerald-500\/40{border-color:rgb(16 185 129 / 0.4)}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-slate-700\/50{border-color:rgb(51 65 85 / 0.5)}.border-slate-700\/60{border-color:rgb(51 65 85 / 0.6)}.border-slate-800\/80{border-color:rgb(30 41 59 / 0.8)}.border-amber-500\/40{border-color:rgb(245 158 11 / 0.4)}.border-slate-800{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-emerald-500\/30{border-color:rgb(16 185 129 / 0.3)}.border-emerald-500\/50{border-color:rgb(16 185 129 / 0.5)}.border-slate-800\/60{border-color:rgb(30 41 59 / 0.6)}.border-slate-950{--tw-border-opacity:1;border-color:rgb(2 6 23 / var(--tw-border-opacity, 1))}.bg-slate-950{--tw-bg-opacity:1;background-color:rgb(2 6 23 / var(--tw-bg-opacity, 1))}.bg-black\/50{background-color:rgb(0 0 0 / 0.5)}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153 / var(--tw-bg-opacity, 1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-emerald-500\/20{background-color:rgb(16 185 129 / 0.2)}.bg-emerald-950\/80{background-color:rgb(2 44 34 / 0.8)}.bg-purple-500\/20{background-color:rgb(168 85 247 / 0.2)}.bg-slate-600{--tw-bg-opacity:1;background-color:rgb(71 85 105 / var(--tw-bg-opacity, 1))}.bg-slate-900\/60{background-color:rgb(15 23 42 / 0.6)}.bg-slate-900\/80{background-color:rgb(15 23 42 / 0.8)}.bg-slate-900\/90{background-color:rgb(15 23 42 / 0.9)}.bg-white\/20{background-color:rgb(255 255 255 / 0.2)}.bg-amber-950\/80{background-color:rgb(69 26 3 / 0.8)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-950\/80{background-color:rgb(2 6 23 / 0.8)}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-rose-600\/80{background-color:rgb(225 29 72 / 0.8)}.bg-sky-600{--tw-bg-opacity:1;background-color:rgb(2 132 199 / var(--tw-bg-opacity, 1))}.bg-black\/80{background-color:rgb(0 0 0 / 0.8)}.bg-purple-600{--tw-bg-opacity:1;background-color:rgb(147 51 234 / var(--tw-bg-opacity, 1))}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-900\/95{background-color:rgb(15 23 42 / 0.95)}.bg-slate-950\/60{background-color:rgb(2 6 23 / 0.6)}.bg-slate-950\/90{background-color:rgb(2 6 23 / 0.9)}.bg-slate-950\/95{background-color:rgb(2 6 23 / 0.95)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-emerald-400{--tw-gradient-from:#34d399 var(--tw-gradient-from-position);--tw-gradient-to:rgb(52 211 153 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-emerald-500{--tw-gradient-from:#10b981 var(--tw-gradient-from-position);--tw-gradient-to:rgb(16 185 129 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-amber-300{--tw-gradient-from:#fcd34d var(--tw-gradient-from-position);--tw-gradient-to:rgb(252 211 77 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-purple-500{--tw-gradient-from:#a855f7 var(--tw-gradient-from-position);--tw-gradient-to:rgb(168 85 247 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-sky-500{--tw-gradient-from:#0ea5e9 var(--tw-gradient-from-position);--tw-gradient-to:rgb(14 165 233 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-amber-500{--tw-gradient-from:#f59e0b var(--tw-gradient-from-position);--tw-gradient-to:rgb(245 158 11 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-sky-400{--tw-gradient-to:rgb(56 189 248 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #38bdf8 var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-sky-500{--tw-gradient-to:rgb(14 165 233 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #0ea5e9 var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-emerald-400{--tw-gradient-to:rgb(52 211 153 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #34d399 var(--tw-gradient-via-position), var(--tw-gradient-to)}.via-rose-500{--tw-gradient-to:rgb(244 63 94 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #f43f5e var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-purple-400{--tw-gradient-to:#c084fc var(--tw-gradient-to-position)}.to-purple-600{--tw-gradient-to:#9333ea var(--tw-gradient-to-position)}.to-sky-400{--tw-gradient-to:#38bdf8 var(--tw-gradient-to-position)}.to-amber-300{--tw-gradient-to:#fcd34d var(--tw-gradient-to-position)}.to-blue-600{--tw-gradient-to:#2563eb var(--tw-gradient-to-position)}.to-indigo-600{--tw-gradient-to:#4f46e5 var(--tw-gradient-to-position)}.to-sky-500{--tw-gradient-to:#0ea5e9 var(--tw-gradient-to-position)}.to-teal-600{--tw-gradient-to:#0d9488 var(--tw-gradient-to-position)}.bg-clip-text{-webkit-background-clip:text;background-clip:text}.object-contain{object-fit:contain}.object-cover{object-fit:cover}.p-1{padding:0.25rem}.p-4{padding:1rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3{padding:0.75rem}.p-1\.5{padding:0.375rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.px-4{padding-left:1rem;padding-right:1rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-3\.5{padding-top:0.875rem;padding-bottom:0.875rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.pt-3{padding-top:0.75rem}.pb-2{padding-bottom:0.5rem}.pt-1{padding-top:0.25rem}.pt-2{padding-top:0.5rem}.pt-4{padding-top:1rem}.pb-12{padding-bottom:3rem}.pb-3{padding-bottom:0.75rem}.pr-2{padding-right:0.5rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.font-digital{font-family:Orbitron, sans-serif}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[10px\]{font-size:10px}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-\[11px\]{font-size:11px}.font-black{font-weight:900}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-tight{line-height:1.25}.leading-relaxed{line-height:1.625}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249 / var(--tw-text-opacity, 1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-indigo-400{--tw-text-opacity:1;color:rgb(129 140 248 / var(--tw-text-opacity, 1))}.text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.text-sky-400{--tw-text-opacity:1;color:rgb(56 189 248 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-transparent{color:transparent}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-400{--tw-text-opacity:1;color:rgb(250 204 21 / var(--tw-text-opacity, 1))}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-emerald-300{--tw-text-opacity:1;color:rgb(110 231 183 / var(--tw-text-opacity, 1))}.text-pink-400{--tw-text-opacity:1;color:rgb(244 114 182 / var(--tw-text-opacity, 1))}.text-pink-500{--tw-text-opacity:1;color:rgb(236 72 153 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.text-sky-200{--tw-text-opacity:1;color:rgb(186 230 253 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-yellow-300{--tw-text-opacity:1;color:rgb(253 224 71 / var(--tw-text-opacity, 1))}.text-sky-300{--tw-text-opacity:1;color:rgb(125 211 252 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-100{opacity:1}.opacity-75{opacity:0.75}.opacity-0{opacity:0}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_0_50px_rgba\(16\2c 185\2c 129\2c 0\.3\)\]{--tw-shadow:0 0 50px rgba(16,185,129,0.3);--tw-shadow-colored:0 0 50px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.blur-2xl{--tw-blur:blur(40px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-2xl{--tw-backdrop-blur:blur(40px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-1000{transition-duration:1000ms}.duration-300{transition-duration:300ms}.duration-500{transition-duration:500ms}.selection\:bg-indigo-500 *::selection{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.selection\:text-white *::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.selection\:bg-indigo-500::selection{--tw-bg-opacity:1;background-color:rgb(99 102 241 / var(--tw-bg-opacity, 1))}.selection\:text-white::selection{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:-translate-y-1:hover{--tw-translate-y:-0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-\[1\.01\]:hover{--tw-scale-x:1.01;--tw-scale-y:1.01;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-125:hover{--tw-scale-x:1.25;--tw-scale-y:1.25;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-\[1\.02\]:hover{--tw-scale-x:1.02;--tw-scale-y:1.02;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-emerald-400:hover{--tw-border-opacity:1;border-color:rgb(52 211 153 / var(--tw-border-opacity, 1))}.hover\:border-cyan-500:hover{--tw-border-opacity:1;border-color:rgb(6 182 212 / var(--tw-border-opacity, 1))}.hover\:border-emerald-500:hover{--tw-border-opacity:1;border-color:rgb(16 185 129 / var(--tw-border-opacity, 1))}.hover\:border-pink-500:hover{--tw-border-opacity:1;border-color:rgb(236 72 153 / var(--tw-border-opacity, 1))}.hover\:border-purple-500:hover{--tw-border-opacity:1;border-color:rgb(168 85 247 / var(--tw-border-opacity, 1))}.hover\:border-sky-500:hover{--tw-border-opacity:1;border-color:rgb(14 165 233 / var(--tw-border-opacity, 1))}.hover\:border-yellow-500:hover{--tw-border-opacity:1;border-color:rgb(234 179 8 / var(--tw-border-opacity, 1))}.hover\:border-slate-600:hover{--tw-border-opacity:1;border-color:rgb(71 85 105 / var(--tw-border-opacity, 1))}.hover\:bg-slate-800:hover{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.hover\:bg-rose-600:hover{--tw-bg-opacity:1;background-color:rgb(225 29 72 / var(--tw-bg-opacity, 1))}.hover\:bg-sky-500:hover{--tw-bg-opacity:1;background-color:rgb(14 165 233 / var(--tw-bg-opacity, 1))}.hover\:bg-purple-500:hover{--tw-bg-opacity:1;background-color:rgb(168 85 247 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:text-emerald-400:hover{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.hover\:opacity-95:hover{opacity:0.95}.hover\:opacity-90:hover{opacity:0.9}.hover\:shadow-emerald-500\/30:hover{--tw-shadow-color:rgb(16 185 129 / 0.3);--tw-shadow:var(--tw-shadow-colored)}.hover\:shadow-amber-500\/30:hover{--tw-shadow-color:rgb(245 158 11 / 0.3);--tw-shadow:var(--tw-shadow-colored)}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-emerald-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(16 185 129 / var(--tw-ring-opacity, 1))}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.active\:scale-\[0\.99\]:active{--tw-scale-x:0.99;--tw-scale-y:0.99;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:translate-x-full{--tw-translate-x:100%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-sky-400{--tw-text-opacity:1;color:rgb(56 189 248 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:text-yellow-400{--tw-text-opacity:1;color:rgb(250 204 21 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:h-11{height:2.75rem}.sm\:w-11{width:2.75rem}.sm\:flex-1{flex:1 1 0%}.sm\:grid-cols-10{grid-template-columns:repeat(10, minmax(0, 1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:p-5{padding:1.25rem}.sm\:text-2xl{font-size:1.5rem;line-height:2rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}.sm\:text-xl{font-size:1.25rem;line-height:1.75rem}.sm\:text-lg{font-size:1.125rem;line-height:1.75rem}}</style><script src="https://apis.google.com/js/api.js?onload=__iframefcb711784" type="text/javascript" charset="UTF-8" gapi_processed="true"></script></head>
+<body class="min-h-screen flex flex-col justify-between relative bg-slate-950 text-slate-100 antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Background Particle Canvas -->
+  <canvas id="particle-canvas" width="552" height="1614"></canvas>
+
+  <!-- MAIN APP CONTAINER -->
+  <div id="app-container" class="relative z-10 w-full max-w-xl mx-auto px-3 py-4 flex-1 flex flex-col gap-4">
+
+    <!-- TOP BANNER IMAGE -->
+    <div class="w-full rounded-2xl overflow-hidden rgb-border bg-slate-900/60 p-1 transition-transform hover:scale-[1.01] relative group">
+      <a id="top-banner-link" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoV2o9nHLN8tii31maEi1soy4CfmggkF4pqthjvvZ2xnmZzoiJWdwZBoF8F67lqTkj5x9jbQJUkC60lVnmMJ-lpAZjxhDYhG-HA3WXHilDDrBUXbdp05UU5XzvCYUXeKiK_8qETdL1eS1hbMGlmpYCHK83VRjrDis9riYMVcMU1dPHpoyD5Xsp0zoZ-1I/s1774/e1e89798-ccf0-445e-8a3f-0bcc81289593.png" target="_blank" rel="noopener noreferrer" class="block w-full text-center relative overflow-hidden rounded-xl">
+        <img id="top-banner-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhoV2o9nHLN8tii31maEi1soy4CfmggkF4pqthjvvZ2xnmZzoiJWdwZBoF8F67lqTkj5x9jbQJUkC60lVnmMJ-lpAZjxhDYhG-HA3WXHilDDrBUXbdp05UU5XzvCYUXeKiK_8qETdL1eS1hbMGlmpYCHK83VRjrDis9riYMVcMU1dPHpoyD5Xsp0zoZ-1I/s320/e1e89798-ccf0-445e-8a3f-0bcc81289593.png" alt="Top Banner" class="w-full h-auto object-cover rounded-xl max-h-48">
+        <!-- Continuous Animated Light Shimmer Effect -->
+        <div class="banner-shimmer-auto"></div>
+        <!-- Hover Flash Sheen -->
+        <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"></div>
+      </a>
+    </div>
+
+    <!-- HEADER CARD -->
+    <header class="glass-card rounded-2xl p-4 text-center border border-slate-700/50 shadow-xl relative overflow-hidden">
+      <!-- 3-Dot Options Button in Top Corner -->
+      <a href="https://www.effectivecpmnetwork.com/jjgii2iixj?key=0e1854c8a08d882dfc02bc474311f607" target="_blank" rel="noopener noreferrer" class="absolute top-3 right-3 text-slate-300 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-700/60 w-8 h-8 rounded-xl flex items-center justify-center shadow-lg transition-all z-20" title="More Options">
+        <i class="fa-solid fa-ellipsis-vertical text-base"></i>
+      </a>
+
+      <div class="absolute -top-12 -left-12 w-28 h-28 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-12 -right-12 w-28 h-28 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+      <div class="flex items-center justify-center flex-wrap gap-2.5">
+        <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSG0mXk5btfjxwmh5HnlI3EFxzs9M4gD5kX5GJOkVgMI55qLin7IInHeOqmDvFy_LzMsIfmhCXRtARdWERs-zosuxzcEzZfAXYoh6CwImNTe5xTy9GOPmBDdb3HqWDj0Ymr5fHFM2uPfHWWQSM-t3oDp4sNExG3asUK-JlVtp7kcCZtqRwHgIs-ToO5mk/s1536/CollageMaker_20260809_191018280.jpg" target="_blank" rel="noopener noreferrer" class="inline-block transition-transform hover:scale-105">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjSG0mXk5btfjxwmh5HnlI3EFxzs9M4gD5kX5GJOkVgMI55qLin7IInHeOqmDvFy_LzMsIfmhCXRtARdWERs-zosuxzcEzZfAXYoh6CwImNTe5xTy9GOPmBDdb3HqWDj0Ymr5fHFM2uPfHWWQSM-t3oDp4sNExG3asUK-JlVtp7kcCZtqRwHgIs-ToO5mk/s320/CollageMaker_20260809_191018280.jpg" alt="App Logo" class="w-10 h-10 sm:w-11 sm:h-11 object-contain rounded-xl border border-slate-700 shadow-md">
+        </a>
+        <h2 class="font-digital text-xl sm:text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-sky-400 to-purple-400 tracking-wide">
+          Amazing Emoji Genaretor
+        </h2>
+        <!-- LIVE indicator -->
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-500/40">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          LIVE
+        </span>
+      </div>
+
+      <p class="text-xs text-yellow-400 font-semibold mt-1">Free unlimited 🤑</p>
+
+      <!-- Ratings & Stats Bar -->
+      <div class="mt-3 pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs font-semibold text-slate-300">
+        <span class="text-amber-400 font-extrabold flex items-center gap-1">⭐ 9.8★</span>
+        <span class="text-slate-600">|</span>
+        <span class="text-sky-400">19+</span>
+        <span class="text-slate-600">|</span>
+        <span class="text-emerald-400">17B+</span>
+        <span class="text-slate-600">|</span>
+        <span class="text-purple-400">808 Million Reviews</span>
+        <span class="text-slate-600">|</span>
+        <span class="text-rose-400">Rated for Downloads</span>
+        <span class="text-slate-600">|</span>
+        <span class="text-indigo-400">12+</span>
+      </div>
+    </header>
+
+    <!-- TOP NAVIGATION - 5 ANIMATED CIRCULAR BUTTONS -->
+    <nav class="w-full">
+      <div class="flex items-center justify-between gap-2 overflow-x-auto py-2 px-1 no-scrollbar">
+        <!-- Button 1: QR code Genaretor -->
+        <a id="nav-btn-1" href="https://mdbabuhossan290324-svg.github.io/amazing-shopping/qrcode.html" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1.5 min-w-[68px] group">
+          <div class="w-14 h-14 rounded-full rgb-border flex items-center justify-center bg-slate-900/90 text-emerald-400 group-hover:scale-110 transition-transform shadow-lg">
+            <i class="fa-solid fa-qrcode text-xl"></i>
+          </div>
+          <span class="text-[10px] font-bold text-slate-300 group-hover:text-emerald-400 text-center leading-tight">QR code Genaretor</span>
+        </a>
+
+        <!-- Button 2: Title Generator -->
+        <a id="nav-btn-2" href="https://mdbabuhossan290324-svg.github.io/amazing-shopping/title.html" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1.5 min-w-[68px] group">
+          <div class="w-14 h-14 rounded-full rgb-border flex items-center justify-center bg-slate-900/90 text-sky-400 group-hover:scale-110 transition-transform shadow-lg">
+            <i class="fa-solid fa-heading text-xl"></i>
+          </div>
+          <span class="text-[10px] font-bold text-slate-300 group-hover:text-sky-400 text-center leading-tight">Title Genaretor</span>
+        </a>
+
+        <!-- Button 3: Emoji Generator -->
+        <a id="nav-btn-3" href="https://mdbabuhossan290324-svg.github.io/amazing-shopping/emoji.html" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1.5 min-w-[68px] group">
+          <div class="w-14 h-14 rounded-full rgb-border flex items-center justify-center bg-slate-900/90 text-yellow-400 group-hover:scale-110 transition-transform shadow-lg">
+            <i class="fa-solid fa-face-smile text-xl"></i>
+          </div>
+          <span class="text-[10px] font-bold text-slate-300 group-hover:text-yellow-400 text-center leading-tight">Emoji Genaretor</span>
+        </a>
+
+        <!-- Button 4: photo to link Generator -->
+        <a id="nav-btn-4" href="https://mdbabuhossan290324-svg.github.io/amazing-shopping/photolink.html" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1.5 min-w-[68px] group">
+          <div class="w-14 h-14 rounded-full rgb-border flex items-center justify-center bg-slate-900/90 text-rose-400 group-hover:scale-110 transition-transform shadow-lg">
+            <i class="fa-solid fa-image text-xl"></i>
+          </div>
+          <span class="text-[10px] font-bold text-slate-300 group-hover:text-rose-400 text-center leading-tight">Photo to link Genaretor</span>
+        </a>
+
+        <!-- Button 5: QR Scanner -->
+        <a id="nav-btn-5" href="https://mdbabuhossan290324-svg.github.io/amazing-shopping/qrsner.html" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-1.5 min-w-[68px] group">
+          <div class="w-14 h-14 rounded-full rgb-border flex items-center justify-center bg-slate-900/90 text-purple-400 group-hover:scale-110 transition-transform shadow-lg">
+            <i class="fa-solid fa-expand text-xl"></i>
+          </div>
+          <span class="text-[10px] font-bold text-slate-300 group-hover:text-purple-400 text-center leading-tight">QR Scanner</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- DOWNLOAD APP BUTTON -->
+    <div class="w-full my-1">
+      <a id="download-app-btn" href="https://www.appcreator24.com/app4144179-ilzfq3" target="_blank" rel="noopener noreferrer" class="relative group block w-full text-center py-4 px-6 rounded-2xl font-digital font-bold text-lg text-white bg-gradient-to-r from-emerald-500 via-sky-500 to-purple-600 shadow-2xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-emerald-500/30">
+        <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+        <span class="relative z-10 flex items-center justify-center gap-3">
+          <i class="fa-solid fa-cloud-arrow-down text-2xl animate-bounce"></i>
+          Download App Free 🚀
+        </span>
+      </a>
+    </div>
+
+    <!-- MIDDLE ROTATING BANNERS (Rotates every 2 seconds) -->
+    <div class="w-full relative rounded-2xl overflow-hidden rgb-border bg-slate-900/80 min-h-[160px] flex items-center justify-center">
+      <a id="middle-banner-link" href="https://mdbabuhossan290324-svg.github.io/amazing-shopping/caption.html" target="_blank" rel="noopener noreferrer" class="block w-full h-full">
+        <img id="middle-banner-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcDbNoZIXR581Zv0NCiwCz_XRqSnyR5FHdFzN1uwcdJbGDP6arCqbOX7-a6-DcxJyfWALtSQK0Fx0TVW1ED0VKk87iVvdAdoYSOZEV2DDk6uNTwADcCn24ypsK6fvcId9QKA-d6LaNRDL9V6FtOMEIa_NJwaU6ed3DPjaWw32GgZ42AljCkU_1tPDz1yg/s1774/16766dd2-3e63-40ec-a5c7-5efcf5a69766.png" alt="Rotating Banner" class="w-full h-auto object-cover rounded-xl transition-opacity duration-500 opacity-100" style="opacity: 0;">
+      </a>
+      <!-- Slide indicator dots -->
+      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10 bg-black/50 px-2 py-1 rounded-full">
+        <span id="banner-dot-0" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span id="banner-dot-1" class="w-2 h-2 rounded-full bg-slate-600"></span>
+      </div>
+    </div>
+
+    <!-- MIDDLE BANNER AD CODE (728x90) -->
+    <div class="w-full flex justify-center items-center overflow-x-auto my-1 min-h-[90px]">
+      <iframe srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;background:transparent;overflow:hidden;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;script type='text/javascript'&gt;atOptions={'key':'b1ea071a36d532c5c71d427f548a748f','format':'iframe','height':90,'width':728,'params':{}};&lt;/script&gt;&lt;script type='text/javascript' src='https://www.highperformanceformat.com/b1ea071a36d532c5c71d427f548a748f/invoke.js'&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;" width="728" height="90" frameborder="0" scrolling="no" style="border:none; overflow:hidden; max-width:100%; min-height:90px;" title="Advertisement"></iframe>
+    </div>
+
+    <!-- LARGE EMOJI SAMPLE SHOWCASE GALLERY -->
+    <div class="glass-card rounded-2xl p-4 border border-slate-700/60 shadow-2xl relative space-y-3">
+      <div class="flex items-center justify-between flex-wrap gap-2 border-b border-slate-800 pb-2">
+        <h3 class="text-sm sm:text-base font-extrabold text-white flex items-center gap-2">
+          <i class="fa-solid fa-face-laugh-beam text-yellow-400 text-xl animate-bounce"></i>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-emerald-400 to-sky-400">Large Expressive Emoji Samples (লাইভ ইমোজি স্যাম্পল)</span>
+        </h3>
+        <span class="text-[10px] font-bold text-amber-300 bg-amber-950/80 px-2.5 py-0.5 rounded-full border border-amber-500/40">
+          ⚡ 200+ Big Emojis
+        </span>
+      </div>
+
+      <p class="text-xs text-slate-300 leading-relaxed">
+        Tap any big emoji below to instant copy 📋 or tap to quickly generate custom AI emoji combos with this emotion!
+      </p>
+
+      <!-- LARGE EMOJI GRID -->
+      <div class="grid grid-cols-6 sm:grid-cols-10 gap-2 p-2 bg-slate-950/80 rounded-xl border border-slate-800/80 max-h-80 overflow-y-auto no-scrollbar">
+        <button onclick="copyToClipboardText('🤑', '🤑 Copied!'); fillQuickTopic('🤑 Rich &amp; Money Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🤑 Money">🤑</button>
+        <button onclick="copyToClipboardText('😱', '😱 Copied!'); fillQuickTopic('😱 Shocked &amp; OMG Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😱 Shocked">😱</button>
+        <button onclick="copyToClipboardText('😲', '😲 Copied!'); fillQuickTopic('😲 Surprised Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😲 Surprised">😲</button>
+        <button onclick="copyToClipboardText('🤪', '🤪 Copied!'); fillQuickTopic('🤪 Crazy &amp; Funny Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🤪 Crazy">🤪</button>
+        <button onclick="copyToClipboardText('😭', '😭 Copied!'); fillQuickTopic('😭 Emotional Crying Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😭 Crying">😭</button>
+        <button onclick="copyToClipboardText('😢', '😢 Copied!'); fillQuickTopic('😢 Sad Emotion')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😢 Sad">😢</button>
+        <button onclick="copyToClipboardText('🥺', '🥺 Copied!'); fillQuickTopic('🥺 Cute Pleading Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🥺 Cute">🥺</button>
+        <button onclick="copyToClipboardText('😂', '😂 Copied!'); fillQuickTopic('😂 Laughing Out Loud')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😂 LOL">😂</button>
+        <button onclick="copyToClipboardText('😤', '😤 Copied!'); fillQuickTopic('😤 Angry Hmph Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😤 Angry">😤</button>
+        <button onclick="copyToClipboardText('🤯', '🤯 Copied!'); fillQuickTopic('🤯 Mind Blown Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🤯 Mind Blown">🤯</button>
+
+        <button onclick="copyToClipboardText('😎', '😎 Copied!'); fillQuickTopic('😎 Cool Savage Flex')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😎 Cool">😎</button>
+        <button onclick="copyToClipboardText('😉', '😉 Copied!'); fillQuickTopic('😉 Winking Cute Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😉 Wink">😉</button>
+        <button onclick="copyToClipboardText('😊', '😊 Copied!'); fillQuickTopic('😊 Soft Happy Smile')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😊 Smile">😊</button>
+        <button onclick="copyToClipboardText('🤫', '🤫 Copied!'); fillQuickTopic('🤫 Secret Shh Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🤫 Secret">🤫</button>
+        <button onclick="copyToClipboardText('😳', '😳 Copied!'); fillQuickTopic('😳 Flustered Shy Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😳 Shy">😳</button>
+        <button onclick="copyToClipboardText('😨', '😨 Copied!'); fillQuickTopic('😨 Scared Fear Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😨 Scared">😨</button>
+        <button onclick="copyToClipboardText('😫', '😫 Copied!'); fillQuickTopic('😫 Tired Exhausted')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😫 Tired">😫</button>
+        <button onclick="copyToClipboardText('😩', '😩 Copied!'); fillQuickTopic('😩 Weary Drama Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😩 Weary">😩</button>
+        <button onclick="copyToClipboardText('😡', '😡 Copied!'); fillQuickTopic('😡 Savage Rage Mode')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😡 Rage">😡</button>
+        <button onclick="copyToClipboardText('😣', '😣 Copied!'); fillQuickTopic('😣 Struggling Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😣 Struggling">😣</button>
+
+        <button onclick="copyToClipboardText('🎧', '🎧 Copied!'); fillQuickTopic('🎧 Music &amp; Beats Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎧 Headphones">🎧</button>
+        <button onclick="copyToClipboardText('🚀', '🚀 Copied!'); fillQuickTopic('🚀 Rocket Launch Success')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🚀 Rocket">🚀</button>
+        <button onclick="copyToClipboardText('🇧🇩', '🇧🇩 Copied!'); fillQuickTopic('🇧🇩 Bangladesh Flag Pride')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🇧🇩 BD Flag">🇧🇩</button>
+        <button onclick="copyToClipboardText('🔒', '🔒 Copied!'); fillQuickTopic('🔒 Secure Locked Privacy')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🔒 Lock">🔒</button>
+        <button onclick="copyToClipboardText('🎬', '🎬 Copied!'); fillQuickTopic('🎬 Cinema Movie Director')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎬 Clapper">🎬</button>
+        <button onclick="copyToClipboardText('📱', '📱 Copied!'); fillQuickTopic('📱 Smartphone Tech Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="📱 Phone">📱</button>
+        <button onclick="copyToClipboardText('🔗', '🔗 Copied!'); fillQuickTopic('🔗 Link Bio Connection')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🔗 Link">🔗</button>
+        <button onclick="copyToClipboardText('💸', '💸 Copied!'); fillQuickTopic('💸 Flying Money Cash')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💸 Cash">💸</button>
+        <button onclick="copyToClipboardText('🤖', '🤖 Copied!'); fillQuickTopic('🤖 AI Robot Tech Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🤖 Robot">🤖</button>
+        <button onclick="copyToClipboardText('🎉', '🎉 Copied!'); fillQuickTopic('🎉 Party Celebration')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎉 Party">🎉</button>
+
+        <button onclick="copyToClipboardText('🔓', '🔓 Copied!'); fillQuickTopic('🔓 Unlocked Access')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🔓 Unlock">🔓</button>
+        <button onclick="copyToClipboardText('💰', '💰 Copied!'); fillQuickTopic('💰 Money Bag Rich')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💰 Money Bag">💰</button>
+        <button onclick="copyToClipboardText('👉', '👉 Copied!'); fillQuickTopic('👉 Point Right')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="👉 Point">👉</button>
+        <button onclick="copyToClipboardText('👇', '👇 Copied!'); fillQuickTopic('👇 Point Down Link')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="👇 Point Down">👇</button>
+        <button onclick="copyToClipboardText('⭐', '⭐ Copied!'); fillQuickTopic('⭐ Star Magic Glow')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="⭐ Star">⭐</button>
+        <button onclick="copyToClipboardText('⚠️', '⚠️ Copied!'); fillQuickTopic('⚠️ Warning Alert')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="⚠️ Warning">⚠️</button>
+        <button onclick="copyToClipboardText('💪', '💪 Copied!'); fillQuickTopic('💪 Gym Strength Flex')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💪 Flex">💪</button>
+        <button onclick="copyToClipboardText('💯', '💯 Copied!'); fillQuickTopic('💯 100 Percent Real')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💯 100">💯</button>
+        <button onclick="copyToClipboardText('✂️', '✂️ Copied!'); fillQuickTopic('✂️ Cut Scissors Style')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="✂️ Scissors">✂️</button>
+        <button onclick="copyToClipboardText('🛍️', '🛍️ Copied!'); fillQuickTopic('🛍️ Shopping Bags Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🛍️ Shopping">🛍️</button>
+
+        <button onclick="copyToClipboardText('🎥', '🎥 Copied!'); fillQuickTopic('🎥 Video Creator Vlogger')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎥 Camera">🎥</button>
+        <button onclick="copyToClipboardText('🎁', '🎁 Copied!'); fillQuickTopic('🎁 Gift Surprise Box')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎁 Gift">🎁</button>
+        <button onclick="copyToClipboardText('✈️', '✈️ Copied!'); fillQuickTopic('✈️ Travel Airplane')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="✈️ Plane">✈️</button>
+        <button onclick="copyToClipboardText('🌙', '🌙 Copied!'); fillQuickTopic('🌙 Crescent Moon Night')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🌙 Moon">🌙</button>
+        <button onclick="copyToClipboardText('☕', '☕ Copied!'); fillQuickTopic('☕ Coffee Addict Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="☕ Coffee">☕</button>
+        <button onclick="copyToClipboardText('📧', '📧 Copied!'); fillQuickTopic('📧 Email Contact')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="📧 Email">📧</button>
+        <button onclick="copyToClipboardText('📩', '📩 Copied!'); fillQuickTopic('📩 DM For Collabs')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="📩 Mail">📩</button>
+        <button onclick="copyToClipboardText('💭', '💭 Copied!'); fillQuickTopic('💭 Thought Bubble')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💭 Thought">💭</button>
+        <button onclick="copyToClipboardText('💀', '💀 Copied!'); fillQuickTopic('💀 Dead Laughing Skull')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💀 Skull">💀</button>
+        <button onclick="copyToClipboardText('👁️', '👁️ Copied!'); fillQuickTopic('👁️ Eye Watching')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="👁️ Eye">👁️</button>
+
+        <button onclick="copyToClipboardText('🌹', '🌹 Copied!'); fillQuickTopic('🌹 Red Rose Love')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🌹 Rose">🌹</button>
+        <button onclick="copyToClipboardText('💞', '💞 Copied!'); fillQuickTopic('💞 Revolving Hearts')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💞 Hearts">💞</button>
+        <button onclick="copyToClipboardText('💗', '💗 Copied!'); fillQuickTopic('💗 Growing Heart')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💗 Pink Heart">💗</button>
+        <button onclick="copyToClipboardText('💕', '💕 Copied!'); fillQuickTopic('💕 Two Hearts')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💕 Two Hearts">💕</button>
+        <button onclick="copyToClipboardText('💜', '💜 Copied!'); fillQuickTopic('💜 Purple Heart Aesthetic')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💜 Purple Heart">💜</button>
+        <button onclick="copyToClipboardText('💛', '💛 Copied!'); fillQuickTopic('💛 Yellow Heart Sun')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💛 Yellow Heart">💛</button>
+        <button onclick="copyToClipboardText('💚', '💚 Copied!'); fillQuickTopic('💚 Green Heart Nature')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💚 Green Heart">💚</button>
+        <button onclick="copyToClipboardText('💔', '💔 Copied!'); fillQuickTopic('💔 Broken Heart Sad')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💔 Broken Heart">💔</button>
+        <button onclick="copyToClipboardText('💓', '💓 Copied!'); fillQuickTopic('💓 Beating Heart')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💓 Beating Heart">💓</button>
+        <button onclick="copyToClipboardText('🌍', '🌍 Copied!'); fillQuickTopic('🌍 Globe Travel World')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🌍 Globe">🌍</button>
+
+        <!-- Flags & Travel -->
+        <button onclick="copyToClipboardText('🇧🇷', '🇧🇷 Copied!'); fillQuickTopic('🇧🇷 Brazil Flag Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🇧🇷 Brazil">🇧🇷</button>
+        <button onclick="copyToClipboardText('🇦🇷', '🇦🇷 Copied!'); fillQuickTopic('🇦🇷 Argentina Flag')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🇦🇷 Argentina">🇦🇷</button>
+        <button onclick="copyToClipboardText('🇺🇸', '🇺🇸 Copied!'); fillQuickTopic('🇺🇸 USA Flag')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🇺🇸 USA">🇺🇸</button>
+        <button onclick="copyToClipboardText('🇵🇰', '🇵🇰 Copied!'); fillQuickTopic('🇵🇰 Pakistan Flag')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🇵🇰 Pakistan">🇵🇰</button>
+        <button onclick="copyToClipboardText('🕋', '🕋 Copied!'); fillQuickTopic('🕋 Kaaba Makkah Holy')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🕋 Kaaba">🕋</button>
+        <button onclick="copyToClipboardText('🇬🇧', '🇬🇧 Copied!'); fillQuickTopic('🇬🇧 UK London Flag')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🇬🇧 UK">🇬🇧</button>
+        <button onclick="copyToClipboardText('🎱', '🎱 Copied!'); fillQuickTopic('🎱 8 Ball Game')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎱 8 Ball">🎱</button>
+        <button onclick="copyToClipboardText('🎸', '🎸 Copied!'); fillQuickTopic('🎸 Rock Guitar Beats')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎸 Guitar">🎸</button>
+        <button onclick="copyToClipboardText('🍾', '🍾 Copied!'); fillQuickTopic('🍾 Champagne Pop Party')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🍾 Bottle">🍾</button>
+        <button onclick="copyToClipboardText('🎤', '🎤 Copied!'); fillQuickTopic('🎤 Microphone Singer')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎤 Mic">🎤</button>
+
+        <!-- Fun & Animals & Objects -->
+        <button onclick="copyToClipboardText('🗽', '🗽 Copied!'); fillQuickTopic('🗽 Statue of Liberty')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🗽 Liberty">🗽</button>
+        <button onclick="copyToClipboardText('🌻', '🌻 Copied!'); fillQuickTopic('🌻 Sunflower Bright')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🌻 Sunflower">🌻</button>
+        <button onclick="copyToClipboardText('🍔', '🍔 Copied!'); fillQuickTopic('🍔 Burger Foodie')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🍔 Burger">🍔</button>
+        <button onclick="copyToClipboardText('🌶️', '🌶️ Copied!'); fillQuickTopic('🌶️ Hot Spicy Chili')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🌶️ Chili">🌶️</button>
+        <button onclick="copyToClipboardText('🥭', '🥭 Copied!'); fillQuickTopic('🥭 Sweet Mango Fruit')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🥭 Mango">🥭</button>
+        <button onclick="copyToClipboardText('🏐', '🏐 Copied!'); fillQuickTopic('🏐 Volleyball Sports')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🏐 Volleyball">🏐</button>
+        <button onclick="copyToClipboardText('🎾', '🎾 Copied!'); fillQuickTopic('🎾 Tennis Match')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎾 Tennis">🎾</button>
+        <button onclick="copyToClipboardText('🏀', '🏀 Copied!'); fillQuickTopic('🏀 Basketball Hoops')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🏀 Basketball">🏀</button>
+        <button onclick="copyToClipboardText('🍉', '🍉 Copied!'); fillQuickTopic('🍉 Summer Watermelon')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🍉 Watermelon">🍉</button>
+        <button onclick="copyToClipboardText('🍓', '🍓 Copied!'); fillQuickTopic('🍓 Sweet Strawberry')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🍓 Strawberry">🍓</button>
+
+        <button onclick="copyToClipboardText('🍗', '🍗 Copied!'); fillQuickTopic('🍗 Fried Chicken Feast')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🍗 Chicken">🍗</button>
+        <button onclick="copyToClipboardText('🍏', '🍏 Copied!'); fillQuickTopic('🍏 Green Apple Fresh')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🍏 Apple">🍏</button>
+        <button onclick="copyToClipboardText('🌼', '🌼 Copied!'); fillQuickTopic('🌼 Blossom Flower')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🌼 Flower">🌼</button>
+        <button onclick="copyToClipboardText('🍀', '🍀 Copied!'); fillQuickTopic('🍀 Lucky Four Leaf Clover')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🍀 Clover">🍀</button>
+        <button onclick="copyToClipboardText('🍭', '🍭 Copied!'); fillQuickTopic('🍭 Lollipop Candy Cute')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🍭 Lollipop">🍭</button>
+        <button onclick="copyToClipboardText('😈', '😈 Copied!'); fillQuickTopic('😈 Devil Naughty Smile')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="😈 Devil">😈</button>
+        <button onclick="copyToClipboardText('💩', '💩 Copied!'); fillQuickTopic('💩 Funny Poop Funny')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💩 Poop">💩</button>
+        <button onclick="copyToClipboardText('🤬', '🤬 Copied!'); fillQuickTopic('🤬 Cursing Angry Face')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🤬 Curse">🤬</button>
+        <button onclick="copyToClipboardText('🤡', '🤡 Copied!'); fillQuickTopic('🤡 Clown Funny Joker')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🤡 Clown">🤡</button>
+        <button onclick="copyToClipboardText('🙈', '🙈 Copied!'); fillQuickTopic('🙈 See No Evil Monkey')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🙈 Monkey">🙈</button>
+
+        <button onclick="copyToClipboardText('🙊', '🙊 Copied!'); fillQuickTopic('🙊 Speak No Evil')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🙊 Monkey">🙊</button>
+        <button onclick="copyToClipboardText('🐹', '🐹 Copied!'); fillQuickTopic('🐹 Hamster Cute Animal')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐹 Hamster">🐹</button>
+        <button onclick="copyToClipboardText('👺', '👺 Copied!'); fillQuickTopic('👺 Goblin Mask Mask')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="👺 Goblin">👺</button>
+        <button onclick="copyToClipboardText('🐯', '🐯 Copied!'); fillQuickTopic('🐯 Tiger Roar King')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐯 Tiger">🐯</button>
+        <button onclick="copyToClipboardText('🐸', '🐸 Copied!'); fillQuickTopic('🐸 Frog Pepe Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐸 Frog">🐸</button>
+        <button onclick="copyToClipboardText('🐷', '🐷 Copied!'); fillQuickTopic('🐷 Pig Cute Animal')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐷 Pig">🐷</button>
+        <button onclick="copyToClipboardText('🐶', '🐶 Copied!'); fillQuickTopic('🐶 Dog Cute Puppy')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐶 Dog">🐶</button>
+        <button onclick="copyToClipboardText('🐼', '🐼 Copied!'); fillQuickTopic('🐼 Panda Chill Cute')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐼 Panda">🐼</button>
+        <button onclick="copyToClipboardText('🐮', '🐮 Copied!'); fillQuickTopic('🐮 Cow Farm Vibe')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐮 Cow">🐮</button>
+        <button onclick="copyToClipboardText('🐭', '🐭 Copied!'); fillQuickTopic('🐭 Mouse Cute')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐭 Mouse">🐭</button>
+
+        <button onclick="copyToClipboardText('🐨', '🐨 Copied!'); fillQuickTopic('🐨 Koala Hug')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐨 Koala">🐨</button>
+        <button onclick="copyToClipboardText('👻', '👻 Copied!'); fillQuickTopic('👻 Ghost Spooky Boo')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="👻 Ghost">👻</button>
+        <button onclick="copyToClipboardText('☠️', '☠️ Copied!'); fillQuickTopic('☠️ Skull Crossbones Danger')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="☠️ Danger">☠️</button>
+        <button onclick="copyToClipboardText('👍', '👍 Copied!'); fillQuickTopic('👍 Thumbs Up Good')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="👍 Like">👍</button>
+        <button onclick="copyToClipboardText('💋', '💋 Copied!'); fillQuickTopic('💋 Kiss Mark Love')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💋 Kiss">💋</button>
+        <button onclick="copyToClipboardText('💬', '💬 Copied!'); fillQuickTopic('💬 Speech Bubble Talk')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💬 Chat">💬</button>
+        <button onclick="copyToClipboardText('⚔️', '⚔️ Copied!'); fillQuickTopic('⚔️ Swords Battle Fight')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="⚔️ Battle">⚔️</button>
+        <button onclick="copyToClipboardText('📅', '📅 Copied!'); fillQuickTopic('📅 Calendar Schedule')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="📅 Date">📅</button>
+        <button onclick="copyToClipboardText('❓', '❓ Copied!'); fillQuickTopic('❓ Question Mystery')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="❓ Question">❓</button>
+        <button onclick="copyToClipboardText('🕺', '🕺 Copied!'); fillQuickTopic('🕺 Dance Disco Party')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🕺 Dance">🕺</button>
+
+        <button onclick="copyToClipboardText('💃', '💃 Copied!'); fillQuickTopic('💃 Dancing Girl Queen')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="💃 Dancing">💃</button>
+        <button onclick="copyToClipboardText('🏃', '🏃 Copied!'); fillQuickTopic('🏃 Running Fast Sports')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🏃 Runner">🏃</button>
+        <button onclick="copyToClipboardText('🦌', '🦌 Copied!'); fillQuickTopic('🦌 Deer Forest')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🦌 Deer">🦌</button>
+        <button onclick="copyToClipboardText('🦒', '🦒 Copied!'); fillQuickTopic('🦒 Giraffe Tall')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🦒 Giraffe">🦒</button>
+        <button onclick="copyToClipboardText('🦘', '🦘 Copied!'); fillQuickTopic('🦘 Kangaroo Jump')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🦘 Kangaroo">🦘</button>
+        <button onclick="copyToClipboardText('🐬', '🐬 Copied!'); fillQuickTopic('🐬 Dolphin Ocean')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐬 Dolphin">🐬</button>
+        <button onclick="copyToClipboardText('🦈', '🦈 Copied!'); fillQuickTopic('🦈 Shark Danger')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🦈 Shark">🦈</button>
+        <button onclick="copyToClipboardText('🐙', '🐙 Copied!'); fillQuickTopic('🐙 Octopus Sea')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🐙 Octopus">🐙</button>
+        <button onclick="copyToClipboardText('🦖', '🦖 Copied!'); fillQuickTopic('REX Dino Monster')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🦖 Dino">🦖</button>
+        <button onclick="copyToClipboardText('🕊️', '🕊️ Copied!'); fillQuickTopic('🕊️ Peace Dove Soft')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🕊️ Dove">🕊️</button>
+
+        <button onclick="copyToClipboardText('🌴', '🌴 Copied!'); fillQuickTopic('🌴 Palm Tree Tropical')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🌴 Palm">🌴</button>
+        <button onclick="copyToClipboardText('🌞', '🌞 Copied!'); fillQuickTopic('🌞 Sun Sunshine Happy')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🌞 Sun">🌞</button>
+        <button onclick="copyToClipboardText('🌊', '🌊 Copied!'); fillQuickTopic('🌊 Ocean Wave Chill')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🌊 Wave">🌊</button>
+        <button onclick="copyToClipboardText('☔', '☔ Copied!'); fillQuickTopic('☔ Rainy Umbrella')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="☔ Rain">☔</button>
+        <button onclick="copyToClipboardText('🎨', '🎨 Copied!'); fillQuickTopic('🎨 Palette Art Creative')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎨 Art">🎨</button>
+        <button onclick="copyToClipboardText('🛵', '🛵 Copied!'); fillQuickTopic('🛵 Scooter Bike Ride')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🛵 Scooter">🛵</button>
+        <button onclick="copyToClipboardText('📷', '📷 Copied!'); fillQuickTopic('📷 Camera Photo Art')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="📷 Camera">📷</button>
+        <button onclick="copyToClipboardText('🔑', '🔑 Copied!'); fillQuickTopic('🔑 Key Success Lock')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🔑 Key">🔑</button>
+        <button onclick="copyToClipboardText('🎈', '🎈 Copied!'); fillQuickTopic('🎈 Balloon Party Fun')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🎈 Balloon">🎈</button>
+        <button onclick="copyToClipboardText('🔍', '🔍 Copied!'); fillQuickTopic('🔍 Search Inspect')" class="p-2 text-2xl sm:text-3xl rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-400 hover:scale-125 transition-all shadow-md flex items-center justify-center active:scale-95" title="🔍 Search">🔍</button>
+      </div>
+    </div>
+
+    <!-- MAIN EMOJI GENERATOR MODULE -->
+    <main class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-700/60 shadow-2xl relative">
+      <div class="text-center mb-4">
+        <h3 class="text-lg sm:text-xl font-extrabold text-white flex items-center justify-center gap-2">
+          <i class="fa-solid fa-face-smile text-amber-400 text-2xl animate-pulse"></i>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-sky-400 to-purple-400">Emoji Generator AI</span>
+        </h3>
+        <p class="text-xs text-slate-300 mt-1">Generate viral, aesthetic, cute, attitude, love, trending &amp; Bangla emoji combos, art &amp; expressions for TikTok, Instagram, WhatsApp, Facebook &amp; YouTube</p>
+      </div>
+
+      <!-- Platform / Category Selection Tabs -->
+      <div class="flex items-center justify-start gap-1 p-1 bg-slate-900/90 rounded-xl mb-4 border border-slate-800 overflow-x-auto no-scrollbar">
+        <button id="platform-all-btn" onclick="selectPlatform('All Emojis')" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap bg-gradient-to-r from-emerald-500 to-sky-500 text-white shadow-lg">
+          <i class="fa-solid fa-fire text-amber-300"></i> All Emojis
+        </button>
+        <button id="platform-insta-btn" onclick="selectPlatform('Aesthetic &amp; Cute')" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap text-slate-400 hover:text-white">
+          <i class="fa-solid fa-sparkles text-pink-500"></i> Aesthetic &amp; Cute
+        </button>
+        <button id="platform-tiktok-btn" onclick="selectPlatform('Attitude &amp; Savage')" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap text-slate-400 hover:text-white">
+          <i class="fa-solid fa-crown text-cyan-400"></i> Attitude &amp; Savage
+        </button>
+        <button id="platform-shorts-btn" onclick="selectPlatform('Love &amp; Romantic')" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap text-slate-400 hover:text-white">
+          <i class="fa-solid fa-heart text-purple-400"></i> Love &amp; Romantic
+        </button>
+        <button id="platform-facebook-btn" onclick="selectPlatform('Trending &amp; Combo')" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap text-slate-400 hover:text-white">
+          <i class="fa-solid fa-bolt text-yellow-400"></i> Trending &amp; Combo
+        </button>
+      </div>
+
+      <!-- INPUT FIELD: Emotion / Topic / Vibe -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <label class="block text-xs font-bold text-slate-200">
+            Enter Topic, Emotion, Vibe, Mood or Keyword for Emojis <span class="text-emerald-400">*</span>
+          </label>
+          <span class="text-[10px] text-emerald-400 font-bold bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">
+            ⚡ Gemini AI Unlimited
+          </span>
+        </div>
+        <textarea id="bio-topic-input" rows="3" placeholder="e.g. Aesthetic sunset, Savage attitude flex, Cute love &amp; hugs, Gym motivation, Party vibes, Sad aesthetic..." class="w-full p-3 rounded-xl glass-input text-xs text-white focus:ring-2 focus:ring-emerald-500 outline-none transition-all resize-none">Aesthetic Soft Girl Vibe</textarea>
+
+        <!-- Quick Emoji Suggestions -->
+        <div class="space-y-1.5">
+          <span class="text-[11px] font-bold text-slate-400 block">Quick Suggestions:</span>
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button onclick="fillQuickTopic('✨ Aesthetic &amp; Soft')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-[11px] font-semibold text-emerald-400 hover:border-emerald-500 hover:scale-105 transition-all">✨ Aesthetic &amp; Soft</button>
+            <button onclick="fillQuickTopic('👑 Savage &amp; Attitude')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-[11px] font-semibold text-sky-400 hover:border-sky-500 hover:scale-105 transition-all">👑 Savage &amp; Attitude</button>
+            <button onclick="fillQuickTopic('💖 Cute Love &amp; Hugs')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-[11px] font-semibold text-purple-400 hover:border-purple-500 hover:scale-105 transition-all">💖 Cute Love &amp; Hugs</button>
+            <button onclick="fillQuickTopic('🔥 Trending Combo')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-[11px] font-semibold text-pink-400 hover:border-pink-500 hover:scale-105 transition-all">🔥 Trending Combo</button>
+            <button onclick="fillQuickTopic('🎉 Party &amp; Celebration')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-[11px] font-semibold text-yellow-400 hover:border-yellow-500 hover:scale-105 transition-all">🎉 Party &amp; Celebration</button>
+            <button onclick="fillQuickTopic('🇧🇩 Bangla Emoji Vibe')" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-[11px] font-semibold text-cyan-400 hover:border-cyan-500 hover:scale-105 transition-all">🇧🇩 Bangla Emoji Vibe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMIZATION OPTIONS -->
+      <div class="mt-4 pt-3 border-t border-slate-800/80 space-y-3">
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div>
+            <label class="font-bold text-slate-300 block mb-1">Emoji Style / Vibe:</label>
+            <select id="bio-style-opt" class="w-full p-2 rounded-xl glass-input text-xs text-slate-200 outline-none">
+              <option value="✨ Aesthetic &amp; Cute" selected="">✨ Aesthetic &amp; Cute</option>
+              <option value="🔥 Attitude &amp; Savage">🔥 Attitude &amp; Savage</option>
+              <option value="💖 Love &amp; Romantic">💖 Love &amp; Romantic</option>
+              <option value="⚡ Motivational &amp; Energy">⚡ Motivational &amp; Energy</option>
+              <option value="🌿 Minimalist &amp; Soft">🌿 Minimalist &amp; Soft</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="font-bold text-slate-300 block mb-1">Output Format:</label>
+            <select id="bio-count-opt" class="w-full p-2 rounded-xl glass-input text-xs text-slate-200 outline-none">
+              <option value="All Emoji Packs" selected="">All Emoji Packs (Standard)</option>
+              <option value="Short Emoji Combos">Short Emoji Combos</option>
+              <option value="Detailed Emoji Art &amp; Patterns">Detailed Emoji Art &amp; Patterns</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- GENERATE BUTTON -->
+        <button id="generate-btn" onclick="generateEmojisNow()" class="w-full py-3.5 px-6 rounded-2xl font-digital font-bold text-sm sm:text-base text-white bg-gradient-to-r from-emerald-500 via-sky-500 to-purple-600 shadow-2xl hover:opacity-95 active:scale-[0.99] transition-all flex items-center justify-center gap-2 group cursor-pointer">
+          <i class="fa-solid fa-wand-magic-sparkles text-lg animate-bounce text-yellow-300"></i>
+          <span>GENERATE EMOJIS NOW 🚀</span>
+        </button>
+      </div>
+
+      <!-- OUTPUT GENERATED RESULT CARD -->
+      <div id="bio-result-card" class="mt-5 pt-4 border-t border-slate-800 space-y-4 hidden-force">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <span class="text-xs font-bold text-emerald-400 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40">
+            <i class="fa-solid fa-circle-check"></i> <span id="result-status-text">Emoji Combos Generated Successfully!</span>
+          </span>
+          <span class="text-[11px] text-slate-400 font-mono" id="bio-count-badge">0 Emoji Packs</span>
+        </div>
+
+        <!-- Copy All / Copy Selected Bar -->
+        <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-slate-900/90 border border-slate-800">
+          <span class="text-xs text-slate-300 font-semibold flex items-center gap-1">
+            <i class="fa-solid fa-hand-pointer text-sky-400"></i> Tap any emoji card to select or copy
+          </span>
+          <div class="flex items-center gap-2">
+            <button onclick="copyAllBios()" class="py-1.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1 shadow-md transition-all">
+              <i class="fa-solid fa-copy"></i> Copy All Emojis
+            </button>
+            <button onclick="copySelectedBios()" class="py-1.5 px-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center gap-1 shadow-md transition-all">
+              <i class="fa-solid fa-check-double"></i> Copy Selected
+            </button>
+          </div>
+        </div>
+
+        <!-- CATEGORIES OF EMOJIS -->
+        <div class="space-y-4">
+          <!-- 1. Aesthetic & Cute Emojis -->
+          <div id="cat-aesthetic-box" class="space-y-2">
+            <div class="flex items-center gap-1.5 text-xs font-extrabold text-amber-400">
+              <i class="fa-solid fa-sparkles"></i> ✨ Aesthetic &amp; Cute Emojis
+            </div>
+            <div id="aesthetic-tags-container" class="grid grid-cols-1 gap-2 p-2.5 rounded-xl bg-slate-950/80 border border-slate-800/80 min-h-[50px]"></div>
+          </div>
+
+          <!-- 2. Attitude, Savage & Flex Emojis -->
+          <div id="cat-professional-box" class="space-y-2">
+            <div class="flex items-center gap-1.5 text-xs font-extrabold text-sky-400">
+              <i class="fa-solid fa-crown"></i> 🔥 Attitude, Savage &amp; Flex Emojis
+            </div>
+            <div id="professional-tags-container" class="grid grid-cols-1 gap-2 p-2.5 rounded-xl bg-slate-950/80 border border-slate-800/80 min-h-[50px]"></div>
+          </div>
+
+          <!-- 3. Love, Romantic & Hug Emojis -->
+          <div id="cat-creative-box" class="space-y-2">
+            <div class="flex items-center gap-1.5 text-xs font-extrabold text-purple-400">
+              <i class="fa-solid fa-heart"></i> 💖 Love, Romantic &amp; Hug Emojis
+            </div>
+            <div id="creative-tags-container" class="grid grid-cols-1 gap-2 p-2.5 rounded-xl bg-slate-950/80 border border-slate-800/80 min-h-[50px]"></div>
+          </div>
+
+          <!-- 4. Motivational, Energy & Fire Emojis -->
+          <div id="cat-minimalist-box" class="space-y-2">
+            <div class="flex items-center gap-1.5 text-xs font-extrabold text-emerald-400">
+              <i class="fa-solid fa-bolt"></i> ⚡ Motivational, Energy &amp; Fire Emojis
+            </div>
+            <div id="minimalist-tags-container" class="grid grid-cols-1 gap-2 p-2.5 rounded-xl bg-slate-950/80 border border-slate-800/80 min-h-[50px]"></div>
+          </div>
+
+          <!-- 5. Trending, Combo & Special Emojis -->
+          <div id="cat-bangla-box" class="space-y-2">
+            <div class="flex items-center gap-1.5 text-xs font-extrabold text-rose-400">
+              <i class="fa-solid fa-[#006a4e]"></i> 🇧🇩 Trending, Combo &amp; Special Emojis
+            </div>
+            <div id="bangla-tags-container" class="grid grid-cols-1 gap-2 p-2.5 rounded-xl bg-slate-950/80 border border-slate-800/80 min-h-[50px]"></div>
+          </div>
+        </div>
+
+        <!-- Raw Text View Box -->
+        <div class="space-y-1">
+          <label class="text-[11px] font-bold text-slate-400 block">Plain Text Format (Copy Ready):</label>
+          <textarea id="raw-bios-textarea" readonly="" rows="5" class="w-full p-2.5 rounded-xl glass-input text-xs text-emerald-300 font-mono resize-none outline-none select-all"></textarea>
+        </div>
+
+        <!-- Action Bar: Delete Result -->
+        <div class="flex items-center justify-end gap-2 pt-2">
+          <button onclick="clearBioResults()" class="py-2 px-4 rounded-xl bg-rose-600/80 hover:bg-rose-600 text-white font-bold text-xs flex items-center gap-1.5 transition-all shadow-lg">
+            <i class="fa-solid fa-trash-can"></i> Delete Results
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- FEATURED YOUTUBE VIDEO SECTION -->
+    <div id="youtube-section" class="glass-card rounded-2xl p-4 border border-slate-700/60 shadow-xl text-center space-y-3">
+      <h3 class="text-xs font-extrabold text-slate-200 uppercase tracking-wider flex items-center justify-center gap-1.5">
+        <i class="fa-brands fa-youtube text-red-500 text-sm"></i> Featured Video
+      </h3>
+      <div class="w-full aspect-[9/16] max-w-[280px] mx-auto rounded-xl overflow-hidden rgb-border bg-black">
+        <iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/Jjgqo6RIhKw" title="YouTube Shorts" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+      </div>
+    </div>
+
+    <!-- YOUTUBE AD CODE (300x250) -->
+    <div class="w-full flex justify-center items-center overflow-hidden my-1 min-h-[250px]">
+      <iframe srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset='utf-8'&gt;&lt;style&gt;html,body{margin:0;padding:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;background:transparent;overflow:hidden;}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;script type='text/javascript'&gt;atOptions={'key':'5dc6a2af6991b7938e46dfda9e7cc30f','format':'iframe','height':250,'width':300,'params':{}};&lt;/script&gt;&lt;script type='text/javascript' src='https://www.highperformanceformat.com/5dc6a2af6991b7938e46dfda9e7cc30f/invoke.js'&gt;&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;" width="300" height="250" frameborder="0" scrolling="no" style="border:none; overflow:hidden;" title="Advertisement"></iframe>
+    </div>
+
+    <!-- MONETIZATION TEXT & 3 BUTTONS SECTION -->
+    <div class="glass-card rounded-2xl p-4 border border-slate-700/60 text-center space-y-3 shadow-xl">
+      <p class="text-xs sm:text-sm font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-sky-400 to-amber-300 leading-relaxed">
+        Monetize your mobile app and website or earn money by sharing direct links on social media 💸
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+        <!-- star.io Button -->
+        <a href="https://portal.start.io/#/signup?referredby=1f23b257-8d8f-0b65-5299-5482874c5efb&amp;preferredsite=pub&amp;source=directURL" target="_blank" rel="noopener noreferrer" class="relative group block w-full text-center py-3 px-4 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-emerald-500 to-teal-600 shadow-lg hover:scale-[1.02] active:scale-95 transition-all overflow-hidden">
+          <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+          <span class="relative z-10 flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-star text-amber-300"></i> star.io
+          </span>
+        </a>
+        <!-- aavertica Button -->
+        <a href="https://adv.so/299330" target="_blank" rel="noopener noreferrer" class="relative group block w-full text-center py-3 px-4 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-sky-500 to-blue-600 shadow-lg hover:scale-[1.02] active:scale-95 transition-all overflow-hidden">
+          <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+          <span class="relative z-10 flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-rectangle-ad text-sky-200"></i> aavertica
+          </span>
+        </a>
+        <!-- adsterra Button -->
+        <a href="https://beta.publishers.adsterra.com/referral/ZYhUrtsHjS" target="_blank" rel="noopener noreferrer" class="relative group block w-full text-center py-3 px-4 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-purple-500 to-indigo-600 shadow-lg hover:scale-[1.02] active:scale-95 transition-all overflow-hidden">
+          <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+          <span class="relative z-10 flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-bolt text-yellow-300"></i> adsterra
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- BOTTOM BANNERS & DIRECT AD BUTTON -->
+    <div class="w-full space-y-3 my-2">
+      <!-- Banner 1 (Script Ad) -->
+      <div class="w-full flex justify-center items-center overflow-hidden min-h-[250px] rounded-2xl bg-slate-900/60 p-2 border border-slate-800">
+        <script type="text/javascript" src="https://adv.so/affiliate.php?aff=299330&amp;width=300&amp;height=250&amp;id=14382"></script><a target="_blank" href="https://adv.so/299330?realRef="><img src="//adv.so/affiliateBanners/300/250/167.jpeg"></a><a target="_blank" href="https://adv.so/299330?realRef="><img src="//adv.so/affiliateBanners/300/250/167.jpeg"></a>
+      </div>
+      <!-- Banner 2 (Image Promo Ad) -->
+      <div class="w-full flex justify-center items-center overflow-hidden rounded-2xl bg-slate-900/60 p-2 border border-slate-800">
+        <a href="https://adv.so/299330" target="_blank" rel="noopener noreferrer" class="block hover:scale-[1.01] transition-transform">
+          <img src="https://adv.so/promo/300/250/167.jpeg" alt="Ad Banner" class="rounded-xl shadow-md max-w-full h-auto mx-auto">
+        </a>
+      </div>
+      <!-- DIRECT AD BUTTON -->
+      <div class="w-full">
+        <a href="https://data527.click/70af4fbf3d2de764d268/1361b04bbe/?placementName=default" target="_blank" rel="noopener noreferrer" class="relative group block w-full text-center py-4 px-6 rounded-2xl font-digital font-extrabold text-base sm:text-lg text-white bg-gradient-to-r from-amber-500 via-rose-500 to-purple-600 shadow-2xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-amber-500/30">
+          <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+          <span class="relative z-10 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-fire text-yellow-300 text-xl animate-pulse"></i>
+            direct ad 🚀
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- BOTTOM APP DOWNLOAD & SOCIAL LINKS SECTION -->
+    <section class="w-full">
+      <div class="flex items-center justify-between gap-2 px-2">
+        <!-- 1. Apple App Store -->
+        <a id="bottom-btn-1" href="https://www.appcreator24.com/app4144179-ilzfq3" target="_blank" rel="noopener noreferrer" title="Apple App Store" class="w-12 h-12 rounded-full rgb-border flex items-center justify-center bg-slate-900 text-slate-100 hover:scale-110 transition-transform shadow-lg">
+          <i class="fa-brands fa-apple text-xl"></i>
+        </a>
+        <!-- 2. Google Play -->
+        <a id="bottom-btn-2" href="https://www.appcreator24.com/app4144179-ilzfq3" target="_blank" rel="noopener noreferrer" title="Google Play" class="w-12 h-12 rounded-full rgb-border flex items-center justify-center bg-slate-900 text-emerald-400 hover:scale-110 transition-transform shadow-lg">
+          <i class="fa-brands fa-google-play text-lg"></i>
+        </a>
+        <!-- 3. Amazon Appstore -->
+        <a id="bottom-btn-3" href="https://www.appcreator24.com/app4144179-ilzfq3" target="_blank" rel="noopener noreferrer" title="Amazon Appstore" class="w-12 h-12 rounded-full rgb-border flex items-center justify-center bg-slate-900 text-amber-400 hover:scale-110 transition-transform shadow-lg">
+          <i class="fa-brands fa-amazon text-lg"></i>
+        </a>
+        <!-- 4. YouTube -->
+        <a id="bottom-btn-4" href="https://www.youtube.com/@Amazingshopping-g9r" target="_blank" rel="noopener noreferrer" title="YouTube Channel" class="w-12 h-12 rounded-full rgb-border flex items-center justify-center bg-slate-900 text-red-500 hover:scale-110 transition-transform shadow-lg">
+          <i class="fa-brands fa-youtube text-lg"></i>
+        </a>
+        <!-- 5. Facebook -->
+        <a id="bottom-btn-5" href="https://www.facebook.com/share/1HgmF9SmeP/" target="_blank" rel="noopener noreferrer" title="Facebook Page" class="w-12 h-12 rounded-full rgb-border flex items-center justify-center bg-slate-900 text-sky-400 hover:scale-110 transition-transform shadow-lg">
+          <i class="fa-brands fa-facebook-f text-lg"></i>
+        </a>
+        <!-- 6. TikTok -->
+        <a id="bottom-btn-6" href="https://vm.tiktok.com/ZS9hkVDJ1jMWH-5H6oX/" target="_blank" rel="noopener noreferrer" title="TikTok Account" class="w-12 h-12 rounded-full rgb-border flex items-center justify-center bg-slate-900 text-pink-400 hover:scale-110 transition-transform shadow-lg">
+          <i class="fa-brands fa-tiktok text-lg"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- FOOTER WITH POLICIES & SECRET ADMIN LOCK -->
+    <footer class="mt-4 pt-6 pb-12 border-t border-slate-800/80 text-center text-xs text-slate-400 space-y-4">
+      <!-- POLICY MODAL TRIGGERS -->
+      <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2.5 text-[11px] text-slate-300 font-semibold">
+        <button onclick="openPolicyModal('Privacy Policy')" class="inline-flex items-center gap-1 hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+          <span>Privacy Policy</span>
+        </button>
+        <span>•</span>
+        <button onclick="openPolicyModal('Copyright')" class="inline-flex items-center gap-1 hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+          <span>Copyright</span>
+        </button>
+        <span>•</span>
+        <button onclick="openPolicyModal('Content Policy')" class="inline-flex items-center gap-1 hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+          <span>Content Policy</span>
+        </button>
+        <span>•</span>
+        <button onclick="openPolicyModal('Cookie Policy')" class="inline-flex items-center gap-1 hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+          <span>Cookie Policy</span>
+        </button>
+        <span>•</span>
+        <button onclick="openPolicyModal('Theme Policy')" class="inline-flex items-center gap-1 hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+          <span>Theme Policy</span>
+        </button>
+        <span>•</span>
+        <button onclick="openPolicyModal('Terms &amp; Conditions')" class="inline-flex items-center gap-1 hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+          <span>Terms &amp; Conditions</span>
+        </button>
+        <span>•</span>
+        <button onclick="openPolicyModal('Children\'s Policy')" class="inline-flex items-center gap-1 hover:text-emerald-400 transition-colors">
+          <i class="fa-solid fa-circle-check text-emerald-400 text-xs"></i>
+          <span>Children's Policy</span>
+        </button>
+      </div>
+
+      <p class="text-[11px] text-slate-300">
+        © 2026 Amazing Emoji generator. All Rights Reserved.
+      </p>
+
+      <!-- SECRET ADMIN LOCK ICON -->
+      <div class="pt-2 flex items-center justify-center">
+        <button id="secret-admin-trigger" onclick="openAdminAuthModal()" class="text-white hover:text-emerald-400 transition-all text-sm flex items-center justify-center w-8 h-8 rounded-full bg-slate-900/60 border border-slate-800/80 hover:border-slate-600 shadow-md cursor-pointer" title="Admin Security Portal">
+          <i class="fa-solid fa-lock text-white"></i>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <!-- POLICY MODAL -->
+  <div id="policy-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 hidden-force">
+    <div class="glass-card max-w-md w-full rounded-2xl p-6 border border-slate-700 shadow-2xl relative space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 id="policy-title" class="font-extrabold text-base text-emerald-400">Policy</h3>
+        <button onclick="closePolicyModal()" class="text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div id="policy-body" class="text-xs text-slate-300 leading-relaxed max-h-60 overflow-y-auto pr-2"></div>
+      <button onclick="closePolicyModal()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs">I Understand</button>
+    </div>
+  </div>
+
+  <!-- SECRET ADMIN AUTH MODAL (FIREBASE AUTHENTICATION) -->
+  <div id="admin-auth-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-xl p-4 hidden-force" style="display: none !important;">
+    <div class="glass-card max-w-sm w-full rounded-2xl p-6 border border-emerald-500/40 shadow-[0_0_50px_rgba(16,185,129,0.3)] relative space-y-4">
+      <div class="text-center space-y-2">
+        <div class="w-12 h-12 mx-auto rounded-2xl rgb-border flex items-center justify-center bg-slate-900 text-emerald-400">
+          <i class="fa-solid fa-shield-halved text-2xl"></i>
+        </div>
+        <h3 class="font-digital font-black text-lg text-white">Firebase Admin Login</h3>
+        <p class="text-xs text-slate-300">Login with Firebase Email &amp; Password to unlock control panel</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Admin Email</label>
+          <input type="email" id="admin-email-input" placeholder="admin@example.com" required="" class="w-full p-3 rounded-xl glass-input text-xs text-white font-mono outline-none focus:ring-2 focus:ring-emerald-500" autocomplete="username" value="">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Admin Password</label>
+          <input type="password" id="admin-password-input" placeholder="••••••••••••" required="" class="w-full p-3 rounded-xl glass-input text-xs text-white font-mono outline-none focus:ring-2 focus:ring-emerald-500" autocomplete="current-password" value="">
+        </div>
+        <button type="submit" id="admin-login-btn" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-sky-500 hover:opacity-90 text-white font-extrabold text-xs shadow-lg transition-all flex items-center justify-center gap-2"><span>FIREBASE LOGIN &amp; UNLOCK 🔓</span></button>
+      </form>
+
+      <div class="text-center pt-1">
+        <button onclick="closeAdminAuthModal()" class="text-xs text-slate-300 hover:text-white">Cancel &amp; Return to App</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN DASHBOARD MODAL -->
+  <div id="admin-dashboard-modal" class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/95 backdrop-blur-2xl p-4 hidden-force" style="display: none !important;">
+    <div class="max-w-xl mx-auto glass-card rounded-2xl p-5 border border-slate-700 shadow-2xl space-y-5 my-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-emerald-400 text-xl"></i>
+          <div>
+            <h3 class="font-digital font-black text-lg text-white">Admin Link Manager</h3>
+            <p class="text-[10px] text-emerald-400 font-bold">authenticated mode <span id="admin-user-email-badge" class="text-sky-300 ml-1">mdbabuhossan290324@gmail.com</span></p>
+          </div>
+        </div>
+        <button onclick="handleAdminLogout()" class="px-3 py-1.5 rounded-lg bg-rose-600/80 hover:bg-rose-600 text-white font-bold text-xs flex items-center gap-1">
+          <i class="fa-solid fa-lock"></i> Lock &amp; Exit
+        </button>
+      </div>
+
+      <!-- 1. EDIT TOP 5 NAV BUTTON LINKS -->
+      <div class="space-y-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <h4 class="text-xs font-extrabold text-emerald-400 flex items-center gap-1.5">
+          <i class="fa-solid fa-circle-nodes"></i> Top 5 Circular Button Links
+        </h4>
+        <div class="space-y-2 text-xs">
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">1. QR code Genaretor:</label>
+            <input type="text" id="edit-nav-1" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">2. Title Genaretor:</label>
+            <input type="text" id="edit-nav-2" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">3. Emoji Genaretor:</label>
+            <input type="text" id="edit-nav-3" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">4. Photo to link Genaretor:</label>
+            <input type="text" id="edit-nav-4" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">5. QR Scanner:</label>
+            <input type="text" id="edit-nav-5" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. EDIT APP DOWNLOAD LINK -->
+      <div class="space-y-2 p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <h4 class="text-xs font-extrabold text-sky-400 flex items-center gap-1.5">
+          <i class="fa-solid fa-download"></i> Main App Download URL
+        </h4>
+        <input type="text" id="edit-download-url" class="w-full p-2 rounded-lg glass-input text-xs">
+      </div>
+
+      <!-- 3. EDIT BOTTOM SOCIAL & APP ICONS -->
+      <div class="space-y-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+        <h4 class="text-xs font-extrabold text-purple-400 flex items-center gap-1.5">
+          <i class="fa-solid fa-share-nodes"></i> Bottom Social &amp; Appstore Links
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">1. Apple Store Link:</label>
+            <input type="text" id="edit-bottom-1" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">2. Google Play Link:</label>
+            <input type="text" id="edit-bottom-2" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">3. Amazon Store Link:</label>
+            <input type="text" id="edit-bottom-3" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">4. YouTube Link:</label>
+            <input type="text" id="edit-bottom-4" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">5. Facebook Link:</label>
+            <input type="text" id="edit-bottom-5" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+          <div>
+            <label class="block text-slate-300 mb-1 font-semibold">6. TikTok Link:</label>
+            <input type="text" id="edit-bottom-6" class="w-full p-2 rounded-lg glass-input text-xs">
+          </div>
+        </div>
+      </div>
+
+      <!-- SAVE & EXPORT SOURCE CODE BUTTONS -->
+      <div class="flex flex-col sm:flex-row items-center gap-2 pt-2">
+        <button onclick="saveAdminLinks()" class="w-full sm:flex-1 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow-lg transition-all flex items-center justify-center gap-2">
+          <i class="fa-solid fa-floppy-disk"></i> Save Changes to App
+        </button>
+        <button onclick="copySourceCode()" class="w-full sm:flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-extrabold text-xs shadow-lg transition-all flex items-center justify-center gap-2">
+          <i class="fa-solid fa-code"></i> Copy GitHub Code
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING AI CHATBOT WIDGET -->
+  <div class="fixed bottom-4 right-4 z-40">
+    <!-- Trigger Button -->
+    <button onclick="toggleChatbot()" class="w-14 h-14 rounded-full rgb-border bg-slate-900 text-emerald-400 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform cursor-pointer relative group" title="Need Help? Chat with AI">
+      <i class="fa-solid fa-comments text-2xl"></i>
+      <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-950 animate-ping"></span>
+      <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-950"></span>
+    </button>
+
+    <!-- Chatbot Window -->
+    <div id="chatbot-window" class="fixed bottom-20 right-4 w-[90vw] max-w-80 h-96 glass-card rounded-2xl border border-slate-700 shadow-2xl flex flex-col hidden-force overflow-hidden z-50">
+      <!-- Header -->
+      <div class="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 border border-emerald-500/40">
+            <i class="fa-solid fa-robot text-sm"></i>
+          </div>
+          <div>
+            <h4 class="text-xs font-bold text-white">Bio AI Support</h4>
+            <span class="text-[10px] text-emerald-400 font-mono">Online</span>
+          </div>
+        </div>
+        <button onclick="toggleChatbot()" class="text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+
+      <!-- Chat Messages Container -->
+      <div id="chat-messages" class="flex-1 p-3 overflow-y-auto space-y-3 text-xs">
+        <div class="flex flex-col gap-1 items-start max-w-[85%]">
+          <div class="p-2.5 rounded-2xl bg-slate-800 text-slate-200 rounded-tl-none">
+            Hello! Welcome to Amazing Bio Generator. How can I help you generate viral &amp; aesthetic bios today?
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Chips -->
+      <div class="px-3 py-1.5 border-t border-slate-800/60 bg-slate-950/60 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+        <button onclick="sendQuickChat('How to generate Instagram bio?')" class="text-[10px] px-2 py-1 rounded-full bg-slate-800 text-emerald-400 hover:bg-slate-700 whitespace-nowrap">Instagram Bio?</button>
+        <button onclick="sendQuickChat('Download App')" class="text-[10px] px-2 py-1 rounded-full bg-slate-800 text-sky-400 hover:bg-slate-700 whitespace-nowrap">Download App</button>
+      </div>
+
+      <!-- Input Form -->
+      <form onsubmit="handleChatSubmit(event)" class="p-2 bg-slate-900/90 border-t border-slate-800 flex items-center gap-2">
+        <input type="text" id="chat-input" placeholder="Type message..." class="flex-1 p-2 rounded-xl glass-input text-xs outline-none">
+        <button type="submit" class="p-2 w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center hover:bg-emerald-500">
+          <i class="fa-solid fa-paper-plane text-xs"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOUNDER & APP DEVELOPER BADGE -->
+  <div class="fixed bottom-4 left-4 z-40 flex items-center gap-2">
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLGjpGYEHNFGCGeo3Xv3XZWZcIpWgd4_X9kXZHe7r_yBrY80uIVoYKApHqljsZrGz5fNks0hbQw1ecjF8lnshhO2oDypqKrQda-5mclfgedTp5Dq0PXQA2PBu-kE9lw2Y_nmLajXIaifcnStVA1xnu_BXm4RlWd6LQDgFZr6Gyrlq1QsxdQlYqZsocaD0/s1920/IMG_1714074835601.jpg" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 p-1.5 transition-transform hover:scale-105 relative group">
+      <!-- Continuous Animated Light Shimmer Effect -->
+      <div class="banner-shimmer-auto rounded-xl"></div>
+      <!-- Hover Flash Sheen -->
+      <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none rounded-xl"></div>
+
+      <div class="relative w-10 h-10 rounded-full shadow-md overflow-hidden flex-shrink-0 z-10">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLGjpGYEHNFGCGeo3Xv3XZWZcIpWgd4_X9kXZHe7r_yBrY80uIVoYKApHqljsZrGz5fNks0hbQw1ecjF8lnshhO2oDypqKrQda-5mclfgedTp5Dq0PXQA2PBu-kE9lw2Y_nmLajXIaifcnStVA1xnu_BXm4RlWd6LQDgFZr6Gyrlq1QsxdQlYqZsocaD0/s320/IMG_1714074835601.jpg" alt="MD Babu Bahadur" class="w-full h-full object-cover rounded-full">
+      </div>
+      <div class="pr-2 flex flex-col justify-center relative z-10">
+        <span class="text-xs font-black text-white group-hover:text-emerald-400 transition-colors leading-tight">MD Babu Bahadur</span>
+        <span class="text-[10px] font-semibold text-emerald-400 leading-tight">Founder &amp; App Developer</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- TOAST NOTIFIER -->
+  <div id="toast-notif" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none -translate-y-4">
+    <div class="px-4 py-2.5 rounded-full rgb-border bg-slate-900/95 text-xs font-bold text-emerald-400 shadow-2xl flex items-center gap-2 border border-emerald-500/50">
+      <i class="fa-solid fa-bell text-emerald-400 animate-bounce"></i>
+      <span id="toast-message"></span>
+    </div>
+  </div>
+
+  <!-- MAIN JAVASCRIPT APP ENGINE -->
+  <script>
+    // DEFAULT DYNAMIC LINKS CONFIGURATION
+    const DEFAULT_LINKS = {
+      nav1: "https://mdbabuhossan290324-svg.github.io/amazing-shopping/qrcode.html",
+      nav2: "https://mdbabuhossan290324-svg.github.io/amazing-shopping/title.html",
+      nav3: "https://mdbabuhossan290324-svg.github.io/amazing-shopping/emoji.html",
+      nav4: "https://mdbabuhossan290324-svg.github.io/amazing-shopping/photolink.html",
+      nav5: "https://mdbabuhossan290324-svg.github.io/amazing-shopping/qrsner.html",
+      download: "https://www.appcreator24.com/app4144179-ilzfq3",
+      bottom1: "https://www.appcreator24.com/app4144179-ilzfq3",
+      bottom2: "https://www.appcreator24.com/app4144179-ilzfq3",
+      bottom3: "https://www.appcreator24.com/app4144179-ilzfq3",
+      bottom4: "https://www.youtube.com/@Amazingshopping-g9r",
+      bottom5: "https://www.facebook.com/share/1HgmF9SmeP/",
+      bottom6: "https://vm.tiktok.com/ZS9hkVDJ1jMWH-5H6oX/"
+    };
+
+    let appLinks = { ...DEFAULT_LINKS };
+
+    // MIDDLE ROTATING BANNERS
+    const MIDDLE_BANNERS = [
+      {
+        img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcDbNoZIXR581Zv0NCiwCz_XRqSnyR5FHdFzN1uwcdJbGDP6arCqbOX7-a6-DcxJyfWALtSQK0Fx0TVW1ED0VKk87iVvdAdoYSOZEV2DDk6uNTwADcCn24ypsK6fvcId9QKA-d6LaNRDL9V6FtOMEIa_NJwaU6ed3DPjaWw32GgZ42AljCkU_1tPDz1yg/s1774/16766dd2-3e63-40ec-a5c7-5efcf5a69766.png",
+        link: "https://mdbabuhossan290324-svg.github.io/amazing-shopping/caption.html"
+      }
+    ];
+
+    let currentBannerIndex = 0;
+
+    // INITIALIZATION ON DOM READY
+    document.addEventListener("DOMContentLoaded", () => {
+      const toast = document.getElementById("toast-notif");
+      if (toast) {
+        toast.className = "fixed top-5 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none -translate-y-4";
+      }
+      const toastMsg = document.getElementById("toast-message");
+      if (toastMsg) toastMsg.innerText = "";
+
+      loadSavedLinks();
+      initMiddleBanners();
+      initParticleBackground();
+      initClientProtections();
+      lockAdminPanelCompletely();
+    });
+
+    // LOAD SAVED LINKS FROM STORAGE
+    function loadSavedLinks() {
+      try {
+        const saved = localStorage.getItem("amazing_qr_links");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (JSON.stringify(parsed).includes("Diraz-shipping") || JSON.stringify(parsed).includes("app4124991") || JSON.stringify(parsed).includes("app4138727") || JSON.stringify(parsed).includes("app4143234") || JSON.stringify(parsed).includes("app4143694") || JSON.stringify(parsed).includes("qrcode.html") || JSON.stringify(parsed).includes("bahadurlivenews24")) {
+            localStorage.removeItem("amazing_qr_links");
+            appLinks = { ...DEFAULT_LINKS };
+          } else {
+            appLinks = { ...DEFAULT_LINKS, ...parsed };
+          }
+        }
+      } catch (e) {
+        console.error(e);
+        appLinks = { ...DEFAULT_LINKS };
+      }
+      applyLinksToDOM();
+    }
+
+    // APPLY LINKS TO HTML ELEMENTS
+    function applyLinksToDOM() {
+      if (document.getElementById("nav-btn-1")) document.getElementById("nav-btn-1").href = appLinks.nav1;
+      if (document.getElementById("nav-btn-2")) document.getElementById("nav-btn-2").href = appLinks.nav2;
+      if (document.getElementById("nav-btn-3")) document.getElementById("nav-btn-3").href = appLinks.nav3;
+      if (document.getElementById("nav-btn-4")) document.getElementById("nav-btn-4").href = appLinks.nav4;
+      if (document.getElementById("nav-btn-5")) document.getElementById("nav-btn-5").href = appLinks.nav5;
+
+      if (document.getElementById("download-app-btn")) document.getElementById("download-app-btn").href = appLinks.download;
+
+      if (document.getElementById("bottom-btn-1")) document.getElementById("bottom-btn-1").href = appLinks.bottom1;
+      if (document.getElementById("bottom-btn-2")) document.getElementById("bottom-btn-2").href = appLinks.bottom2;
+      if (document.getElementById("bottom-btn-3")) document.getElementById("bottom-btn-3").href = appLinks.bottom3;
+      if (document.getElementById("bottom-btn-4")) document.getElementById("bottom-btn-4").href = appLinks.bottom4;
+      if (document.getElementById("bottom-btn-5")) document.getElementById("bottom-btn-5").href = appLinks.bottom5;
+      if (document.getElementById("bottom-btn-6")) document.getElementById("bottom-btn-6").href = appLinks.bottom6;
+    }
+
+    // MIDDLE ROTATING BANNERS ENGINE
+    function initMiddleBanners() {
+      const bannerImg = document.getElementById("middle-banner-img");
+      const bannerLink = document.getElementById("middle-banner-link");
+      if (!bannerImg || !bannerLink) return;
+
+      const updateBanner = () => {
+        const item = MIDDLE_BANNERS[currentBannerIndex];
+        bannerImg.style.opacity = "0";
+        setTimeout(() => {
+          bannerImg.src = item.img || "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg-87tFs_imYBO3Y1EVKDhlGA5z8W_VjxWex8pz7AzpoUAGg78SSJgrm68XxsJULUAWZz2Me148yp-5P_rFif64jc158-sLwuxytiadESAtkLBvx6dMWvt1G6g9DFmbZrKAkSdyygqbl3jwopRH1h5gFJ-H6fbwITCqEV4ahj_tQzicrAmSr5HiLCCSt-Q/s320/22c012fd-66f0-4508-ae79-5fdb8a5944ac.png";
+          bannerLink.href = item.link || "#";
+          bannerImg.style.opacity = "1";
+
+          document.getElementById("banner-dot-0")?.classList.toggle("bg-emerald-400", currentBannerIndex === 0);
+          document.getElementById("banner-dot-0")?.classList.toggle("bg-slate-600", currentBannerIndex !== 0);
+          document.getElementById("banner-dot-1")?.classList.toggle("bg-emerald-400", currentBannerIndex === 1);
+          document.getElementById("banner-dot-1")?.classList.toggle("bg-slate-600", currentBannerIndex !== 1);
+
+          currentBannerIndex = (currentBannerIndex + 1) % MIDDLE_BANNERS.length;
+        }, 300);
+      };
+
+      updateBanner();
+      setInterval(updateBanner, 2000);
+    }
+
+    // BIO GENERATOR LOGIC & STATE
+    let selectedPlatform = "All Platforms";
+    let generatedBioData = {
+      aesthetic: [],
+      professional: [],
+      creative: [],
+      minimalist: [],
+      bangla: []
+    };
+    let selectedBioSet = new Set();
+
+    function selectPlatform(plat) {
+      selectedPlatform = plat;
+      const btns = {
+        'All Platforms': 'platform-all-btn',
+        'Instagram': 'platform-insta-btn',
+        'TikTok & FB': 'platform-tiktok-btn',
+        'LinkedIn & Web': 'platform-shorts-btn',
+        'Dating & Fun': 'platform-facebook-btn'
+      };
+
+      Object.keys(btns).forEach(k => {
+        const btn = document.getElementById(btns[k]);
+        if (btn) {
+          if (k === plat) {
+            btn.className = "flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap bg-gradient-to-r from-emerald-500 to-sky-500 text-white shadow-lg";
+          } else {
+            btn.className = "flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 whitespace-nowrap text-slate-400 hover:text-white";
+          }
+        }
+      });
+    }
+
+    function fillQuickTopic(topic) {
+      const input = document.getElementById("bio-topic-input");
+      if (input) {
+        input.value = topic.replace(/^[^\w\s]+/, '').trim();
+      }
+    }
+
+    // GENERATE EMOJIS FUNCTION
+    async function generateEmojisNow() {
+      const topicInput = document.getElementById("bio-topic-input");
+      const topic = topicInput ? topicInput.value.trim() : "";
+
+      if (!topic) {
+        showToast("Please enter a topic, emotion or vibe first! ❌");
+        return;
+      }
+
+      const styleOpt = document.getElementById("bio-style-opt") ? document.getElementById("bio-style-opt").value : "✨ Aesthetic & Cute";
+      const countOpt = document.getElementById("bio-count-opt") ? document.getElementById("bio-count-opt").value : "All Emoji Packs";
+
+      const btn = document.getElementById("generate-btn");
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin text-lg"></i> Generating AI Emojis...`;
+      }
+
+      showToast("Generating unlimited AI Emojis... ⚡");
+
+      try {
+        const response = await fetch("/api/generate-emojis", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            topic,
+            platform: selectedPlatform,
+            style: styleOpt,
+            count: countOpt
+          })
+        });
+
+        const data = await response.json();
+        const emojiSet = data.emojis || data.captions || data.bios;
+        if (data.success && emojiSet) {
+          generatedBioData = emojiSet;
+        } else {
+          throw new Error("Server fallback to client smart emoji generator");
+        }
+      } catch (err) {
+        console.warn("AI API fallback to smart client emoji generator:", err);
+        generatedBioData = buildFallbackBios(topic, selectedPlatform);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles text-lg animate-bounce text-yellow-300"></i><span>GENERATE EMOJIS NOW 🚀</span>`;
+        }
+      }
+
+      renderBioResults();
+      showToast("Emojis Generated Successfully! 🎉");
+    }
+
+    // Aliases for compatibility
+    window.generateBiosNow = generateEmojisNow;
+    window.generateCaptionsNow = generateEmojisNow;
+
+    // CLIENT SIDE SMART FALLBACK EMOJI ENGINE
+    function buildFallbackBios(topic, platform) {
+      const clean = topic.trim() || "Aesthetic Vibe";
+
+      return {
+        aesthetic: [
+          `✨☁️🌸 Aesthetic Vibe | ${clean} ✦`,
+          `🌙⭐🧸 Golden Hour & Dreams ✨`,
+          `🌿🕊️🤍 Soft Girl Aesthetic • ${clean}`,
+          `📸🖤🎨 Timeless Memories & Minimal Art`
+        ],
+        professional: [
+          `👑⚡🔥 Born to Flex • ${clean} 💥`,
+          `🖤😎👊 Savage Mode On | Rule the Game`,
+          `🏆💸🚀 Silent Moves • Loud Results`,
+          `⚡👑⚔️ One in a Lifetime Vibe`
+        ],
+        creative: [
+          `💖🌸🧸 Soft Heart & Warm Hugs (${clean})`,
+          `🥺❤️✨ My Favorite Place is With You`,
+          `💕🎀🌹 Forever & Always Love Vibe`,
+          `🧸💘☀️ Sunshine on My Rainy Days`
+        ],
+        minimalist: [
+          `🚀💪📈 Work Hard • Dream Big (${clean})`,
+          `🌟🔥🏆 Hustle in Silence • Win Loud`,
+          `⚡💯💼 Stay Focused & Humble`,
+          `🎯💥🔥 Endless Potential Unlocked`
+        ],
+        bangla: [
+          `🇧🇩👑⚡ নিজের নিয়মে বাঁচার আনন্দ 🌸 (${clean})`,
+          `☕🔥🇧🇩 চায়ের কাপে ঝড় & বাংলা Vibe`,
+          `😊✨🖤 হাসিটা খাঁটি • মনটা পরিষ্কার`,
+          `🌸🇧🇩🧸 গল্পে ভরা সুন্দর জীবন`
+        ]
+      };
+    }
+
+    // RENDER EMOJIS TO DOM
+    function renderBioResults() {
+      selectedBioSet.clear();
+
+      const aestheticBox = document.getElementById("aesthetic-tags-container");
+      const profBox = document.getElementById("professional-tags-container");
+      const creativeBox = document.getElementById("creative-tags-container");
+      const minimalistBox = document.getElementById("minimalist-tags-container");
+      const banglaBox = document.getElementById("bangla-tags-container");
+
+      if (aestheticBox) aestheticBox.innerHTML = renderBioCards(generatedBioData.aesthetic || []);
+      if (profBox) profBox.innerHTML = renderBioCards(generatedBioData.professional || generatedBioData.attitude || []);
+      if (creativeBox) creativeBox.innerHTML = renderBioCards(generatedBioData.creative || generatedBioData.love || []);
+      if (minimalistBox) minimalistBox.innerHTML = renderBioCards(generatedBioData.minimalist || generatedBioData.motivational || []);
+      if (banglaBox) banglaBox.innerHTML = renderBioCards(generatedBioData.bangla || []);
+
+      const totalCount = (generatedBioData.aesthetic || []).length +
+                         (generatedBioData.professional || generatedBioData.attitude || []).length +
+                         (generatedBioData.creative || generatedBioData.love || []).length +
+                         (generatedBioData.minimalist || generatedBioData.motivational || []).length +
+                         (generatedBioData.bangla || []).length;
+
+      const countBadge = document.getElementById("bio-count-badge");
+      if (countBadge) countBadge.innerText = `${totalCount} Emoji Packs Generated`;
+
+      updateRawTextarea();
+
+      const resultCard = document.getElementById("bio-result-card");
+      if (resultCard) {
+        resultCard.classList.remove("hidden-force");
+        resultCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+
+    function renderBioCards(bioList) {
+      if (!bioList || bioList.length === 0) {
+        return `<span class="text-xs text-slate-500 italic">No emojis in this category</span>`;
+      }
+      return bioList.map((bio) => {
+        const escaped = escapeHtml(bio);
+        return `
+          <div onclick="toggleBioSelect('${escaped.replace(/\n/g, '\\n')}', this)" class="bio-card p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-100 cursor-pointer relative hover:border-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20 transition-all group">
+            <div class="whitespace-pre-line font-sans text-base sm:text-lg font-bold leading-relaxed text-center py-1 tracking-wide">${escaped}</div>
+            <div class="mt-2.5 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-800/80 pt-2">
+              <span class="group-hover:text-emerald-400 flex items-center gap-1 font-semibold"><i class="fa-solid fa-hand-pointer"></i> Tap to select / copy</span>
+              <button onclick="event.stopPropagation(); copyToClipboardText(\`${escaped}\`, 'Emoji Art Copied! 📋')" class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-emerald-600 to-sky-600 hover:opacity-90 text-white font-extrabold transition-all shadow-md">Copy Emoji 📋</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleBioSelect(bio, el) {
+      const cleanBio = bio.replace(/\\n/g, '\n');
+      if (selectedBioSet.has(cleanBio)) {
+        selectedBioSet.delete(cleanBio);
+        el.classList.remove("border-emerald-500", "bg-emerald-950/40");
+        el.classList.add("bg-slate-900", "border-slate-800");
+      } else {
+        selectedBioSet.add(cleanBio);
+        el.classList.remove("bg-slate-900", "border-slate-800");
+        el.classList.add("border-emerald-500", "bg-emerald-950/40");
+        showToast("Emoji Selected! ✂️");
+      }
+      updateRawTextarea();
+    }
+
+    function getAllBiosString() {
+      const all = [
+        ...(generatedBioData.aesthetic || []),
+        ...(generatedBioData.professional || generatedBioData.attitude || []),
+        ...(generatedBioData.creative || generatedBioData.love || []),
+        ...(generatedBioData.minimalist || generatedBioData.motivational || []),
+        ...(generatedBioData.bangla || [])
+      ];
+      return Array.from(new Set(all)).join('\n\n------------------------------\n\n');
+    }
+
+    function updateRawTextarea() {
+      const area = document.getElementById("raw-bios-textarea");
+      if (!area) return;
+      if (selectedBioSet.size > 0) {
+        area.value = Array.from(selectedBioSet).join('\n\n------------------------------\n\n');
+      } else {
+        area.value = getAllBiosString();
+      }
+    }
+
+    function copyAllBios() {
+      const allStr = getAllBiosString();
+      if (!allStr) {
+        showToast("No emojis to copy!");
+        return;
+      }
+      copyToClipboardText(allStr, "All Emojis Copied to Clipboard! 📋");
+    }
+
+    function copySelectedBios() {
+      if (selectedBioSet.size === 0) {
+        showToast("Please tap some emojis to select first!");
+        return;
+      }
+      const selStr = Array.from(selectedBioSet).join('\n\n------------------------------\n\n');
+      copyToClipboardText(selStr, `${selectedBioSet.size} Selected Emojis Copied! ✂️`);
+    }
+
+    function copyToClipboardText(text, successMsg) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(successMsg);
+        }).catch(() => {
+          fallbackCopyText(text, successMsg);
+        });
+      } else {
+        fallbackCopyText(text, successMsg);
+      }
+    }
+
+    function fallbackCopyText(text, successMsg = "Emoji Copied! 📋") {
+      try {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        if (successful) {
+          showToast(successMsg);
+        } else {
+          showToast("Copy failed! Please select text manually.");
+        }
+      } catch (err) {
+        console.error(err);
+        showToast(successMsg);
+      }
+    }
+
+    function clearBioResults() {
+      generatedBioData = { aesthetic: [], professional: [], creative: [], minimalist: [], bangla: [] };
+      selectedBioSet.clear();
+
+      const resultCard = document.getElementById("bio-result-card");
+      if (resultCard) resultCard.classList.add("hidden-force");
+
+      const area = document.getElementById("raw-bios-textarea");
+      if (area) area.value = "";
+
+      showToast("Emoji Results Cleared! 🗑️");
+    }
+
+    // FLOATING AI CHATBOT LOGIC
+    function toggleChatbot() {
+      const win = document.getElementById("chatbot-window");
+      win.classList.toggle("hidden-force");
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById("chat-input");
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendChatMessage("user", text);
+      input.value = "";
+
+      setTimeout(() => {
+        let reply = "For support please contact:\ndaraz.bangladesh.shop.com";
+        if (text.toLowerCase().includes("emoji") || text.toLowerCase().includes("bio") || text.toLowerCase().includes("caption") || text.toLowerCase().includes("instagram") || text.toLowerCase().includes("tiktok")) {
+          reply = "Enter your topic, emotion or vibe in the box above and click 'GENERATE EMOJIS NOW' to get unlimited aesthetic emoji combos & art!";
+        } else if (text.toLowerCase().includes("download")) {
+          reply = "Click the 'Download App' button at the top to download our official app directly!";
+        }
+        appendChatMessage("bot", reply);
+      }, 600);
+    }
+
+    function sendQuickChat(msg) {
+      document.getElementById("chat-input").value = msg;
+      handleChatSubmit({ preventDefault: () => {} });
+    }
+
+    function appendChatMessage(sender, text) {
+      const container = document.getElementById("chat-messages");
+      const div = document.createElement("div");
+      div.className = `flex flex-col gap-1 ${sender === 'user' ? 'items-end' : 'items-start'} max-w-[85%]`;
+
+      const bubble = document.createElement("div");
+      bubble.className = `p-2.5 rounded-2xl text-xs ${
+        sender === 'user' 
+          ? 'bg-emerald-600 text-white rounded-tr-none' 
+          : 'bg-slate-800 text-slate-200 rounded-tl-none'
+      }`;
+      bubble.innerText = text;
+
+      div.appendChild(bubble);
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // SECRET ADMIN AUTH & PANEL (FIREBASE AUTHENTICATION)
+    let isAdminLoggedIn = false;
+
+    function lockAdminPanelCompletely() {
+      isAdminLoggedIn = false;
+      try {
+        sessionStorage.removeItem("admin_session");
+        localStorage.removeItem("admin_session");
+      } catch (e) {}
+
+      const dashModal = document.getElementById("admin-dashboard-modal");
+      if (dashModal) {
+        dashModal.classList.add("hidden-force");
+        dashModal.style.setProperty("display", "none", "important");
+        dashModal.setAttribute("style", "display: none !important;");
+      }
+
+      const authModal = document.getElementById("admin-auth-modal");
+      if (authModal) {
+        authModal.classList.add("hidden-force");
+        authModal.style.setProperty("display", "none", "important");
+        authModal.setAttribute("style", "display: none !important;");
+      }
+
+      const emailInput = document.getElementById("admin-email-input");
+      if (emailInput) emailInput.value = "";
+      const pwdInput = document.getElementById("admin-password-input");
+      if (pwdInput) pwdInput.value = "";
+    }
+
+    // Immediately execute lock to prevent any unwanted UI flash
+    lockAdminPanelCompletely();
+
+    function openAdminAuthModal() {
+      if (window.isAdminLoggedIn && window.firebaseAuth && window.firebaseAuth.currentUser) {
+        openAdminDashboard();
+        return;
+      }
+      const modal = document.getElementById("admin-auth-modal");
+      if (modal) {
+        modal.classList.remove("hidden-force");
+        modal.style.setProperty("display", "flex", "important");
+        modal.setAttribute("style", "display: flex !important;");
+      }
+      const emailInput = document.getElementById("admin-email-input");
+      if (emailInput) {
+        setTimeout(() => emailInput.focus(), 100);
+      }
+    }
+
+    function closeAdminAuthModal() {
+      const authModal = document.getElementById("admin-auth-modal");
+      if (authModal) {
+        authModal.classList.add("hidden-force");
+        authModal.style.setProperty("display", "none", "important");
+        authModal.setAttribute("style", "display: none !important;");
+      }
+    }
+
+    async function handleAdminLogin(e) {
+      if (e) e.preventDefault();
+      const emailInput = document.getElementById("admin-email-input");
+      const pwdInput = document.getElementById("admin-password-input");
+      const loginBtn = document.getElementById("admin-login-btn");
+
+      const email = emailInput ? emailInput.value.trim() : "";
+      const pwd = pwdInput ? pwdInput.value.trim() : "";
+
+      if (!email || !pwd) {
+        showToast("Please enter both Email & Password! ❌");
+        return;
+      }
+
+      if (loginBtn) {
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin text-sm"></i> Firebase Authenticating...`;
+      }
+
+      try {
+        if (!window.signInWithEmailAndPassword || !window.firebaseAuth) {
+          throw new Error("Firebase Auth SDK initializing... Please wait a moment.");
+        }
+
+        const userCredential = await window.signInWithEmailAndPassword(window.firebaseAuth, email, pwd);
+        const user = userCredential.user;
+
+        // Verify Admin UID
+        const requiredUid = window.ADMIN_UID || "YOUR_ADMIN_UID";
+        if (requiredUid !== "YOUR_ADMIN_UID" && user.uid !== requiredUid) {
+          if (window.firebaseSignOut && window.firebaseAuth) {
+            await window.firebaseSignOut(window.firebaseAuth);
+          }
+          isAdminLoggedIn = false;
+          showToast("Unauthorized access: Your user UID is not authorized as Admin! ❌");
+          return;
+        }
+
+        isAdminLoggedIn = true;
+        showToast(`Firebase Authenticated: ${user.email || 'Admin'}! 🔓`);
+
+        const authModal = document.getElementById("admin-auth-modal");
+        if (authModal) {
+          authModal.classList.add("hidden-force");
+          authModal.setAttribute("style", "display: none !important;");
+        }
+
+        openAdminDashboard();
+      } catch (error) {
+        console.error("Firebase Login Error:", error);
+        isAdminLoggedIn = false;
+        let errMsg = "Login failed! Incorrect Email or Password. ❌";
+        if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+          errMsg = "Incorrect Firebase Email or Password! ❌";
+        } else if (error.code === 'auth/too-many-requests') {
+          errMsg = "Too many failed attempts. Try again later! ⚠️";
+        } else if (error.message) {
+          errMsg = error.message;
+        }
+        showToast(errMsg);
+      } finally {
+        if (loginBtn) {
+          loginBtn.disabled = false;
+          loginBtn.innerHTML = `<span>FIREBASE LOGIN & UNLOCK 🔓</span>`;
+        }
+      }
+    }
+
+    function openAdminDashboard() {
+      if (!isAdminLoggedIn && (!window.firebaseAuth || !window.firebaseAuth.currentUser)) {
+        openAdminAuthModal();
+        return;
+      }
+
+      const authModal = document.getElementById("admin-auth-modal");
+      if (authModal) {
+        authModal.classList.add("hidden-force");
+        authModal.setAttribute("style", "display: none !important;");
+      }
+
+      // Populate fields
+      if (document.getElementById("edit-nav-1")) document.getElementById("edit-nav-1").value = appLinks.nav1;
+      if (document.getElementById("edit-nav-2")) document.getElementById("edit-nav-2").value = appLinks.nav2;
+      if (document.getElementById("edit-nav-3")) document.getElementById("edit-nav-3").value = appLinks.nav3;
+      if (document.getElementById("edit-nav-4")) document.getElementById("edit-nav-4").value = appLinks.nav4;
+      if (document.getElementById("edit-nav-5")) document.getElementById("edit-nav-5").value = appLinks.nav5;
+
+      if (document.getElementById("edit-download-url")) document.getElementById("edit-download-url").value = appLinks.download;
+
+      if (document.getElementById("edit-bottom-1")) document.getElementById("edit-bottom-1").value = appLinks.bottom1;
+      if (document.getElementById("edit-bottom-2")) document.getElementById("edit-bottom-2").value = appLinks.bottom2;
+      if (document.getElementById("edit-bottom-3")) document.getElementById("edit-bottom-3").value = appLinks.bottom3;
+      if (document.getElementById("edit-bottom-4")) document.getElementById("edit-bottom-4").value = appLinks.bottom4;
+      if (document.getElementById("edit-bottom-5")) document.getElementById("edit-bottom-5").value = appLinks.bottom5;
+      if (document.getElementById("edit-bottom-6")) document.getElementById("edit-bottom-6").value = appLinks.bottom6;
+
+      const dashModal = document.getElementById("admin-dashboard-modal");
+      if (dashModal) {
+        dashModal.classList.remove("hidden-force");
+        dashModal.style.setProperty("display", "block", "important");
+        dashModal.setAttribute("style", "display: block !important;");
+      }
+    }
+
+    async function handleAdminLogout() {
+      if (window.firebaseSignOut && window.firebaseAuth) {
+        try {
+          await window.firebaseSignOut(window.firebaseAuth);
+        } catch (e) {}
+      }
+      lockAdminPanelCompletely();
+      showToast("Logged out of Admin Portal & Locked! 🔒");
+    }
+
+    function saveAdminLinks() {
+      if (!isAdminLoggedIn && (!window.firebaseAuth || !window.firebaseAuth.currentUser)) {
+        lockAdminPanelCompletely();
+        showToast("Access Denied! Unauthorized. ❌");
+        return;
+      }
+
+      appLinks.nav1 = document.getElementById("edit-nav-1").value.trim() || DEFAULT_LINKS.nav1;
+      appLinks.nav2 = document.getElementById("edit-nav-2").value.trim() || DEFAULT_LINKS.nav2;
+      appLinks.nav3 = document.getElementById("edit-nav-3").value.trim() || DEFAULT_LINKS.nav3;
+      appLinks.nav4 = document.getElementById("edit-nav-4").value.trim() || DEFAULT_LINKS.nav4;
+      appLinks.nav5 = document.getElementById("edit-nav-5").value.trim() || DEFAULT_LINKS.nav5;
+
+      appLinks.download = document.getElementById("edit-download-url").value.trim() || DEFAULT_LINKS.download;
+
+      appLinks.bottom1 = document.getElementById("edit-bottom-1").value.trim() || DEFAULT_LINKS.bottom1;
+      appLinks.bottom2 = document.getElementById("edit-bottom-2").value.trim() || DEFAULT_LINKS.bottom2;
+      appLinks.bottom3 = document.getElementById("edit-bottom-3").value.trim() || DEFAULT_LINKS.bottom3;
+      appLinks.bottom4 = document.getElementById("edit-bottom-4").value.trim() || DEFAULT_LINKS.bottom4;
+      appLinks.bottom5 = document.getElementById("edit-bottom-5").value.trim() || DEFAULT_LINKS.bottom5;
+      appLinks.bottom6 = document.getElementById("edit-bottom-6").value.trim() || DEFAULT_LINKS.bottom6;
+
+      localStorage.setItem("amazing_qr_links", JSON.stringify(appLinks));
+      applyLinksToDOM();
+      showToast("Link Configuration Saved & Applied!");
+    }
+
+    // COPY SOURCE CODE FOR GITHUB PAGES
+    function copySourceCode() {
+      if (!isAdminLoggedIn && (!window.firebaseAuth || !window.firebaseAuth.currentUser)) {
+        lockAdminPanelCompletely();
+        showToast("Access Denied! Unauthorized. ❌");
+        return;
+      }
+
+      const liveToast = document.getElementById("toast-notif");
+      if (liveToast) {
+        liveToast.className = "fixed top-5 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none -translate-y-4";
+      }
+      const liveToastMsg = document.getElementById("toast-message");
+      if (liveToastMsg) liveToastMsg.innerText = "";
+
+      const clone = document.documentElement.cloneNode(true);
+      
+      const clonedDash = clone.querySelector("#admin-dashboard-modal");
+      if (clonedDash) {
+        clonedDash.setAttribute("style", "display: none !important;");
+        clonedDash.classList.add("hidden-force");
+      }
+      
+      const clonedAuth = clone.querySelector("#admin-auth-modal");
+      if (clonedAuth) {
+        clonedAuth.setAttribute("style", "display: none !important;");
+        clonedAuth.classList.add("hidden-force");
+        const pwdIn = clonedAuth.querySelector("#admin-password-input");
+        if (pwdIn) pwdIn.setAttribute("value", "");
+        const emailIn = clonedAuth.querySelector("#admin-email-input");
+        if (emailIn) emailIn.setAttribute("value", "");
+      }
+
+      const clonedToast = clone.querySelector("#toast-notif");
+      if (clonedToast) {
+        clonedToast.className = "fixed top-5 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none -translate-y-4";
+      }
+      const clonedToastMsg = clone.querySelector("#toast-message");
+      if (clonedToastMsg) clonedToastMsg.innerText = "";
+
+      const fullHtml = "<!DOCTYPE html>\n" + clone.outerHTML;
+      navigator.clipboard.writeText(fullHtml).then(() => {
+        showToast("Source code copied successfully!");
+      }).catch(err => {
+        console.error(err);
+        fallbackCopyText(fullHtml, "Source code copied successfully!");
+      });
+    }
+
+    // POLICY MODALS
+    const POLICY_DATA = {
+      "Privacy Policy": "We respect your privacy. No generated emoji data or search input is stored on external servers without your permission.",
+      "Copyright": "© 2026 Amazing Emoji Genaretor. All logos, graphics, and trademarks belong to their respective owners.",
+      "Content Policy": "Users are responsible for emojis generated and used on social media platforms.",
+      "Cookie Policy": "This application uses standard localStorage to save your custom link configurations locally.",
+      "Theme Policy": "Features a multi-color animated 6-color RGB glassmorphic layout optimized for high contrast displays.",
+      "Terms & Conditions": "By using Amazing Emoji Genaretor, you agree to use this service for lawful social media and messaging purposes.",
+      "Children's Policy": "Our application is rated 12+ and suitable for general audiences."
+    };
+
+    function openPolicyModal(title) {
+      document.getElementById("policy-title").innerText = title;
+      document.getElementById("policy-body").innerText = POLICY_DATA[title] || "Official policy documentation.";
+      document.getElementById("policy-modal").classList.remove("hidden-force");
+    }
+
+    function closePolicyModal() {
+      document.getElementById("policy-modal").classList.add("hidden-force");
+    }
+
+    // TOAST NOTIFIER
+    function showToast(msg) {
+      const toast = document.getElementById("toast-notif");
+      const txt = document.getElementById("toast-message");
+      txt.innerText = msg;
+
+      toast.classList.remove("opacity-0", "pointer-events-none", "-translate-y-4");
+      toast.classList.add("opacity-100", "translate-y-0");
+
+      setTimeout(() => {
+        toast.classList.add("opacity-0", "pointer-events-none", "-translate-y-4");
+        toast.classList.remove("opacity-100", "translate-y-0");
+      }, 3000);
+    }
+
+    // CANVAS PARTICLE BACKGROUND
+    function initParticleBackground() {
+      const canvas = document.getElementById("particle-canvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const colors = ["#10b981", "#3b82f6", "#a855f7", "#ef4444", "#f97316", "#eab308"];
+      const particles = [];
+
+      for (let i = 0; i < 45; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 2 + 0.5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = p.color;
+          ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    }
+
+    // CLIENT SIDE PROTECTION
+    function initClientProtections() {
+      document.addEventListener("contextmenu", e => e.preventDefault());
+
+      document.addEventListener("keydown", e => {
+        if (
+          e.key === "F12" ||
+          (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
+          (e.ctrlKey && e.key === "u")
+        ) {
+          e.preventDefault();
+        }
+      });
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+
+
+<iframe ng-non-bindable="" frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" tabindex="-1" vspace="0" width="100%" aria-hidden="true" id="I0_1786453347618" name="I0_1786453347618" src="https://amazing-genaretor.firebaseapp.com/__/auth/iframe?apiKey=AIzaSyCbz3dVmdIm6jFFzh2SRO8dej_ph02ObtQ&amp;appName=%5BDEFAULT%5D&amp;v=10.8.0&amp;eid=p&amp;usegapi=1&amp;jsh=m%3B%2F_%2Fscs%2Fabc-static%2F_%2Fjs%2Fk%3Dgapi.lb.en.9vdPKhB0RUg.O%2Fd%3D1%2Frs%3DAHpOoo97anj7zZ432JcN58tqJJp_A6WeOw%2Fm%3D__features__#id=I0_1786453347618&amp;_gfid=I0_1786453347618&amp;parent=https%3A%2F%2Fais-dev-c4ih3e35txtu43wigc7vzj-578330488733.asia-southeast1.run.app&amp;pfname=&amp;rpctoken=25715108" style="position: absolute; top: -100px; width: 1px; height: 1px;"></iframe></body></html>
