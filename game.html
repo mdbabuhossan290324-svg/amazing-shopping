@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Amazing Emoji Generate ai</title>
+  <meta name="description" content="AI Emoji Generator, Emoji Kitchen Studio, Sticker Maker & Mini-Games." />
+  <meta name="theme-color" content="#09090B" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fdf4ff',
+              500: '#d946ef',
+              600: '#c026d3',
+              900: '#701a75',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #09090B;
+      color: #F8FAFC;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #121217; }
+    ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3F3F46; }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.03); }
+    }
+    .animate-glow { animation: pulse-glow 3s infinite ease-in-out; }
+    .glass-card {
+      background: rgba(18, 18, 23, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#09090B] text-slate-100 flex flex-col items-center pb-24 overflow-x-hidden">
+
+  <!-- TOP APP HEADER -->
+  <header class="w-full max-w-5xl px-4 py-3 border-b border-white/10 flex items-center justify-between sticky top-0 bg-[#09090B]/90 backdrop-blur-md z-40">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-fuchsia-500 to-cyan-400 p-0.5 shadow-lg shadow-fuchsia-500/20 flex items-center justify-center text-xl">
+        ✨
+      </div>
+      <div>
+        <h1 class="text-lg font-black tracking-tight text-white flex items-center gap-2">
+          Amazing Emoji Generate <span class="text-xs px-2 py-0.5 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/40 font-mono">AI</span>
+        </h1>
+        <p class="text-[11px] text-slate-400">Prompt Studio • Kitchen Mixer • Sticker Lab</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button id="soundToggleBtn" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 text-xs flex items-center gap-1.5 transition-colors cursor-pointer" title="Toggle Sound">
+        <span id="soundIcon">🔊</span>
+      </button>
+      <div class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-fuchsia-400">
+        ⭐ <span id="favCount">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION TABS -->
+  <nav class="w-full max-w-2xl px-4 mt-4 flex items-center justify-center gap-1.5 overflow-x-auto py-1">
+    <button onclick="switchTab('generator')" id="tab-generator" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-fuchsia-500 text-white shadow-lg shadow-fuchsia-500/25">
+      <span>🎨</span> AI Generator
+    </button>
+    <button onclick="switchTab('kitchen')" id="tab-kitchen" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-[#121217] text-slate-400 border border-white/5 hover:text-white">
+      <span>🧪</span> Kitchen Mix
+    </button>
+    <button onclick="switchTab('stickers')" id="tab-stickers" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-[#121217] text-slate-400 border border-white/5 hover:text-white">
+      <span>🏷️</span> Sticker Lab
+    </button>
+    <button onclick="switchTab('games')" id="tab-games" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-[#121217] text-slate-400 border border-white/5 hover:text-white">
+      <span>🎮</span> Emoji Quiz
+    </button>
+    <button onclick="switchTab('gallery')" id="tab-gallery" class="tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 bg-[#121217] text-slate-400 border border-white/5 hover:text-white">
+      <span>⭐</span> Gallery (<span id="galleryCount">0</span>)
+    </button>
+  </nav>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="w-full max-w-4xl px-4 mt-5 flex flex-col items-center">
+
+    <!-- 1. AI GENERATOR TAB -->
+    <section id="view-generator" class="tab-view w-full flex flex-col items-center">
+      <div class="w-full glass-card rounded-3xl p-5 sm:p-6 mb-6">
+        <div class="flex flex-col sm:flex-row gap-4 items-center justify-between mb-4">
+          <div>
+            <h2 class="text-xl font-black text-white flex items-center gap-2">
+              <span>🔮</span> AI Prompt-to-Emoji
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5">Type any description, character, or fantasy mood to synthesize a custom vector emoji</p>
+          </div>
+          <button onclick="surprisePrompt()" class="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-fuchsia-300 font-semibold flex items-center gap-1.5 cursor-pointer">
+            <span>🎲</span> Surprise Me
+          </button>
+        </div>
+
+        <!-- Prompt Form -->
+        <div class="relative w-full mb-4">
+          <input
+            id="promptInput"
+            type="text"
+            placeholder="e.g. Cyberpunk cat with neon sunglasses and gold crown..."
+            class="w-full px-4 py-3.5 pr-28 rounded-2xl bg-black/50 border border-white/10 focus:border-fuchsia-400 focus:outline-none text-white text-sm placeholder:text-slate-500 font-medium"
+          />
+          <button
+            onclick="generateFromPrompt()"
+            id="generateBtn"
+            class="absolute right-1.5 top-1.5 bottom-1.5 px-4 rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:opacity-95 text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-fuchsia-500/20 cursor-pointer"
+          >
+            <span>✨</span> Generate
+          </button>
+        </div>
+
+        <!-- Style Selectors -->
+        <div class="w-full mb-4">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 font-mono">Render Style</span>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <button onclick="setStyle('3d')" class="style-btn active px-3 py-2 rounded-xl bg-white/10 border border-fuchsia-400 text-left text-xs font-semibold flex items-center gap-2 transition-all" data-style="3d">
+              <span>🔮</span> 3D Glossy
+            </button>
+            <button onclick="setStyle('cyber')" class="style-btn px-3 py-2 rounded-xl bg-black/40 border border-white/5 hover:border-white/20 text-left text-xs font-semibold flex items-center gap-2 transition-all" data-style="cyber">
+              <span>⚡</span> Cyber Neon
+            </button>
+            <button onclick="setStyle('kawaii')" class="style-btn px-3 py-2 rounded-xl bg-black/40 border border-white/5 hover:border-white/20 text-left text-xs font-semibold flex items-center gap-2 transition-all" data-style="kawaii">
+              <span>🌸</span> Cute Kawaii
+            </button>
+            <button onclick="setStyle('sticker')" class="style-btn px-3 py-2 rounded-xl bg-black/40 border border-white/5 hover:border-white/20 text-left text-xs font-semibold flex items-center gap-2 transition-all" data-style="sticker">
+              <span>🏷️</span> Die-Cut Sticker
+            </button>
+          </div>
+        </div>
+
+        <!-- Accessories & Expression chips -->
+        <div class="w-full pt-3 border-t border-white/5 flex flex-wrap gap-1.5">
+          <span class="text-[10px] text-slate-500 font-mono self-center mr-1">QUICK TAGS:</span>
+          <button onclick="toggleTag('crown')" class="tag-chip px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[11px] text-slate-300 hover:border-fuchsia-400 cursor-pointer">👑 Crown</button>
+          <button onclick="toggleTag('sunglasses')" class="tag-chip px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[11px] text-slate-300 hover:border-fuchsia-400 cursor-pointer">🕶️ Shades</button>
+          <button onclick="toggleTag('fire')" class="tag-chip px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[11px] text-slate-300 hover:border-fuchsia-400 cursor-pointer">🔥 Fire</button>
+          <button onclick="toggleTag('headphones')" class="tag-chip px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[11px] text-slate-300 hover:border-fuchsia-400 cursor-pointer">🎧 Headset</button>
+          <button onclick="toggleTag('sparkles')" class="tag-chip px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[11px] text-slate-300 hover:border-fuchsia-400 cursor-pointer">✨ Glints</button>
+        </div>
+      </div>
+
+      <!-- Emoji Live Preview & Action Deck -->
+      <div class="w-full glass-card rounded-3xl p-6 flex flex-col md:flex-row items-center gap-6 justify-between">
+        <div class="flex flex-col items-center">
+          <div id="emojiStage" class="w-48 h-48 sm:w-56 sm:h-56 rounded-3xl bg-black/60 border border-white/10 flex items-center justify-center p-4 shadow-2xl relative group">
+            <div id="currentEmojiSvgContainer" class="w-full h-full flex items-center justify-center">
+              <!-- Rendered SVG lives here -->
+            </div>
+          </div>
+          <span id="currentEmojiTitle" class="text-sm font-bold text-white mt-3 text-center max-w-xs truncate">Cool Cyber King</span>
+        </div>
+
+        <div class="flex-1 w-full flex flex-col gap-3">
+          <div class="flex items-center gap-2">
+            <button onclick="downloadCurrentPng()" class="flex-1 py-3 rounded-2xl bg-fuchsia-500 hover:bg-fuchsia-400 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-fuchsia-500/20 cursor-pointer transition-all">
+              <span>📥</span> Download HD PNG
+            </button>
+            <button onclick="downloadCurrentSvg()" class="flex-1 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all">
+              <span>📄</span> Vector SVG
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="copyCurrentSvg()" class="flex-1 py-2.5 rounded-xl bg-[#181820] hover:bg-white/5 border border-white/5 text-xs text-slate-300 font-semibold flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>📋</span> Copy SVG Code
+            </button>
+            <button onclick="saveCurrentToFavorites()" id="favBtn" class="flex-1 py-2.5 rounded-xl bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/30 text-xs text-pink-300 font-semibold flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>⭐</span> Save to Favorites
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. KITCHEN MIX TAB -->
+    <section id="view-kitchen" class="tab-view w-full hidden flex-col items-center">
+      <div class="w-full glass-card rounded-3xl p-6 mb-6">
+        <h2 class="text-xl font-black text-white flex items-center gap-2 mb-1">
+          <span>🧪</span> Emoji Kitchen Mixer
+        </h2>
+        <p class="text-xs text-slate-400 mb-5">Select two base emojis to fuse them into an all-new hybrid sticker</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-6">
+          <!-- Picker 1 -->
+          <div class="flex flex-col items-center p-4 rounded-2xl bg-black/40 border border-white/5">
+            <span class="text-[11px] font-mono text-slate-400 mb-2">INGREDIENT 1</span>
+            <div id="kitchenSlot1" class="text-5xl mb-2">😀</div>
+            <div class="flex flex-wrap gap-1.5 justify-center max-h-36 overflow-y-auto p-1" id="kitchenGrid1"></div>
+          </div>
+
+          <!-- Fusion Alchemy center -->
+          <div class="flex flex-col items-center justify-center py-2">
+            <div class="text-2xl font-black text-fuchsia-400 mb-2">+</div>
+            <button onclick="mixSelectedKitchen()" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-black text-xs uppercase tracking-wider shadow-lg shadow-purple-500/25 hover:scale-105 active:scale-95 transition-transform cursor-pointer">
+              ⚡ Fuse Emojis
+            </button>
+          </div>
+
+          <!-- Picker 2 -->
+          <div class="flex flex-col items-center p-4 rounded-2xl bg-black/40 border border-white/5">
+            <span class="text-[11px] font-mono text-slate-400 mb-2">INGREDIENT 2</span>
+            <div id="kitchenSlot2" class="text-5xl mb-2">🔥</div>
+            <div class="flex flex-wrap gap-1.5 justify-center max-h-36 overflow-y-auto p-1" id="kitchenGrid2"></div>
+          </div>
+        </div>
+
+        <!-- Kitchen Result Card -->
+        <div id="kitchenResultBox" class="w-full p-4 rounded-2xl bg-black/50 border border-fuchsia-500/30 flex flex-col sm:flex-row items-center gap-4 justify-between">
+          <div class="flex items-center gap-4">
+            <div id="kitchenResultSvg" class="w-20 h-20 rounded-2xl bg-[#181820] p-2 flex items-center justify-center"></div>
+            <div>
+              <h4 id="kitchenResultTitle" class="text-base font-bold text-white">Grinning Flame</h4>
+              <p class="text-xs text-slate-400" id="kitchenResultDesc">Fiery joyful hybrid creature</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="downloadKitchenPng()" class="px-4 py-2 rounded-xl bg-fuchsia-500 hover:bg-fuchsia-400 text-white font-bold text-xs cursor-pointer">Download</button>
+            <button onclick="saveKitchenToFavorites()" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-pink-300 text-xs border border-pink-500/30 cursor-pointer">⭐ Save</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. STICKER LAB & PATTERN -->
+    <section id="view-stickers" class="tab-view w-full hidden flex-col items-center">
+      <div class="w-full glass-card rounded-3xl p-6 mb-6">
+        <h2 class="text-xl font-black text-white flex items-center gap-2 mb-1">
+          <span>🏷️</span> Sticker Lab & Wallpaper Pattern
+        </h2>
+        <p class="text-xs text-slate-400 mb-5">Add custom text memes, thick sticker borders, or generate HD wallpaper patterns</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Text on Emoji Meme -->
+          <div class="p-4 rounded-2xl bg-black/40 border border-white/5 flex flex-col">
+            <h3 class="text-sm font-bold text-slate-200 mb-2">Meme Sticker Caption</h3>
+            <input id="stickerTextInput" type="text" placeholder="Type meme caption here..." class="w-full px-3 py-2 rounded-xl bg-black/50 border border-white/10 text-white text-xs mb-3" oninput="updateStickerPreview()" />
+            
+            <div class="flex items-center justify-center p-4 bg-[#121217] rounded-2xl border border-white/5 relative min-h-[160px]" id="stickerMemePreview">
+              <div id="stickerMemeSvg" class="w-28 h-28"></div>
+              <span id="stickerMemeText" class="absolute bottom-2 font-black text-xs text-white uppercase tracking-wider bg-black/80 px-2 py-0.5 rounded border border-white/10 font-mono"></span>
+            </div>
+            <button onclick="downloadStickerMeme()" class="mt-3 w-full py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-black font-black text-xs uppercase cursor-pointer">
+              Download Sticker Meme
+            </button>
+          </div>
+
+          <!-- Wallpaper Generator -->
+          <div class="p-4 rounded-2xl bg-black/40 border border-white/5 flex flex-col">
+            <h3 class="text-sm font-bold text-slate-200 mb-2">Emoji Pattern Wallpaper</h3>
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs text-slate-400">Background:</span>
+              <input id="patternColorPicker" type="color" value="#09090B" class="w-8 h-8 rounded border-0 cursor-pointer" onchange="renderPatternPreview()" />
+            </div>
+            <div class="w-full h-36 rounded-2xl border border-white/10 overflow-hidden relative" id="patternPreviewBox">
+              <canvas id="patternCanvas" class="w-full h-full"></canvas>
+            </div>
+            <button onclick="downloadWallpaperPattern()" class="mt-3 w-full py-2.5 rounded-xl bg-fuchsia-500 hover:bg-fuchsia-400 text-white font-black text-xs uppercase cursor-pointer">
+              Download Full HD Wallpaper
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. EMOJI QUIZ & MINI-GAMES -->
+    <section id="view-games" class="tab-view w-full hidden flex-col items-center">
+      <div class="w-full glass-card rounded-3xl p-6 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-xl font-black text-white flex items-center gap-2">
+              <span>🎮</span> Guess the Movie & Phrase Quiz
+            </h2>
+            <p class="text-xs text-slate-400">Decode the emojis to find the title!</p>
+          </div>
+          <div class="px-3 py-1 rounded-xl bg-yellow-400/10 border border-yellow-400/30 text-yellow-300 font-mono text-xs font-bold">
+            Score: <span id="quizScore">0</span>
+          </div>
+        </div>
+
+        <div class="w-full p-6 rounded-2xl bg-black/50 border border-white/10 flex flex-col items-center text-center mb-4">
+          <span class="text-[10px] text-slate-500 uppercase font-mono tracking-wider mb-2" id="quizCategory">CATEGORY: MOVIES</span>
+          <div class="text-4xl sm:text-5xl my-3 tracking-widest" id="quizEmojis">🦁 👑 🌅</div>
+          <p class="text-xs text-slate-400 mb-4" id="quizHint">Hint: A Disney classic about the circle of life</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-md" id="quizOptionsGrid">
+            <!-- Options dynamically injected -->
+          </div>
+        </div>
+
+        <div id="quizFeedback" class="text-xs font-bold text-center h-5"></div>
+      </div>
+    </section>
+
+    <!-- 5. GALLERY & FAVORITES -->
+    <section id="view-gallery" class="tab-view w-full hidden flex-col items-center">
+      <div class="w-full glass-card rounded-3xl p-6 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-xl font-black text-white flex items-center gap-2">
+              <span>⭐</span> Your Saved Creations
+            </h2>
+            <p class="text-xs text-slate-400">Locally saved custom stickers & kitchen mixes</p>
+          </div>
+          <button onclick="clearAllFavorites()" class="text-xs text-rose-400 hover:underline cursor-pointer">Clear All</button>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 w-full" id="galleryGrid">
+          <!-- Dynamic favorites -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SECRET LOCK BUTTON AT THE BOTTOM (Discreet, black lock icon with no text) -->
+  <footer class="fixed bottom-3 right-3 z-50">
+    <button
+      id="secretLockBtn"
+      onclick="openSecretExportModal()"
+      class="w-8 h-8 rounded-full bg-black text-black/80 hover:text-white border border-white/10 flex items-center justify-center text-xs shadow-lg transition-all opacity-40 hover:opacity-100 hover:scale-110 cursor-pointer"
+      title="🔒"
+    >
+      🔒
+    </button>
+  </footer>
+
+  <!-- SECRET SINGLE-FILE CODE EXPORT MODAL -->
+  <div id="secretExportModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl bg-[#121217] rounded-3xl border border-white/15 p-6 shadow-2xl flex flex-col max-h-[90vh]">
+      
+      <!-- Password Prompt Gate -->
+      <div id="passwordGate" class="flex flex-col items-center text-center py-6">
+        <div class="w-14 h-14 rounded-2xl bg-black border border-white/10 flex items-center justify-center text-2xl mb-3">
+          🔒
+        </div>
+        <h3 class="text-lg font-black text-white mb-1">Security Authentication</h3>
+        <p class="text-xs text-slate-400 mb-4 max-w-xs">Enter your administrative master password to unlock the full standalone single-file source code.</p>
+        
+        <form onsubmit="handlePasswordSubmit(event)" class="w-full max-w-xs flex flex-col gap-3">
+          <input
+            id="passwordInput"
+            type="password"
+            placeholder="Enter password..."
+            class="w-full px-4 py-2.5 rounded-xl bg-black/60 border border-white/15 text-white text-xs font-mono focus:border-fuchsia-400 focus:outline-none text-center"
+          />
+          <button
+            type="submit"
+            class="w-full py-2.5 rounded-xl bg-fuchsia-500 hover:bg-fuchsia-400 text-white font-bold text-xs cursor-pointer"
+          >
+            Unlock Full Single-File Code
+          </button>
+          <span id="passwordError" class="text-xs text-rose-400 font-mono hidden">Incorrect password. Please try again.</span>
+        </form>
+        <button onclick="closeSecretExportModal()" class="mt-4 text-xs text-slate-500 hover:text-slate-300 cursor-pointer">Cancel</button>
+      </div>
+
+      <!-- Unlocked Source Code Viewer & Downloader -->
+      <div id="codeViewer" class="hidden flex-col h-full">
+        <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+          <div>
+            <h3 class="text-base font-black text-white flex items-center gap-2">
+              <span>📦</span> Standalone index.html Single-File
+            </h3>
+            <p class="text-[11px] text-emerald-400 font-mono">100% Ready for GitHub Pages (Zero build required)</p>
+          </div>
+          <button onclick="closeSecretExportModal()" class="text-slate-400 hover:text-white text-lg">✕</button>
+        </div>
+
+        <div class="relative flex-1 bg-black/70 rounded-xl border border-white/10 p-3 mb-3 overflow-hidden">
+          <textarea
+            id="sourceCodeBox"
+            readonly
+            class="w-full h-64 bg-transparent font-mono text-[10px] text-slate-300 focus:outline-none resize-none"
+          ></textarea>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button
+            onclick="copySourceCodeToClipboard()"
+            id="copyCodeBtn"
+            class="flex-1 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 cursor-pointer"
+          >
+            <span>📋</span> Copy Entire Single-File Code
+          </button>
+          <button
+            onclick="downloadSingleFileHtml()"
+            class="py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer"
+          >
+            <span>💾</span> Download .html
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- APPLICATION LOGIC SCRIPT -->
+  <script>
+    // Sound synthesis
+    let soundEnabled = true;
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    function playPop() {
+      if (!soundEnabled) return;
+      if (!audioCtx && AudioContextClass) audioCtx = new AudioContextClass();
+      if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.frequency.setValueAtTime(500, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.08);
+    }
+
+    document.getElementById('soundToggleBtn').addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundIcon').innerText = soundEnabled ? '🔊' : '🔇';
+    });
+
+    // App State
+    let currentStyle = '3d';
+    let currentExpression = 'cool';
+    let currentAccessories = ['crown', 'sunglasses'];
+    let currentColors = { primary: '#FBBF24', secondary: '#F59E0B' };
+    let favorites = JSON.parse(localStorage.getItem('amazing_emoji_favs') || '[]');
+
+    const KITCHEN_ITEMS = [
+      { id: 'smile', char: '😀', name: 'Grinning', color: '#FBBF24' },
+      { id: 'heart', char: '😍', name: 'Heart Eyes', color: '#F43F5E' },
+      { id: 'cool', char: '😎', name: 'Cool Shades', color: '#06B6D4' },
+      { id: 'fire', char: '🔥', name: 'Flame', color: '#F97316' },
+      { id: 'devil', char: '😈', name: 'Devil', color: '#A855F7' },
+      { id: 'robot', char: '🤖', name: 'Android', color: '#06B6D4' },
+      { id: 'cat', char: '🐱', name: 'Cat', color: '#F59E0B' },
+      { id: 'crown', char: '👑', name: 'Royal', color: '#EAB308' },
+      { id: 'skull', char: '💀', name: 'Skull', color: '#94A3B8' },
+      { id: 'star', char: '⭐', name: 'Star', color: '#FACC15' }
+    ];
+    let kitchen1 = KITCHEN_ITEMS[0];
+    let kitchen2 = KITCHEN_ITEMS[3];
+
+    // Quiz Questions
+    const QUIZ_LIST = [
+      { category: 'MOVIES', emojis: '🦁 👑 🌅', question: 'Which movie is this?', options: ['The Lion King', 'Madagascar', 'Jungle Book', 'Tarzan'], correct: 'The Lion King', hint: 'Disney classic in Africa' },
+      { category: 'MOVIES', emojis: '🚢 🧊 💔', question: 'Which movie is this?', options: ['Titanic', 'Frozen', 'Ice Age', 'Cast Away'], correct: 'Titanic', hint: 'Jack and Rose' },
+      { category: 'SONGS', emojis: '👑 🐝 🍋', question: 'Which artist / album?', options: ['Beyoncé - Lemonade', 'Queen - Bohemian', 'Ariana - Sweetener', 'Rihanna - Umbrella'], correct: 'Beyoncé - Lemonade', hint: 'Queen Bey' },
+      { category: 'PHRASES', emojis: '🌧️ 🐱 🐶', question: 'Which idiom?', options: ['Raining Cats & Dogs', 'Pet Shelter', 'Animal Planet', 'Barking Dog'], correct: 'Raining Cats & Dogs', hint: 'Heavy heavy downpour' }
+    ];
+    let quizIdx = 0;
+    let quizScore = 0;
+
+    // SVG Generator Engine
+    function renderSvg({ style, expression, primaryColor, secondaryColor, accessories }) {
+      const uid = 'svg_' + Math.random().toString(36).substr(2, 6);
+      let border = style === 'sticker' ? 'stroke="#FFFFFF" stroke-width="12" paint-order="stroke fill"' : '';
+      let filter = style === 'sticker' ? 'filter="drop-shadow(0 10px 10px rgba(0,0,0,0.4))"' : '';
+
+      let eyes = '<ellipse cx="82" cy="100" rx="10" ry="14" fill="#1E1E24" /><circle cx="78" cy="94" r="4" fill="#FFF" /><ellipse cx="158" cy="100" rx="10" ry="14" fill="#1E1E24" /><circle cx="154" cy="94" r="4" fill="#FFF" />';
+      if (expression === 'cool' || accessories.includes('sunglasses')) {
+        eyes = '<path d="M 58 92 L 108 92 C 112 114 98 126 78 126 C 60 126 54 112 58 92 Z" fill="#111827" stroke="#374151" stroke-width="3" /><path d="M 132 92 L 182 92 C 186 114 172 126 152 126 C 134 126 128 112 132 92 Z" fill="#111827" stroke="#374151" stroke-width="3" /><line x1="108" y1="102" x2="132" y2="102" stroke="#111827" stroke-width="6" stroke-linecap="round" /><line x1="68" y1="96" x2="80" y2="118" stroke="#FFF" stroke-width="3" opacity="0.6" /><line x1="142" y1="96" x2="154" y2="118" stroke="#FFF" stroke-width="3" opacity="0.6" />';
+      } else if (expression === 'love' || accessories.includes('hearts')) {
+        eyes = '<path d="M 85 90 C 85 82 76 75 68 75 C 58 75 52 83 52 92 C 52 108 85 125 85 125 C 85 125 118 108 118 92 C 118 83 112 75 102 75 C 94 75 85 82 85 90 Z" fill="#EF4444" /><path d="M 155 90 C 155 82 146 75 138 75 C 128 75 122 83 122 92 C 122 108 155 125 155 125 C 155 125 188 108 188 92 C 188 83 182 75 172 75 C 164 75 155 82 155 90 Z" fill="#EF4444" />';
+      }
+
+      let mouth = '<path d="M 76 134 C 76 168 164 168 164 134 Q 120 154 76 134 Z" fill="#B91C1C" /><path d="M 84 136 Q 120 148 156 136 Q 120 130 84 136 Z" fill="#FFFFFF" />';
+
+      let accSvg = '';
+      if (accessories.includes('crown')) {
+        accSvg += '<path d="M 64 64 L 78 28 L 102 50 L 120 20 L 138 50 L 162 28 L 176 64 Z" fill="#FDE047" stroke="#B45309" stroke-width="3" /><circle cx="78" cy="28" r="4" fill="#EF4444" /><circle cx="120" cy="20" r="5" fill="#3B82F6" /><circle cx="162" cy="28" r="4" fill="#10B981" />';
+      }
+      if (accessories.includes('fire')) {
+        accSvg += '<path d="M 120 0 C 135 30 170 40 170 70 C 170 95 150 110 120 110 C 90 110 70 95 70 70 C 70 40 105 30 120 0 Z" fill="#F97316" opacity="0.6" />';
+      }
+
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%">
+        <defs>
+          <radialGradient id="grad_${uid}" cx="35%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="${primaryColor}" />
+            <stop offset="100%" stop-color="${secondaryColor}" />
+          </radialGradient>
+        </defs>
+        <g ${filter}>
+          <circle cx="120" cy="120" r="90" fill="url(#grad_${uid})" ${border} />
+          <ellipse cx="95" cy="62" rx="40" ry="18" fill="#FFF" opacity="0.4" transform="rotate(-18 95 62)" />
+          ${eyes}
+          ${mouth}
+          ${accSvg}
+        </g>
+      </svg>`;
+    }
+
+    function updateMainPreview() {
+      const svg = renderSvg({
+        style: currentStyle,
+        expression: currentExpression,
+        primaryColor: currentColors.primary,
+        secondaryColor: currentColors.secondary,
+        accessories: currentAccessories
+      });
+      document.getElementById('currentEmojiSvgContainer').innerHTML = svg;
+    }
+
+    function generateFromPrompt() {
+      playPop();
+      const prompt = document.getElementById('promptInput').value.trim() || 'Awesome AI Emoji';
+      document.getElementById('currentEmojiTitle').innerText = prompt;
+      
+      const lower = prompt.toLowerCase();
+      currentAccessories = [];
+      if (lower.includes('crown') || lower.includes('king') || lower.includes('queen')) currentAccessories.push('crown');
+      if (lower.includes('shades') || lower.includes('glasses') || lower.includes('cool')) currentAccessories.push('sunglasses');
+      if (lower.includes('fire') || lower.includes('flame') || lower.includes('dragon')) currentAccessories.push('fire');
+      if (lower.includes('love') || lower.includes('heart')) currentAccessories.push('hearts');
+
+      if (lower.includes('pink') || lower.includes('kawaii')) {
+        currentColors = { primary: '#FDA4AF', secondary: '#F43F5E' };
+      } else if (lower.includes('blue') || lower.includes('cyber')) {
+        currentColors = { primary: '#06B6D4', secondary: '#3B82F6' };
+      } else if (lower.includes('green') || lower.includes('alien')) {
+        currentColors = { primary: '#34D399', secondary: '#059669' };
+      } else {
+        currentColors = { primary: '#FBBF24', secondary: '#F59E0B' };
+      }
+
+      updateMainPreview();
+      confetti({ particleCount: 35, spread: 60, origin: { y: 0.6 } });
+    }
+
+    function surprisePrompt() {
+      const prompts = [
+        'Cyberpunk robot cat wearing gold crown',
+        'Happy blushing strawberry with sunglasses',
+        'Golden fire dragon with diamond shine',
+        'Kawaii angel kitten with sparkle halo',
+        'Cool space astronaut smiling on the moon'
+      ];
+      const random = prompts[Math.floor(Math.random() * prompts.length)];
+      document.getElementById('promptInput').value = random;
+      generateFromPrompt();
+    }
+
+    function setStyle(st) {
+      playPop();
+      currentStyle = st;
+      document.querySelectorAll('.style-btn').forEach(b => {
+        if (b.dataset.style === st) {
+          b.classList.add('bg-white/10', 'border-fuchsia-400');
+          b.classList.remove('bg-black/40', 'border-white/5');
+        } else {
+          b.classList.remove('bg-white/10', 'border-fuchsia-400');
+          b.classList.add('bg-black/40', 'border-white/5');
+        }
+      });
+      updateMainPreview();
+    }
+
+    function toggleTag(tag) {
+      playPop();
+      if (currentAccessories.includes(tag)) {
+        currentAccessories = currentAccessories.filter(a => a !== tag);
+      } else {
+        currentAccessories.push(tag);
+      }
+      updateMainPreview();
+    }
+
+    function switchTab(tabId) {
+      playPop();
+      document.querySelectorAll('.tab-view').forEach(v => v.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('bg-fuchsia-500', 'text-white', 'shadow-lg', 'shadow-fuchsia-500/25');
+        b.classList.add('bg-[#121217]', 'text-slate-400', 'border', 'border-white/5');
+      });
+
+      document.getElementById('view-' + tabId).classList.remove('hidden');
+      const btn = document.getElementById('tab-' + tabId);
+      btn.classList.add('bg-fuchsia-500', 'text-white', 'shadow-lg', 'shadow-fuchsia-500/25');
+      btn.classList.remove('bg-[#121217]', 'text-slate-400', 'border', 'border-white/5');
+
+      if (tabId === 'kitchen') renderKitchenSlots();
+      if (tabId === 'stickers') { updateStickerPreview(); renderPatternPreview(); }
+      if (tabId === 'games') renderQuiz();
+      if (tabId === 'gallery') renderGallery();
+    }
+
+    // Kitchen Mixer
+    function renderKitchenSlots() {
+      const g1 = document.getElementById('kitchenGrid1');
+      const g2 = document.getElementById('kitchenGrid2');
+      g1.innerHTML = '';
+      g2.innerHTML = '';
+
+      KITCHEN_ITEMS.forEach(item => {
+        const b1 = document.createElement('button');
+        b1.className = 'w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-lg cursor-pointer';
+        b1.innerText = item.char;
+        b1.onclick = () => { kitchen1 = item; document.getElementById('kitchenSlot1').innerText = item.char; mixSelectedKitchen(); };
+        g1.appendChild(b1);
+
+        const b2 = document.createElement('button');
+        b2.className = 'w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-center text-lg cursor-pointer';
+        b2.innerText = item.char;
+        b2.onclick = () => { kitchen2 = item; document.getElementById('kitchenSlot2').innerText = item.char; mixSelectedKitchen(); };
+        g2.appendChild(b2);
+      });
+      mixSelectedKitchen();
+    }
+
+    function mixSelectedKitchen() {
+      playPop();
+      const acc = [];
+      if (kitchen1.id === 'crown' || kitchen2.id === 'crown') acc.push('crown');
+      if (kitchen1.id === 'fire' || kitchen2.id === 'fire') acc.push('fire');
+      if (kitchen1.id === 'cool' || kitchen2.id === 'cool') acc.push('sunglasses');
+      if (kitchen1.id === 'heart' || kitchen2.id === 'heart') acc.push('hearts');
+
+      const svg = renderSvg({
+        style: '3d',
+        expression: 'happy',
+        primaryColor: kitchen1.color,
+        secondaryColor: kitchen2.color,
+        accessories: acc
+      });
+
+      document.getElementById('kitchenResultSvg').innerHTML = svg;
+      document.getElementById('kitchenResultTitle').innerText = `${kitchen1.name} ${kitchen2.name}`;
+      document.getElementById('kitchenResultDesc').innerText = `Fusion of ${kitchen1.char} and ${kitchen2.char}`;
+    }
+
+    // Quiz
+    function renderQuiz() {
+      const q = QUIZ_LIST[quizIdx % QUIZ_LIST.length];
+      document.getElementById('quizCategory').innerText = 'CATEGORY: ' + q.category;
+      document.getElementById('quizEmojis').innerText = q.emojis;
+      document.getElementById('quizHint').innerText = 'Hint: ' + q.hint;
+      document.getElementById('quizScore').innerText = quizScore;
+      document.getElementById('quizFeedback').innerText = '';
+
+      const grid = document.getElementById('quizOptionsGrid');
+      grid.innerHTML = '';
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-xs font-semibold text-white transition-all cursor-pointer';
+        btn.innerText = opt;
+        btn.onclick = () => handleQuizPick(opt, q.correct);
+        grid.appendChild(btn);
+      });
+    }
+
+    function handleQuizPick(chosen, correct) {
+      if (chosen === correct) {
+        quizScore += 100;
+        document.getElementById('quizFeedback').innerHTML = '<span class="text-emerald-400">✨ Correct! +100 Points</span>';
+        confetti({ particleCount: 30, spread: 50 });
+      } else {
+        document.getElementById('quizFeedback').innerHTML = '<span class="text-rose-400">❌ Incorrect! It was ' + correct + '</span>';
+      }
+      setTimeout(() => {
+        quizIdx++;
+        renderQuiz();
+      }, 1400);
+    }
+
+    // Sticker Lab Preview & Wallpaper
+    function updateStickerPreview() {
+      const text = document.getElementById('stickerTextInput').value.trim();
+      document.getElementById('stickerMemeText').innerText = text;
+      document.getElementById('stickerMemeSvg').innerHTML = document.getElementById('currentEmojiSvgContainer').innerHTML;
+    }
+
+    function renderPatternPreview() {
+      const canvas = document.getElementById('patternCanvas');
+      const ctx = canvas.getContext('2d');
+      const bg = document.getElementById('patternColorPicker').value;
+      canvas.width = 400;
+      canvas.height = 200;
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = '24px serif';
+      const emojis = ['✨', '🔥', '👑', '😎', '😍', '🤖'];
+      for (let x = 20; x < canvas.width; x += 50) {
+        for (let y = 30; y < canvas.height; y += 45) {
+          const em = emojis[Math.floor((x + y) % emojis.length)];
+          ctx.fillText(em, x, y);
+        }
+      }
+    }
+
+    // Save / Gallery
+    function saveCurrentToFavorites() {
+      playPop();
+      const title = document.getElementById('currentEmojiTitle').innerText;
+      const svg = document.getElementById('currentEmojiSvgContainer').innerHTML;
+      favorites.push({ id: Date.now(), title, svg });
+      localStorage.setItem('amazing_emoji_favs', JSON.stringify(favorites));
+      updateFavCount();
+      confetti({ particleCount: 20 });
+    }
+
+    function saveKitchenToFavorites() {
+      playPop();
+      const title = document.getElementById('kitchenResultTitle').innerText;
+      const svg = document.getElementById('kitchenResultSvg').innerHTML;
+      favorites.push({ id: Date.now(), title, svg });
+      localStorage.setItem('amazing_emoji_favs', JSON.stringify(favorites));
+      updateFavCount();
+      confetti({ particleCount: 20 });
+    }
+
+    function updateFavCount() {
+      document.getElementById('favCount').innerText = favorites.length;
+      document.getElementById('galleryCount').innerText = favorites.length;
+    }
+
+    function renderGallery() {
+      updateFavCount();
+      const grid = document.getElementById('galleryGrid');
+      grid.innerHTML = '';
+      if (favorites.length === 0) {
+        grid.innerHTML = '<div class="col-span-full py-12 text-center text-xs text-slate-500">No saved emojis yet. Create some and tap "Save to Favorites"!</div>';
+        return;
+      }
+      favorites.forEach((fav, i) => {
+        const card = document.createElement('div');
+        card.className = 'p-3 rounded-2xl bg-black/40 border border-white/5 flex flex-col items-center relative group';
+        card.innerHTML = `
+          <div class="w-20 h-20 mb-2 flex items-center justify-center">${fav.svg}</div>
+          <span class="text-xs font-bold text-white truncate max-w-full mb-2">${fav.title}</span>
+          <button class="text-[10px] text-rose-400 hover:underline cursor-pointer" onclick="deleteFavorite(${i})">Remove</button>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function deleteFavorite(idx) {
+      favorites.splice(idx, 1);
+      localStorage.setItem('amazing_emoji_favs', JSON.stringify(favorites));
+      renderGallery();
+    }
+
+    function clearAllFavorites() {
+      if (confirm('Clear all saved favorites?')) {
+        favorites = [];
+        localStorage.setItem('amazing_emoji_favs', JSON.stringify(favorites));
+        renderGallery();
+      }
+    }
+
+    // Downloads & Copies
+    function copyCurrentSvg() {
+      const svg = document.getElementById('currentEmojiSvgContainer').innerHTML;
+      navigator.clipboard.writeText(svg).then(() => {
+        alert('SVG code copied to clipboard!');
+      });
+    }
+
+    function downloadCurrentSvg() {
+      const svg = document.getElementById('currentEmojiSvgContainer').innerHTML;
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'amazing-emoji.svg';
+      a.click();
+    }
+
+    function downloadCurrentPng() {
+      const svg = document.getElementById('currentEmojiSvgContainer').innerHTML;
+      const img = new Image();
+      const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      img.onload = function() {
+        const c = document.createElement('canvas');
+        c.width = 1024; c.height = 1024;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, 1024, 1024);
+        const a = document.createElement('a');
+        a.href = c.toDataURL('image/png');
+        a.download = 'amazing-emoji-1024.png';
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    }
+
+    function downloadKitchenPng() {
+      const svg = document.getElementById('kitchenResultSvg').innerHTML;
+      const img = new Image();
+      const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      img.onload = function() {
+        const c = document.createElement('canvas');
+        c.width = 1024; c.height = 1024;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, 1024, 1024);
+        const a = document.createElement('a');
+        a.href = c.toDataURL('image/png');
+        a.download = 'kitchen-mix.png';
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    }
+
+    function downloadStickerMeme() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 800; canvas.height = 800;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#121217';
+      ctx.fillRect(0, 0, 800, 800);
+
+      const svg = document.getElementById('currentEmojiSvgContainer').innerHTML;
+      const img = new Image();
+      const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      img.onload = function() {
+        ctx.drawImage(img, 150, 100, 500, 500);
+        const text = document.getElementById('stickerTextInput').value.trim() || 'AMAZING EMOJI';
+        ctx.font = 'bold 36px Outfit, sans-serif';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.textAlign = 'center';
+        ctx.fillText(text.toUpperCase(), 400, 700);
+
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = 'emoji-meme-sticker.png';
+        a.click();
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
+    }
+
+    function downloadWallpaperPattern() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1920; canvas.height = 1080;
+      const ctx = canvas.getContext('2d');
+      const bg = document.getElementById('patternColorPicker').value;
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = '48px serif';
+      const emojis = ['✨', '🔥', '👑', '😎', '😍', '🤖', '🌸', '💎'];
+      for (let x = 60; x < canvas.width; x += 120) {
+        for (let y = 80; y < canvas.height; y += 110) {
+          const em = emojis[Math.floor((x + y) % emojis.length)];
+          ctx.fillText(em, x, y);
+        }
+      }
+
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = 'amazing-emoji-wallpaper-1080p.png';
+      a.click();
+    }
+
+    // ==========================================
+    // 🔒 SECRET STANDALONE SINGLE-FILE CODE EXPORT (Password: bahadur@2025#)
+    // ==========================================
+    function openSecretExportModal() {
+      document.getElementById('secretExportModal').classList.remove('hidden');
+      document.getElementById('passwordGate').classList.remove('hidden');
+      document.getElementById('codeViewer').classList.add('hidden');
+      document.getElementById('passwordInput').value = '';
+      document.getElementById('passwordError').classList.add('hidden');
+    }
+
+    function closeSecretExportModal() {
+      document.getElementById('secretExportModal').classList.add('hidden');
+    }
+
+    function handlePasswordSubmit(e) {
+      e.preventDefault();
+      const pass = document.getElementById('passwordInput').value;
+      if (pass === 'bahadur@2025#') {
+        document.getElementById('passwordGate').classList.add('hidden');
+        document.getElementById('codeViewer').classList.remove('hidden');
+        document.getElementById('codeViewer').classList.add('flex');
+        // Grab current full document HTML
+        document.getElementById('sourceCodeBox').value = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      } else {
+        document.getElementById('passwordError').classList.remove('hidden');
+      }
+    }
+
+    function copySourceCodeToClipboard() {
+      const code = document.getElementById('sourceCodeBox').value;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.getElementById('copyCodeBtn');
+        btn.innerHTML = '<span>✅</span> All Code Copied to Clipboard!';
+        setTimeout(() => {
+          btn.innerHTML = '<span>📋</span> Copy Entire Single-File Code';
+        }, 2500);
+      });
+    }
+
+    function downloadSingleFileHtml() {
+      const code = document.getElementById('sourceCodeBox').value;
+      const blob = new Blob([code], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'index.html';
+      a.click();
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      updateMainPreview();
+      updateFavCount();
+    });
+  </script>
+</body>
+</html>
