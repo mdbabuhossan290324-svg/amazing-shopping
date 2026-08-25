@@ -1,2 +1,2 @@
-# amazing-shopping
-Amazing Shopping Affiliate Website
+# Amazing-App-Development 
+Amazing App  Website
